@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="main">
+
+        <div class="container-fluid">
+            
+            <div class="container">
+        <div class="row py-5 mt-4 align-items-center">
+            <!-- For Demo Purpose -->
+            <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+                <!-- LOGO -->
+                <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+                <h1 style="text-align: center;">Log In</h1>
+            </div>
+
+            <!-- Registeration Form -->
+            <div class="col-md-7 col-lg-6 ml-auto">
+                <form action="#">
+                    <div class="row">
+                        <!-- DNI -->
+                        <div class="input-group col-md mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                    <i class="bi bi-person-badge"></i>
+                                </span>
+                            </div>
+                            <input id="firstName" type="text" name="DNI" placeholder="DNI" class="form-control bg-white border-left-0 border-md">
+                        </div>
+                  
+                        <!-- Password -->
+                        <div class="input-group col-md-12 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                    <i class="fa fa-user text-muted"></i>
+                                </span>
+                            </div>
+                            <input id="firstName" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                        </div>
+
+                        <!-- Password Confirmation -->
+                        <div class="input-group col-md-12 mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                    <i class="fa fa-user text-muted"></i>
+                                </span>
+                            </div>
+                            <input id="firstName" type="text" name="Confirmation" placeholder="Confirmation Password" class="form-control bg-white border-left-0 border-md">
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="form-group col-lg-12 mx-auto mb-0">
+                            <a href="#" class="btn btn-primary btn-block py-2">
+                                <span class="font-weight-bold">Create your account</span>
+                            </a>
+                        </div>
+                        
+                        <!-- New Account -->
+                        <div class="text-center w-100">
+                            <p class="text-muted font-weight-bold">Don't have an account? <a href="#" class="text-primary ml-2">Register</a></p>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // For Demo Purpose [Changing input group text on focus]
+        $(function () {
+            $('input, select').on('focus', function () {
+                $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
+            });
+            $('input, select').on('blur', function () {
+                $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
+            });
+        });
+        
+        </script>
+</div>
+</body>
+</html>
