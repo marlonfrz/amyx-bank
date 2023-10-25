@@ -46,4 +46,4 @@ def register(request):
 
 @login_required
 def dashboard(request):
-    return(render, 'amyx_bank/main.html' {'section' : 'main'})
+    return(render(request, 'amyx_bank/main.html', {'main' : 'main'}))

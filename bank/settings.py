@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'amyx_bank.apps.AmyxBankConfig'
+    'amyx_bank.apps.AmyxBankConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +122,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
