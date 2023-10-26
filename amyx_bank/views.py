@@ -3,10 +3,25 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import LoginForm, Profile, UserRegistrationForm
+from .forms import LoginForm, Profile, UserRegistrationForm, BankAccountForm
 
 # Create your views here.
 
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            Profile.objects.create(user=new_user)
+            return render(request, 'account/register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'account/register.html', {'user_form': user_form})
 
 def user_login(request):
     if request.method == 'POST':
@@ -26,24 +41,16 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
 
-
-def register(request):
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-            # Save the User object
-            new_user.save()
-            Profile.objects.create(user=new_user)
-            return render(request, 'account/register_done.html', {'new_user': new_user})
-    else:
-        user_form = UserRegistrationForm()
-    return render(request, 'account/register.html', {'user_form': user_form})
-
-
 @login_required
 def dashboard(request):
     return render(request, 'amyx_bank/main.html', {'main' : 'main'})
+
+
+def bank_account_create_view(request):
+    if request.method == 'POST':
+        form = BankAccountForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+    else:
+        bank_account_create_form = BankAccountForm()
+    return render(request, 'amyx_bank/account_create.html', {'form': bank_account_create_form})

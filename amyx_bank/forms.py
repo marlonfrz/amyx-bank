@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import Profile, BankAccount
 
 
 class LoginForm(forms.Form):
@@ -48,3 +48,8 @@ def clean_email(self):
     if User.objects.filter(email=data).exists():
         raise forms.ValidationError('Email already in use.')
     return data
+
+class BankAccountForm(forms.ModelForm):
+    class Meta:
+        model = BankAccount
+        fields = ['account_name', 'status']
