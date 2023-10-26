@@ -5,7 +5,7 @@ from .models import Profile
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
+    first_name = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 
