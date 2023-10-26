@@ -4,46 +4,57 @@
 <head>
 <title>{% block title %}{% endblock %}</title>
 <link href="{% static "css/base.css" %}" rel="stylesheet">
+<link href="{% static "css/media_query.css" %}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<div id="header">
-<span class="logo">Bookmarks</span>
-{% if request.user.is_authenticated %}
-<ul class="menu">
-<li {% if section == "dashboard" %}class="selected"{% endif %}>
-<a href="{% url "dashboard" %}">My dashboard</a>
-</li>
-<li {% if section == "images" %}class="selected"{% endif %}>
-<a href="#">Images</a>
-</li>
-Building a Social Website162
-<li {% if section == "people" %}class="selected"{% endif %}>
-<a href="#">People</a>
-</li>
-</ul>
-{% endif %}
-<span class="user">
-{% if request.user.is_authenticated %}
-Hello {{ request.user.first_name|default:request.user.username }},
-<a href="{% url "logout" %}">Logout</a>
-{% else %}
-<a href="{% url "login" %}">Log-in</a>
-{% endif %}
-</span>
-</div>
-{% if messages %}
-<ul class="messages">
-{% for message in messages %}
-<li class="{{ message.tags }}">
-{{ message|safe }}
-<a href="#" class="close">x</a>
-</li>
-{% endfor %}
-</ul>
-{% endif %}
-<div id="content">
-{% block content %}
-{% endblock %}
+    <div class="container-fluid">
+        <nav class="main-nav">
+            <a href="#"><img src="" alt="LOGO" class="nav-brand d-none d-md-block"></a>
+            <div class="row menu-nav d-flex justify-content-left" id="nav">
+                <div class="col-md-2 col-sm-4 col-4"><a href="#">Inmuebles</a></div>
+                <div class="col-md-2 col-sm-4 col-4"><a href="#">Hipotecas</a></div>
+                <div class="col-md-2 col-sm-4 col-4"><a href="#">Jovenes</a></div>
+                <div class="col-md-2 col-sm-4 col-4"><a href="#">Particulares</a></div>
+                <div class="col-md-2 col-sm-4 col-4"><a href="#">Empresas</a></div>
+                <div class="col-md-2 col-sm-4 col-4"><a href="#">Banca privada</a></div>
+            </div>
+            <div class="invisible d-md-none d-sm-block offset-sm-12 "></div>
+            <div class="row menu-nav-right">
+                <div class="col-md-6 col-sm-3 col-2"><a href="#">Registrarse</a></div>
+                <div class="col-md-6 col-sm-3 col-2"><a href="#">Acceder al perfil</a></div>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+        <footer>
+            <div class="cont1">
+                <p>Web corporativa</p>
+                <p>A.M.Y.X Clientes</p>
+                <p>A.M.Y.X Inmuebles</p>
+                <p>Finanzas personales</p>
+            </div>
+            <div class="cont2">
+                <p>Aviso legal</p>
+                <p>Informacion de Protección de datos</p>
+                <p>Política de cookies</p>
+                <p>Tablón de anuncios</p>
+            </div>
+            <div class="cont3">
+                <p>Accesibilidad</p>
+                <p>Seguridad online</p>
+                <p>Ley de crédito inmobiliario</p>
+                <p>Regulación de Sostenibilidad</p>
+            </div>
+            <div class="cont4">
+                <p>Calcular hipoteca</p>
+                <p>Calculadora de IVA</p>
+                <p>Trabaja con nosotros</p>
+                <p>Horario de oficinas</p>
+            </div>
+        </footer>
+    </div>
+
 </div>
 </body>
 </html>
