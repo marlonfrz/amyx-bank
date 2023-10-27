@@ -53,3 +53,7 @@ select.form-control {
     box-shadow: none;
 }
 
+#cuadro_img {
+    height: 20px;
+    width: 20px;
+}

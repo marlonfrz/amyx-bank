@@ -8,21 +8,6 @@ body{
 .main-body {
     padding: 15px;
 }
-.card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
-}
-
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-}
 
 .card-body {
     flex: 1 1 auto;
@@ -57,14 +42,6 @@ body{
     height: 5px;
 }
 
-.card {
-    background-color: #fff;
-    border-radius: 10px;
-    border: none;
-    position: relative;
-    margin-bottom: 30px;
-    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
-}
 .l-bg-cherry {
     background: linear-gradient(to right, #493240, #f09) !important;
     color: #fff;
@@ -73,6 +50,22 @@ body{
 .l-bg-cherry {
     background: linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) !important;
     color: #fff;
+}
+
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
 }
 
 .btn.btn-outline-secondary {
@@ -95,35 +88,133 @@ body{
 }
 
 nav {
+    height: 70px;
+    margin: 0;
     background-color: rgb(24, 139, 206);
 }
 
 nav:hover {
-    background-color: rgba(24, 139, 206, 0.404); 
+    height: 70px;
+    margin: 0;
+    background-color: rgba(24, 139, 255); 
 }
 
 .navbar .navbar-nav .nav-link {
     color: black !important;
 }
 
-.logo {
-    max-width: 50px; 
-    height: auto; 
-    margin: 10px; 
-}
 
 /* Reducir la altura de la barra de navegación */
 .navbar {
     height: 70px;
+    margin: 0;
 }
 
 /* Reducir el tamaño del texto en los elementos del menú */
 .navbar-nav .nav-link {
-    font-size: 17px; 
+    font-size: 17px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgb(24, 22, 189) !important ;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+}
+.dropdown-content a:hover {
+    color: #FFFFFF;
+    background-color: rgb(24, 139, 206);
 }
 
 
+.logo {
+    margin-top: 0;
+    margin-left: 0;
+    width: 80px;
+    height: 70px;
+    display: block;
+    padding: 0;
+}
 
-.navbar-nav .nav-link:hover {
-    color: rgb(24, 139, 206) !important ;
+@media (max-width: 576px) {
+    .logo {
+        width: 80px;
+        height: 70px;
+        padding: 0;
+        padding-top: 0;
+        padding-left: 0;
+        margin: 0;
+        margin-top: 0;
+        margin-left: 0;
+    }
+}
+
+.nav li a{
+    background:linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) ;
+    color: white;
+    text-decoration:none;
+    padding: 35px;
+    display:block;
+    border-radius: 20px;
+    width: 200px;
+    text-align: center;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.card_1 {
+    background: linear-gradient(to right, rgb(119, 0, 113)   , rgb(255, 0, 242)) !important;
+}
+
+.card_1:hover {
+    background: rgba(255, 0, 242, 0.527) !important;
+    color: black;
+}
+
+.card_2 {
+    background: linear-gradient(to right, green   , rgb(0, 250, 0)) !important;
+}
+
+.card_2:hover {
+    background: rgba(0, 128, 0, 0.452) !important;
+    color: black;
+}
+
+.card_3 {
+    background: linear-gradient(to right, rgb(126, 0, 0)  , red) !important;
+}
+
+.card_3:hover {
+    background: rgba(255, 0, 0, 0.589) !important;
+    color: black;
+}
+
+.card_4 {
+    background: linear-gradient(to right, rgb(51, 51, 51)  , grey) !important;
+}
+
+.card_4:hover {
+    background: rgba(128, 128, 128, 0.555) !important;
+    color: black;
 }
