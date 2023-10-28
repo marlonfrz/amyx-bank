@@ -6,6 +6,14 @@
     background-color: #FFFFFF;
 }
 
+.logo {
+    display: block;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -15,13 +23,18 @@ a {
     border: solid 1px grey;
 }
 
+.risk-n {
+    font-size: 4em;
+    padding: 1px;
+}
+
 /* Nav */
 
 .main-nav {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
     height: 115px;
+    padding: 1em;
 }
 
 .nav-brand {
@@ -29,9 +42,6 @@ a {
 }
 
 /* Izquierda */
-.menu-nav {
-    display: flex;
-}
 
 .menu-nav {
     transition: all 0.25ms ease;
@@ -53,11 +63,9 @@ a {
 .menu-nav-right {
     display: flex;
     flex: -1;
-    padding: 1em;
 }
 
 .menu-nav-right > div {
-    padding: 1em;
     font-weight: bold;
 }
 
