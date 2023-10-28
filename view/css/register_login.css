@@ -57,3 +57,69 @@ select.form-control {
     height: 20px;
     width: 20px;
 }
+
+.logo {
+    width: 80px;
+    height: 70px;
+    display: block;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+@media (max-width: 576px) {
+    .logo {
+        width: 80px;
+        height: 70px;
+        padding: 0;
+        padding-top: 0;
+        padding-left: 0;
+        margin: 0;
+        margin-top: 0;
+        margin-left: 0;
+    }
+}
+
+.nav li a{
+    background:linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) ;
+    color: white;
+    text-decoration:none;
+    padding: 35px;
+    display:block;
+    border-radius: 20px;
+    text-align: center;
+}
+
+nav {
+    height: 70px;
+    margin: 0;
+    background-color: rgb(24, 139, 206);
+}
+
+nav:hover {
+    height: 70px;
+    margin: 0;
+    background-color: rgba(24, 139, 255); 
+}
+
+.navbar .navbar-nav .nav-link {
+    color: black !important;
+}
+
+
+/* Reducir la altura de la barra de navegación */
+.navbar {
+    height: 70px;
+    margin: 0;
+}
+
+/* Reducir el tamaño del texto en los elementos del menú */
+.navbar-nav .nav-link {
+    font-size: 17px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgb(24, 22, 189) !important ;
+}
