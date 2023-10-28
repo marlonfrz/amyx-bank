@@ -90,7 +90,18 @@ a {
     transition: box-shadow 0.45s ease;
 }
 
+
 .imag:hover {
+    opacity: 0.75;
+    box-shadow: 10px 0px 20px black;
+}
+
+.imag_showcase {
+    width: 50%;
+    height: 50%;
+}
+
+.imag_showcase:hover {
     opacity: 0.75;
     box-shadow: 10px 0px 20px black;
 }
