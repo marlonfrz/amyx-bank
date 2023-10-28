@@ -119,95 +119,30 @@ a {
     height:200px;
     background-color: green;
     transition: all 250ms ease;
+    margin-top: 50px;
 }
 
 .product2 {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    
     width:200px;
-    height:200px;
-    background-color: green;
-    text-align: center;
-    transition: all 250ms ease;
+    height:150px;
 }
 
-.product3 {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    width:200px;
-    height:200px;
-    background-color: green;
-    text-align: center;
-    transition: all 250ms ease;
-}
-
-.product4{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    width:200px;
-    height:200px;
-    background-color: green;
-    text-align: center;
-    transition: all 250ms ease;
-}
-
-.product5 {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    width:200px;
-    height:200px;
-    background-color: green;
-    text-align: center;
-    transition: all 250ms ease;
-}
-
-.product6 {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    width:200px;
-    height:200px;
-    background-color: green;
-    text-align: center;
-    transition: all 250ms ease;
-}
 
 .product1:hover {
     background-color: grey;
     box-shadow: 10px 10px 20px black;
 }
 
-.product2:hover {
-    background-color: grey;
-    box-shadow: 10px 10px 20px black;
+.product1 img{
+    
 }
 
-.product3:hover {
-    background-color: grey;
-    box-shadow: 10px 10px 20px black;
-}
 
-.product4:hover {
-    background-color: grey;
-    box-shadow: 10px 10px 20px black;
-}
 
-.product5:hover {
-    background-color: grey;
-    box-shadow: 10px 10px 20px black;
-}
-
-.product6:hover {
-    background-color: grey;
-    box-shadow: 10px 10px 20px black;
-}
 
 footer {
-    background-color: rgb(22, 22, 22);
+    background-color: grey;
     height: 300px;
     width: 100%;
     display: flex;
@@ -216,9 +151,16 @@ footer {
 }
 
 footer p {
-    color: white;
+    background-color: grey;
 }
 
 footer div {
     margin: 100px;
+    background-color: grey;
+}
+
+
+#cuadro_img {
+    height: 200px;
+    width: 200px;
 }
