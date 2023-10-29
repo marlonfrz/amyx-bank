@@ -20,7 +20,7 @@ class BankAccount(models.Model):
 
     account_name = models.CharField(max_length=50, primary_key=False)
     account_balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
     objects = models.Manager()
 
 
@@ -37,8 +37,7 @@ class BankAccount(models.Model):
             self.account_code = f"A5-{new_bank_account_code:04d}"
         except BankAccount.DoesNotExist:
             self.account_code = "A5-0001"
-        self._meta.get_field('account_balance').editable = False
-        return super().save(self, *args, **kwargs)
+        return super(__class__, self).save(*args, **kwargs)
 
     # adaptar y crear view de account_detail
 

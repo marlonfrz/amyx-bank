@@ -52,4 +52,4 @@ def clean_email(self):
 class BankAccountForm(forms.ModelForm):
     class Meta:
         model = BankAccount
-        fields = ['account_name', 'status']
+        fields = ['account_name', 'account_balance']

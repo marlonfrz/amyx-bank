@@ -48,9 +48,11 @@ def dashboard(request):
 
 def bank_account_create_view(request):
     if request.method == 'POST':
-        form = BankAccountForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
+        bank_account_form = BankAccountForm(request.POST)
+        if bank_account_form.is_valid():
+            new_bank_account = bank_account_form.save(commit=False)
+            return render(request, 'account/create.html', {'new_bank_account'})
+            
     else:
         bank_account_create_form = BankAccountForm()
     return render(request, 'amyx_bank/account_create.html', {'form': bank_account_create_form})
