@@ -1,0 +1,140 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+.main {
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    position: relative;
+    height: 100%;
+}
+
+.container-fluid {
+    padding: 4em;
+}
+
+.border-md {
+    border-width: 2px;
+}
+
+.navbar-expand-lg {
+    background-color: rgb(24, 139, 206);
+}
+
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+
+body {
+    min-height: 100vh;
+}
+
+.form-control:not(select) {
+    padding: 1.5rem 0.5rem;
+}
+
+select.form-control {
+    height: 52px;
+    padding-left: 0.5rem;
+}
+
+.form-control::placeholder {
+    color: #ccc;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.form-control:focus {
+    box-shadow: none;
+}
+
+#cuadro_img {
+    height: 20px;
+    width: 20px;
+}
+
+.logo {
+    width: 80px;
+    height: 70px;
+    display: block;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+@media (max-width: 576px) {
+    .logo {
+        width: 80px;
+        height: 70px;
+        padding: 0;
+        padding-top: 0;
+        padding-left: 0;
+        margin: 0;
+        margin-top: 0;
+        margin-left: 0;
+    }
+}
+
+.nav li a{
+    background:linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) ;
+    text-decoration:none;
+    padding: 35px;
+    display:block;
+    border-radius: 20px;
+    text-align: center;
+}
+
+nav {
+    height: 70px;
+    margin: 0;
+    background-color: rgb(24, 139, 206);
+}
+
+nav:hover {
+    height: 70px;
+    margin: 0;
+    background-color: rgba(24, 139, 255); 
+}
+
+.navbar .navbar-nav .nav-link {
+    color: black !important;
+}
+
+
+/* Reducir la altura de la barra de navegación */
+.navbar {
+    height: 70px;
+    margin: 0;
+}
+
+/* Reducir el tamaño del texto en los elementos del menú */
+.navbar-nav .nav-link {
+    font-size: 17px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgb(24, 22, 189) !important ;
+}
+
+@media (max-width: 476px) {
+    .main-nav #nav div {
+        font-size: 10px
+    }
+}
+
+@media (max-width: 476px) {
+    .main-nav .menu-nav-right div {
+        font-size: 10px
+    }
+}

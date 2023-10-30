@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Create a new bank account{% endblock %}
+
+{% block content %}
+<div class="main">
+
+    <div class="container-fluid">
+        
+        <div class="container">
+            <div class="row py-5 mt-4 align-items-center">
+                <!-- For Demo Purpose -->
+                <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+                    <!-- LOGO -->
+                    <img src="../img/logo1.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+                    <h1>Create an Account</h1>
+                </div>
+
+                <!-- Registeration Form -->
+                <div class="col-md-7 col-lg-6 ml-auto">
+                    <form action="#">
+                        <div class="row">
+                            
+                            <!-- Account Name -->
+                            <div class="input-group col-lg-6 mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512">
+                                            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <input id="firstName" type="text" name="firstname" placeholder="Account Name" class="form-control bg-white border-left-0 border-md">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

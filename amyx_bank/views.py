@@ -3,9 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import LoginForm, Profile, UserRegistrationForm, BankAccountForm
+from .forms import BankAccountForm, LoginForm, Profile, UserRegistrationForm
 
 # Create your views here.
+
 
 def register(request):
     if request.method == 'POST':
@@ -22,6 +23,7 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -41,17 +43,19 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
 
+
 @login_required
 def dashboard(request):
-    return render(request, 'amyx_bank/main.html', {'main' : 'main'})
+    return render(request, 'amyx_bank/main.html', {'main': 'main'})
 
 
+@login_required
 def bank_account_create_view(request):
     if request.method == 'POST':
         bank_account_form = BankAccountForm(request.POST)
         if bank_account_form.is_valid():
             new_bank_account = bank_account_form.save(commit=False)
-            return render(request, 'account/create.html', {'new_bank_account': new_bank_account})
+            return render(request, 'account/create.html', {'new_bank_account': 'new_bank_account'})
     else:
         form = BankAccountForm()
     return render(request, 'amyx_bank/account_create.html', {'form': form})

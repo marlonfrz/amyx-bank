@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Profile, BankAccount
+from .models import BankAccount, Profile
 
 
 class LoginForm(forms.Form):
@@ -49,7 +49,8 @@ def clean_email(self):
         raise forms.ValidationError('Email already in use.')
     return data
 
+
 class BankAccountForm(forms.ModelForm):
     class Meta:
         model = BankAccount
-        fields = ['account_name', 'account_balance']
+        fields = ['account_name']
