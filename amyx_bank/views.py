@@ -51,8 +51,7 @@ def bank_account_create_view(request):
         bank_account_form = BankAccountForm(request.POST)
         if bank_account_form.is_valid():
             new_bank_account = bank_account_form.save(commit=False)
-            return render(request, 'account/create.html', {'new_bank_account'})
-            
+            return render(request, 'account/create.html', {'new_bank_account': new_bank_account})
     else:
-        bank_account_create_form = BankAccountForm()
-    return render(request, 'amyx_bank/account_create.html', {'form': bank_account_create_form})
+        form = BankAccountForm()
+    return render(request, 'amyx_bank/account_create.html', {'form': form})
