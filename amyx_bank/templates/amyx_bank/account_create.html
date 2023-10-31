@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-{% block title %} Create a bank account {% endblock %}
+{% block title %}Create a new bank account{% endblock %}
 {% block content %}
-<h1>Create an account</h1>
-<p>Please sign up using the following form</p>
-<form method="post">
-    {{ bank_account_create_form.as_p }}
-    {% csrf_token %}
-</form>
-
-<p><a href="create.html"><input type="submit" value="Create my account"></a></p>
+    <h1>Create an account</h1>
+    <p>Please sign up using the following form</p>
+    <form method="post">
+        {{ bank_account_create_form.as_p }}
+        <p><input type="submit" class="btn btn-primary" value="Create my account"></p>
+        {% csrf_token %}
+    </form>
 {% endblock %}

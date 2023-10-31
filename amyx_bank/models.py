@@ -31,14 +31,26 @@ class BankAccount(models.Model):
     #    ]
 
     # NO TOCAR EL METODO SAVE; FUNCIONA BIEN
-    def save(self, *args, **kwargs) -> None:
+    """ def save(self, *args, **kwargs) -> None:
         bank_prefix = "A5"
         last_used_account_code = BankAccount.objects.latest("account_code").account_code
         new_bank_account_code = (
             f"{bank_prefix}-{int(last_used_account_code[3:].lstrip('0')) + 1:04d}"
         )
         self.account_code = new_bank_account_code
-        return super(__class__, self).save(*args, **kwargs)
+        return super(__class__, self).save(*args, **kwargs) """
+
+    def save(self, *args, **kwargs):
+        if not self.account_code:
+            bank_prefix = "A5"
+            last_used_account = BankAccount.objects.order_by('-account_code').first()
+            if last_used_account:
+                last_code = last_used_account.account_code
+                new_account_code = f"{bank_prefix}-{int(last_code[3:].lstrip('0')) + 1:04d}"
+            else:
+                new_account_code = "A5-0001"
+            self.account_code = new_account_code
+        super(BankAccount, self).save(*args, **kwargs)
 
     # adaptar y crear view de account_detail
 

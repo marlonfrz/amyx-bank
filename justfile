@@ -24,3 +24,14 @@ migrate app="": _database
 
 startapp app:
     python manage.py startapp {{ app }}
+
+
+_database:
+    #!/usr/bin/env bash
+    if [ ! -e *.sqlite3 ]; then
+        if   [[ $OSTYPE == "linux-gnu"* ]]; then
+            sudo service postgresql status &> /dev/null || sudo service postgresql start
+        elif [[ $OSTYPE == "darwin"* ]]; then
+            pgrep -x postgres || open /Applications/Postgres.app
+        fi
+    fi

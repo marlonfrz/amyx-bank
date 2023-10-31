@@ -1,11 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import BankAccountForm, LoginForm, Profile, UserRegistrationForm
-
-# Create your views here.
 
 
 def register(request):
@@ -49,13 +47,21 @@ def dashboard(request):
     return render(request, 'amyx_bank/main.html', {'main': 'main'})
 
 
-@login_required
+""" @login_required """
+
+
 def bank_account_create_view(request):
     if request.method == 'POST':
         bank_account_form = BankAccountForm(request.POST)
         if bank_account_form.is_valid():
             new_bank_account = bank_account_form.save(commit=False)
-            return render(request, 'account/create.html', {'new_bank_account': 'new_bank_account'})
+            new_bank_account.save()
+            # Redirige a la página de inicio del tablero o donde desees después de crear la cuenta
+            return redirect('account_create_success')
     else:
         form = BankAccountForm()
-    return render(request, 'amyx_bank/account_create.html', {'form': form})
+    return render(request, 'amyx_bank/account_create.html', {'bank_account_create_form': form})
+
+
+def account_create_success(request):
+    return render(request, 'amyx_bank/account_create_done.html')
