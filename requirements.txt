@@ -1,3 +1,4 @@
 django
 prettyconf
 Pillow
+django-inline-svg
