@@ -14,11 +14,6 @@
     left: 0;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-}
-
 .risk1, .risk2 {
     border: solid 1px grey;
 }
@@ -56,8 +51,8 @@ nav {
 }
 
 .menu-nav a:hover {
-    border-bottom: 2px solid black;
-    color: #702632;
+    border-bottom: 2px solid black !important;
+    color: #5050FF !important; 
 }
 
 .menu-nav {

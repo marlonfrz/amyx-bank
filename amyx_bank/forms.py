@@ -1,12 +1,33 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import PasswordInput, TextInput
 
 from .models import BankAccount, Profile
 
 
 class LoginForm(forms.Form):
-    first_name = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    name = forms.CharField(widget=TextInput())
+    password = forms.CharField(widget=PasswordInput())
+
+    class Meta:
+        widgets = {
+            'name': TextInput(
+                attrs={
+                    'class': "form-control bg-white border-left-0 border-md",
+                    'id': "firstName",
+                    'placeholder': "Name",
+                    'type': "text",
+                }
+            ),
+            'password': PasswordInput(
+                attrs={
+                    'class': "form-control bg-white border-left-0 border-md",
+                    'id': "password",
+                    'placeholder': "Password",
+                    'type': "password",
+                }
+            ),
+        }
 
 
 class UserRegistrationForm(forms.ModelForm):

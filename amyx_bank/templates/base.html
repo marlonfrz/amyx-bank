@@ -3,16 +3,14 @@
 <html>
 <head>
 <title>{% block title %}{% endblock %}</title>
-<link href="{% static "css/base.css" %}" rel="stylesheet">
-<!-- <link href="{% static "css/register_login.css" %}" rel="stylesheet"> -->
-<!-- <link href="{% static "css/main.css" %}" rel="stylesheet"> -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <body>
   <nav class="main-nav row" id="nav">
     <div class="row">
-      <div class="col-1">
-        <a href="#"><img src="../img/logo1.svg" alt="LOGO" class="nav-brand d-none d-md-block logo"></a>
+      <div class="col-1" style="text-align: center;">
+        <img src="{% static 'img/logo1.jpg' %}" height="60px" width="60px" alt="" class="img-fluid mb-3 d-none d-md-block">
       </div>
       <div class="col-8">
         <div class="row menu-nav d-flex justify-content-end">
@@ -26,9 +24,13 @@
       </div>
       <div class="col-3">
         <div class="row menu-nav-right d-flex justify-content-end">
-          <div class="col-md-5 col-sm-3 col-2"><a href="register.html">Registrarse</a></div>
-          <div class="col-md-3 col-sm-3 col-2"><a href="login.html">Log In</a></div>
-          <div class="col-md-3 col-sm-3 col-2"><a href="profile.html">Acceder al perfil</a></div>
+          {% if request.user.is_authenticated %}
+          <div class="col-md-5 col-sm-3 col-2"><a href="{% url 'logout' %}">Logout</a></div>
+            <div class="col-md-3 col-sm-3 col-2"><a href="#">Acceder al perfil</a></div>
+          {% else %}
+            <div class="col-md-5 col-sm-3 col-2"><a href="{% url 'register' %}">Registrarse</a></div>
+            <div class="col-md-3 col-sm-3 col-2"><a href="{% url 'login' %}">Log In</a></div>
+          {% endif %}
         </div>
     </div>
   </nav>

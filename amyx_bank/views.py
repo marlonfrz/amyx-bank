@@ -33,10 +33,10 @@ def user_login(request):
                 if user.is_active:
                     login(request, user)
                     return HttpResponse('Authenticated successfully')
+                else:
+                    return HttpResponse('Disabled account')
             else:
-                return HttpResponse('Disabled account')
-        else:
-            return HttpResponse('Invalid login')
+                return redirect('account_create_success')
     else:
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})

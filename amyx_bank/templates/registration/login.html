@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+{% load svg %}
 {% block title %}Log-in{% endblock %}
 {% block content %}
 <div class="main">
@@ -10,8 +12,8 @@
             <!-- For Demo Purpose -->
             <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
                 <!-- LOGO -->
-                <img src="../img/logo1.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
-                <h1 style="text-align: center;">Log In</h1>
+                <img src="{% static 'img/logo1.jpg' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+                <h1>Log In</h1>
             </div>
 
             <!-- Registeration Form -->
@@ -27,6 +29,7 @@
                                     </svg>
                                 </span>
                             </div>
+                            {{ form.name }}
                             <input id="firstName" type="text" name="DNI" placeholder="DNI" class="form-control bg-white border-left-0 border-md">
                         </div>
                         <!-- Password -->
@@ -38,33 +41,23 @@
                                     </svg>                                    </svg>
                                 </span>
                             </div>
-                            <input id="firstName" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                            <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
                         </div>
-
-                        <!-- Password Confirmation -->
-                        <div class="input-group col-md-12 mb-4">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-white px-4 border-md border-right-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512">
-                                        <path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/>
-                                    </svg>                                  
-                                </span>
-                            </div>
-                            <input id="firstName" type="password" name="Confirmation" placeholder="Confirmation Password" class="form-control bg-white border-left-0 border-md">
-                        </div>
-                        
                         <!-- Submit Button -->
                         <div class="form-group col-lg-12 mx-auto mb-0">
                             <div class="font-weight-bold">
                                 <a href="#" class="btn btn-primary btn-block py-2">Create your account</a>
+                                <hr>
+                                <p class="text-muted font-weight-bold">Don't have an account? <a href="#" class="text-primary ml-2">Register</a></p>
                             </div>
                         </div>
-                        <br><br>
-                        <!-- New Account -->
-                        <div class="text-center w-100">
-                            <p class="text-muted font-weight-bold">Don't have an account? <a href="#" class="text-primary ml-2">Register</a></p>
-                        </div>
                         
+                        <form method="post">
+                            {{ form.name }}
+                            {{ form.password }}
+                            {% csrf_token %}
+                            <p><input type="submit" value="Log in"></p>
+                            </form>
                     </div>
                 </form>
             </div>
