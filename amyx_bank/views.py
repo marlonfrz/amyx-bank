@@ -47,9 +47,7 @@ def dashboard(request):
     return render(request, 'amyx_bank/main.html', {'main': 'main'})
 
 
-""" @login_required """
-
-
+@login_required
 def bank_account_create_view(request):
     if request.method == 'POST':
         bank_account_form = BankAccountForm(request.POST)
