@@ -4,9 +4,8 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('', views.dashboard, name='dashboard'),
     path('register/', views.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('new_bank_account/', views.bank_account_create_view, name='new_account'),
     path('account_create_success/', views.account_create_success, name='account_create_success'),
