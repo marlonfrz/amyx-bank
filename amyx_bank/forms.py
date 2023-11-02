@@ -6,12 +6,12 @@ from .models import BankAccount, Profile
 
 
 class LoginForm(forms.Form):
-    name = forms.CharField(widget=TextInput())
+    username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
 
     class Meta:
         widgets = {
-            'name': TextInput(
+            'username': TextInput(
                 attrs={
                     'class': "form-control bg-white border-left-0 border-md",
                     'id': "firstName",
@@ -31,12 +31,13 @@ class LoginForm(forms.Form):
 
 
 class UserRegistrationForm(forms.ModelForm):
+    username = forms.CharField(max_length=20)
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "email"]
+        fields = ["username", "first_name", "last_name", "email"]
 
     def clean_password2(self):
         cd = self.cleaned_data

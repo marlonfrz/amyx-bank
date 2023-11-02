@@ -1,8 +1,10 @@
 from django.conf import settings
+
+# from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.urls import reverse
 
 from .utils import generate_random_code
 
@@ -29,7 +31,7 @@ class BankAccount(models.Model):
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
     objects = models.Manager()
     target_ct = models.ForeignKey(
-        ContentType, blank=True, null=True, related_name='target_obj', on_delete=models.CASCADE
+        ContentType, blank=True, null=True, related_name='target_obj', on_delete=models.PROTECT
     )
     target_id = models.PositiveIntegerField(null=True, blank=True)
     target = GenericForeignKey('target_ct', 'target_id')
@@ -56,8 +58,6 @@ class BankAccount(models.Model):
         self.account_code = new_bank_account_code
         return super(__class__, self).save(*args, **kwargs)
 
-    # adaptar y crear view de account_detail
-
 
 #    def get_absolute_url(self):
 #        return reverse('amyx_bank:account_detail', args=[self.id])
@@ -79,3 +79,15 @@ class Card(models.Model):
             new_card_account_code = "C5-0001"
         self.card_account_code = new_card_account_code
         return super(__class__, self).save(*args, **kwargs)
+
+
+class Transaction(models.Model):
+    agent = models.CharField(max_length=60)
+    pass
+
+
+class deleted_user(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=False, null=True, default=None
+    )
+    deleted_date = models.DateTimeField(auto_now=True)

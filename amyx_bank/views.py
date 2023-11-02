@@ -28,11 +28,11 @@ def user_login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(request, username=cd['user_name'], password=cd['password'])
+            user = authenticate(request, username=cd['username'], password=cd['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                    return redirect('dashboard')
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -44,7 +44,7 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'amyx_bank/main.html', {'section': 'main'})
+    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
 
 
 @login_required
@@ -61,5 +61,28 @@ def bank_account_create_view(request):
     return render(request, 'amyx_bank/account_create.html', {'bank_account_create_form': form})
 
 
+@login_required
+def card_create_view(request):
+    pass
+
+
+@login_required
+def edit_account(request):
+    pass
+
+
+@login_required
+def edit_card(request):
+    pass
+
+
 def account_create_success(request):
     return render(request, 'amyx_bank/account_create_done.html')
+
+
+def logout(request):
+    return render(request, 'registration/logout.html')
+
+
+def main(request):
+    return render(request, 'amyx_bank/main.html')
