@@ -31,13 +31,9 @@ nav {
 }
 
 .main-nav {
-    position: absolute;
-    top: 0;
     display: flex;
     justify-content: space-evenly;
-    height: 115px;
-    padding: 0.5em;
-    background-color:#f5f5ff !important;
+    height: 50px;
 }
 
 .nav-brand {
@@ -75,7 +71,7 @@ nav {
 body{margin-top:20px;}
 .footer_area {
     position: relative;
-    z-index: 1;
+    z-index: 0;
     overflow: hidden;
     box-shadow: 0 8px 48px 8px rgba(47, 91, 234, 0.175);
     padding:60px;
@@ -160,7 +156,7 @@ body{margin-top:20px;}
 
 .single-footer-widget {
     position: relative;
-    z-index: 1;
+    z-index: 0;
 }
 .single-footer-widget .copywrite-text a {
     color: #747794;
@@ -189,7 +185,7 @@ body{margin-top:20px;}
 
 .footer_social_area {
     position: relative;
-    z-index: 1;
+    z-index: 0;
 }
 .footer_social_area a {
     border-radius: 50%;
@@ -265,10 +261,10 @@ ol, ul {
     background-color: #e2e8f0;
 }
 .h-100 {
-    height: 100%!important;
+    height: 100% !important;
 }
 .shadow-none {
-    box-shadow: none!important;
+    box-shadow: none !important;
 }
 
 .balance {
@@ -276,13 +272,8 @@ ol, ul {
 }
 
 .l-bg-cherry {
-    background: linear-gradient(to right, #493240, #f09) !important;
-    color: #fff;
-}
-
-.l-bg-cherry {
-    background: linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) !important;
-    color: #fff;
+    background: blue !important;
+    color: black;
 }
 
 
@@ -292,7 +283,6 @@ ol, ul {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
@@ -332,8 +322,6 @@ nav {
 }
 
 nav:hover {
-
-    margin: 0;
     background-color: rgba(24, 139, 255); 
 }
 
@@ -382,7 +370,6 @@ nav:hover {
     color: #FFFFFF;
     background-color: rgb(24, 139, 206);
 }
-
 
 .logo {
     width: 80px;
@@ -442,37 +429,41 @@ a:hover {
 }
 
 .card_1 {
-    background: linear-gradient(to right, rgb(119, 0, 113)   , rgb(255, 0, 242)) !important;
+    background: #5385d8 !important;
 }
 
 .card_1:hover {
-    background: rgba(255, 0, 242, 0.527) !important;
+    background: #5386d8a6  !important;
     color: black;
+    z-index: 1;
 }
 
 .card_2 {
-    background: linear-gradient(to right, green   , rgb(0, 250, 0)) !important;
+    background: #729bed !important;
 }
 
 .card_2:hover {
-    background: rgba(0, 128, 0, 0.452) !important;
+    background: #729bed8c !important;
     color: black;
+    z-index: 1;
 }
 
 .card_3 {
-    background: linear-gradient(to right, rgb(126, 0, 0)  , red) !important;
+    background: #92b2ff !important;
 }
 
 .card_3:hover {
-    background: rgba(255, 0, 0, 0.589) !important;
+    background: rgba(146, 179, 255, 0.555) !important;
     color: black;
+    z-index: 1;
 }
 
 .card_4 {
-    background: linear-gradient(to right, rgb(51, 51, 51)  , grey) !important;
+    background: #abc4ff !important;
 }
 
 .card_4:hover {
-    background: rgba(128, 128, 128, 0.555) !important;
+    background: #abc4ff8c !important;
     color: black;
+    z-index: 1;
 }
