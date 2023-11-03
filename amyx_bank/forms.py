@@ -9,26 +9,6 @@ class LoginForm(forms.Form):
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
 
-    class Meta:
-        widgets = {
-            'username': TextInput(
-                attrs={
-                    'class': "form-control bg-white border-left-0 border-md",
-                    'id': "firstName",
-                    'placeholder': "Name",
-                    'type': "text",
-                }
-            ),
-            'password': PasswordInput(
-                attrs={
-                    'class': "form-control bg-white border-left-0 border-md",
-                    'id': "password",
-                    'placeholder': "Password",
-                    'type': "password",
-                }
-            ),
-        }
-
 
 class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField(max_length=20)
