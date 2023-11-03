@@ -7,34 +7,20 @@
 <link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <header>
-  <nav class="nav-bar-default navbar-fixed-top navigation">
-    <div class="container-fluid">
-      <div class="col-1">
-        <img src="{% static 'img/logo1.jpg' %}" height="60px" width="60px" alt="" class="img-fluid mb-3 d-none d-md-block">
+  <nav class="navigation navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="" alt="">
+        </a>
+        <button id="navButton" class="navbar-text navbar-right btn btn-info">User | Logout</button>
+        <a href=""><p class="navbar-text navbar-right">Cuenta</p></a>
+        <a href=""><p class="navbar-text navbar-right">Tarjetas</p></a>
+        <a href=""><p class="navbar-text navbar-right">Pagos</p></a>
+        <a href=""><p class="navbar-text navbar-right">Transferencias</p></a>
+        <a href=""><p class="navbar-text navbar-right">Movimientos</p></a>
       </div>
-      <div class="col-8">
-        <div class="row menu-nav d-flex justify-content-end">
-          <div class="col-md-2 col-sm-4 col-4"><a href="{% url 'main' %}">Inmuebles</a></div>
-          <div class="col-md-2 col-sm-4 col-4"><a href="{% url 'main' %}">Hipotecas</a></div>
-          <div class="col-md-2 col-sm-4 col-4"><a href="{% url 'main' %}">Jovenes</a></div>
-          <div class="col-md-2 col-sm-4 col-4"><a href="{% url 'main' %}">Particulares</a></div>
-          <div class="col-md-2 col-sm-4 col-4"><a href="{% url 'main' %}">Empresas</a></div>
-          <div class="col-md-2 col-sm-4 col-4"><a href="{% url 'main' %}">Banca privada</a></div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="row menu-nav-right d-flex justify-content-end">
-          {% if request.user.is_authenticated %}
-          <div class="col-md-5 col-sm-3 col-2"><a href="{% url 'logout' %}">Logout</a></div>
-          <div class="col-md-3 col-sm-3 col-2"><a href="{% url 'dashboard' %}">Acceder al perfil</a></div>
-          {% else %}
-          <div class="col-md-5 col-sm-3 col-2"><a href="{% url 'register' %}">Sign Up</a></div>
-          <div class="col-md-3 col-sm-3 col-2"><a href="{% url 'login' %}">Log In</a></div>
-          {% endif %}
-        </div>
-      </div>
-    </nav>
-  </header>
+  </nav>
+</header>
   <body>
   {% block content %}
   {% endblock %}

@@ -68,7 +68,6 @@ nav {
     font-weight: bold;
 }
 
-body{margin-top:20px;}
 .footer_area {
     position: relative;
     z-index: 0;
@@ -316,19 +315,23 @@ ol, ul {
 }
 
 nav {
-    height: 70px;
+    height: 100px;
     margin: 0;
     background-color: rgb(24, 139, 206);
 }
 
+header {
+    height: 100px;
+    background-color: white;
+}
 nav:hover {
     background-color: rgba(24, 139, 255); 
 }
 
 .navbar .navbar-nav .nav-link {
+    height: 100px;
     color: black !important;
 }
-
 
 /* Reducir la altura de la barra de navegación */
 .navbar {
@@ -394,7 +397,7 @@ nav:hover {
     }
 }
 
-.nav li a{
+.nav .cards a{
     background:linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) ;
     color: white;
     text-decoration:none;
@@ -405,6 +408,17 @@ nav:hover {
     text-align: center;
 }
 
+
+.nav .movimientos a{
+    background:linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) ;
+    color: white;
+    text-decoration:none;
+    padding: 35px;
+    display:block;
+    border-radius: 20px;
+    width: 200px;
+    text-align: center;
+}
 .cards {
     transition: transform 0.2s;
     margin-right: 70px;
@@ -497,4 +511,9 @@ input[type=submit], a.button {
     padding: 10px 20px;
     font-size: 14px;
     text-transform: uppercase;
+}
+
+.l-bg-cherry {
+    background-color: linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) !important;
+    color: black;
 }
