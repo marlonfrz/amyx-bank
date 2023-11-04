@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import PasswordInput, TextInput
+from django.contrib.auth.forms import UserChangeForm
 
 from .models import BankAccount, Profile
 
@@ -25,12 +26,16 @@ class UserRegistrationForm(forms.ModelForm):
         return cd["password2"]
 
 
+<<<<<<< HEAD
 class UserEditForm(forms.ModelForm):
     
 
+=======
+class UserEditForm(UserChangeForm):
+>>>>>>> yamila
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['password', 'email']
 
     def clean_email(self):
         data = self.cleaned_data['email']
