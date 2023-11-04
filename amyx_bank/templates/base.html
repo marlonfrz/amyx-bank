@@ -12,7 +12,13 @@
         <a class="navbar-brand" href="#">
           <img src="" alt="">
         </a>
-        <button id="navButton" class="navbar-text navbar-right btn btn-info">User | Logout</button>
+        <span id="navButton" class="navbar-text navbar-right btn btn-info">
+          {% if user.is_authenticated %}
+              <a href="{% url 'logout' %}">Log Out</a>
+          {% else %}
+              <a href="{% url 'login' %}">Log In</a>
+          {% endif %}
+        </span>
         <a href=""><p class="navbar-text navbar-right">Cuenta</p></a>
         <a href=""><p class="navbar-text navbar-right">Tarjetas</p></a>
         <a href=""><p class="navbar-text navbar-right">Pagos</p></a>

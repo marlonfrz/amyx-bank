@@ -270,11 +270,6 @@ ol, ul {
     height: 5px;
 }
 
-.l-bg-cherry {
-    background: blue !important;
-    color: black;
-}
-
 
 .card {
     position: relative;
@@ -296,10 +291,7 @@ ol, ul {
 }
 
 
-.btn.btn-outline-secondary:action {
-    background-color: rgb(33, 113, 160);
-    color: white;
-}
+
 .btn.btn-outline-secondary:hover {
     background-color: rgb(33, 113, 160);
     color: white;
@@ -353,6 +345,7 @@ nav:hover {
     position: relative;
     width: 100px;
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -408,6 +401,11 @@ nav:hover {
     text-align: center;
 }
 
+.movimientos {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
 
 .nav .movimientos a{
     background:linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) ;
@@ -513,7 +511,17 @@ input[type=submit], a.button {
     text-transform: uppercase;
 }
 
-.l-bg-cherry {
-    background-color: linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) !important;
-    color: black;
+
+.btn-info {
+   background-color:  rgb(33, 113, 160);
+   color: white;
+   border: none ;
+}
+
+.btn-info:hover {
+    background-color:rgb(24, 139, 206);
+}
+
+.btn-info a{
+    background-color: transparent;
 }
