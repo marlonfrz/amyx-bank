@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import BankAccountForm, LoginForm, Profile, UserRegistrationForm, Edit
+from .forms import BankAccountForm, LoginForm, Profile, UserRegistrationForm,
 
 
 def register(request):
