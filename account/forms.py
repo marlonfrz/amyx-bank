@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.forms import PasswordInput, TextInput
 from django.contrib.auth.forms import UserChangeForm
 
-from .models import BankAccount, Profile
+from .models import Profile
+from amyx_bank.models import BankAccount
 
 
 class UserRegistrationForm(forms.ModelForm):

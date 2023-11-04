@@ -89,8 +89,3 @@ class Card(models.Model):
             new_card_account_code = "C5-0001"
         self.card_account_code = new_card_account_code
         return super(__class__, self).save(*args, **kwargs)
-
-
-    
-
-

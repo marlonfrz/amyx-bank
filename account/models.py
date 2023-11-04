@@ -35,7 +35,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'Profile of {self.user}'
 
-class deleted_user(models.Model):
+class DeletedUser(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=False, null=True, default=None
     )

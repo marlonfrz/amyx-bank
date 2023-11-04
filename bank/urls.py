@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-#    path('payment/', include('payment.urls')),
+    path('payment/', include('payment.urls')),
     path('', include('amyx_bank.urls')),
 ]

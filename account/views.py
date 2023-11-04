@@ -35,18 +35,12 @@ def bank_account_create_view(request):
         form = BankAccountForm()
     return render(request, 'amyx_bank/account_create.html', {'bank_account_create_form': form})
 
-
 @login_required
 def card_create_view(request):
     pass
 
-
-
-
 def account_create_success(request):
     return render(request, 'amyx_bank/account_create_done.html')
-
-
 
 @login_required
 def edit_card(request):
