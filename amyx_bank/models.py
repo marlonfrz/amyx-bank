@@ -27,7 +27,6 @@ class BankAccount(models.Model):
     target_id = models.PositiveIntegerField(null=True, blank=True)
     target = GenericForeignKey('target_ct', 'target_id')
 
-
     class Meta:
         ordering = ['-account_code']
         indexes = [
@@ -69,7 +68,6 @@ class Card(models.Model):
     )
     target_id = models.PositiveIntegerField(null=True, blank=True)
     target = GenericForeignKey('target_ct', 'target_id')
-
 
     class Meta:
         ordering = ['-card_account_code']
