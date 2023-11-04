@@ -4,7 +4,6 @@ from django.forms import PasswordInput, TextInput
 
 from .models import BankAccount, Profile
 
-
 class LoginForm(forms.Form):
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
@@ -27,6 +26,8 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class UserEditForm(forms.ModelForm):
+    
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
@@ -56,3 +57,5 @@ class BankAccountForm(forms.ModelForm):
     class Meta:
         model = BankAccount
         fields = ['account_name']
+
+

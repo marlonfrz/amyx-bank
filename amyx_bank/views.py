@@ -52,8 +52,7 @@ def bank_account_create_view(request):
     if request.method == 'POST':
         bank_account_form = BankAccountForm(request.POST)
         if bank_account_form.is_valid():
-            new_bank_account = bank_account_form.save(commit=False)
-            new_bank_account.save()
+            bank_account_form.save()
             # Redirige a la página de inicio del tablero o donde desees después de crear la cuenta
             return redirect('account_create_success')
     else:
