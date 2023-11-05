@@ -19,11 +19,13 @@
             <a href="{% url 'logout' %}">Log Out</a>
           {% endif %}
         </button>
-        <a href=""><p class="navbar-text navbar-right">Cuenta</p></a>
-        <a href=""><p class="navbar-text navbar-right">Tarjetas</p></a>
-        <a href=""><p class="navbar-text navbar-right">Pagos</p></a>
-        <a href=""><p class="navbar-text navbar-right">Transferencias</p></a>
-        <a href=""><p class="navbar-text navbar-right">Movimientos</p></a>
+        <a href="{% url 'main' %}"><p class="navbar-text navbar-right">Home</p></a>
+        <a href="{% url 'dashboard' %}"><p class="navbar-text navbar-right">Profile</p></a>
+        <a href=""><p class="navbar-text navbar-right">Accounts</p></a>
+        <a href="{% url 'card_detail' %}"><p class="navbar-text navbar-right">Cards</p></a>
+        <a href=""><p class="navbar-text navbar-right">Payments</p></a>
+        <a href=""><p class="navbar-text navbar-right">Transfers</p></a>
+        <a href=""><p class="navbar-text navbar-right">Movements</p></a>
       </div>
   </nav>
 </header>

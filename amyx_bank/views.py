@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from .models import BankAccount
+from .forms import AccountEditForm, LoginForm
 
-from account.models import Profile
-from .forms import LoginForm
 from account.forms import UserRegistrationForm
+from account.models import Profile
 
 def register(request):
     if request.method == 'POST':
@@ -19,7 +20,6 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -38,10 +38,21 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
-
-
+    
 def logout(request):
     return render(request, 'registration/logout.html')
 
 def main(request):
     return render(request, 'amyx_bank/main.html')
+
+@login_required
+def edit_bank_account(request, pk): #el pk es primarykey
+    bank_account = BankAccount.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = AccountEditForm(request.POST, instance=bank_account)
+        if form.is_valid():
+            form.save()
+            return redirect('bank_account_detail', pk=pk)
+    else:
+        form = AccountEditForm(instance=bank_account)
+    return render(request, 'edit_bank_account.html', {'account_edit_form':form})
