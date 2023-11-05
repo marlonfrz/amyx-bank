@@ -11,7 +11,7 @@ def dashboard(request):
 
 @login_required
 def edit_account(request):
-    pass
+    return render(request, 'account/edit_account.html', {'section': 'dashboard'})
 
 @login_required
 def edit_profile(request):
@@ -22,7 +22,7 @@ def edit_profile(request):
             return redirect('profile')
     else:
         form = UserEditForm(instance=request.user)
-    return render(request, 'edit_profile.html', {'user_edit_form': form})
+    return render(request, 'account/edit_profile.html', {'user_edit_form': form})
 
 @login_required
 def bank_account_create_view(request):
@@ -33,15 +33,16 @@ def bank_account_create_view(request):
             return redirect('account_create_success')
     else:
         form = BankAccountForm()
-    return render(request, 'amyx_bank/account_create.html', {'bank_account_create_form': form})
+    return render(request, 'account/account_create.html', {'bank_account_create_form': form})
 
 @login_required
 def card_create_view(request):
     pass
 
 def account_create_success(request):
-    return render(request, 'amyx_bank/account_create_done.html')
+    return render(request, 'account/account_create_done.html')
 
 @login_required
 def edit_card(request):
     pass
+
