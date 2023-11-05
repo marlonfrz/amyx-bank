@@ -1,12 +1,12 @@
 from django.conf import settings
 
 # from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-
+from django.core.mail import send_mail
 from .utils import generate_random_code
+from account.models import Profile
 
 
 class BankAccount(models.Model):
@@ -21,17 +21,17 @@ class BankAccount(models.Model):
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
 
     objects = models.Manager()
-    target_ct = models.ForeignKey(
+    profile = models.ForeignKey(
         ContentType, blank=True, null=True, related_name='bank_accounts', on_delete=models.PROTECT
     )
     target_id = models.PositiveIntegerField(null=True, blank=True)
-    target = GenericForeignKey('target_ct', 'target_id')
+    target = GenericForeignKey('profile', 'target_id')
 
     class Meta:
         ordering = ['-account_code']
         indexes = [
             models.Index(fields=['-account_code']),
-            models.Index(fields=['target_ct', 'target_id']),
+            models.Index(fields=['profile', 'target_id']),
         ]
 
     def save(self, *args, **kwargs) -> None:
@@ -63,17 +63,17 @@ class Card(models.Model):
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
 
     objects = models.Manager()
-    target_ct = models.ForeignKey(
+    account = models.ForeignKey(
         ContentType, blank=True, null=True, related_name='cards', on_delete=models.PROTECT
     )
     target_id = models.PositiveIntegerField(null=True, blank=True)
-    target = GenericForeignKey('target_ct', 'target_id')
+    target = GenericForeignKey('account', 'target_id')
 
     class Meta:
         ordering = ['-card_account_code']
         indexes = [
             models.Index(fields=['-card_account_code']),
-            models.Index(fields=['target_ct', 'target_id']),
+            models.Index(fields=['account', 'target_id']),
         ]
 
     def save(self, *args, **kwargs) -> None:
@@ -85,5 +85,7 @@ class Card(models.Model):
             )
         except Card.DoesNotExist:
             new_card_account_code = "C5-0001"
+        print(self.account.profile.user.email)
+#        send_mail('Your credit has been created',f'Your credit card has the code {self.card_validation_code}',settings.EMAIL_HOST_USER,[self.account.profile.user.email], fail_silently=True,)
         self.card_account_code = new_card_account_code
         return super(__class__, self).save(*args, **kwargs)

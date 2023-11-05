@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 class Transaction(models.Model):
     agent = models.CharField(max_length=60)
     concept = models.CharField(max_length=100, default='')
-    amount = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     timestamp = models.DateTimeField(auto_now_add=True)
     kind = models.CharField(max_length=20, default='buy')
 

@@ -6,6 +6,11 @@
     background-color: #FFFFFF;
 }
 
+a {
+    text-decoration: None;
+    background-color: transparent !important;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .logo {
@@ -513,9 +518,9 @@ input[type=submit], a.button {
 
 
 .btn-info {
-   background-color:  rgb(33, 113, 160);
-   color: white;
-   border: none ;
+    background-color:  rgb(33, 113, 160);
+    color: white;
+    border: none ;
 }
 
 .btn-info:hover {
@@ -524,4 +529,14 @@ input[type=submit], a.button {
 
 .btn-info a{
     background-color: transparent;
+}
+
+.operation {
+    color: black;
+    transition: ease-in-out;
+}
+
+.operation_btn:hover a {
+    color: white;
+    transition: ease-in-out;
 }

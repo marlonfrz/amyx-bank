@@ -15,7 +15,6 @@ def transfer(request):
 def commissions(request):
     pass
 
-
 @login_required
 def buy(request):
     pass

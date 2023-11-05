@@ -11,11 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-<<<<<<< HEAD
-from prettyconfig import config
-=======
 from prettyconf import config
->>>>>>> yamila
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -144,4 +140,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=config.boolean)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSlWORD = config('SMTP_LOGIN_lPASSWORD', default='password')
+EMAIL_HOST_PASSWORD = config('SMTP_LOGIN_PASSWORD', default='password')

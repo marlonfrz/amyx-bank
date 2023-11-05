@@ -48,7 +48,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-12">
-                                <a class="btn btn-primary" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills" target="_blank">Edit</a>
+                                <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit</a>
                             </div>
                         </div>
                     </div>
@@ -68,8 +68,12 @@
                         </div>
                     </div>
                 </div>
+                <!-- AQUI VA A IR UN BLOQUE PARA LA GENERACION DE TARJETAS -->
                 <div class="col-md-12 col-sm-4 col-4">
                     <ul class="  d-inline-block justify-content-between nav">
+                {% block cards %}
+                <!-- MOVIMIENTOS -->
+                {% endblock %}
                         <li class="movimientos">
                             <a href="">                        
                                 Card 1<BR>
@@ -104,30 +108,41 @@
         <div class="col-sm-12 col-md-6 mb-3">
         <!--- Contenido a la derecha -->
             <div class="actions row">
-                <button class="gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">Creación de tarjetas</button>
-                <button class="gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">Creación de cuentas</button>
-                <button class="gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">Mobile recharges</button>
-                <button class="gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">Bizums</button>
-                <button class="gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">Bill payment</button>
-                <button class="gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">Direct debit receipts</button>
+                
+                <button class="operation_btn gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">
+                    <a class="operation" href="{% url 'card_create' %}">Creación de tarjetas</a>
+                </button>
+                
+                <button class="operation_btn gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">
+                    <a class="operation" href="{% url 'create_account' %}">Creación de cuentas</a>
+                </button>
+                
+                <button class="operation_btn gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">
+                    <a class="operation" href="{% url 'buy' %}">Buy</a>
+                </button>
+                
+                <button class="operation_btn gy-2 col-md-12 col-sm-4 col-4 btn btn-outline-secondary btn-block" type="button">
+                    <a class="operation" href="{% url 'transfer' %}">Trasnfers</a>
+                </button>
+
             </div> <br>
             <ul class="d-inline-block justify-content-between nav">
 				<li class="cards"><a href="">CARDS</a>
 					<ul class="submenu">
-						<li ><a class="card_1" href="">Card 1</a></li>
-						<li ><a class="card_2" href="">Card 2</a></li>
-						<li ><a class="card_3" href="">Card 3</a></li>
-						<li ><a class="card_4" href="">Card 4</a></li>
+						<li><a class="card_1" href="">Card 1</a></li>
+						<li><a class="card_2" href="">Card 2</a></li>
+						<li><a class="card_3" href="">Card 3</a></li>
+						<li><a class="card_4" href="">Card 4</a></li>
 					</ul>
 				</li>
 			</ul>
             <ul class="d-inline-block nav">
 				<li class="cards"><a href="">ACCOUNTS</a>
 					<ul class="submenu">
-						<li ><a class="card_1" href="">Account 1</a></li>
-						<li ><a class="card_2" href="">Account 2</a></li>
-						<li ><a class="card_3" href="">Account 3</a></li>
-						<li ><a class="card_4" href="">Account 4</a></li>
+						<li><a class="card_1" href="">Account 1</a></li>
+						<li><a class="card_2" href="">Account 2</a></li>
+						<li><a class="card_3" href="">Account 3</a></li>
+						<li><a class="card_4" href="">Account 4</a></li>
 					</ul>
 				</li>
 			</ul>
