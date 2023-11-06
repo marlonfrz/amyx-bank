@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 
 from . import views
 
@@ -9,6 +9,6 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('create_account/', views.bank_account_create_view, name='create_account'),
     path('edit/account/<int:id>/', views.edit_bank_account, name='edit_account'),
+    path('create_card/', views.card_create, name='create_card'),
     path('edit/card/<int:id>/', views.card_edit, name='card_edit'),
-    path('card/create', views.card_create, name='card_create'),
 ]

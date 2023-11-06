@@ -20,7 +20,7 @@ class UserRegistrationForm(UserCreationForm):
         data = self.cleaned_data['email']
         qs = User.objects.exclude(id=self.instance.id).filter(email=data)
         if qs.exists():
-            raise forms.ValidationError(' Email already in use.')
+            raise forms.ValidationError('Email already in use.')
         return data
 
 
@@ -41,10 +41,10 @@ class UserEditForm(UserChangeForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ["avatar"]
+        fields = ["avatar", 'status']
 
 
 class ChangePasswordForm(PasswordChangeForm):
     class Meta:
         model = User
-        fields = ('old_password', 'new_password1', 'new_password2')
+        fields = ['old_password', 'new_password1', 'new_password2']

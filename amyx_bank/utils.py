@@ -3,6 +3,7 @@ import random, requests, string
 URL = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/files/banks.json'
 RESPONSE = requests.get(URL)
 BANKS = RESPONSE.json()
+#print(BANKS)
 
 def generate_random_code(code_length):
     valid_chars = string.ascii_uppercase + string.digits

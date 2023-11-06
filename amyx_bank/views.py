@@ -10,14 +10,12 @@ from .forms import AccountEditForm, AccountForm, CardCreateForm, CardEditForm, L
 from .models import BankAccount, Card
 
 
-def logout(request):
-    return render(request, 'registration/logout.html')
-
-
+# http://dsw.pc16.aula109:8000/
 def main(request):
     return render(request, 'amyx_bank/main.html')
 
 
+# http://dsw.pc16.aula109:8000/register
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -32,6 +30,7 @@ def register(request):
     return render(request, 'account/register.html', {'user_form': user_form})
 
 
+# http://dsw.pc16.aula109:8000/login
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -51,6 +50,13 @@ def user_login(request):
     return render(request, 'registration/login.html', {'form': form})
 
 
+# http://dsw.pc16.aula109:8000/logout
+def logout(request):
+    log_out(request)
+    return render(request, 'registration/logout.html')
+
+
+# http://dsw.pc16.aula109:8000/create_account
 @login_required
 def bank_account_create_view(request):
     if request.method == 'POST':
@@ -63,16 +69,8 @@ def bank_account_create_view(request):
     return render(request, 'account/account_create.html', {'bank_account_create_form': form})
 
 
-def logout(request):
-    log_out(request)
-    return render(request, 'registration/logout.html')
 
-
-@login_required
-def main(request):
-    return render(request, 'amyx_bank/main.html')
-
-
+# http://dsw.pc16.aula109:8000/edit/account/<int:id>/
 @login_required
 def edit_bank_account(request, id):  # el pk es primarykey
     bank_account = BankAccount.objects.get(id=id)
@@ -86,6 +84,8 @@ def edit_bank_account(request, id):  # el pk es primarykey
     return render(request, 'edit_bank_account.html', {'account_edit_form': form})
 
 
+
+# http://dsw.pc16.aula109:8000/create_card
 @login_required
 def card_create(request, id):  # el pk es primarykey
     if request.method == 'POST':
@@ -98,6 +98,8 @@ def card_create(request, id):  # el pk es primarykey
         return render(request, 'amyx_bank/card_create.html', {'card_create_form': form})
 
 
+
+# http://dsw.pc16.aula109:8000/edit/card/<int:id>/
 @login_required
 def card_edit(request, id):  # el pk es primarykey
     card_id = Card.objects.get(id=id)

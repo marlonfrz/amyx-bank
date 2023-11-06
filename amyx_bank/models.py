@@ -4,7 +4,7 @@ from django.db import models
 from django.urls import reverse
 
 from account.models import Profile
-
+from django.contrib.auth.models import User
 from .utils import generate_random_code
 
 
@@ -22,10 +22,7 @@ class BankAccount(models.Model):
         DISABLED = 'DS', 'Disable'
         CANCELLED = 'CN', 'Cancelled'
 
-    account = models.OneToOneField(
-        Profile, related_name='bank_accounts', on_delete=models.PROTECT, null=True
-    )
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     account_name = models.CharField(max_length=50, primary_key=False)
     account_balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     account_code = models.CharField(max_length=20, null=False, blank=True, default="A5-0001")

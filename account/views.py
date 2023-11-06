@@ -1,21 +1,21 @@
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from amyx_bank.models import BankAccount, Card
+from amyx_bank.models import BankAccount
 
 from .forms import ChangePasswordForm, ProfileEditForm, UserEditForm
 
 
+# http://dsw.pc16.aula109:8000/account
 @login_required
 def dashboard(request):
-    bank_accounts = BankAccount.objects.filter(user=request.user)
+#    bank_accounts = BankAccount.objects.filter(user=request.user.profile)
     return render(
-        request, 'account/dashboard.html', {'section': 'dashboard', 'bank_accounts': bank_accounts}
+        request, 'account/dashboard.html', {'section': 'dashboard', 'bank_accounts': "bank_accounts"}
     )
 
 
+# http://dsw.pc16.aula109:8000/account
 @login_required
 def edit_user_information(request):
     if request.method == 'POST':
@@ -28,11 +28,7 @@ def edit_user_information(request):
     return render(request, 'account/edit_profile.html', {'user_edit_form': form})
 
 
-@login_required
-def card_create_view(request):
-    return render(request, 'details/card_detail.html')
-
-
+# http://dsw.pc16.aula109:8000/account/account_detail/<int:id>
 @login_required
 def account_detail_view(request, id):
     #    card = BankAccount.objects.filter(profile=request.user.profile)
@@ -40,20 +36,13 @@ def account_detail_view(request, id):
     return render(request, 'details/account_detail.html', {'cuenta': cuenta})
 
 
+# http://dsw.pc16.aula109:8000/account/account_create_success/
+@login_required
 def account_create_success(request):
     return render(request, 'account/account_create_done.html')
 
 
-@login_required
-def edit_card(request):
-    pass
-
-
-@login_required
-def edit_account(request):
-    pass
-
-
+# http://dsw.pc16.aula109:8000/account/edit/profile
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
@@ -73,10 +62,7 @@ def edit_profile(request):
     )
 
 
-def main(request):
-    return render(request, 'amyx_bank/main.html')
-
-
+# http://dsw.pc16.aula109:8000/account/edit/password
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -87,3 +73,10 @@ def change_password(request):
     else:
         form = ChangePasswordForm(request.user)
     return render(request, 'account/change_password.html', {'change_password': form})
+
+
+# http://dsw.pc16.aula109:8000/account/accounts
+@login_required
+def accounts(request):
+    accounts = BankAccount.objects.filter(user=request.user)
+    return render(request, 'account/accounts.html', {'accounts': accounts})
