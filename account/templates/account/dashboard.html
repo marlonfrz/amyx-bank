@@ -137,14 +137,7 @@
 				</li>
 			</ul>
             <ul class="d-inline-block nav">
-				<li class="cards"><a href="">ACCOUNTS</a>
-					<ul class="submenu">
-						<li><a class="card_1" href="">Account 1</a></li>
-						<li><a class="card_2" href="">Account 2</a></li>
-						<li><a class="card_3" href="">Account 3</a></li>
-						<li><a class="card_4" href="">Account 4</a></li>
-					</ul>
-				</li>
+				{% include "list.html"%}
 			</ul>
         </div>
         {% csrf_token %}

@@ -1,11 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import (
+    PasswordChangeForm,
+    UserChangeForm,
+    UserCreationForm,
+)
 from django.contrib.auth.models import User
-from django.forms import PasswordInput, TextInput
-from django.contrib.auth.forms import UserChangeForm
-from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
-
-from amyx_bank.models import BankAccount
 
 from .models import Profile
 
@@ -24,6 +23,7 @@ class UserRegistrationForm(UserCreationForm):
             raise forms.ValidationError(' Email already in use.')
         return data
 
+
 class UserEditForm(UserChangeForm):
     class Meta:
         model = User
@@ -36,6 +36,13 @@ class UserEditForm(UserChangeForm):
         if qs.exists():
             raise forms.ValidationError(' Email already in use.')
         return data
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["avatar"]
+
 
 class ChangePasswordForm(PasswordChangeForm):
     class Meta:

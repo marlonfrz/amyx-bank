@@ -17,19 +17,11 @@ class Profile(models.Model):
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
 
     objects = models.Manager()
-    target_ct = models.ForeignKey(
-        ContentType, blank=True, null=True, related_name='profiles', on_delete=models.PROTECT
-    )
-    target_id = models.PositiveIntegerField(null=True, blank=True)
-    target = GenericForeignKey('target_ct', 'target_id')
-    # reporter = models.ForeignKey(Reporter, on_delete=models.CASCADE)
-    # ccounts = models.ManyToOneRel()
 
     class Meta:
         ordering = ['-user']
         indexes = [
             models.Index(fields=['-user']),
-            models.Index(fields=['target_ct', 'target_id']),
         ]
 
     def __str__(self):

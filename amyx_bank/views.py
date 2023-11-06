@@ -18,10 +18,6 @@ def main(request):
     return render(request, 'amyx_bank/main.html')
 
 
-from .forms import AccountEditForm, LoginForm
-from .models import BankAccount
-
-
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -77,38 +73,38 @@ def main(request):
 
 
 @login_required
-def edit_bank_account(request, pk):  # el pk es primarykey
-    bank_account = BankAccount.objects.get(pk=pk)
+def edit_bank_account(request, id):  # el pk es primarykey
+    bank_account = BankAccount.objects.get(id=id)
     if request.method == 'POST':
         form = AccountEditForm(request.POST, instance=bank_account)
         if form.is_valid():
             form.save()
-            return redirect('bank_account_detail', pk=pk)
+            return redirect('bank_account_detail', id=id)
     else:
         form = AccountEditForm(instance=bank_account)
     return render(request, 'edit_bank_account.html', {'account_edit_form': form})
 
 
 @login_required
-def card_create(request, pk):  # el pk es primarykey
+def card_create(request, id):  # el pk es primarykey
     if request.method == 'POST':
         form = CardCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('card_detail', pk=pk)
+            return redirect('card_detail', id=id)
         else:
             form = CardCreateForm()
         return render(request, 'amyx_bank/card_create.html', {'card_create_form': form})
 
 
 @login_required
-def card_edit(request, pk):  # el pk es primarykey
-    card_id = Card.objects.get(pk=pk)
+def card_edit(request, id):  # el pk es primarykey
+    card_id = Card.objects.get(id=id)
     if request.method == 'POST':
         form = CardEditForm(request.POST, instance=card_id)
         if form.is_valid():
             form.save()
-            return redirect('card_detail', pk=pk)
+            return redirect('card_detail', id=id)
     else:
         form = CardEditForm(instance=card_id)
     return render(request, 'card_edit.html', {'card_edit_form': form})

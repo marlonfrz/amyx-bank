@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 {% block title %}Account detail{% endblock %}
 {% block content %}
-    <div class="card"> 
+    <div class="card_detail"> 
         <div class="card-statistic-3 p-4">
             <div class="mb-4 justify-content-between align-items-center">
                 <div>
                     <h2 class="card-title">Account 1</h2>
-                    <h3 class="total">1.050 €</h3>
+                    <h3 class="total">1.050 € </h3>
                     <div class='help'></div>
                 </div>
                 <div>
                     <h4 class="iban">IBAN:</h4>
-                    <h4 class="account">A5-0001</h4>
+                    <h4 class="account">{{ cuenta.account_code }}</h4>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
-HOLA

@@ -1,18 +1,23 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import ChangePasswordForm, UserEditForm
+from amyx_bank.models import BankAccount, Card
+
+from .forms import ChangePasswordForm, ProfileEditForm, UserEditForm
 
 
 @login_required
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    bank_accounts = BankAccount.objects.filter(user=request.user)
+    return render(
+        request, 'account/dashboard.html', {'section': 'dashboard', 'bank_accounts': bank_accounts}
+    )
 
 
 @login_required
-def edit_profile(request):
+def edit_user_information(request):
     if request.method == 'POST':
         form = UserEditForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -29,8 +34,10 @@ def card_create_view(request):
 
 
 @login_required
-def account_create_view(request):
-    return render(request, 'details/account_detail.html')
+def account_detail_view(request, id):
+    #    card = BankAccount.objects.filter(profile=request.user.profile)
+    cuenta = get_object_or_404(BankAccount, id=id)
+    return render(request, 'details/account_detail.html', {'cuenta': cuenta})
 
 
 def account_create_success(request):
@@ -45,6 +52,25 @@ def edit_card(request):
 @login_required
 def edit_account(request):
     pass
+
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(request.POST, instance=request.user)
+        profile_form = ProfileEditForm(request.POST, instance=request.user)
+        if profile_form.is_valid() and user_form.is_valid():
+            profile_form.save()
+            user_form.save()
+            return redirect('dashboard')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(
+        request,
+        'account/edit_profile.html',
+        {'user_edit_form': user_form, 'profile_edit_form': profile_form},
+    )
 
 
 def main(request):

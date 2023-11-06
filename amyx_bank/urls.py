@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
     path('create_account/', views.bank_account_create_view, name='create_account'),
-    path('edit/account/<int:pk>/', views.edit_bank_account, name='edit_account'),
-    path('edit/card/<int:pk>/', views.card_edit, name='card_edit'),
+    path('edit/account/<int:id>/', views.edit_bank_account, name='edit_account'),
+    path('edit/card/<int:id>/', views.card_edit, name='card_edit'),
     path('card/create', views.card_create, name='card_create'),
 ]
