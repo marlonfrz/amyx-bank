@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+
+
 from .forms import BankAccountForm, UserEditForm
 
 
@@ -10,10 +12,6 @@ from .forms import BankAccountForm, UserEditForm
 def dashboard(request):
     return render(request, 'account/dashboard.html', {'section': 'dashboard'})
 
-
-@login_required
-def edit_account(request):
-    pass
 
 
 @login_required
@@ -42,7 +40,7 @@ def bank_account_create_view(request):
 
 @login_required
 def card_create_view(request):
-    pass
+    return render(request, 'amyx_bank/card_detail.html')
 
 
 def account_create_success(request):
@@ -53,6 +51,10 @@ def account_create_success(request):
 def edit_card(request):
     pass
 
+@login_required
+def edit_account(request):
+    pass
+
 
 def main(request):
-    return render(request, 'amx_bank/main.html')
+    return render(request, 'amyx_bank/main.html')
