@@ -6,6 +6,11 @@
     background-color: #FFFFFF;
 }
 
+a {
+    text-decoration: None;
+    background-color: transparent !important;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .logo {
@@ -270,11 +275,6 @@ ol, ul {
     height: 5px;
 }
 
-.l-bg-cherry {
-    background: blue !important;
-    color: black;
-}
-
 
 .card {
     position: relative;
@@ -296,10 +296,7 @@ ol, ul {
 }
 
 
-.btn.btn-outline-secondary:action {
-    background-color: rgb(33, 113, 160);
-    color: white;
-}
+
 .btn.btn-outline-secondary:hover {
     background-color: rgb(33, 113, 160);
     color: white;
@@ -353,6 +350,7 @@ nav:hover {
     position: relative;
     width: 100px;
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -408,6 +406,11 @@ nav:hover {
     text-align: center;
 }
 
+.movimientos {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
 
 .nav .movimientos a{
     background:linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) ;
@@ -482,6 +485,14 @@ a:hover {
     z-index: 1;
 }
 
+/*
+form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}*/
+
 form p {
     width: 100%;
     overflow: auto;
@@ -513,7 +524,27 @@ input[type=submit], a.button {
     text-transform: uppercase;
 }
 
-.l-bg-cherry {
-    background-color: linear-gradient(to right, rgb(31, 31, 175), rgb(33, 113, 160)) !important;
+
+.btn-info {
+    background-color:  rgb(33, 113, 160);
+    color: white;
+    border: none ;
+}
+
+.btn-info:hover {
+    background-color:rgb(24, 139, 206);
+}
+
+.btn-info a{
+    background-color: transparent;
+}
+
+.operation {
     color: black;
+    transition: ease-in-out;
+}
+
+.operation_btn:hover a {
+    color: white;
+    transition: ease-in-out;
 }

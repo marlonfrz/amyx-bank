@@ -1,22 +1,12 @@
 from django.conf import settings
 
 # from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-
+from django.core.mail import send_mail
 from .utils import generate_random_code
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    date_of_birth = models.DateField(blank=True, null=True)
-    # reporter = models.ForeignKey(Reporter, on_delete=models.CASCADE)
-    # ccounts = models.ManyToOneRel()
-
-    def __str__(self):
-        return f'Profile of {self.user}'
+from account.models import Profile
 
 
 class BankAccount(models.Model):
@@ -29,22 +19,20 @@ class BankAccount(models.Model):
     account_balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     account_code = models.CharField(max_length=20, null=False, blank=True, default="A5-0001")
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
+
     objects = models.Manager()
-    target_ct = models.ForeignKey(
-        ContentType, blank=True, null=True, related_name='target_obj', on_delete=models.PROTECT
+    profile = models.ForeignKey(
+        ContentType, blank=True, null=True, related_name='bank_accounts', on_delete=models.PROTECT
     )
     target_id = models.PositiveIntegerField(null=True, blank=True)
-    target = GenericForeignKey('target_ct', 'target_id')
+    target = GenericForeignKey('profile', 'target_id')
 
-    # = models.ForeignKey(Reporter, on_delete=models.CASCADE)
-
-    # class Meta:
-    #    ordering = ['-movement']
-    #    indexes = [
-    #        models.Index(fields=['-movement']),
-    #        models.Index(fields=['target_ct', 'target_id']),
-    #    ]
-    # NO TOCAR EL METODO SAVE; FUNCIONA BIEN
+    class Meta:
+        ordering = ['-account_code']
+        indexes = [
+            models.Index(fields=['-account_code']),
+            models.Index(fields=['profile', 'target_id']),
+        ]
 
     def save(self, *args, **kwargs) -> None:
         bank_prefix = "A5"
@@ -64,9 +52,29 @@ class BankAccount(models.Model):
 
 
 class Card(models.Model):
+    class Status(models.TextChoices):
+        ACTIVE = 'AC', 'Active'
+        DISABLED = 'DS', 'Disable'
+        CANCELLED = 'CN', 'Cancelled'
+
     card_name = models.CharField(max_length=50, primary_key=False, default=None)
     card_validation_code = generate_random_code(3)
     card_account_code = models.CharField(max_length=20, null=False, blank=True, default="C5-0001")
+    status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
+
+    objects = models.Manager()
+    account = models.ForeignKey(
+        ContentType, blank=True, null=True, related_name='cards', on_delete=models.PROTECT
+    )
+    target_id = models.PositiveIntegerField(null=True, blank=True)
+    target = GenericForeignKey('account', 'target_id')
+
+    class Meta:
+        ordering = ['-card_account_code']
+        indexes = [
+            models.Index(fields=['-card_account_code']),
+            models.Index(fields=['account', 'target_id']),
+        ]
 
     def save(self, *args, **kwargs) -> None:
         card_prefix = "C5"
@@ -77,17 +85,7 @@ class Card(models.Model):
             )
         except Card.DoesNotExist:
             new_card_account_code = "C5-0001"
+        print(self.account.profile.user.email)
+#        send_mail('Your credit has been created',f'Your credit card has the code {self.card_validation_code}',settings.EMAIL_HOST_USER,[self.account.profile.user.email], fail_silently=True,)
         self.card_account_code = new_card_account_code
         return super(__class__, self).save(*args, **kwargs)
-
-
-class Transaction(models.Model):
-    agent = models.CharField(max_length=60)
-    pass
-
-
-class deleted_user(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, blank=False, null=True, default=None
-    )
-    deleted_date = models.DateTimeField(auto_now=True)
