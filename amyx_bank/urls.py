@@ -11,5 +11,4 @@ urlpatterns = [
     path('edit/account/<int:pk>/', views.edit_bank_account, name='edit_account'),
     path('edit/card/<int:pk>/', views.card_edit, name='card_edit'),
     path('card/create', views.card_create, name='card_create'),
-    path('account/', include('account.urls')),
 ]

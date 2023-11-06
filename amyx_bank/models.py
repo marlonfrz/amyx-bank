@@ -1,12 +1,12 @@
-from django.conf import settings
-
 # from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
 from django.core.mail import send_mail
+from django.db import models
+
 from .utils import generate_random_code
-from account.models import Profile
+
+# from account.models import Profile
 
 
 class BankAccount(models.Model):
@@ -85,7 +85,7 @@ class Card(models.Model):
             )
         except Card.DoesNotExist:
             new_card_account_code = "C5-0001"
-        print(self.account.profile.user.email)
-#        send_mail('Your credit has been created',f'Your credit card has the code {self.card_validation_code}',settings.EMAIL_HOST_USER,[self.account.profile.user.email], fail_silently=True,)
+        # print(self.account.profile.user.email)
+        #        send_mail('Your credit has been created',f'Your credit card has the code {self.card_validation_code}',settings.EMAIL_HOST_USER,[self.account.profile.user.email], fail_silently=True,)
         self.card_account_code = new_card_account_code
         return super(__class__, self).save(*args, **kwargs)
