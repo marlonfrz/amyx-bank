@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% include 'list.html' %}
 {% block title %}Dashboard{% endblock %}
 {% load static %}
 {% block content %}
@@ -137,7 +138,8 @@
 				</li>
 			</ul>
             <ul class="d-inline-block nav">
-				{% include "list.html"%}
+				{% block accounts %}
+                {% endblock%}
 			</ul>
         </div>
         {% csrf_token %}

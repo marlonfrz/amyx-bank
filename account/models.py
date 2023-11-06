@@ -11,7 +11,7 @@ class Profile(models.Model):
         DISABLED = 'DS', 'Disable'
         CANCELLED = 'CN', 'Cancelled'
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    user = models.OneToOneField(User, on_delete=models.PROTECT)
     date_of_birth = models.DateField(blank=True, null=True)
     avatar = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)

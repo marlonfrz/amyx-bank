@@ -23,7 +23,7 @@ class BankAccount(models.Model):
         CANCELLED = 'CN', 'Cancelled'
 
     account = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name='bank_accounts', on_delete=models.PROTECT, null=True
+        Profile, related_name='bank_accounts', on_delete=models.PROTECT, null=True
     )
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     account_name = models.CharField(max_length=50, primary_key=False)

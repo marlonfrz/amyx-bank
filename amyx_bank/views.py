@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout as log_out
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -64,6 +64,7 @@ def bank_account_create_view(request):
 
 
 def logout(request):
+    log_out(request)
     return render(request, 'registration/logout.html')
 
 
