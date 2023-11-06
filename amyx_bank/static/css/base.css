@@ -8,7 +8,6 @@
 
 a {
     text-decoration: None;
-    background-color: transparent !important;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -542,9 +541,38 @@ input[type=submit], a.button {
 .operation {
     color: black;
     transition: ease-in-out;
+    background-color: transparent !important;
 }
 
 .operation_btn:hover a {
     color: white;
     transition: ease-in-out;
+}
+
+.total {
+    float: right;
+}
+
+.help{
+    clear: both;
+}
+
+.account, .iban{
+    display: inline;
+}
+
+.card_detail{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    position: relative;
+    margin-bottom: 30px;
+    margin-left: 150px;
+    margin-right: 150px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
 }

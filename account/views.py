@@ -3,14 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-
-
-from .forms import UserEditForm, ChangePasswordForm
+from .forms import ChangePasswordForm, UserEditForm
 
 
 @login_required
 def dashboard(request):
     return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+
 
 @login_required
 def edit_profile(request):
@@ -24,20 +23,33 @@ def edit_profile(request):
     return render(request, 'account/edit_profile.html', {'user_edit_form': form})
 
 
-
 @login_required
 def card_create_view(request):
-    return render(request, 'amyx_bank/card_detail.html')
+    return render(request, 'details/card_detail.html')
+
+
+@login_required
+def account_create_view(request):
+    return render(request, 'details/account_detail.html')
+
 
 def account_create_success(request):
     return render(request, 'account/account_create_done.html')
+
 
 @login_required
 def edit_card(request):
     pass
 
+
+@login_required
+def edit_account(request):
+    pass
+
+
 def main(request):
     return render(request, 'amyx_bank/main.html')
+
 
 @login_required
 def change_password(request):
