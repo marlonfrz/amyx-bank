@@ -335,7 +335,7 @@ nav:hover {
 
 /* Reducir la altura de la barra de navegación */
 .navbar {
-    height: 70px;
+    height: 100px;
     margin: 0;
 }
 
