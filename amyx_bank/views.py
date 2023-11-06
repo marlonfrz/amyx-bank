@@ -49,5 +49,6 @@ def logout(request):
     return render(request, 'registration/logout.html')
 
 
+@login_required
 def main(request):
     return render(request, 'amyx_bank/main.html')
