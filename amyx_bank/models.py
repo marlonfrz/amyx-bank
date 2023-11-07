@@ -69,7 +69,6 @@ class Card(models.Model):
     card_account_code = models.CharField(
         max_length=20, null=False, blank=True, default="C5-0001"
     )
-    balance = models.CharField(max_length=10, default=0)
     status = models.CharField(
         max_length=20, default=Status.ACTIVE, choices=Status.choices
     )

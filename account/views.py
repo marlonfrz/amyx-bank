@@ -79,5 +79,5 @@ def change_password(request):
 # http://dsw.pc16.aula109:8000/account/accounts
 @login_required
 def accounts(request):
-    accounts = BankAccount.objects.filter(user=request.user)
+    accounts = BankAccount.objects.filter(user=request.user.profile.bank_accounts)
     return render(request, "account/accounts.html", {"accounts": accounts})

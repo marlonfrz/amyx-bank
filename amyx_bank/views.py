@@ -68,6 +68,7 @@ def bank_account_create_view(request):
         bank_account_form = AccountForm(request.POST)
         if bank_account_form.is_valid():
             bank_account_form.save()
+            BankAccount.objects.create(account_code=bank_account_form)
             return redirect("account_create_success")
     else:
         form = AccountForm()
@@ -84,7 +85,7 @@ def edit_bank_account(request, id):  # el pk es primarykey
         form = AccountEditForm(request.POST, instance=bank_account)
         if form.is_valid():
             form.save()
-            return redirect("bank_account_detail", id=id)
+            return render(request , "bank_account_detail", id=id)
     else:
         form = AccountEditForm(instance=bank_account)
     return render(request, "edit_bank_account.html", {"account_edit_form": form})
@@ -92,15 +93,19 @@ def edit_bank_account(request, id):  # el pk es primarykey
 
 # http://dsw.pc16.aula109:8000/create_card
 @login_required
-def card_create(request, id):  # el pk es primarykey
+def create_card(request):
     if request.method == "POST":
-        form = CardCreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("card_detail", id=id)
+        card_form = CardCreateForm(request.POST)
+        if card_form.is_valid():
+            card_form.save()
+            new_card = Card.objects.create(card_name=card_form)
+            return render(request, "amyx_bank/card_detail", {"id" : new_card.id})
         else:
-            form = CardCreateForm()
-        return render(request, "amyx_bank/card_create.html", {"card_create_form": form})
+            return HttpResponse('Formulario invalido')
+    else:
+        card_form = CardCreateForm()
+    return render(request, "amyx_bank/card_create.html", {"card_create_form": card_form})
+
 
 
 # http://dsw.pc16.aula109:8000/edit/card/<int:id>/
@@ -117,7 +122,8 @@ def card_edit(request, id):  # el pk es primarykey
     return render(request, "card_edit.html", {"card_edit_form": form})
 
 
+# http://dsw.pc16.aula109:8000/card_detail/<int:id>
 @login_required
-def card_detail(request, card_account_code):
-    card = Card.objects.get(card_account_code=card_account_code)
-    return render(request, "card_detail.html", {"card_detail": card_detail})
+def card_detail(request, card_code):
+    card = Card.objects.all().filter(card_account_code=card_code)
+    return render(request, "card_detail.html", {"card": card})
