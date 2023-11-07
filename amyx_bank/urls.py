@@ -11,5 +11,5 @@ urlpatterns = [
     path("edit/account/<int:id>/", views.edit_bank_account, name="edit_account"),
     path("create_card/", views.card_create, name="create_card"),
     path("edit/card/<int:id>/", views.card_edit, name="card_edit"),
-    path("card_detail/", views.card_detail, name="card_detail"),
+    path("card_detail/<str:card_account_code>/", views.card_detail, name="card_detail"),
 ]

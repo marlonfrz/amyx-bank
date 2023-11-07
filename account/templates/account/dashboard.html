@@ -72,37 +72,16 @@
             <!-- AQUI VA A IR UN BLOQUE PARA LA GENERACION DE TARJETAS -->
             <div class="col-md-12 col-sm-4 col-4">
                 <ul class="  d-inline-block justify-content-between nav">
-                    {% block cards %}
+                    {% block movements%}
                     <!-- MOVIMIENTOS -->
                     {% endblock %}
-                    <li class="movimientos">
-                        <a href="{% url 'card_detail' card_account_code=Card.card_account_code %}">
-                            Card 1<BR>
-                            Amazon<BR>
-                            3.2 €
-                        </a>
-                    </li>
-                    <li class="movimientos">
-                        <a href="">
-                            Card 1<BR>
-                            Amazon<BR>
-                            3.2 €
-                        </a>
-                    </li>
-                    <li class="movimientos">
-                        <a href="">
-                            Card 1<BR>
-                            Amazon<BR>
-                            3.2 €
-                        </a>
-                    </li>
-                    <li class="movimientos">
-                        <a href="">
-                            Card 1<BR>
-                            Amazon<BR>
-                            3.2 €
-                        </a>
-                    </li>
+                    {% for card in cards %}
+                        <li class="movimientos">
+                            {% if Card.card_account_code %}
+                                <a href="{% url 'card_detail' card_account_code=card.card_account_code %}"></a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -133,17 +112,15 @@
             </div> <br>
             <ul class="d-inline-block justify-content-between nav">
                 <li class="cards"><a href="">CARDS</a>
-                    <ul class="submenu">
-                        <li><a class="card_1" href="">Card 1</a></li>
-                        <li><a class="card_2" href="">Card 2</a></li>
-                        <li><a class="card_3" href="">Card 3</a></li>
-                        <li><a class="card_4" href="">Card 4</a></li>
-                    </ul>
+                    {% block cards %}
+                    {% endblock%}
                 </li>
             </ul>
             <ul class="d-inline-block nav">
-                {% block accounts %}
-                {% endblock%}
+                <li class="cards"><a href="">ACCOUNTS</a>
+                    {% block accounts %}
+                    {% endblock%}
+                </li>    
             </ul>
         </div>
         {% csrf_token %}

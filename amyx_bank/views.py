@@ -1,17 +1,22 @@
-from django.contrib.auth import authenticate, login, logout as log_out
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout as log_out
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from .models import Card
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 
 from account.forms import UserRegistrationForm
 from account.models import Profile
+from amyx_bank.models import (
+    Card,  # Asegúrate de importar el modelo Card desde el módulo adecuado
+)
 
 from .forms import AccountEditForm, AccountForm, CardCreateForm, CardEditForm, LoginForm
 from .models import BankAccount, Card
 
 
 # http://dsw.pc16.aula109:8000/
+@login_required
 def main(request):
     return render(request, "amyx_bank/main.html")
 
@@ -37,15 +42,11 @@ def user_login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(
-                request, username=cd["username"], password=cd["password"]
-            )
+            user = authenticate(request, username=cd["username"], password=cd["password"])
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(
-                        request, "account/dashboard.html", {"section": "dashboard"}
-                    )
+                    return render(request, "account/dashboard.html", {"section": "dashboard"})
                 else:
                     return HttpResponse("Disabled account")
             else:
@@ -71,9 +72,7 @@ def bank_account_create_view(request):
             return redirect("account_create_success")
     else:
         form = AccountForm()
-    return render(
-        request, "account/account_create.html", {"bank_account_create_form": form}
-    )
+    return render(request, "account/account_create.html", {"bank_account_create_form": form})
 
 
 # http://dsw.pc16.aula109:8000/edit/account/<int:id>/
@@ -97,6 +96,8 @@ def card_create(request, id):  # el pk es primarykey
         form = CardCreateForm(request.POST)
         if form.is_valid():
             form.save()
+            # Generar la URL inversa con el valor de id
+            url = reverse('card_detail', kwargs={'id': id})
             return redirect("card_detail", id=id)
         else:
             form = CardCreateForm()
@@ -117,7 +118,18 @@ def card_edit(request, id):  # el pk es primarykey
     return render(request, "card_edit.html", {"card_edit_form": form})
 
 
-@login_required
+""" @login_required
 def card_detail(request, card_account_code):
     card = Card.objects.get(card_account_code=card_account_code)
-    return render(request, "card_detail.html", {"card_detail": card_detail})
+    return render(request, "card_detail.html", {"card_detail": card_detail}) """
+
+
+def card_detail(request, card_account_code):
+    try:
+        card = Card.objects.get(card_account_code=card_account_code)
+    except Card.DoesNotExist:
+        # Manejar la situación en la que no se encontró ninguna tarjeta
+        return render(request, "./account/cards.html", {"message": "La tarjeta no existe"})
+
+    # Procesar y mostrar los detalles de la tarjeta
+    return render(request, "card_detail.html", {"card_detail": card})
