@@ -1,5 +1,4 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout as log_out
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -7,12 +6,9 @@ from django.urls import reverse
 
 from account.forms import UserRegistrationForm
 from account.models import Profile
-from amyx_bank.models import (
-    Card,  # Asegúrate de importar el modelo Card desde el módulo adecuado
-)
 
-from .forms import AccountEditForm, AccountForm, CardCreateForm, CardEditForm, LoginForm
-from .models import BankAccount, Card
+from .forms import AccountEditForm, AccountForm, LoginForm
+from .models import BankAccount
 
 
 # http://dsw.pc16.aula109:8000/
@@ -57,8 +53,8 @@ def user_login(request):
 
 
 # http://dsw.pc16.aula109:8000/logout
-def logout(request):
-    log_out(request)
+def log_out(request):
+    logout(request)
     return render(request, "registration/logout.html")
 
 
@@ -84,56 +80,7 @@ def edit_bank_account(request, id):  # el pk es primarykey
         form = AccountEditForm(request.POST, instance=bank_account)
         if form.is_valid():
             form.save()
-            return render(request , "bank_account_detail", id=id)
+            return render(request, "bank_account_detail", id=id)
     else:
         form = AccountEditForm(instance=bank_account)
     return render(request, "edit_bank_account.html", {"account_edit_form": form})
-
-
-# http://dsw.pc16.aula109:8000/create_card
-@login_required
-def create_card(request):
-    if request.method == "POST":
-        card_form = CardCreateForm(request.POST)
-        if card_form.is_valid():
-            card_form.save()
-            # Generar la URL inversa con el valor de id
-            url = reverse('card_detail', kwargs={'id': id})
-            return redirect("card_detail", id=id)
-        else:
-            return HttpResponse('Formulario invalido')
-    else:
-        card_form = CardCreateForm()
-    return render(request, "amyx_bank/card_create.html", {"card_create_form": card_form})
-
-
-
-# http://dsw.pc16.aula109:8000/edit/card/<int:id>/
-@login_required
-def card_edit(request, id):  # el pk es primarykey
-    card_id = Card.objects.get(id=id)
-    if request.method == "POST":
-        form = CardEditForm(request.POST, instance=card_id)
-        if form.is_valid():
-            form.save()
-            return redirect("card_detail", id=id)
-    else:
-        form = CardEditForm(instance=card_id)
-    return render(request, "card_edit.html", {"card_edit_form": form})
-
-
-""" @login_required
-def card_detail(request, card_account_code):
-    card = Card.objects.get(card_account_code=card_account_code)
-    return render(request, "card_detail.html", {"card_detail": card_detail}) """
-
-
-def card_detail(request, card_account_code):
-    try:
-        card = Card.objects.get(card_account_code=card_account_code)
-    except Card.DoesNotExist:
-        # Manejar la situación en la que no se encontró ninguna tarjeta
-        return render(request, "./account/cards.html", {"message": "La tarjeta no existe"})
-
-    # Procesar y mostrar los detalles de la tarjeta
-    return render(request, "card_detail.html", {"card_detail": card})

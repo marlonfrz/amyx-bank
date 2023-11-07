@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+
 from amyx_bank.models import BankAccount
 
 from .forms import ChangePasswordForm, ProfileEditForm, UserEditForm
@@ -79,5 +80,7 @@ def change_password(request):
 # http://dsw.pc16.aula109:8000/account/accounts
 @login_required
 def accounts(request):
-    accounts = BankAccount.objects.filter(user=request.user.profile.bank_accounts)
+    accounts = BankAccount.objects.filter(user=request.user.profile.bank_accounts).exclude(
+        status=BankAccount.Status.CANCELLED[0]
+    )
     return render(request, "account/accounts.html", {"accounts": accounts})
