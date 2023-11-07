@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Cards detail{% endblock %}
 {% block content %}
-{% comment %} {% for card in cards %} {% endcomment %}
-    <div class="card_detail"> 
-        <div class="card-statistic-3 p-4">
-            <div class="mb-4 justify-content-between align-items-center">
-                <div>
-                    <h2 class="card-title">Card 1</h2>
-                    <h3 class="total">2.150 €</h3>
-                    <div class='help'></div>
-                </div>
-                <div>
-                    <h4 class="iban">CARD'S NUMBER:</h4>
-                    <h4 class="account">A5-0001</h4>
-                </div>
+{% for card in cards %}
+<div class="card_detail">
+    <div class="card-statistic-3 p-4">
+        <div class="mb-4 justify-content-between align-items-center">
+            <div>
+                <h2 class="card-title">{{ card.name }}</h2>
+                <h3 class="total">{{ card.balance }} €</h3>
+                <div class='help'></div>
+            </div>
+            <div>
+                <h4 class="iban">CARD'S NUMBER:</h4>
+                <h4 class="account">{{ card.card_account_code }}</h4>
             </div>
         </div>
     </div>
-{% comment %} {% endfor %} {% endcomment %}
-    
+</div>
+{% endfor %}
+
 {% endblock %}

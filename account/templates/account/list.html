@@ -1,9 +1,0 @@
-{% block content %}
-    <li class="cards"><a href="">ACCOUNTS</a>
-        <ul class="submenu">
-            {% for bank_account in bank_accounts %}
-                <li><a class="card_1" href="">{{ bank_account.account_code }}</a></li>
-            {% endfor %}
-        </ul>
-    </li>
-{% endblock %}

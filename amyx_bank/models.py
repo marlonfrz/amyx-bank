@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db import models
 from django.urls import reverse
@@ -18,14 +19,11 @@ from .utils import generate_random_code
 #
 class BankAccount(models.Model):
     class Status(models.TextChoices):
-        ACTIVE = 'AC', 'Active'
-        DISABLED = 'DS', 'Disable'
-        CANCELLED = 'CN', 'Cancelled'
+        ACTIVE = "AC", "Active"
+        DISABLED = "DS", "Disable"
+        CANCELLED = "CN", "Cancelled"
 
-    account = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name='bank_accounts', on_delete=models.PROTECT, null=True
-    )
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     account_name = models.CharField(max_length=50, primary_key=False)
     account_balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     account_code = models.CharField(max_length=20, null=False, blank=True, default="A5-0001")
@@ -33,9 +31,9 @@ class BankAccount(models.Model):
     objects = models.Manager()
 
     class Meta:
-        ordering = ['-account_code']
+        ordering = ["-account_code"]
         indexes = [
-            models.Index(fields=['-account_code']),
+            models.Index(fields=["-account_code"]),
         ]
 
     def save(self, *args, **kwargs) -> None:
@@ -57,23 +55,27 @@ class BankAccount(models.Model):
 
 class Card(models.Model):
     class Status(models.TextChoices):
-        ACTIVE = 'AC', 'Active'
-        DISABLED = 'DS', 'Disable'
-        CANCELLED = 'CN', 'Cancelled'
+        ACTIVE = "AC", "Active"
+        DISABLED = "DS", "Disable"
+        CANCELLED = "CN", "Cancelled"
 
     card_name = models.CharField(max_length=50, primary_key=False, default=None)
     card_validation_code = generate_random_code(3)
-    card_account_code = models.CharField(max_length=20, null=False, blank=True, default="C5-0001")
-    status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
+    card_account_code = models.CharField(
+        max_length=20, null=False, blank=True, default="C5-0001"
+    )
+    status = models.CharField(
+        max_length=20, default=Status.ACTIVE, choices=Status.choices
+    )
 
     account = models.ForeignKey(
-        BankAccount, related_name='cards', on_delete=models.PROTECT, null=True
+        BankAccount, related_name="cards", on_delete=models.PROTECT, null=True
     )
 
     class Meta:
-        ordering = ['-card_account_code']
+        ordering = ["-card_account_code"]
         indexes = [
-            models.Index(fields=['-card_account_code']),
+            models.Index(fields=["-card_account_code"]),
         ]
 
     def save(self, *args, **kwargs) -> None:
@@ -85,6 +87,11 @@ class Card(models.Model):
             )
         except Card.DoesNotExist:
             new_card_account_code = "C5-0001"
+
+        # Asegurarse de que card_account_code no esté en blanco
+        if not self.card_account_code:
+            self.card_account_code = new_card_account_code
+
         # print(self.account.profile.user.email)
         #        send_mail('Your credit has been created',f'Your credit card has the code {self.card_validation_code}',settings.EMAIL_HOST_USER,[self.account.profile.user.email], fail_silently=True,)
         self.card_account_code = new_card_account_code

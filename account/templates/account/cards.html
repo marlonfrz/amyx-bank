@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Your accounts {% endblock %}
+{% block content %}
+    <h1>Your cards {{ user.username }}:</h1>
+    <ul>
+        {% for card in cards %}
+            <li>{{ card.card_account_code }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

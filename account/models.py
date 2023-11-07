@@ -1,7 +1,4 @@
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
@@ -11,11 +8,10 @@ class Profile(models.Model):
         DISABLED = 'DS', 'Disable'
         CANCELLED = 'CN', 'Cancelled'
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    user = models.OneToOneField(User, on_delete=models.PROTECT, related_name='profile')
     date_of_birth = models.DateField(blank=True, null=True)
     avatar = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
-
     objects = models.Manager()
 
     class Meta:
