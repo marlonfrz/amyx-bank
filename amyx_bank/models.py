@@ -50,6 +50,7 @@ class BankAccount(models.Model):
         self.account_code = new_bank_account_code
         return super(__class__, self).save(*args, **kwargs)
 
+
 #    def get_absolute_url(self):
 #        return reverse('amyx_bank:account_detail', args=[self.id])
 
