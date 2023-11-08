@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 #  from prettyconf import config
@@ -33,7 +34,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'account.apps.AccountConfig',
+    'account',
     'amyx_bank.apps.AmyxBankConfig',
     'card.apps.CardConfig',
     'payment.apps.PaymentConfig',
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'bank.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR / 'account/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

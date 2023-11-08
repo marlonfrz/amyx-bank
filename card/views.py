@@ -22,7 +22,7 @@ def create_card(request):
             return HttpResponse('Formulario invalido')
     else:
         card_form = CardCreateForm()
-    return render(request, "amyx_bank/card_create.html", {"card_create_form": card_form})
+    return render(request, "card/card_create.html", {"card_create_form": card_form})
 
 
 # http://dsw.pc16.aula109:8000/edit/card/<int:id>/

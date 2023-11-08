@@ -84,3 +84,13 @@ def accounts(request):
         status=BankAccount.Status.CANCELLED[0]
     )
     return render(request, "account/accounts.html", {"accounts": accounts})
+
+
+# def list_cards(request, account_id):
+#      cards = Card.objects.all().filter(account=account_id)
+#      return render(request, "account/list_cards.html", {"cards": cards})
+#
+#
+#
+#
+#

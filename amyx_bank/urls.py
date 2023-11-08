@@ -9,4 +9,6 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("create_account/", views.bank_account_create_view, name="create_account"),
     path("edit/account/<int:id>/", views.edit_bank_account, name="edit_account"),
+    #path('inicio/', views.inicio, name='inicio'),
+    #path('detalle/<int:id>/', views.detalle, name='detalle'),
 ]

@@ -7,105 +7,103 @@
 <link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <header>
-<nav class="navigation navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
+  <nav class="navigation navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
         <a class="navbar-brand" href="#">
-        <img src="" alt="">
+          <img src="" alt="">
         </a>
         <button id="navButton" class="navbar-text navbar-right btn btn-info">
-        {% if request.auth %}
+          {% if request.user.is_authenticated %}
             <a href="{% url 'logout' %}">Log Out</a>
-        {% else %}
+          {% else %}
             <a href="{% url 'login' %}">Log In</a>
-        {% endif %}
+          {% endif %}
         </button>
-
-        <a href=""><p class="navbar-text navbar-right">Cuenta</p></a>
-        <a href=""><p class="navbar-text navbar-right">Tarjetas</p></a>
-        <a href=""><p class="navbar-text navbar-right">Pagos</p></a>
-        <a href=""><p class="navbar-text navbar-right">Transferencias</p></a>
-        <a href=""><p class="navbar-text navbar-right">Movimientos</p></a>
-    </div>
-</nav>
+        <a href="{% url 'main' %}"><p class="navbar-text navbar-right">Home</p></a>
+        <a href="{% url 'dashboard' %}"><p class="navbar-text navbar-right">Profile</p></a>
+        <a href="{% url 'accounts' %}"><p class="navbar-text navbar-right">Accounts</p></a>
+        <a href=""><p class="navbar-text navbar-right">Payments</p></a>
+        <a href=""><p class="navbar-text navbar-right">Transfers</p></a>
+        <a href=""><p class="navbar-text navbar-right">Movements</p></a>
+      </div>
+  </nav>
 </header>
-<body>
-    <div class="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+  <body>
+  {% block content %}
+  {% endblock %}
     <br>
     <br>
     <br>
     <br>
     <br>
     <div class="footer_area">
-    <div class="container_footer">
-        <div class="row footer_area">
-            <!-- Single Widget-->
-            <div class="col-12 col-sm-6 col-lg-4">
+      <div class="container_footer">
+          <div class="row footer_area">
+              <!-- Single Widget-->
+              <div class="col-12 col-sm-6 col-lg-4">
                 <div class="single-footer-widget section_padding_0_130">
-                <!-- Footer Logo-->
-                <div class="footer-logo mb-3"></div>
-                <p>Appland is completely creative, lightweight, clean app landing page.</p>
-                <!-- Copywrite Text-->
-                <div class="copywrite-text mb-5">
+                  <!-- Footer Logo-->
+                  <div class="footer-logo mb-3"></div>
+                  <p>Appland is completely creative, lightweight, clean app landing page.</p>
+                  <!-- Copywrite Text-->
+                  <div class="copywrite-text mb-5">
                     <p class="mb-0">Made with <i class="lni-heart mr-1"></i>by<a class="ml-1" href="https://wrapbootstrap.com/user/DesigningWorld">Designing World</a></p>
+                  </div>
+                  <!-- Footer Social Area-->
+                  <div class="footer_social_area"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype"><i class="fa fa-skype"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></div>
                 </div>
-                <!-- Footer Social Area-->
-                <div class="footer_social_area"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype"><i class="fa fa-skype"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></div>
-                </div>
-            </div>
-            <!-- Single Widget-->
-            <div class="col-12 col-sm-6 col-lg">
+              </div>
+              <!-- Single Widget-->
+              <div class="col-12 col-sm-6 col-lg">
                 <div class="single-footer-widget section_padding_0_130">
-                <!-- Widget Title-->
-                <h5 class="widget-title">About</h5>
+                  <!-- Widget Title-->
+                  <h5 class="widget-title">About</h5>
                 <!-- Footer Menu-->
-                <div class="footer_menu">
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Corporate Sale</a></li>
-                        <li><a href="#">Terms &amp; Policy</a></li>
-                        <li><a href="#">Community</a></li>
+                  <div class="footer_menu">
+                      <ul>
+                      <li><a href="#">About Us</a></li>
+                      <li><a href="#">Corporate Sale</a></li>
+                      <li><a href="#">Terms &amp; Policy</a></li>
+                      <li><a href="#">Community</a></li>
                     </ul>
+                  </div>
                 </div>
-                </div>
-            </div>
-            <!-- Single Widget-->
-            <div class="col-12 col-sm-6 col-lg">
+              </div>
+              <!-- Single Widget-->
+              <div class="col-12 col-sm-6 col-lg">
                 <div class="single-footer-widget section_padding_0_130">
-                <!-- Widget Title-->
-                <h5 class="widget-title">Support</h5>
-                <!-- Footer Menu-->
-                <div class="footer_menu">
-                    <ul>
+                  <!-- Widget Title-->
+                  <h5 class="widget-title">Support</h5>
+                  <!-- Footer Menu-->
+                  <div class="footer_menu">
+                      <ul>
                         <li><a href="#">Help</a></li>
                         <li><a href="#">Support</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Term &amp; Conditions</a></li>
                         <li><a href="#">Help &amp; Support</a></li>
-                    </ul>
+                      </ul>
                     </div>
-                </div>
+                  </div>
                 </div>
                 <!-- Single Widget-->
                 <div class="col-12 col-sm-6 col-lg">
-                <div class="single-footer-widget section_padding_0_130">
+                  <div class="single-footer-widget section_padding_0_130">
                     <!-- Widget Title-->
                     <h5 class="widget-title">Contact</h5>
                     <!-- Footer Menu-->
                     <div class="footer_menu">
-                    <ul>
+                      <ul>
                         <li><a href="#">Call Centre</a></li>
                         <li><a href="#">Email Us</a></li>
                         <li><a href="#">Term &amp; Conditions</a></li>
                         <li><a href="#">Help Center</a></li>
-                    </ul>
+                      </ul>
                     </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
-            </div>
-        </div>
+          </div>
 </body>
 </html>

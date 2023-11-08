@@ -84,3 +84,9 @@ def edit_bank_account(request, id):  # el pk es primarykey
     else:
         form = AccountEditForm(instance=bank_account)
     return render(request, "edit_bank_account.html", {"account_edit_form": form})
+
+#def inicio(request):
+#    return HttpResponse("Esta es la página de inicio. <a href='" + reverse('detalle', args=[1]) + "'>Ir a Detalle</a>")
+
+#def detalle(request, id):
+#    return HttpResponse("Detalles del elemento #" + str(id))
