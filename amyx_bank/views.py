@@ -65,7 +65,6 @@ def bank_account_create_view(request):
         bank_account_form = AccountForm(request.POST)
         if bank_account_form.is_valid():
             bank_account_form.save()
-            BankAccount.objects.create(account_code=bank_account_form)
             return redirect("account_create_success")
     else:
         form = AccountForm()
