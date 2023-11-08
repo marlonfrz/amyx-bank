@@ -19,12 +19,12 @@ class BankAccount(models.Model):
         DISABLED = "DS", "Disable"
         CANCELLED = "CN", "Cancelled"
 
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     account_name = models.CharField(max_length=50, primary_key=False)
     account_balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
-    account_code = models.CharField(max_length=20, null=False, blank=True, default="A5-0001")
+    account_code = models.CharField(max_length=20, null=False, blank=True)
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
     objects = models.Manager()
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=False)
 
     class Meta:
         ordering = ["-account_code"]

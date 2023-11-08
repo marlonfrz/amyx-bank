@@ -12,27 +12,8 @@ from .models import BankAccount
 
 
 # http://dsw.pc16.aula109:8000/
-# http://dsw.pc16.aula109:8000/
 def main(request):
     return render(request, "amyx_bank/main.html")
-
-
-def edit_profile(request):
-    if request.method == "POST":
-        user_form = UserEditForm(request.POST, instance=request.user)
-        profile_form = ProfileEditForm(request.POST, instance=request.user)
-        if profile_form.is_valid() and user_form.is_valid():
-            profile_form.save()
-            user_form.save()
-            return redirect("dashboard")
-    else:
-        user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
-    return render(
-        request,
-        "account/edit_profile.html",
-        {"user_edit_form": user_form, "profile_edit_form": profile_form},
-    )
 
 
 # http://dsw.pc16.aula109:8000/register
@@ -74,6 +55,7 @@ def user_login(request):
 
 
 # http://dsw.pc16.aula109:8000/logout
+@login_required
 def log_out(request):
     logout(request)
     return render(request, "registration/logout.html")
@@ -85,7 +67,10 @@ def bank_account_create_view(request):
     if request.method == "POST":
         bank_account_form = AccountForm(request.POST)
         if bank_account_form.is_valid():
-            bank_account_form.save()
+            user = authenticate(request, username=request.user.username, password=cd["password"])
+            new_bank_account = bank_account_form.save(commit=False)
+            user.account = new_bank_account
+            new_bank_account.save()
             return redirect("dashboard")
     else:
         form = AccountForm()

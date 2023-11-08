@@ -31,14 +31,6 @@ def edit_user_information(request):
     return render(request, "account/edit_profile.html", {"user_edit_form": form})
 
 
-# http://dsw.pc16.aula109:8000/account/account_detail/<int:id>
-@login_required
-def account_detail_view(request, id):
-    #    card = BankAccount.objects.filter(profile=request.user.profile)
-    cuenta = get_object_or_404(BankAccount, id=id)
-    return render(request, "details/account_detail.html", {"cuenta": cuenta})
-
-
 # http://dsw.pc16.aula109:8000/account/account_create_success/
 @login_required
 def account_create_success(request):
@@ -94,11 +86,12 @@ def accounts(request):
 #
 #
 
-
+""" 
 def account_list(request):
-    account_list = BankAccount.Status.ACTIVE.all()
-    paginator = Paginator(account_list, 4)
+    account_list = BankAccount.objects.filter(status='Active')
+    paginator = Paginator(account_list, 10)
     page_number = request.GET.get('page', 1)
-    accounts = paginator.page(page_number)
+    account = paginator.page(page_number)
 
-    return render(request, 'account_detail.html', {'accounts': accounts})
+    return render(request, 'account_detail.html', {'account': account})
+"""
