@@ -4,3 +4,4 @@ requests
 Pillow
 django-inline-svg
 django-debug-toolbar
+django-bootstrap-v5

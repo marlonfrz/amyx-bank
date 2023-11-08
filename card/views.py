@@ -13,11 +13,11 @@ def create_card(request):
     if request.method == "POST":
         card_form = CardCreateForm(request.POST)
         if card_form.is_valid():
-            new_card = card_form.save()
-            Card.objects.create(card_name=new_card)
-            # Generar la URL inversa con el valor de id
-            url = reverse('card_detail', {'id': new_card.id})
-            return redirect(url)
+            card_form.save()
+            return redirect('dashboard')
+#            Generar la URL inversa con el valor de id
+#            url = reverse('card_detail', {'id': new_card.id})
+#            return redirect(url)
         else:
             return HttpResponse('Formulario invalido')
     else:

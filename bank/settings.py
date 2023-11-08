@@ -35,15 +35,16 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'account',
-    'amyx_bank.apps.AmyxBankConfig',
-    'card.apps.CardConfig',
-    'payment.apps.PaymentConfig',
+    'amyx_bank',
+    'card',
+    'payment',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap5',
     'svg',
 ]
 
