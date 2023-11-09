@@ -11,7 +11,7 @@ from .forms import CardCreateForm, CardEditForm
 from .models import Card
 
 
-# http://dsw.pc16.aula109:8000/create_card
+# http://dsw.pc16.aula109:8000/card/create_card
 @login_required
 def create_card(request):
     if request.method == "POST":
@@ -23,7 +23,6 @@ def create_card(request):
             if user is not None:
                 destined_account = cd["destined_account"]
                 profile = get_object_or_404(Profile, user=user)
-                print(profile)
                 account = BankAccount.objects.filter(profile=profile).get(account_name=destined_account)
                 print(account)
                 card = card_form.save(commit=False)

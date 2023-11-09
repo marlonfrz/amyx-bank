@@ -44,6 +44,9 @@ class BankAccount(models.Model):
                 new_bank_account_code = "A5-0001"
             self.account_code = new_bank_account_code
         return super(__class__, self).save(*args, **kwargs)
+    
+    def __str__(self) -> str:
+        return self.account_name
 
     def get_absolute_url(self):
         return reverse('account_detail', args=[self.id])

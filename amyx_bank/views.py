@@ -71,7 +71,8 @@ def bank_account_create_view(request):
             user = authenticate(request, username=request.user.username, password=cd["password"])
             if user is not None:
                 new_bank_account = bank_account_form.save(commit=False)
-                user.account = new_bank_account
+                profile = get_object_or_404(Profile, user=user)
+                new_bank_account.profile = profile
                 new_bank_account.save()
                 return redirect("dashboard")
             else:
