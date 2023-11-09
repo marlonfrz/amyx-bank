@@ -13,7 +13,7 @@ class Card(models.Model):
         CANCELLED = "CN", "Cancelled"
 
     account = models.ForeignKey(BankAccount, on_delete=models.PROTECT)
-    card_name = models.CharField(max_length=50, primary_key=False, default='Founds')
+    card_name = models.CharField(max_length=50, primary_key=False, default='')
     card_validation_code = generate_random_code(3)
     card_account_code = models.CharField(max_length=20, null=False, blank=True, default="C5-0001")
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)

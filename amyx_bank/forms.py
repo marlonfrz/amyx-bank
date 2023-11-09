@@ -12,6 +12,7 @@ class LoginForm(forms.Form):
 
 
 class AccountForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = BankAccount
         fields = ['account_name']

@@ -67,11 +67,15 @@ def bank_account_create_view(request):
     if request.method == "POST":
         bank_account_form = AccountForm(request.POST)
         if bank_account_form.is_valid():
+            cd = bank_account_form.cleaned_data
             user = authenticate(request, username=request.user.username, password=cd["password"])
-            new_bank_account = bank_account_form.save(commit=False)
-            user.account = new_bank_account
-            new_bank_account.save()
-            return redirect("dashboard")
+            if user is not None:
+                new_bank_account = bank_account_form.save(commit=False)
+                user.account = new_bank_account
+                new_bank_account.save()
+                return redirect("dashboard")
+            else:
+                return HttpResponse(f'Invalid credentials')
     else:
         form = AccountForm()
     return render(request, "account/account_create.html", {"bank_account_create_form": form})

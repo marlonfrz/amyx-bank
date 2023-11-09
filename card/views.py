@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from amyx_bank.models import BankAccount
+from account.models import Profile
 
 from .forms import CardCreateForm, CardEditForm
 from .models import Card
@@ -18,10 +19,15 @@ def create_card(request):
         if card_form.is_valid():
             cd = card_form.cleaned_data
             user = authenticate(request, username=request.user.username, password=cd["password"])
+            print(user.username)
             if user is not None:
+                destined_account = cd["destined_account"]
+                profile = get_object_or_404(Profile, user=user)
+                print(profile)
+                account = BankAccount.objects.filter(profile=profile).get(account_name=destined_account)
+                print(account)
                 card = card_form.save(commit=False)
-                print(user.profile)
-                user.profile.account.card = card
+                card.account = account
                 card.save()
                 return redirect('dashboard')
             else:
