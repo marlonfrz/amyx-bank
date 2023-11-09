@@ -2,13 +2,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.core.paginator import Paginator
 
-from account.forms import UserRegistrationForm
-from account.models import Profile
-
-from .forms import AccountEditForm, AccountForm, LoginForm, ProfileForm
-from .models import BankAccount
+from .forms import LoginForm, ProfileForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 
 
 # http://dsw.pc16.aula109:8000/
@@ -60,39 +56,26 @@ def log_out(request):
     logout(request)
     return render(request, "registration/logout.html")
 
-# http://dsw.pc16.aula109:8000/create_account
-@login_required
-def bank_account_create_view(request):
-    if request.method == "POST":
-        bank_account_form = AccountForm(request.POST)
-        if bank_account_form.is_valid():
-            cd = bank_account_form.cleaned_data
-            user = authenticate(request, username=request.user.username, password=cd["password"])
-            if user is not None:
-                new_bank_account = bank_account_form.save(commit=False)
-                profile = get_object_or_404(Profile, user=user)
-                new_bank_account.profile = profile
-                new_bank_account.save()
-                return redirect("dashboard")
-            else:
-                return HttpResponse(f'Invalid credentials')
-    else:
-        form = AccountForm()
-    return render(request, "account/account_create.html", {"bank_account_create_form": form})
 
-
-# http://dsw.pc16.aula109:8000/edit/account/<int:id>/
+# http://dsw.pc16.aula109:8000/account/edit/profile
 @login_required
-def edit_bank_account(request, id):  # el pk es primarykey
-    bank_account = BankAccount.objects.get(id=id)
+def edit_profile(request):
     if request.method == "POST":
-        form = AccountEditForm(request.POST, instance=bank_account)
-        if form.is_valid():
-            form.save()
-            return render(request, "bank_account_detail", id=id)
+        user_form = UserEditForm(request.POST, instance=request.user)
+        profile_form = ProfileEditForm(request.POST, instance=request.user)
+        if profile_form.is_valid() and user_form.is_valid():
+            profile_form.save()
+            user_form.save()
+            return redirect("dashboard")
     else:
-        form = AccountEditForm(instance=bank_account)
-    return render(request, "edit_bank_account.html", {"account_edit_form": form})
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(
+        request,
+        "account/edit_profile.html",
+        {"user_edit_form": user_form, "profile_edit_form": profile_form},
+    )
+
 
 
 # def inicio(request):
@@ -102,6 +85,3 @@ def edit_bank_account(request, id):  # el pk es primarykey
 #    return HttpResponse("Detalles del elemento #" + str(id))
 
 
-def account_detail(request, id):
-    account = get_object_or_404(BankAccount, id=id)
-    return render(request, 'account/account_detail.html', {"account": account})
