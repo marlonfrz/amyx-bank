@@ -60,7 +60,6 @@ def log_out(request):
     logout(request)
     return render(request, "registration/logout.html")
 
-
 # http://dsw.pc16.aula109:8000/create_account
 @login_required
 def bank_account_create_view(request):

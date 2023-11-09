@@ -4,8 +4,12 @@ from .models import Card
 
 
 class CardCreateForm(forms.ModelForm):
-    destined_account = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Card\'s account'}))
     password = forms.CharField(widget=forms.PasswordInput)
+    def __init__(self, accounts=[], *args, **kwargs):
+        super(CardCreateForm, self).__init__(*args, **kwargs)
+        self.fields['accounts'] = forms.ModelChoiceField(
+                queryset=accounts, widget=forms.Select({'id': 'accounts'}))
+
 
     class Meta:
         model = Card

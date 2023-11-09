@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-
+from amyx_bank.utils import generate_random_code
 from amyx_bank.models import BankAccount
 from account.models import Profile
 
@@ -21,12 +21,13 @@ def create_card(request):
             user = authenticate(request, username=request.user.username, password=cd["password"])
             print(user.username)
             if user is not None:
-                destined_account = cd["destined_account"]
                 profile = get_object_or_404(Profile, user=user)
+                destined_account = cd["accounts"]
                 account = BankAccount.objects.filter(profile=profile).get(account_name=destined_account)
                 print(account)
                 card = card_form.save(commit=False)
                 card.account = account
+                card.cvc = generate_random_code(3)
                 card.save()
                 return redirect('dashboard')
             else:
@@ -34,7 +35,9 @@ def create_card(request):
         else:
             return HttpResponse('Formulario invalido')
     else:
-        card_form = CardCreateForm()
+        profile = get_object_or_404(Profile, user=request.user)
+        accounts = BankAccount.objects.filter(profile=profile)
+        card_form = CardCreateForm(accounts=accounts)
     return render(request, "card/card_create.html", {"card_create_form": card_form})
 
 
