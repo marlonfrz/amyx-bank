@@ -12,6 +12,8 @@ from .forms import (
     UserRegistrationForm,
 )
 
+from .models import Profile
+
 
 # http://dsw.pc16.aula109:8000/
 def main(request):
@@ -68,14 +70,14 @@ def log_out(request):
 def edit_profile(request):
     if request.method == "POST":
         user_form = UserEditForm(request.POST, instance=request.user)
-        profile_form = ProfileEditForm(request.POST, instance=request.user)
+        profile_form = ProfileEditForm(request.POST, instance=(profile:=get_object_or_404(Profile, user=request.user)), files=request.FILES)
         if profile_form.is_valid() and user_form.is_valid():
             profile_form.save()
             user_form.save()
             return redirect("dashboard")
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
+        profile_form = ProfileEditForm(instance=(profile:=get_object_or_404(Profile, user=request.user)))
     return render(
         request,
         "account/edit_profile.html",

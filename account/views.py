@@ -12,6 +12,10 @@ from .forms import ChangePasswordForm, AccountEditForm, AccountForm
 # http://dsw.pc16.aula109:8000/account
 @login_required
 def dashboard(request):
+    if request.user.profile.avatar:
+        print('si existe')
+    else: 
+        print('no existe')
     return render(request, "account/dashboard.html")
 
 
