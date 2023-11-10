@@ -1,10 +1,16 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.core.paginator import Paginator
 
-from .forms import LoginForm, ProfileForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+from .forms import (
+    LoginForm,
+    ProfileEditForm,
+    ProfileForm,
+    UserEditForm,
+    UserRegistrationForm,
+)
 
 
 # http://dsw.pc16.aula109:8000/
@@ -24,10 +30,10 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = new_user
             profile.save()
-            return render(request, "amyx_bank/register_done.html", {"new_user": new_user})
+            return render(request, "registration/register_done.html", {"new_user": new_user})
     else:
         user_form = UserRegistrationForm()
-    return render(request, "ámyx_bank/register.html", {"user_form": user_form})
+    return render(request, "registration/register.html", {"user_form": user_form})
 
 
 # http://dsw.pc16.aula109:8000/login
@@ -77,11 +83,8 @@ def edit_profile(request):
     )
 
 
-
 # def inicio(request):
 #    return HttpResponse("Esta es la página de inicio. <a href='" + reverse('detalle', args=[1]) + "'>Ir a Detalle</a>")
 
 # def detalle(request, id):
 #    return HttpResponse("Detalles del elemento #" + str(id))
-
-

@@ -1,13 +1,14 @@
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import check_password, make_password
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from amyx_bank.utils import generate_random_code
+
 from account.models import BankAccount, Profile
+from amyx_bank.utils import generate_random_code
 
 from .forms import CardCreateForm, CardEditForm
 from .models import Card
@@ -33,12 +34,12 @@ def create_card(request):
                 send_mail(
                     'You card\'s CVC',  # Email concept
                     f"""Your card {card} has been created succesfully.
-Your card's CVC is: {cvc}.
-Remember or keep this code for your activities.
+                        Your card's CVC is: {cvc}.
+                        Remember or keep this code for your activities.
 
 
-This email has been generated automatically and is for educational purposes from students of IES Puerto de la Cruz.
-We are sorry if you receive this by our testing and we appologise for it, you are very welcome to mark us as spam.""",  # Email Message
+                        This email has been generated automatically and is for educational purposes from students of IES Puerto de la Cruz.
+                        We are sorry if you receive this by our testing and we appologise for it, you are very welcome to mark us as spam.""",  # Email Message
                     f'{settings.EMAIL_HOST_USER}',  # Email sender
                     [user.email],  # Email receiver
                     fail_silently=True,  # So the server does not crash
@@ -58,7 +59,7 @@ We are sorry if you receive this by our testing and we appologise for it, you ar
 
 # http://dsw.pc16.aula109:8000/edit/card/<int:id>/
 @login_required
-def card_edit(request, id):  # el pk es primarykey
+def card_edit(request, id):
     card_id = Card.objects.get(id=id)
     if request.method == "POST":
         form = CardEditForm(request.POST, instance=card_id)

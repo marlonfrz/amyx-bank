@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Welcome{% endblock %}
+{% load static %}
+{% load bootstrap5 %}
 {% block content %}
-
     <div class="container-fluid">
         
         <br>
@@ -9,59 +10,62 @@
             <div class="row d-flex justify-content-center">
                 <div class="risk1 col-6 col-md-4">
                     <p class="inside-risk-container d-flex"><span class="risk-n">1/6</span><br>
-                        Este número es indicativo del riesgo del producto, 
-                        siendo 1/6 indicativo de menor riesgo y 6/6 de mayor riesgo. 
+                        This number is indicative of the risk of the product,
+                      1/6 being indicative of lower risk and 6/6 indicating higher risk.
                     </p>
                 </div>
                 <div class="risk2 col-6 col-md-4 ">
                     <p class="inside-risk-container">
-                        A.M.Y.X Bank está adscrito al Fondo de Garantía de Depósitos de Entidades de Crédito. 
-                        Para depósitos en dinero el importe máximo garantizado es de 100.000 euros por depositante en cada entidad de crédito. 
+                        A.M.Y.X Bank is attached to the Credit Institutions Deposit Guarantee Fund.
+                      For cash deposits, the maximum guaranteed amount is 100,000 euros per depositor in each credit institution.
                     </p>
                 </div>
             </div>
         </div>
-        <header class="showcase">
-            <div class="img-elements">
-                <img src="../img/logo1.svg" alt="" class="imag">
-            </div>
-        </header>
+        </div>
         <div class="content">
             <div class="content-img">
-                <img src="../img/logo1.svg" alt="" class="imag">
+                <img src="{% static 'img/4.png' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+
             </div>
             <div class="products">
                 <div class="row">
                     <div class="col-md-4 d-sm-none d-lg-block">
                         <div class="product1">
-                            <img src="../img/logo1.svg" alt="" class="imag">
+                            <img src="{% static 'img/5.png' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+
                         </div>
                     </div>
                     <div class="col-md-4 d-sm-none d-lg-block">
                         <div class="product1">
-                            <img src="../img/logo1.svg" alt="" class="imag">
+                            <img src="{% static 'img/6.png' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="product1">
-                            <img src="../img/logo1.svg" alt="" class="imag">
+                            <img src="{% static 'img/7.png' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="product1">
-                            <img src="../img/logo1.svg" alt="" class="imag">
+                            <img src="{% static 'img/8.png' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+
                         </div>
                     </div>
                     <div class="col-md-4 d-none d-lg-block">
                         <div class="product1">
-                            <img src="../img/logo1.svg" alt="" class="imag">
+                            <img src="{% static 'img/9.png' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+
                         </div>
                     </div>
                     <div class="col-md-4 d-none d-lg-block">
                         <div class="product1">
-                            <img src="../img/logo1.svg" alt="" class="imag">
+                            <img src="{% static 'img/10.png' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
+
                         </div>
                     </div>
                 </div>
@@ -69,12 +73,12 @@
         </div>
         
         
-        <header class="showcase">
+        <div class="showcase">
             <div class="img-elements">
-                <img src="../img/logo1.svg" alt="" class="imag_showcase">
-                <img src="../img/logo1.svg" alt="" class="imag_showcase">
-                <img src="../img/logo1.svg" alt="" class="imag_showcase d-sm-none d-lg-block">
+                <p><a href="#"><img src="{% static 'img/1.png' %}" alt="" class="imag_showcase"></a></p>
+                <p><a href="{% url 'accounts' %}"><img src="{% static 'img/12.jpg' %}" alt="" class="imag_showcase"></a></p>
+                <p><a href="#"><img src="{% static 'img/3.png' %}" alt="" class="imag_showcase d-sm-none d-lg-block"></a></p>
             </div>
-        </header>
+        </div>
 
 {% endblock %}

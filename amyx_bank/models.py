@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
+
 class Profile(models.Model):
     class Status(models.TextChoices):
         ACTIVE = 'AC', 'Active'
@@ -10,7 +11,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     date_of_birth = models.DateField(blank=True, null=True)
-    avatar = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+    avatar = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True, null=False)
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
     objects = models.Manager()
 
@@ -25,6 +26,3 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profile:dashboard')
-
-
-

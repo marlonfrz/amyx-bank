@@ -78,13 +78,10 @@ a {
 
 .img-elements {
     width: 90%;
-    height: 90%;
+    height: 100%;
     display: flex;
 }
 
-.img-elements img {
-    width: 100%;
-}
 
 .imag {
     transition: box-shadow 0.45s ease;

@@ -1,8 +1,9 @@
 from django import forms
-from .models import Profile
-from django.forms import PasswordInput, TextInput
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.models import User
+from django.forms import PasswordInput, TextInput
+
+from .models import Profile
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -19,14 +20,17 @@ class UserRegistrationForm(UserCreationForm):
             raise forms.ValidationError('Email already in use.')
         return data
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['avatar', 'date_of_birth']
+
 
 class UserEditForm(UserChangeForm):
     class Meta:

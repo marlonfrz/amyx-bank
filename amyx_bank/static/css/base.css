@@ -317,7 +317,7 @@ nav {
     background-color: rgb(24, 139, 206);
 }
 
-header {
+nav {
     height: 100px;
     background-color: white;
 }
@@ -580,3 +580,12 @@ input[type=submit], a.button {
 .content{
     transform: translate(-50%, -50%);
 }
+.content-img {
+    margin-top: 50px;
+    height: 1095px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
