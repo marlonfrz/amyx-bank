@@ -1,11 +1,15 @@
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from amyx_bank.utils import generate_random_code
-from amyx_bank.models import BankAccount
+
 from account.models import Profile
+from amyx_bank.models import BankAccount
+from amyx_bank.utils import generate_random_code
 
 from .forms import CardCreateForm, CardEditForm
 from .models import Card
@@ -15,19 +19,33 @@ from .models import Card
 @login_required
 def create_card(request):
     if request.method == "POST":
-        card_form = CardCreateForm(request.POST)
+        profile = get_object_or_404(Profile, user=request.user)
+        card_form = CardCreateForm(profile, request.POST)
         if card_form.is_valid():
             cd = card_form.cleaned_data
             user = authenticate(request, username=request.user.username, password=cd["password"])
-            print(user.username)
             if user is not None:
-                profile = get_object_or_404(Profile, user=user)
                 destined_account = cd["accounts"]
-                account = BankAccount.objects.filter(profile=profile).get(account_name=destined_account)
-                print(account)
+                account = BankAccount.objects.filter(profile=profile).get(
+                    account_name=destined_account
+                )
                 card = card_form.save(commit=False)
                 card.account = account
-                card.cvc = generate_random_code(3)
+                cvc = generate_random_code(3)
+                send_mail(
+                    'You card\'s CVC',  # Email concept
+                    f"""Your card {card} has been created succesfully.
+Your card's CVC is: {cvc}.
+Remember or keep this code for your activities.
+
+
+This email has been generated automatically and is for educational purposes from students of IES Puerto de la Cruz.
+We are sorry if you receive this by our testing and we appologise for it, you are very welcome to mark us as spam.""",  # Email Message
+                    f'{settings.EMAIL_HOST_USER}',  # Email sender
+                    [user.email],  # Email receiver
+                    fail_silently=True,  # So the server does not crash
+                )
+                card.cvc = make_password(cvc)
                 card.save()
                 return redirect('dashboard')
             else:
@@ -36,8 +54,7 @@ def create_card(request):
             return HttpResponse('Formulario invalido')
     else:
         profile = get_object_or_404(Profile, user=request.user)
-        accounts = BankAccount.objects.filter(profile=profile)
-        card_form = CardCreateForm(accounts=accounts)
+        card_form = CardCreateForm(profile)
     return render(request, "card/card_create.html", {"card_create_form": card_form})
 
 

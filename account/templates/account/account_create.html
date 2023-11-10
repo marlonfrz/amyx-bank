@@ -10,11 +10,4 @@
         {% csrf_token %}
     </form>
 </div>
-    <script>
-        function account_create_success() {
-            var account_name = document.getElementById("id_account_name").value; 
-            alert(`Your account ${account_name} has been created successfully`)
-        }
-    </script>
-
 {% endblock %}

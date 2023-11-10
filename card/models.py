@@ -39,6 +39,9 @@ class Card(models.Model):
 
     def get_absolute_url(self):
         return reverse('card:card_detail', args=[self.id])
+    
+    def __str__(self) -> str:
+        return self.card_name
 
 
 """

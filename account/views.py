@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 from amyx_bank.models import BankAccount
+from .models import Profile
 
 from .forms import ChangePasswordForm, ProfileEditForm, UserEditForm
 
@@ -11,24 +12,7 @@ from .forms import ChangePasswordForm, ProfileEditForm, UserEditForm
 @login_required
 def dashboard(request):
     #    bank_accounts = BankAccount.objects.filter(user=request.user.profile)
-    return render(
-        request,
-        "account/dashboard.html",
-        {"section": "dashboard", "bank_accounts": "bank_accounts"},
-    )
-
-
-# http://dsw.pc16.aula109:8000/account
-@login_required
-def edit_user_information(request):
-    if request.method == "POST":
-        form = UserEditForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect("dashboard")
-    else:
-        form = UserEditForm(instance=request.user)
-    return render(request, "account/edit_profile.html", {"user_edit_form": form})
+    return render(request, "account/dashboard.html")
 
 
 # http://dsw.pc16.aula109:8000/account/account_create_success/
@@ -73,7 +57,9 @@ def change_password(request):
 # http://dsw.pc16.aula109:8000/account/accounts
 @login_required
 def accounts(request):
-    accounts = BankAccount.objects.filter().exclude(status=BankAccount.Status.CANCELLED)
+    user = request.user
+    profile = get_object_or_404(Profile, user=user)
+    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
     return render(request, "account/accounts.html", {"accounts": accounts})
 
 

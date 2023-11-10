@@ -29,6 +29,3 @@ class Profile(models.Model):
         return reverse('profile:dashboard')
 
 
-class DeletedUser(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=True, default=None)
-    deleted_date = models.DateTimeField(auto_now=True)
