@@ -6,10 +6,8 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-
-from account.models import Profile
-from amyx_bank.models import BankAccount
 from amyx_bank.utils import generate_random_code
+from account.models import BankAccount, Profile
 
 from .forms import CardCreateForm, CardEditForm
 from .models import Card

@@ -1,6 +1,6 @@
 from django import forms
 
-from amyx_bank.models import BankAccount
+from account.models import BankAccount
 
 from .models import Card
 

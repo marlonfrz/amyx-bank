@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from amyx_bank.models import BankAccount
+from account.models import BankAccount
 
 from .utils import generate_random_code
 
