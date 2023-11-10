@@ -279,7 +279,6 @@ ol, ul {
     position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 0;
     word-wrap: break-word;
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
@@ -575,3 +574,4 @@ input[type=submit], a.button {
     margin-right: 150px;
     box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
 }
+

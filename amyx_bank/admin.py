@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import BankAccount
+from .models import Profile
+
 
 # Register your models here.
-@admin.register(BankAccount)
-class BankAccount(admin.ModelAdmin):
-    list_display = ['account_code', 'account_name', 'account_balance', 'status', 'profile']
+@admin.register(Profile)
+class Profile(admin.ModelAdmin):
+    list_display = ['id', 'user', 'avatar', 'status', 'date_of_birth']

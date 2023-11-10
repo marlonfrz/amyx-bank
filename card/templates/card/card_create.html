@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block title %}New Card{% endblock %}
 {% block content %}
-<h1>Create a Card</h1>
-<p>You can create a card using the following form:</p>
-<form method="post" enctype="multipart/form-data">
-{{ card_create_form.as_p }}
-{% csrf_token %}
-<p><input type="submit" value="Save changes"></p>
-</form>
-
-
+<div style="margin-left: 40%;">
+    <h1>Create a Card</h1>
+    <p>You can create a card using the following form:</p>
+    <form method="post" enctype="multipart/form-data">
+        {{ card_create_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" class="btn btn-primary" value="Save changes" onclick="card_create_success()"></p>
+    </form>
+</div>
 {% endblock %}

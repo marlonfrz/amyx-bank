@@ -2,17 +2,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.core.paginator import Paginator
 
-from account.forms import UserRegistrationForm
-from account.models import Profile
-
-from .forms import AccountEditForm, AccountForm, LoginForm
-from .models import BankAccount
+from .forms import LoginForm, ProfileForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 
 
 # http://dsw.pc16.aula109:8000/
-@login_required
 def main(request):
     return render(request, "amyx_bank/main.html")
 
@@ -21,15 +16,18 @@ def main(request):
 def register(request):
     if request.method == "POST":
         user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
+        profile_form = ProfileForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data["password1"])
             new_user.save()
-            Profile.objects.create(user=new_user)
-            return render(request, "account/register_done.html", {"new_user": new_user})
+            profile = profile_form.save(commit=False)
+            profile.user = new_user
+            profile.save()
+            return render(request, "amyx_bank/register_done.html", {"new_user": new_user})
     else:
         user_form = UserRegistrationForm()
-    return render(request, "account/register.html", {"user_form": user_form})
+    return render(request, "ámyx_bank/register.html", {"user_form": user_form})
 
 
 # http://dsw.pc16.aula109:8000/login
@@ -53,39 +51,37 @@ def user_login(request):
 
 
 # http://dsw.pc16.aula109:8000/logout
+@login_required
 def log_out(request):
     logout(request)
     return render(request, "registration/logout.html")
 
 
-# http://dsw.pc16.aula109:8000/create_account
+# http://dsw.pc16.aula109:8000/account/edit/profile
 @login_required
-def bank_account_create_view(request):
+def edit_profile(request):
     if request.method == "POST":
-        bank_account_form = AccountForm(request.POST)
-        if bank_account_form.is_valid():
-            bank_account_form.save()
-            return redirect("account_create_success")
+        user_form = UserEditForm(request.POST, instance=request.user)
+        profile_form = ProfileEditForm(request.POST, instance=request.user)
+        if profile_form.is_valid() and user_form.is_valid():
+            profile_form.save()
+            user_form.save()
+            return redirect("dashboard")
     else:
-        form = AccountForm()
-    return render(request, "account/account_create.html", {"bank_account_create_form": form})
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(
+        request,
+        "account/edit_profile.html",
+        {"user_edit_form": user_form, "profile_edit_form": profile_form},
+    )
 
 
-# http://dsw.pc16.aula109:8000/edit/account/<int:id>/
-@login_required
-def edit_bank_account(request, id):  # el pk es primarykey
-    bank_account = BankAccount.objects.get(id=id)
-    if request.method == "POST":
-        form = AccountEditForm(request.POST, instance=bank_account)
-        if form.is_valid():
-            form.save()
-            return render(request, "bank_account_detail", id=id)
-    else:
-        form = AccountEditForm(instance=bank_account)
-    return render(request, "edit_bank_account.html", {"account_edit_form": form})
 
-#def inicio(request):
+# def inicio(request):
 #    return HttpResponse("Esta es la página de inicio. <a href='" + reverse('detalle', args=[1]) + "'>Ir a Detalle</a>")
 
-#def detalle(request, id):
+# def detalle(request, id):
 #    return HttpResponse("Detalles del elemento #" + str(id))
+
+
