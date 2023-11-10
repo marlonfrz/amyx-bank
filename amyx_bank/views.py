@@ -24,10 +24,10 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = new_user
             profile.save()
-            return render(request, "account/register_done.html", {"new_user": new_user})
+            return render(request, "amyx_bank/register_done.html", {"new_user": new_user})
     else:
         user_form = UserRegistrationForm()
-    return render(request, "account/register.html", {"user_form": user_form})
+    return render(request, "ámyx_bank/register.html", {"user_form": user_form})
 
 
 # http://dsw.pc16.aula109:8000/login

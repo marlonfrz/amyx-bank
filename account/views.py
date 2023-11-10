@@ -66,7 +66,7 @@ def edit_bank_account(request, id):  # el pk es primarykey
             return render(request, "bank_account_detail", id=id)
     else:
         form = AccountEditForm(instance=bank_account)
-    return render(request, "edit_bank_account.html", {"account_edit_form": form})
+    return render(request, "account/account_edit.html", {"account_edit_form": form})
 
 # http://dsw.pc16.aula109:8000/account/accounts
 @login_required
@@ -84,9 +84,6 @@ def account_detail(request, id):
 # def list_cards(request, account_id):
 #      cards = Card.objects.all().filter(account=account_id)
 #      return render(request, "account/list_cards.html", {"cards": cards})
-#
-#
-#
 #
 #
 

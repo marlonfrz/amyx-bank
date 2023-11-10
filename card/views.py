@@ -4,8 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from amyx_bank.utils import generate_random_code
-from amyx_bank.models import BankAccount
-from account.models import Profile
+from account.models import BankAccount, Profile
 
 from .forms import CardCreateForm, CardEditForm
 from .models import Card
