@@ -12,10 +12,6 @@ from .forms import ChangePasswordForm, AccountEditForm, AccountForm
 # http://dsw.pc16.aula109:8000/account
 @login_required
 def dashboard(request):
-    if request.user.profile.avatar:
-        print('si existe')
-    else: 
-        print('no existe')
     return render(request, "account/dashboard.html")
 
 
@@ -75,9 +71,11 @@ def edit_bank_account(request, id):  # el pk es primarykey
 # http://dsw.pc16.aula109:8000/account/accounts
 @login_required
 def accounts(request):
-    user = request.user
-    profile = get_object_or_404(Profile, user=user)
-    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+#    user = request.user
+#    profile = get_object_or_404(Profile, user=user)
+#    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+#    Las 3 lineas de arriba equivalen a la de abajo
+    accounts = BankAccount.objects.filter(profile=get_object_or_404(Profile, user=request.user)).exclude(status=BankAccount.Status.CANCELLED)
     return render(request, "account/accounts.html", {"accounts": accounts})
 
 

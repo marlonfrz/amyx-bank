@@ -21,4 +21,4 @@ class CardCreateForm(forms.ModelForm):
 class CardEditForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ['card_name']
+        fields = ['card_name', 'status']

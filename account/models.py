@@ -3,7 +3,6 @@ from django.urls import reverse
 
 from amyx_bank.models import Profile
 
-
 class BankAccount(models.Model):
     class Status(models.TextChoices):
         ACTIVE = "AC", "Active"

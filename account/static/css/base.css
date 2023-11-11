@@ -512,7 +512,7 @@ input, textarea {
     font-size: 14px;
 }
 
-input[type=submit], a.button {
+input[type=submit], a.button, input[type=button] {
     font-weight: bold;
     background: #12c064;
     color: white;

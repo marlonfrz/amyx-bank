@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 {% block title %}New Card{% endblock %}
 {% block content %}
-<div style="margin-left: 40%;">
-    <h1>Create a Card</h1>
-    <p>You can create a card using the following form:</p>
-    <form method="post" enctype="multipart/form-data">
-        {{ card_create_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" class="btn btn-primary" value="Save changes" onclick="card_create_success()"></p>
-    </form>
-</div>
+{% if accounts %}
+    <div style="margin-left: 40%;">
+        <h1>Create a Card</h1>
+        <p>You can create a card using the following form:</p>
+        <form method="post" enctype="multipart/form-data">
+            {{ card_create_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" class="btn btn-primary" value="Save changes" onclick="card_create_success()"></p>
+        </form>
+    </div> 
+{% else %}
+    <h1>You do not have accounts to associate to a new card <span style="color: orange">{{ user.username }}</span>, create some with the following <a style="color: blue" href="{% url 'create_account' %}">link</a></h1>
+{% endif %}
 {% endblock %}

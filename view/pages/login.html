@@ -96,7 +96,7 @@
                         <br><br>
                         <!-- New Account -->
                         <div class="text-center w-100">
-                            <p class="text-muted font-weight-bold">Don't have an account? <a href="#" class="text-primary ml-2">Register</a></p>
+                            <p class="text-muted font-weight-bold">Don't have an account? <a href="./register.html" class="text-primary ml-2">Register</a></p>
                         </div>
                         
                     </div>
@@ -104,6 +104,12 @@
             </div>
         </div>
     </div>
+    <button onclick="check_data()">Prueba</button>
+    <select name="Status" id="id_status">Status
+        <option value="AC">Active</option>
+        <option value="DS">Disabled</option>
+        <option value="CN">Cancelled</option>
+    </select>
     <script>
         // For Demo Purpose [Changing input group text on focus]
         $(function () {

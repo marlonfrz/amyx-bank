@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Edit your bank account{% endblock %}
-{% block content %}<div style="margin-left: 40%;">
+{% block content %}
+<div style="margin-left: 40%;">
     <h1>Edit an account</h1>
     <p>Please use the following form</p>
     <form method="post">
         {{ account_edit_form.as_p }}
-        <p><input type="submit" class="btn btn-primary" value="Create my account" onclick="account_create_success()"></p>
+        <p><input type="submit" class="btn btn-primary" value="Edit my account" onclick="account_create_success() "></p>
         {% csrf_token %}
     </form>
 </div>
+{% endblock %}
