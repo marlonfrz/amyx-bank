@@ -49,7 +49,7 @@ def bank_account_create_view(request):
                 new_bank_account.save()
                 return redirect("dashboard")
             else:
-                return HttpResponse(f'Invalid credentials')
+                return HttpResponse('Invalid credentials')
     else:
         form = AccountForm()
     return render(request, "account/account_create.html", {"bank_account_create_form": form})
