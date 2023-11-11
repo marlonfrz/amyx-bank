@@ -3,8 +3,6 @@ from django.urls import reverse
 
 from account.models import BankAccount
 
-from .utils import generate_random_code
-
 
 class Card(models.Model):
     class Status(models.TextChoices):

@@ -1,5 +1,4 @@
 from django import forms
-
 from account.models import BankAccount
 
 from .models import Card

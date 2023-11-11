@@ -5,7 +5,7 @@ from .models import BankAccount
 
 @admin.register(BankAccount)
 class BankAccountAdmin(admin.ModelAdmin):
-    list_display = ['account_code', 'account_name', 'account_balance', 'status', 'profile']
+    list_display = ['account_code', 'account_name', 'balance', 'status', 'profile']
 
 
 

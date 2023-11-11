@@ -12,7 +12,10 @@ from .forms import ChangePasswordForm, AccountEditForm, AccountForm
 # http://dsw.pc16.aula109:8000/account
 @login_required
 def dashboard(request):
-    return render(request, "account/dashboard.html")
+    profile = get_object_or_404(Profile, user=request.user)
+    accounts = BankAccount.objects.filter(profile=profile)
+    balance = sum(account.balance for account in accounts)
+    return render(request, "account/dashboard.html", {'total_balance': balance})
 
 
 # http://dsw.pc16.aula109:8000/account/account_create_success/

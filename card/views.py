@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from account.models import BankAccount, Profile
-from amyx_bank.utils import generate_random_code
+from amyx_bank.ourutils import generate_random_code
 
 from .forms import CardCreateForm, CardEditForm
 from .models import Card
@@ -31,19 +31,19 @@ def create_card(request):
                 card = card_form.save(commit=False)
                 card.account = account
                 cvc = generate_random_code(3)
-#                send_mail(
-#                    'You card\'s CVC',  # Email concept
-#                    f"""Your card {card} has been created succesfully.
-#Your card's CVC is: {cvc}.
-#Remember or keep this code for your activities.
-#
-#
-#This email has been generated automatically and is for educational purposes from students of IES Puerto de la Cruz.
-#We are sorry if you receive this by our testing and we appologise for it, you are very welcome to mark us as spam.""",  # Email Message
-#                    f'{settings.EMAIL_HOST_USER}',  # Email sender
-#                    [user.email],  # Email receiver
-#                    fail_silently=True,  # So the server does not crash
-#                )
+                send_mail(
+                    'You card\'s CVC',  # Email concept
+                    f"""Your card {card} has been created succesfully.
+Your card's CVC is: {cvc}.
+Remember or keep this code for your activities.
+
+
+This email has been generated automatically and is for educational purposes from students of IES Puerto de la Cruz.
+We are sorry if you receive this by our testing and we appologise for it, you are very welcome to mark us as spam.""",  # Email Message
+                    f'{settings.EMAIL_HOST_USER}',  # Email sender
+                    [user.email],  # Email receiver
+                    fail_silently=True,  # So the server does not crash
+                )
                 card.cvc = make_password(cvc)
                 card.save()
                 return redirect('dashboard')
@@ -61,15 +61,16 @@ def create_card(request):
 # http://dsw.pc16.aula109:8000/edit/card/<int:id>/
 @login_required
 def card_edit(request, id):
-    card_id = Card.objects.get(id=id)
+    card = Card.objects.get(id=id)
     if request.method == "POST":
-        form = CardEditForm(request.POST, instance=card_id)
+        form = CardEditForm(request.POST, instance=card)
         if form.is_valid():
             form.save()
-            return redirect("card_detail", id=id)
+            return redirect("card_detail", id=card.id)
     else:
-        form = CardEditForm(instance=card_id)
-    return render(request, "card/card_edit.html", {"card_edit_form": form})
+        form = CardEditForm(instance=card)
+    return render(request, "card/card_edit.html", {"card_edit_form": form, "card": card})
+
 
 @login_required
 def cards(request):
@@ -78,7 +79,6 @@ def cards(request):
     accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
     all_cards = {}
     for account in accounts:
-        print(type(account))
         try:
             account_cards = Card.objects.filter(account=account).exclude(status=Card.Status.CANCELLED)
             for card in account_cards:
