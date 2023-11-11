@@ -6,7 +6,7 @@
     <p>Please use the following form</p>
     <form method="post">
         {{ account_edit_form.as_p }}
-        <p><input type="submit" class="btn btn-primary" value="Edit my account" onclick="account_create_success() "></p>
+        <p><input type="submit" class="btn btn-primary" value="Edit my account" onclick="account_create_success()"></p>
         {% csrf_token %}
     </form>
 </div>

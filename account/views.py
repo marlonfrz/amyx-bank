@@ -63,7 +63,7 @@ def edit_bank_account(request, id):  # el pk es primarykey
         form = AccountEditForm(request.POST, instance=bank_account)
         if form.is_valid():
             form.save()
-            return render(request, "bank_account_detail", id=id)
+            return redirect("accounts")
     else:
         form = AccountEditForm(instance=bank_account)
     return render(request, "account/account_edit.html", {"account_edit_form": form})
