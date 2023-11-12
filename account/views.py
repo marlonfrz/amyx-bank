@@ -92,7 +92,6 @@ def account_detail(request, id):
 #      cards = Card.objects.all().filter(account=account_id)
 #      return render(request, "account/list_cards.html", {"cards": cards})
 #
-#
 
 """ 
 def account_list(request):
@@ -100,6 +99,5 @@ def account_list(request):
     paginator = Paginator(account_list, 10)
     page_number = request.GET.get('page', 1)
     account = paginator.page(page_number)
-
     return render(request, 'account_detail.html', {'account': account})
 """

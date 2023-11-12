@@ -18,14 +18,18 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-
+import payment.views
 
 urlpatterns = [
+    path("__debug__/", include("debug_toolbar.urls")),
     path('', include('amyx_bank.urls')),
-    path('payment/', include('payment.urls')),
     path('account/', include('account.urls')),
     path('card/', include('card.urls')),
     path('admin/', admin.site.urls),
+    path('payments/', include('payment.urls')),
+    path('payment/', view=payment.views.payment, name='payments'),
+    path('outoging/', view=payment.views.outgoing_transactions, name='outgoing'),
+    path('incoming/', view=payment.views.incoming_transactions, name='incoming'),
 ]
 
 if settings.DEBUG:

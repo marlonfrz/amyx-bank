@@ -17,8 +17,8 @@ from .models import Card
 # http://dsw.pc16.aula109:8000/card/create_card
 @login_required
 def create_card(request):
+    profile = get_object_or_404(Profile, user=request.user)
     if request.method == "POST":
-        profile = get_object_or_404(Profile, user=request.user)
         card_form = CardCreateForm(profile, request.POST)
         if card_form.is_valid():
             cd = card_form.cleaned_data
@@ -50,15 +50,14 @@ We are sorry if you receive this by our testing and we appologise for it, you ar
             else:
                 return HttpResponse('Invalid Credencials')
         else:
-            return HttpResponse('Formulario invalido')
+            return HttpResponse('Invalid form')
     else:
-        profile = get_object_or_404(Profile, user=request.user)
         accounts = BankAccount.objects.filter(profile=profile)
         card_form = CardCreateForm(profile)
     return render(request, "card/card_create.html", {"card_create_form": card_form, "accounts": accounts})
 
 
-# http://dsw.pc16.aula109:8000/edit/card/<int:id>/
+# http://dsw.pc16.aula109:8000/card/edit/card/<int:id>/
 @login_required
 def card_edit(request, id):
     card = Card.objects.get(id=id)
@@ -71,7 +70,7 @@ def card_edit(request, id):
         form = CardEditForm(instance=card)
     return render(request, "card/card_edit.html", {"card_edit_form": form, "card": card})
 
-
+# http://dsw.pc16.aula109:8000/card/cards/
 @login_required
 def cards(request):
     user = request.user

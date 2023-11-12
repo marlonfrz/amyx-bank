@@ -7,8 +7,8 @@ class Transaction(models.Model):
         OUTGOING = "OG", "OUTGOING"
         INCOMING = "IC", "INCOMING"
 
-    account = models.ForeignKey(BankAccount, on_delete=models.PROTECT, null=True, blank=True)
     agent = models.CharField(max_length=60)
+    account = models.CharField(max_length=7, default="")
     concept = models.CharField(max_length=100, default='')
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -27,7 +27,6 @@ class Transaction(models.Model):
 class Payment(models.Model):
     card = models.ForeignKey(Card, on_delete=models.PROTECT)
     business = models.CharField(max_length=60)
-    concept = models.CharField(max_length=100, default='')
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     timestamp = models.DateTimeField(auto_now_add=True)
     kind = models.CharField(max_length=20, default='PAYMENTS')

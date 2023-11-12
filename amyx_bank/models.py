@@ -23,6 +23,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'Profile of {self.user}'
-
-    def get_absolute_url(self):
-        return reverse('profile:dashboard')

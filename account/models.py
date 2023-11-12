@@ -41,5 +41,6 @@ class BankAccount(models.Model):
     def get_absolute_url(self):
         return reverse('account_detail', args=[self.id])
 
+#href="{% url 'reverse' account_detail account.id %}"
 
 
