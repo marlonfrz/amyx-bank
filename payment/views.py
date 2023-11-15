@@ -89,7 +89,7 @@ def outgoing_transactions(request):
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
         print(taxed_amount)
         if cac.balance > taxed_amount:
-            transaction = {"agent" : sender, "account" : account, "concept" : concept, "amount" : amount}
+            transaction = {"agent" : sender, "cac" : account, "concept" : concept, "amount" : amount}
             status = requests.post(f"http://127.0.0.1:8000/incoming/", transaction)
             #print(status)
             cac.balance -= taxed_amount
@@ -146,11 +146,8 @@ def payroll(request):
     # La cantidad de dinero a instroducir
     # cuyos nombres seran cac y balance respectivamente
     cd = json.loads(request.body)
-    print(cd)
     balance = Decimal((cd.get('balance')))
-    print(balance)
     account = get_object_or_404(BankAccount, account_code=cd.get('cac').upper())
-    print(account)
     account.balance += balance
     account.save()
     return HttpResponse("NOMINA BIEN METIDA PARA DENTRO")
