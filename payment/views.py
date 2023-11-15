@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from amyx_bank.ourutils import calc_commission, get_bank_info
 import json, requests
 from decimal import Decimal
+from itertools import chain
 
 
 @csrf_exempt
@@ -179,9 +180,14 @@ def payroll(request):
 def movements(request):
     transactions = Transaction.objects.all()
     payments = Payment.objects.all()
-    return render(
-        request, "movements.html", {"transactions": transactions, "payment": payments}
+    all_movements = sorted(
+        chain(transactions, payments),
+        key=lambda instance: instance.timestamp,
+        reverse=True,
     )
+    return render(request, "movements.html", {"all_movements": all_movements})
+
+    # all_movements = sorted(chain(transaction, payment), key=lambda instance: instance.requested_date, reverse = True)
 
 
 @login_required
