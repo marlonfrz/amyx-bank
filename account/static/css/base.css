@@ -30,11 +30,6 @@ a {
     padding: 1px;
 }
 
-/* Nav */
-nav {
-    background-color:#f5f5ff !important;
-}
-
 .main-nav {
     display: flex;
     justify-content: space-evenly;
@@ -314,16 +309,10 @@ ol, ul {
 nav {
     height: 100px;
     margin: 0;
-    background-color: rgb(24, 139, 206);
+    background-color: rgb(24, 139, 206) ;
+
 }
 
-nav {
-    height: 100px;
-    background-color: white;
-}
-nav:hover {
-    background-color: rgba(24, 139, 255); 
-}
 
 .navbar .navbar-nav .nav-link {
     height: 100px;
@@ -336,14 +325,14 @@ nav:hover {
     margin: 0;
 }
 
+
+
 /* Reducir el tamaño del texto en los elementos del menú */
 .navbar-nav .nav-link {
     font-size: 17px;
 }
 
-.navbar-nav .nav-link:hover {
-    color: rgb(24, 22, 189) !important ;
-}
+
 
 .dropdown {
     display: inline-block;
@@ -586,3 +575,6 @@ input[type=submit], a.button {
     justify-content: space-between;
 }
 
+.img-fluid{
+    background-color: transparent;
+}

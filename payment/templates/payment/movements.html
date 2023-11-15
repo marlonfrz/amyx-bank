@@ -1,0 +1,10 @@
+{% block content %}
+<h2>Movements</h2>
+{% for movement in all_movements %}
+{% if Payment.business %}
+<li>{{ Payment.business }}{{ Payment.amount }}</li>
+{% else %}
+<li>{{ Transaction.agent }}{{ Transaction.amount }}</li>
+{% endif %}
+{% endfor %}
+{% endblock %}

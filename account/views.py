@@ -15,7 +15,7 @@ def dashboard(request):
     profile = get_object_or_404(Profile, user=request.user)
     accounts = BankAccount.objects.filter(profile=profile)
     balance = sum(account.balance for account in accounts)
-    return render(request, "account/dashboard.html", {'total_balance': balance})
+    return render(request, "account/dashboard.html", {"total_balance": balance})
 
 
 # http://dsw.pc16.aula109:8000/account/account_create_success/
@@ -44,7 +44,9 @@ def bank_account_create_view(request):
         bank_account_form = AccountForm(request.POST)
         if bank_account_form.is_valid():
             cd = bank_account_form.cleaned_data
-            user = authenticate(request, username=request.user.username, password=cd["password"])
+            user = authenticate(
+                request, username=request.user.username, password=cd["password"]
+            )
             if user is not None:
                 new_bank_account = bank_account_form.save(commit=False)
                 profile = get_object_or_404(Profile, user=user)
@@ -52,10 +54,12 @@ def bank_account_create_view(request):
                 new_bank_account.save()
                 return redirect("dashboard")
             else:
-                return HttpResponse('Invalid credentials')
+                return HttpResponse("Invalid credentials")
     else:
         form = AccountForm()
-    return render(request, "account/account_create.html", {"bank_account_create_form": form})
+    return render(
+        request, "account/account_create.html", {"bank_account_create_form": form}
+    )
 
 
 # http://dsw.pc16.aula109:8000/edit/account/<int:id>/
@@ -71,21 +75,24 @@ def edit_bank_account(request, id):  # el pk es primarykey
         form = AccountEditForm(instance=bank_account)
     return render(request, "account/account_edit.html", {"account_edit_form": form})
 
+
 # http://dsw.pc16.aula109:8000/account/accounts
 @login_required
 def accounts(request):
-#    user = request.user
-#    profile = get_object_or_404(Profile, user=user)
-#    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
-#    Las 3 lineas de arriba equivalen a la de abajo
-    accounts = BankAccount.objects.filter(profile=get_object_or_404(Profile, user=request.user)).exclude(status=BankAccount.Status.CANCELLED)
+    #    user = request.user
+    #    profile = get_object_or_404(Profile, user=user)
+    #    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+    #    Las 3 lineas de arriba equivalen a la de abajo
+    accounts = BankAccount.objects.filter(
+        profile=get_object_or_404(Profile, user=request.user)
+    ).exclude(status=BankAccount.Status.CANCELLED)
     return render(request, "account/accounts.html", {"accounts": accounts})
 
 
 # http://dsw.pc16.aula109:8000/account/<id:int>
 def account_detail(request, id):
     account = get_object_or_404(BankAccount, id=id)
-    return render(request, 'account/account_detail.html', {"account": account})
+    return render(request, "account/account_detail.html", {"account": account})
 
 
 # def list_cards(request, account_id):
