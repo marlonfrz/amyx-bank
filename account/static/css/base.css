@@ -32,7 +32,7 @@ a {
 
 /* Nav */
 nav {
-    background-color:#f5f5ff !important;
+    background-color:#f5f5ffa8 !important;
 }
 
 .main-nav {
@@ -319,7 +319,6 @@ nav {
 
 nav {
     height: 100px;
-    background-color: white;
 }
 nav:hover {
     background-color: rgba(24, 139, 255); 
@@ -341,9 +340,7 @@ nav:hover {
     font-size: 17px;
 }
 
-.navbar-nav .nav-link:hover {
-    color: rgb(24, 22, 189) !important ;
-}
+
 
 .dropdown {
     display: inline-block;
