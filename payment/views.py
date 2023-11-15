@@ -22,24 +22,25 @@ def payment(request):
             form = PaymentForm(request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
-            else:
-                return HttpResponse("Invalid form data format")
+        else:
+            return HttpResponseBadRequest("Payment was cancelled due to invalid information passed in the POST request")
         business = cd.get('business').upper()
         ccc = cd.get('ccc').upper()
         amount = Decimal(cd.get('amount'))
         if amount == 0:
-            return HttpResponse("You cannot send no money to anyone!")
+            return HttpResponseBadRequest("You cannot send no money to anyone!")
         pin = cd.get('pin')
         try:
             card = Card.objects.get(card_code=ccc)
         except Card.DoesNotExist:
             return HttpResponseForbidden(f"Card {ccc} doesn't exists")
         correct_pin = check_password(pin, card.cvc)
-        taxed_amount = calc_commission(amount, "PAYMENTS")
+        taxed_amount = amount + calc_commission(amount, "PAYMENTS")
         if correct_pin:
             if card.account.balance > taxed_amount:
                 card.account.balance -= taxed_amount
                 card.save()
+                card.account.save()
                 Payment.objects.create(
                     card=card,
                     business=business,
@@ -47,7 +48,7 @@ def payment(request):
                 )
                 return HttpResponse("Ok!")
             else:
-                return HttpResponse("Everything went ok, but you don't have enough money")
+                return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
         else:
             return HttpResponseForbidden(f"The code pin {pin} doesn't match")
     else:
@@ -55,7 +56,6 @@ def payment(request):
     return render(request, 'payment/payment.html', {'payment_form' : form})
 
 @csrf_exempt
-@login_required
 def outgoing_transactions(request):
     # Este bloque controla que los datos pueden 
     # llegar tanto por formulario como por curl
@@ -66,8 +66,8 @@ def outgoing_transactions(request):
             form = TransactionForm(request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
-            else:
-                return HttpResponse("Invalid form data format")
+        else:
+            return HttpResponseBadRequest("Transaction was cancelled due to invalid information passed in the POST request")
         # Obtención los datos del diccionario
         sender = cd.get('sender').upper()
         account = cd.get('cac').upper()
@@ -92,7 +92,6 @@ def outgoing_transactions(request):
             transaction = {"agent" : sender, "account" : account, "concept" : concept, "amount" : amount}
             status = requests.post(f"http://127.0.0.1:8000/incoming/", transaction)
             #print(status)
-            print('manolo')
             cac.balance -= taxed_amount
             cac.save()
             Transaction.objects.create(
