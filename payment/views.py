@@ -187,7 +187,8 @@ def movements(request):
     )
     return render(request, "movements.html", {"all_movements": all_movements})
 
-    # all_movements = sorted(chain(transaction, payment), key=lambda instance: instance.requested_date, reverse = True)
+
+# arreglar esta view
 
 
 @login_required
