@@ -61,7 +61,7 @@ def payment(request):
         form = PaymentForm()
     return render(request, "payment/payment.html", {"payment_form": form})
 
-
+@login_required
 @csrf_exempt
 def outgoing_transactions(request):
     # Este bloque controla que los datos pueden
@@ -118,7 +118,7 @@ def outgoing_transactions(request):
     return render(request, "payment/transactions.html", {"transaction_form": form})
 
 
-@login_required
+
 @require_POST
 def incoming_transactions(request):
     # Este bloque controla que los datos pueden
@@ -162,16 +162,8 @@ def payroll(request):
     # La cantidad de dinero a instroducir
     # cuyos nombres seran cac y balance respectivamente
     cd = json.loads(request.body)
-<<<<<<< HEAD
     balance = Decimal((cd.get('balance')))
     account = get_object_or_404(BankAccount, account_code=cd.get('cac').upper())
-=======
-    print(cd)
-    balance = Decimal((cd.get("balance")))
-    print(balance)
-    account = get_object_or_404(BankAccount, account_code=cd.get("cac").upper())
-    print(account)
->>>>>>> 8ec1787ce3d4ca7040016b4d6bc17cf441762a80
     account.balance += balance
     account.save()
     return HttpResponse("NOMINA BIEN METIDA PARA DENTRO")
