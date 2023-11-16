@@ -7,7 +7,13 @@
         <li class="card" style="width:35%">
             <div class="card-statistic-3 p-4">
                 <div class="mb-4 d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">{% if movement.business %}<a href="{{ movement.get_absolute_url }}" style="color: blue"> {{ movement.business }}</a> {% else %}<a href="{{ movement.get_absolute_url }}" style="color: blue">{{ movement.agent }}</a> {% endif %}</h3>
+                    <h3 class="card-title mb-0">
+                        {% if movement.business %}
+                            <a href="{{ movement.get_absolute_url }}" style="color: blue"> {{ movement.business }}</a> 
+                        {% else %}
+                            <a href="{{ movement.get_absolute_url }}" style="color: blue">{{ movement.agent }}</a> 
+                        {% endif %}
+                    </h3>
                     <h5>Amount: {{ movement.amount }}€</h5>
                 </div>
             </div>
@@ -19,11 +25,9 @@
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ movements.previous_page_number }}">previous</a>
             {% endif %}
-
             <span class="current">
                 Página {{ movements.number }} de {{ movements.paginator.num_pages }}.
             </span>
-
             {% if movements.has_next %}
                 <a href="?page={{ movements.next_page_number }}">next</a>
                 <a href="?page={{ movements.paginator.num_pages }}">last &raquo;</a>

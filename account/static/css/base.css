@@ -595,14 +595,14 @@ table {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 8px;  /* Ajusta el espacio interno según sea necesario */
+    padding: 8px;  
     text-align: left;
 }
 
 th {
-    width: 30%; /* Ajusta el ancho de la columna de la izquierda según tus necesidades */
+    width: 30%; 
 }
 
 td {
-    width: 70%; /* Ajusta el ancho de la columna de la derecha según tus necesidades */
+    width: 70%; 
 }

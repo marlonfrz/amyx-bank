@@ -28,9 +28,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('payments/', include('payment.urls')),
     path('payment/', views.payment, name='payment'),
-    path('outoging/', views.outgoing_transactions, name='outgoing'),
+    path('outoing/', views.outgoing_transactions, name='outgoing'),
     path('incoming/', views.incoming_transactions, name='incoming'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

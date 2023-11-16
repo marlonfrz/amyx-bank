@@ -3,13 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.auth.hashers import check_password
-from .forms import PaymentForm, TransactionForm
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+from .forms import PaymentForm, IncomingTransactionForm, OutgoingTransactionForm
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, HttpResponseRedirect
 from card.models import Card
-from account.models import BankAccount, Profile
+from account.models import BankAccount
 from .models import Payment, Transaction
 from django.shortcuts import get_object_or_404
 from amyx_bank.ourutils import calc_commission, get_bank_info
+from django.urls import reverse
 import json, requests
 from decimal import Decimal
 from itertools import chain
@@ -71,7 +72,7 @@ def outgoing_transactions(request):
         try:
             cd = json.loads(request.body)
         except json.JSONDecodeError:
-            form = TransactionForm(request.POST)
+            form = OutgoingTransactionForm(request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
         else:
@@ -95,23 +96,24 @@ def outgoing_transactions(request):
         except BankAccount.DoesNotExist:
             return HttpResponseForbidden(f"Account {sender} doesn't exists")
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
-        print(taxed_amount)
         if cac.balance > taxed_amount:
             url = f"{destined_bank}:8000/incoming/"
-            transaction = {"agent" : str(sender), "cac" : str(account), "concept" : str(concept), "amount" : str(amount)}
+            transaction = json.dumps({"agent" : str(sender), "cac" : str(account), "concept" : str(concept), "amount" : str(amount)})
             status = requests.post(url, data=transaction)
-            print(status)
-            cac.balance -= taxed_amount
-            cac.save()
-            Transaction.objects.create(
-                agent=sender,
-                account=account,
-                concept=concept,
-                amount=amount,
-            )
-        return redirect("dashboard")
+            if status.status_code == 200:
+                cac.balance -= taxed_amount
+                cac.save()
+                new_transaction = Transaction.objects.create(
+                    agent=sender,
+                    account=account,
+                    concept=concept,
+                    amount=amount,
+                )
+                return redirect(reverse("transaction_detail", args=[new_transaction.id]))
+            else:
+                return HttpResponseBadRequest(f"The account {account} you tried to send money to does not exist")
     else:
-        form = TransactionForm()
+        form = OutgoingTransactionForm()
     return render(request, "payment/transactions.html", {"transaction_form": form})
 
 
@@ -120,37 +122,29 @@ def outgoing_transactions(request):
 def incoming_transactions(request):
     # Este bloque controla que los datos pueden
     # llegar tanto por formulario como por curl
-#    agent=A5-0005&cac=A5-0004&concept=Este+concepto+es+de+prueba&amount=8 
-    cd = str(request.body).lstrip('b').strip("'").split("&")
-    data = {}
-    for field in cd:
-        field_name, field_value = field.split("=")
-        if field_name == "concept":
-            field_value = field_value.replace("+", " ")
-        data[field_name] = field_value
+    # Puede llegar la solicitud mediante curl
+    cd = json.loads(request.body)
     # Obtención los datos del diccionario
-    sender = data.get("agent")
-    cac = data.get("cac")
-    concept = data.get("concept")
-    amount = Decimal(data.get("amount"))
-
+    sender = cd.get("agent")
+    cac = cd.get("cac")
+    concept = cd.get("concept")
+    amount = Decimal(cd.get("amount"))
     # Comprueba que la cuenta existe
     try:
-        account = BankAccount.objects.get(account_code=cac)
+        # account = get_object_or_404(BankAccount, account_code=cac)
+        account = BankAccount.objects.get(account_code=cac)  
     except BankAccount.DoesNotExist:
         return HttpResponseBadRequest(
-            "The account you tried to send money to does not exist"
+            f"The account {cac} you tried to send money to does not exist"
         )
-#
     taxed_amount = calc_commission(amount, "INCOMING")
     total_amount = amount - taxed_amount
     account.balance += total_amount
     account.save()
-    Transaction.objects.create(
+    new_transaction = Transaction.objects.create(
         agent=sender, account=account, concept=concept, amount=amount
     )
-    return redirect("dashboard")
-
+    return redirect(reverse("transaction_detail", args=[new_transaction.id]))
 
 @csrf_exempt
 def payroll(request):
@@ -164,7 +158,7 @@ def payroll(request):
     account.save()
     return HttpResponse("NOMINA BIEN METIDA PARA DENTRO")
 
-
+@login_required
 def movements(request):
     transactions = Transaction.objects.all()
     payments = Payment.objects.all()
@@ -184,8 +178,6 @@ def movements(request):
         movements_page = paginator.page(paginator.num_pages)
     return render(request, "payment/movements.html", {"movements": movements_page})
 
-
-# arreglar esta view
 
 @login_required
 def payment_detail(request, id):
