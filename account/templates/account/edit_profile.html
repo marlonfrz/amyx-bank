@@ -10,5 +10,6 @@
         {% csrf_token %}
     <p><input type="submit" class="btn btn-primary" value="Save changes"></p>
     </form>
+    <h5>You have changed your profile information,<br> you can also change your password <a href="{% url 'change_password' %}" style="color: blue">here</a></h5>
 </div>
 {% endblock %}

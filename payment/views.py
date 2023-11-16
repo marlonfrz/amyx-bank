@@ -87,9 +87,7 @@ def outgoing_transactions(request):
         amount = Decimal(cd.get("amount"))
         if amount == 0:
             return HttpResponse("You can't send no money to anyone")
-
         concept = cd.get("concept")
-
         destined_bank = get_bank_info(account, "url")
         # Obtiene la cuenta del sender
         try:
@@ -99,8 +97,9 @@ def outgoing_transactions(request):
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
         print(taxed_amount)
         if cac.balance > taxed_amount:
-            transaction = {"agent" : sender, "cac" : account, "concept" : concept, "amount" : amount}
-            status = requests.post(f"http://127.0.0.1:8000/incoming/", transaction)
+            url = f"{destined_bank}:8000/incoming/"
+            transaction = {"agent" : str(sender), "cac" : str(account), "concept" : str(concept), "amount" : str(amount)}
+            status = requests.post(url, data=transaction)
             print(status)
             cac.balance -= taxed_amount
             cac.save()
@@ -110,51 +109,47 @@ def outgoing_transactions(request):
                 concept=concept,
                 amount=amount,
             )
-            return HttpResponse("Everything went ok with the transaction")
-        return HttpResponse(
-            "todo ha ido bien, solo falta que implementes las nominas"
-        )  # QUITAR CUANDO TODO FUNCIONE
+        return redirect("dashboard")
     else:
         form = TransactionForm()
     return render(request, "payment/transactions.html", {"transaction_form": form})
 
 
 
-@require_POST
+@csrf_exempt
 def incoming_transactions(request):
     # Este bloque controla que los datos pueden
     # llegar tanto por formulario como por curl
+#    agent=A5-0005&cac=A5-0004&concept=Este+concepto+es+de+prueba&amount=8 
+    cd = str(request.body).lstrip('b').strip("'").split("&")
+    data = {}
+    for field in cd:
+        field_name, field_value = field.split("=")
+        if field_name == "concept":
+            field_value = field_value.replace("+", " ")
+        data[field_name] = field_value
+    # Obtención los datos del diccionario
+    sender = data.get("agent")
+    cac = data.get("cac")
+    concept = data.get("concept")
+    amount = Decimal(data.get("amount"))
+
+    # Comprueba que la cuenta existe
     try:
-        cd = json.loads(request.body)
-    except json.JSONDecodeError:
-        form = TransactionForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-        else:
-            return HttpResponse("Invalid form data format")
-
-        # Obtención los datos del diccionario
-        sender = cd.get("sender")
-        cac = cd.get("cac")
-        concept = cd.get("concept")
-        amount = Decimal(cd.get("amount"))
-
-        # Comprueba que la cuenta existe
-        try:
-            account = BankAccount.objects.get(account_code=cac)
-        except BankAccount.DoesNotExist:
-            return HttpResponseBadRequest(
-                "The account you tried to send money to does not exist"
-            )
-
-        taxed_amount = calc_commission(amount, "INCOMING")
-        total_amount = amount - taxed_amount
-        account.balance += total_amount
-        account.save()
-        new_transaction = Transaction.objects.create(
-            agent=sender, account=account, concept=concept, amount=amount
+        account = BankAccount.objects.get(account_code=cac)
+    except BankAccount.DoesNotExist:
+        return HttpResponseBadRequest(
+            "The account you tried to send money to does not exist"
         )
-        return redirect("dashboard")
+#
+    taxed_amount = calc_commission(amount, "INCOMING")
+    total_amount = amount - taxed_amount
+    account.balance += total_amount
+    account.save()
+    new_transaction = Transaction.objects.create(
+        agent=sender, account=account, concept=concept, amount=amount
+    )
+    return redirect("dashboard")
 
 
 @csrf_exempt
