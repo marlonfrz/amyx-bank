@@ -520,11 +520,16 @@ input[type=submit], a.button {
 }
 
 .btn-info:hover {
-    background-color:rgb(24, 139, 206);
+    background-color:black;
+    color: white;
 }
 
 .btn-info a{
     background-color: transparent;
+}
+
+.btn-info:hover a{
+    color: white;
 }
 
 .operation {
@@ -577,4 +582,24 @@ input[type=submit], a.button {
 
 .img-fluid{
     background-color: transparent;
+}
+
+table {
+    border: ridge;
+    border-color: rgb(24, 139, 206);
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;  /* Ajusta el espacio interno según sea necesario */
+    text-align: left;
+}
+
+th {
+    width: 30%; /* Ajusta el ancho de la columna de la izquierda según tus necesidades */
+}
+
+td {
+    width: 70%; /* Ajusta el ancho de la columna de la derecha según tus necesidades */
 }

@@ -19,6 +19,33 @@ a {
     color: black;
 }
 
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    background-color: transparent !important;
+}  
+
+.header-p {
+    all: unset;
+    background-color: transparent !important;
+    margin: 0;
+}
+
+.header-a {
+    all: unset;
+}
+
+.header-a, .btn {
+    margin-right: 15px;
+}
+
 .risk1, .risk2 {
     border: solid 1px grey;
 }

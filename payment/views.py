@@ -13,6 +13,7 @@ from amyx_bank.ourutils import calc_commission, get_bank_info
 import json, requests
 from decimal import Decimal
 from itertools import chain
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 @csrf_exempt
@@ -100,7 +101,7 @@ def outgoing_transactions(request):
         if cac.balance > taxed_amount:
             transaction = {"agent" : sender, "cac" : account, "concept" : concept, "amount" : amount}
             status = requests.post(f"http://127.0.0.1:8000/incoming/", transaction)
-            # print(status)
+            print(status)
             cac.balance -= taxed_amount
             cac.save()
             Transaction.objects.create(
@@ -177,10 +178,29 @@ def movements(request):
         key=lambda instance: instance.timestamp,
         reverse=True,
     )
-    return render(request, "movements.html", {"all_movements": all_movements})
+    movements_per_page = 5
+    paginator = Paginator(all_movements, movements_per_page)
+    page = request.GET.get('page')
+    try:
+        movements_page = paginator.page(page)
+    except PageNotAnInteger:
+        movements_page = paginator.page(1)
+    except EmptyPage:
+        movements_page = paginator.page(paginator.num_pages)
+    return render(request, "payment/movements.html", {"movements": movements_page})
 
 
 # arreglar esta view
+
+@login_required
+def payment_detail(request, id):
+    movement = get_object_or_404(Payment, id=id)
+    return render(request, "payment/payment_detail.html", {"movement": movement})
+
+@login_required
+def transaction_detail(request, id):
+    movement = get_object_or_404(Transaction, id=id)
+    return render(request, "payment/transaction_detail.html", {"movement": movement})
 
 
 @login_required

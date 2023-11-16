@@ -5,33 +5,29 @@
 <head>
 <title>{% block title %}{% endblock %}</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<link href="{% static 'css/base.css' %}" rel="stylesheet">
-<link href="{% static 'css/main.css' %}" rel="stylesheet">
-<link rel="icon" href="{% static 'img/logo1.jpg' %}" type="image/x-icon/jpg">
+<link href="{% static "css/base.css" %}" rel="stylesheet">
+<link href="{% static "css/main.css" %}" rel="stylesheet">
+
+<link rel="icon" type="image/jpg" href="{% static 'img/logo1.jpg' %}"/>
 </head>
-<header>
-  <div class="container-fluid"></div>
-    <nav class="navigation navbar navbar-fixed-top">
-        <img src="{% static 'svg/logo1.svg' %}" height="70px" width="70px" alt="" class="img-fluid mb-3 d-none d-md-block">
-        <button id="navButton" class="navbar-text navbar-right btn btn-info">
-          {% if request.user.is_authenticated %}
-            <a href="{% url 'logout' %}">Log Out</a>
-          {% else %}
-            <a href="{% url 'login' %}">Log In</a>
-          {% endif %}
-        </button>
-        <a href="{% url 'main' %}"><p class="navbar-text navbar-right">Home</p></a>
-        <a href="{% url 'dashboard' %}"><p class="navbar-text navbar-right">Profile</p></a>
-        <a href="{% url 'accounts' %}"><p class="navbar-text navbar-right">Accounts</p></a>
-        <a href="{% url 'cards' %}"><p class="navbar-text navbar-right">Cards</p></a>
-        <a href="{% url 'payment' %}"><p class="navbar-text navbar-right">Payments</p></a>
-        <a href="{% url 'outgoing' %}"><p class="navbar-text navbar-right">Transactions</p></a>
-        <a href=""><p class="navbar-text navbar-right">Movements</p></a>
-    </nav>
+<nav class="navigation navbar navbar-fixed-top">
+  <div class="header-container">
+    <a class="header-a" href="{% url 'main' %}"><img src="{% static 'svg/logo1.svg' %}" height="70px" width="70px" alt="" class="img-fluid"></a>
+    <button id="navButton" class="btn btn-info">
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'logout' %}">Log Out</a>
+      {% else %}
+      <a href="{% url 'login' %}">Log In</a>
+      {% endif %}
+    </button>
+    <a class="header-a" href="{% url 'dashboard' %}"><p class="header-p">Profile</p></a>
+    <a class="header-a" href="{% url 'accounts' %}"><p class="header-p">Accounts</p></a>
+    <a class="header-a" href="{% url 'cards' %}"><p class="header-p">Cards</p></a>
+    <a class="header-a" href="{% url 'payment' %}"><p class="header-p">Payments</p></a>
+    <a class="header-a" href="{% url 'outgoing' %}"><p class="header-p">Transactions</p></a>
+    <a class="header-a" href="{% url 'movements' %}"><p class="header-p">Movements</p></a>
   </div>
-
-</header>
-
+</nav>
   <body>
     {% block content %}
     {% endblock %}

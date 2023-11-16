@@ -1,6 +1,7 @@
 from django.db import models
 from card.models import Card
-from account.models import BankAccount
+from django.urls import reverse
+
 
 class Transaction(models.Model):
     class TransactionType(models.TextChoices):
@@ -23,6 +24,10 @@ class Transaction(models.Model):
         indexes = [
             models.Index(fields=['-timestamp']),
         ]
+    
+    def get_absolute_url(self):
+        return reverse('transaction_detail', args=[self.id])
+
 
 class Payment(models.Model):
     card = models.ForeignKey(Card, on_delete=models.PROTECT)
@@ -39,6 +44,8 @@ class Payment(models.Model):
             models.Index(fields=['-timestamp']),
         ]
 
+    def get_absolute_url(self):
+        return reverse('payment_detail', args=[self.id])
 
 #       ID=4      #
 # F transaccion   #

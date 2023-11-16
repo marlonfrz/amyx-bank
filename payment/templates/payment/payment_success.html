@@ -1,0 +1,8 @@
+{% extends "account/base.html" %}
+{% block title %}Payment success!{% endblock %}
+{% block content %}
+<h1>Hi {{ user.username }}!</h1>
+<p>
+Now you can see your payment at <a href="{% url "movements" %}">your movements</a>.
+</p>
+{% endblock %}

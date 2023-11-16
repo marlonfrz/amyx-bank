@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Movement detail{% endblock %}
+{% block content %}
+<center>
+    <h4 style="margin-top:20px; margin-bottom:20px">Movement done at: {{ movement.timestamp|date:"g:i A d F Y" }}</h4>
+    <table>
+        <tr>
+            <th>Business</th>
+            <td>{{ movement.business }}</td>
+        </tr>
+        <tr>
+            <th>Card</th>
+            <td>{{ movement.card }} ({{ movement.card.card_code }})</td>
+        </tr>
+        <tr>
+            <th>Kind</th>
+            <td>{{ movement.kind }}</td>
+        </tr>
+        <tr>
+            <th>Amount</th>
+            <td>{{ movement.amount }} €</td>
+        </tr>
+    </table>
+</center>
+{% endblock %}
