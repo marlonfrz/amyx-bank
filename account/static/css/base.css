@@ -475,10 +475,8 @@ a:hover {
 
 /*
 form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 50%;
+    margin: 0 auto;
 }*/
 
 form p {
@@ -582,6 +580,11 @@ input[type=submit], a.button {
 
 .img-fluid{
     background-color: transparent;
+}
+
+.top-margin {
+    margin-top:20px; 
+    margin-bottom:20px
 }
 
 table {
