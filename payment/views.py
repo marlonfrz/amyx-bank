@@ -146,7 +146,7 @@ def incoming_transactions(request):
     total_amount = amount - taxed_amount
     account.balance += total_amount
     account.save()
-    new_transaction = Transaction.objects.create(
+    Transaction.objects.create(
         agent=sender, account=account, concept=concept, amount=amount
     )
     return redirect("dashboard")
