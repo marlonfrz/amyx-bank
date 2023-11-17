@@ -1,12 +1,11 @@
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
-
+from prettyconf import config
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import generate_random_code
 
@@ -28,25 +27,29 @@ def create_card(request):
                 account = BankAccount.objects.filter(profile=profile).get(
                     account_name=destined_account
                 )
-                card = card_form.save(commit=False)
-                card.account = account
-                cvc = generate_random_code(3)
-                send_mail(
-                    'You card\'s CVC',  # Email concept
-                    f"""Your card {card} has been created succesfully.
-Your card's CVC is: {cvc}.
-Remember or keep this code for your activities.
+                cards = Card.objects.filter(account=account)
+                if len(cards) < int(config('MAX_CARD_NUMBER')):
+                    card = card_form.save(commit=False)
+                    card.account = account
+                    cvc = generate_random_code(3)
+                    send_mail(
+                        'You card\'s CVC',  # Email concept
+                        f"""Your card {card} has been created succesfully.
+    Your card's CVC is: {cvc}.
+    Remember or keep this code for your activities.
 
 
-This email has been generated automatically and is for educational purposes from students of IES Puerto de la Cruz.
-We are sorry if you receive this by our testing and we appologise for it, you are very welcome to mark us as spam.""",  # Email Message
-                    f'{settings.EMAIL_HOST_USER}',  # Email sender
-                    [user.email],  # Email receiver
-                    fail_silently=True,  # So the server does not crash
-                )
-                card.cvc = make_password(cvc)
-                card.save()
-                return redirect('dashboard')
+    This email has been generated automatically and is for educational purposes from students of IES Puerto de la Cruz.
+    We are sorry if you receive this by our testing and we appologise for it, you are very welcome to mark us as spam.""",  # Email Message
+                        f'{settings.EMAIL_HOST_USER}',  # Email sender
+                        [user.email],  # Email receiver
+                        fail_silently=True,  # So the server does not crash
+                    )
+                    card.cvc = make_password(cvc)
+                    card.save()
+                    return redirect('dashboard')
+                else:
+                    return HttpResponseBadRequest("You have reached the limit of card per account")
             else:
                 return HttpResponse('Invalid Credencials')
         else:

@@ -11,7 +11,7 @@
 <link rel="icon" type="image/jpg" href="{% static 'img/logo1.jpg' %}"/>
 </head>
 <nav class="navigation navbar navbar-fixed-top">
-  <div class="header-container">
+  <div class="header-container container-fluid">
     <a class="header-a" href="{% url 'main' %}"><img src="{% static 'svg/logo1.svg' %}" height="70px" width="70px" alt="" class="img-fluid"></a>
     <button id="navButton" class="btn btn-info">
       {% if request.user.is_authenticated %}
@@ -44,13 +44,27 @@
                 <div class="single-footer-widget section_padding_0_130">
                   <!-- Footer Logo-->
                   <div class="footer-logo mb-3"></div>
-                  <p>Appland is completely creative, lightweight, clean app landing page.</p>
+                  <p>A.M.Y.X Bank is your trusted bank</p>
                   <!-- Copywrite Text-->
                   <div class="copywrite-text mb-5">
-                    <p class="mb-0">Made with <i class="lni-heart mr-1"></i>by<a class="ml-1" href="https://wrapbootstrap.com/user/DesigningWorld">Designing World</a></p>
+                    <p class="mb-0">Made by <a class="ml-1" href="{% url 'about_us' %}">A.M.Y.X Bank</a></p>
                   </div>
+                  
                   <!-- Footer Social Area-->
-                  <div class="footer_social_area"><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest"><i class="fa fa-pinterest"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype"><i class="fa fa-skype"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></div>
+                  <div class="footer_social_area">
+                    <a href="https://www.instagram.com/yaamiilaa_03/" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+                      <img src="{% static 'img/instagram.png' %}" height="70px" width="70px" alt="" class="img-fluid">
+                      <p style="font-size:12px">Yamila Ramos</p>
+                    </a>
+                    <a href="https://www.instagram.com/marlonfrz/" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+                      <img src="{% static 'img/instagram.png' %}" height="70px" width="70px" alt="" class="img-fluid">
+                      <p style="font-size: 12px">Marlon Farizo</p>
+                    </a>
+                    <a href="https://www.instagram.com/el__payo__/" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+                      <img src="{% static 'img/instagram.png' %}" height="70px" width="70px" alt="" class="img-fluid">
+                      <p style="font-size: 12px">Ayoze Hdez</p>
+                    </a>
+                  </div>
                 </div>
               </div>
               <!-- Single Widget-->
@@ -61,7 +75,7 @@
                 <!-- Footer Menu-->
                   <div class="footer_menu">
                       <ul>
-                      <li><a href="#">About Us</a></li>
+                      <li><a href="{% url 'about_us' %}">About Us</a></li>
                       <li><a href="#">Corporate Sale</a></li>
                       <li><a href="#">Terms &amp; Policy</a></li>
                       <li><a href="#">Community</a></li>

@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth import authenticate
+from prettyconf import config
 
 from .models import BankAccount, Profile
 
@@ -47,12 +47,17 @@ def bank_account_create_view(request):
             user = authenticate(
                 request, username=request.user.username, password=cd["password"]
             )
+            profile = get_object_or_404(Profile, user=request.user)
+            accounts = BankAccount.objects.filter(profile=profile)
             if user is not None:
-                new_bank_account = bank_account_form.save(commit=False)
-                profile = get_object_or_404(Profile, user=user)
-                new_bank_account.profile = profile
-                new_bank_account.save()
-                return redirect("dashboard")
+                if len(accounts) < int(config('MAX_ACCOUNT_NUMBER')):
+                    new_bank_account = bank_account_form.save(commit=False)
+                    profile = get_object_or_404(Profile, user=user)
+                    new_bank_account.profile = profile
+                    new_bank_account.save()
+                    return redirect("dashboard")
+                else:
+                    return HttpResponseBadRequest("You have reached the max amount of accounts you can create, which is 4") 
             else:
                 return HttpResponse("Invalid credentials")
     else:
@@ -93,18 +98,3 @@ def accounts(request):
 def account_detail(request, id):
     account = get_object_or_404(BankAccount, id=id)
     return render(request, "account/account_detail.html", {"account": account})
-
-
-# def list_cards(request, account_id):
-#      cards = Card.objects.all().filter(account=account_id)
-#      return render(request, "account/list_cards.html", {"cards": cards})
-#
-
-""" 
-def account_list(request):
-    account_list = BankAccount.objects.filter(status='Active')
-    paginator = Paginator(account_list, 10)
-    page_number = request.GET.get('page', 1)
-    account = paginator.page(page_number)
-    return render(request, 'account_detail.html', {'account': account})
-"""

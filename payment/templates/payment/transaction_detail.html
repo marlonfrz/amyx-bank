@@ -20,6 +20,10 @@
             <th>Amount</th>
             <td>{{ movement.amount }} €</td>
         </tr>
+        <tr>
+            <th>Kind</th>
+            <td><a href="{% url 'about_us' %}">{{ movement.kind }}</a></td>
+        </tr>
     </table>
 </center>
 

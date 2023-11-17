@@ -46,16 +46,3 @@ class Payment(models.Model):
 
     def get_absolute_url(self):
         return reverse('payment_detail', args=[self.id])
-
-#       ID=4      #
-# F transaccion   #
-#                 #
-# "Destinatario"  #
-#                 #
-#                 #
-#    Concepto     #
-#                 #
-#                 #
-#    cantidad     #
-#                 #
-#      Tipo       #

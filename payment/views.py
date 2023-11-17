@@ -45,14 +45,13 @@ def payment(request):
         if correct_pin:
             if card.account.balance > taxed_amount:
                 card.account.balance -= taxed_amount
-                card.save()
                 card.account.save()
-                Payment.objects.create(
+                new_payment = Payment.objects.create(
                     card=card,
                     business=business,
                     amount=amount,
                 )
-                return HttpResponse("Ok!")
+                return redirect(reverse("payment_detail", args=[new_payment.id]))
             else:
                 return HttpResponseBadRequest(
                     "Everything went ok, but you don't have enough money"
@@ -98,7 +97,7 @@ def outgoing_transactions(request):
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
         if cac.balance > taxed_amount:
             url = f"{destined_bank}:8000/incoming/"
-            transaction = json.dumps({"agent" : str(sender), "cac" : str(account), "concept" : str(concept), "amount" : str(amount)})
+            transaction = json.dumps({"agent" : f"{sender}", "cac" : f"{account}", "concept" : f"{concept}", "amount" : f"{amount}"})
             status = requests.post(url, data=transaction)
             if status.status_code == 200:
                 cac.balance -= taxed_amount
@@ -108,6 +107,7 @@ def outgoing_transactions(request):
                     account=account,
                     concept=concept,
                     amount=amount,
+                    kind=Transaction.TransactionType.OUTGOING,
                 )
                 return redirect(reverse("transaction_detail", args=[new_transaction.id]))
             else:
@@ -125,14 +125,14 @@ def incoming_transactions(request):
     # Puede llegar la solicitud mediante curl
     cd = json.loads(request.body)
     # Obtención los datos del diccionario
-    sender = cd.get("agent")
-    cac = cd.get("cac")
+    sender = cd.get("agent").upper()
+    cac = cd.get("cac").upper()
     concept = cd.get("concept")
     amount = Decimal(cd.get("amount"))
     # Comprueba que la cuenta existe
     try:
         # account = get_object_or_404(BankAccount, account_code=cac)
-        account = BankAccount.objects.get(account_code=cac)  
+        account = BankAccount.objects.get(account_code=cac)
     except BankAccount.DoesNotExist:
         return HttpResponseBadRequest(
             f"The account {cac} you tried to send money to does not exist"
@@ -142,17 +142,21 @@ def incoming_transactions(request):
     account.balance += total_amount
     account.save()
     new_transaction = Transaction.objects.create(
-        agent=sender, account=account, concept=concept, amount=amount
+        agent=sender, 
+        account=cac, 
+        concept=concept, 
+        amount=amount, 
+        kind=Transaction.TransactionType.INCOMING,
     )
     return redirect(reverse("transaction_detail", args=[new_transaction.id]))
 
 @csrf_exempt
-def payroll(request):
+def payroll(request): #NOMINA
     # Los campos de payroll son unicamente la cuenta destino y
     # La cantidad de dinero a instroducir
     # cuyos nombres seran cac y balance respectivamente
     cd = json.loads(request.body)
-    balance = Decimal((cd.get('balance')))
+    balance = Decimal(cd.get('balance'))
     account = get_object_or_404(BankAccount, account_code=cd.get('cac').upper())
     account.balance += balance
     account.save()

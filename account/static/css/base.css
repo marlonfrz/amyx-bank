@@ -7,11 +7,6 @@
 }
 
 
-a {
-    text-decoration: None;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .logo {
     display: block;
@@ -30,11 +25,7 @@ a {
     padding: 1px;
 }
 
-.main-nav {
-    display: flex;
-    justify-content: space-evenly;
-    height: 50px;
-}
+
 
 .nav-brand {
     width: 95px;
@@ -50,10 +41,6 @@ a {
     font-weight: bold;
 }
 
-.menu-nav a:hover {
-    border-bottom: 2px solid black !important;
-    color: #5050FF !important; 
-}
 
 .menu-nav {
     flex: 1;
@@ -68,13 +55,7 @@ a {
     font-weight: bold;
 }
 
-.footer_area {
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
-    box-shadow: 0 8px 48px 8px rgba(47, 91, 234, 0.175);
-    padding:60px;
-}
+
 .footer_area .row {
     margin-left: -25px;
     margin-right: -25px;
@@ -153,10 +134,6 @@ a {
     padding-left: 25px;
 }
 
-.single-footer-widget {
-    position: relative;
-    z-index: 0;
-}
 .single-footer-widget .copywrite-text a {
     color: #747794;
     font-size: 1rem;
@@ -182,30 +159,11 @@ a {
     margin-bottom: 0;
 }
 
-.footer_social_area {
-    position: relative;
-    z-index: 0;
-}
-.footer_social_area a {
-    border-radius: 50%;
-    height: 40px;
-    text-align: center;
-    width: 40px;
-    display: inline-block;
-    background-color: #f5f5ff;
-    line-height: 40px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    margin-right: 10px;
-}
-.footer_social_area a i {
-    line-height: 36px;
-}
 .footer_social_area a:hover,
 .footer_social_area a:focus {
-    color: #ffffff;
+    color: black !important;
 }
-
+ 
 @-webkit-keyframes bi-cycle {
     0% {
         left: 0;
@@ -605,4 +563,8 @@ th {
 
 td {
     width: 70%; 
+}
+
+.about_us{
+    font-size: 19px;
 }

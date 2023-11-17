@@ -154,4 +154,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=config.boolean)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('SMTP_LOGIN_PASSWORD', default='password')
- """
+"""
