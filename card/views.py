@@ -16,6 +16,7 @@ from .models import Card
 # http://dsw.pc16.aula109:8000/card/create_card
 @login_required
 def create_card(request):
+    MAX_CARD_AMOUNT = 4
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == "POST":
         card_form = CardCreateForm(profile, request.POST)
@@ -24,11 +25,11 @@ def create_card(request):
             user = authenticate(request, username=request.user.username, password=cd["password"])
             if user is not None:
                 destined_account = cd["accounts"]
-                account = BankAccount.objects.filter(profile=profile).get(
+                account = BankAccount.objects.filter(profile=profile, status=BankAccount.Status.ACTIVE).get(
                     account_name=destined_account
                 )
-                cards = Card.objects.filter(account=account)
-                if len(cards) < int(config('MAX_CARD_NUMBER')):
+                cards = Card.objects.filter(account=account).exclude(status=Card.Status.CANCELLED)
+                if len(cards) < MAX_CARD_AMOUNT:
                     card = card_form.save(commit=False)
                     card.account = account
                     cvc = generate_random_code(3)
@@ -78,7 +79,7 @@ def card_edit(request, id):
 def cards(request):
     user = request.user
     profile = get_object_or_404(Profile, user=user)
-    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+    accounts = BankAccount.objects.filter(profile=profile, status=BankAccount.Status.ACTIVE)
     all_cards = {}
     for account in accounts:
         try:
