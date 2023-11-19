@@ -98,4 +98,6 @@ def accounts(request):
 # http://dsw.pc16.aula109:8000/account/<id:int>
 def account_detail(request, id):
     account = get_object_or_404(BankAccount, id=id)
+    if account.status == BankAccount.Status.CANCELLED:
+        return HttpResponseBadRequest("The account you tried to view was canceled some time ago")
     return render(request, "account/account_detail.html", {"account": account})

@@ -96,4 +96,6 @@ def cards(request):
 @login_required
 def card_detail(request, id):
     card = get_object_or_404(Card, id=id)
+    if card.status == Card.Status.CANCELLED:
+        return HttpResponseBadRequest("The card you tried to view was canceled some time ago")
     return render(request, "card/card_detail.html", {"card": card})
