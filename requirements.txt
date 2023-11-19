@@ -1,5 +1,0 @@
-django
-prettyconf
-requests
-django-debug-toolbar
-django-bootstrap-v5
