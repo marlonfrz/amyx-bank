@@ -1,16 +1,14 @@
-from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
-from prettyconf import config
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import generate_random_code
 
-from .forms import CardCreateForm, CardEditForm
-from .models import Card
+from card.forms import CardCreateForm, CardEditForm
+from card.models import Card
 
 
 # http://dsw.pc16.aula109:8000/card/create_card

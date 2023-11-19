@@ -2,11 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth import authenticate
-from prettyconf import config
 
-from .models import BankAccount, Profile
+from account.models import BankAccount, Profile
 
-from .forms import ChangePasswordForm, AccountEditForm, AccountForm
+from account.forms import ChangePasswordForm, AccountEditForm, AccountForm
 
 
 # http://dsw.pc16.aula109:8000/account

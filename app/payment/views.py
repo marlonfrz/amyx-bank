@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 from django.contrib.auth.hashers import check_password
-from .forms import PaymentForm, IncomingTransactionForm, OutgoingTransactionForm
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest, HttpResponseRedirect
+from payment.forms import PaymentForm, TransactionForm
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 from card.models import Card
 from account.models import BankAccount
 from .models import Payment, Transaction
@@ -71,7 +70,7 @@ def outgoing_transactions(request):
         try:
             cd = json.loads(request.body)
         except json.JSONDecodeError:
-            form = OutgoingTransactionForm(request.POST)
+            form = TransactionForm(request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
         else:
@@ -113,7 +112,7 @@ def outgoing_transactions(request):
             else:
                 return HttpResponseBadRequest(f"The account {account} you tried to send money to does not exist")
     else:
-        form = OutgoingTransactionForm()
+        form = TransactionForm()
     return render(request, "payment/transactions.html", {"transaction_form": form})
 
 
@@ -160,7 +159,7 @@ def payroll(request): #NOMINA
     account = get_object_or_404(BankAccount, account_code=cd.get('cac').upper())
     account.balance += balance
     account.save()
-    return HttpResponse("NOMINA BIEN METIDA PARA DENTRO")
+    return HttpResponse("Payroll done")
 
 @login_required
 def movements(request):

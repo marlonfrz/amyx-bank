@@ -1,7 +1,7 @@
 from django import forms
 from account.models import BankAccount
 
-from .models import Card
+from card.models import Card
 
 
 class CardCreateForm(forms.ModelForm):

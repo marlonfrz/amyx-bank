@@ -1,10 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import (
+from amyx_bank.forms import (
     LoginForm,
     ProfileEditForm,
     ProfileForm,
@@ -12,7 +11,7 @@ from .forms import (
     UserRegistrationForm,
 )
 
-from .models import Profile
+from amyx_bank.models import Profile
 
 
 # http://dsw.pc16.aula109:8000/
