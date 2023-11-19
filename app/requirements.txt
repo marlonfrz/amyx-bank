@@ -1,0 +1,6 @@
+django
+prettyconf
+Pillow
+requests
+django-debug-toolbar
+django-bootstrap-v5
