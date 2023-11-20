@@ -14,10 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
 from payment import views
 
 urlpatterns = [
@@ -28,11 +28,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('payments/', include('payment.urls')),
     path('payment/', views.payment, name='payment'),
-    path('outoing/', views.outgoing_transactions, name='outgoing'),
-    path('incoming/', views.incoming_transactions, name='incoming'),
+    path('outgoing/', views.outgoing_transactions, name='outgoing'),
+    path('transfer/incoming/', views.incoming_transactions, name='incoming'),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-    document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

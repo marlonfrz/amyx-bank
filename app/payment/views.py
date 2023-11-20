@@ -1,19 +1,21 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.hashers import check_password
-from payment.forms import PaymentForm, TransactionForm
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
-from card.models import Card
-from account.models import BankAccount
-from .models import Payment, Transaction
-from django.shortcuts import get_object_or_404
-from amyx_bank.ourutils import calc_commission, get_bank_info
-from django.urls import reverse
-import json, requests
+import json
 from decimal import Decimal
 from itertools import chain
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+import requests
+from account.models import BankAccount
+from amyx_bank.ourutils import calc_commission, get_bank_info
+from card.models import Card
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from payment.forms import PaymentForm, TransactionForm
+
+from .models import Payment, Transaction
 
 
 @csrf_exempt
@@ -52,14 +54,13 @@ def payment(request):
                 )
                 return redirect(reverse("payment_detail", args=[new_payment.id]))
             else:
-                return HttpResponseBadRequest(
-                    "Everything went ok, but you don't have enough money"
-                )
+                return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
         else:
             return HttpResponseForbidden(f"The code pin {pin} doesn't match")
     else:
         form = PaymentForm()
     return render(request, "payment/payment.html", {"payment_form": form})
+
 
 @login_required
 @csrf_exempt
@@ -95,9 +96,16 @@ def outgoing_transactions(request):
             return HttpResponseForbidden(f"Account {sender} doesn't exists")
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
         if cac.balance > taxed_amount:
-            url = f"{destined_bank}:8000/incoming/"
-            transaction = json.dumps({"agent" : f"{sender}", "cac" : f"{account}", "concept" : f"{concept}", "amount" : f"{amount}"})
-            status = requests.post(url, data=transaction)
+            url = f"{destined_bank}:8000/transfer/incoming/"
+            print(url)
+            transaction = {
+                "sender": sender,
+                "cac": account,
+                "concept": concept,
+                "amount": str(amount),
+            }
+            status = requests.post(url, json=transaction)
+            print(status.status_code)
             if status.status_code == 200:
                 cac.balance -= taxed_amount
                 cac.save()
@@ -110,11 +118,14 @@ def outgoing_transactions(request):
                 )
                 return redirect(reverse("transaction_detail", args=[new_transaction.id]))
             else:
-                return HttpResponseBadRequest(f"The account {account} you tried to send money to does not exist")
+                return HttpResponseBadRequest(
+                    f"The account {account} you tried to send money to does not exist"
+                )
+        else:
+            return HttpResponseBadRequest("You do not have enough money!")
     else:
         form = TransactionForm()
     return render(request, "payment/transactions.html", {"transaction_form": form})
-
 
 
 @csrf_exempt
@@ -124,7 +135,7 @@ def incoming_transactions(request):
     # Puede llegar la solicitud mediante curl
     cd = json.loads(request.body)
     # Obtención los datos del diccionario
-    sender = cd.get("agent").upper()
+    sender = cd.get("sender").upper()
     cac = cd.get("cac").upper()
     concept = cd.get("concept")
     amount = Decimal(cd.get("amount"))
@@ -141,16 +152,18 @@ def incoming_transactions(request):
     account.balance += total_amount
     account.save()
     new_transaction = Transaction.objects.create(
-        agent=sender, 
-        account=cac, 
-        concept=concept, 
-        amount=amount, 
+        agent=sender,
+        account=cac,
+        concept=concept,
+        amount=amount,
         kind=Transaction.TransactionType.INCOMING,
     )
     return redirect(reverse("transaction_detail", args=[new_transaction.id]))
 
+
 @csrf_exempt
-def payroll(request): #NOMINA
+def payroll(request):
+    # NOMINA
     # Los campos de payroll son unicamente la cuenta destino y
     # La cantidad de dinero a instroducir
     # cuyos nombres seran cac y balance respectivamente
@@ -160,6 +173,7 @@ def payroll(request): #NOMINA
     account.balance += balance
     account.save()
     return HttpResponse("Payroll done")
+
 
 @login_required
 def movements(request):
@@ -186,6 +200,7 @@ def movements(request):
 def payment_detail(request, id):
     movement = get_object_or_404(Payment, id=id)
     return render(request, "payment/payment_detail.html", {"movement": movement})
+
 
 @login_required
 def transaction_detail(request, id):

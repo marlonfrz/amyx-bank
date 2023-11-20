@@ -1,5 +1,7 @@
 # Justfile
+
 project_name := `basename $(dirname $(realpath $0))`
+
 dockup:
     docker compose up
 

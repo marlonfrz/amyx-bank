@@ -2,37 +2,41 @@
 {% block title %}Movements{% endblock %}
 {% block content %}
 <center>
-    <h2 style="margin-top: 20px; margin-bottom: 20px">Your movements {{ user.username }}</h2>
-    {% for movement in movements %}
-        <li class="card" style="width:35%">
-            <div class="card-statistic-3 p-4">
-                <div class="mb-4 d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">
-                        {% if movement.business %}
-                            <a href="{{ movement.get_absolute_url }}" style="color: blue"> {{ movement.business }}</a> 
-                        {% else %}
-                            <a href="{{ movement.get_absolute_url }}" style="color: blue">{{ movement.agent }}</a> 
-                        {% endif %}
-                    </h3>
-                    <h5>Amount: {{ movement.amount }}€</h5>
+    {% if movements %}
+        <h2 style="margin-top: 20px; margin-bottom: 20px">Your movements {{ user.username }}</h2>
+        {% for movement in movements %}
+            <li class="card" style="width:35%">
+                <div class="card-statistic-3 p-4">
+                    <div class="mb-4 d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">
+                            {% if movement.business %}
+                                <a href="{{ movement.get_absolute_url }}" style="color: blue">{{ movement.business }}</a> 
+                            {% else %}
+                                <a href="{{ movement.get_absolute_url }}" style="color: blue">{{ movement.agent }}</a> 
+                            {% endif %}
+                        </h3>
+                        <h5>Amount: {{ movement.amount }}€</h5>
+                    </div>
                 </div>
-            </div>
-        </li>
-    {% endfor %}
-    <div class="">
-        <span class="step-links">
-            {% if movements.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ movements.previous_page_number }}">previous</a>
-            {% endif %}
-            <span class="current">
-                Página {{ movements.number }} de {{ movements.paginator.num_pages }}.
+            </li>
+        {% endfor %}
+        <div class="">
+            <span class="step-links">
+                {% if movements.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ movements.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="current">
+                    Página {{ movements.number }} de {{ movements.paginator.num_pages }}.
+                </span>
+                {% if movements.has_next %}
+                    <a href="?page={{ movements.next_page_number }}">next</a>
+                    <a href="?page={{ movements.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
             </span>
-            {% if movements.has_next %}
-                <a href="?page={{ movements.next_page_number }}">next</a>
-                <a href="?page={{ movements.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+        </div>
+    {% else %}
+    <h2 style="margin-top: 20px; margin-bottom: 20px">You have no movements yet</h2>
+    {% endif %}
 </center>
 {% endblock %}

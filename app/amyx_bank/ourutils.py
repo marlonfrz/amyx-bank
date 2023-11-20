@@ -1,5 +1,8 @@
-import random, string, requests
+import random
+import string
 from decimal import Decimal
+
+import requests
 
 URL = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/files/banks.json'
 RESPONSE = requests.get(URL)
@@ -17,13 +20,13 @@ def get_bank_info(bank_account_or_card: str, related_info: str) -> str:
     return BANKS[bank_id].get(related_info)
 
 
-def calc_commission(transferred_amount: int, transference_type: str) -> int:
-    SMALL_UPPER_LIMIT = 50
-    MEDIUM_UPPER_LIMIT = 500
-    COMMISSION_TABLES= {
-        "OUTGOING" : {"SMALL": "0.02" , "MEDIUM": "0.04", "LARGE": "0.06"},    # FUNCIONA BIEN
-        "INCOMING" : {"SMALL": "0.01" , "MEDIUM": "0.02", "LARGE": "0.03"},    # FUNCIONA BIEN
-        "PAYMENTS" : {"SMALL": "0.03" , "MEDIUM": "0.05", "LARGE": "0.07"},    # FUNCIONA BIEN
+def calc_commission(transferred_amount: Decimal, transference_type: str) -> Decimal:
+    SMALL_UPPER_LIMIT = Decimal(50)
+    MEDIUM_UPPER_LIMIT = Decimal(500)
+    COMMISSION_TABLES = {
+        "OUTGOING": {"SMALL": "0.02", "MEDIUM": "0.04", "LARGE": "0.06"},  # FUNCIONA BIEN
+        "INCOMING": {"SMALL": "0.01", "MEDIUM": "0.02", "LARGE": "0.03"},  # FUNCIONA BIEN
+        "PAYMENTS": {"SMALL": "0.03", "MEDIUM": "0.05", "LARGE": "0.07"},  # FUNCIONA BIEN
     }
     if transferred_amount < SMALL_UPPER_LIMIT:
         transference_size = "SMALL"
