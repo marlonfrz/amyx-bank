@@ -50,7 +50,7 @@ def bank_account_create_view(request):
                 request, username=request.user.username, password=cd["password"]
             )
             profile = get_object_or_404(Profile, user=request.user)
-            accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.STATUS.CANCELLED)
+            accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
             if len(accounts) < MAX_ACCOUNT_AMOUNT:
                 if user is not None:
                         new_bank_account = bank_account_form.save(commit=False)

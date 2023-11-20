@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import generate_random_code
-
+from django.conf import settings
 from card.forms import CardCreateForm, CardEditForm
 from card.models import Card
 
