@@ -11,9 +11,9 @@
 <link rel="icon" type="image/jpg" href="{% static 'img/logo1.jpg' %}"/>
 </head>
 <nav class="navigation navbar navbar-fixed-top">
-  <div class="header-container container-fluid">
+  <div class="container-fluid">
     <a class="header-a" href="{% url 'main' %}"><img src="{% static 'svg/logo1.svg' %}" height="70px" width="70px" alt="" class="img-fluid"></a>
-    <button id="navButton" class="btn btn-info">
+    <button id="navButton" class="btn login_button">
       {% if request.user.is_authenticated %}
       <a href="{% url 'logout' %}">Log Out</a>
       {% else %}

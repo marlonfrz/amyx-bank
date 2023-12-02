@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import requests
 
-URL = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/files/banks.json'
+URL = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/notes/files/banks.json'
 RESPONSE = requests.get(URL)
 BANKS = RESPONSE.json()
 
