@@ -4,9 +4,9 @@ from decimal import Decimal
 
 import requests
 
-URL = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/files/banks.json'
-RESPONSE = requests.get(URL)
-BANKS = RESPONSE.json()
+#URL = 'https://raw.githubusercontent.com/sdelquin/dsw/main/ut3/te1/files/banks.json'
+#RESPONSE = requests.get(URL)
+#BANKS = RESPONSE.json()
 
 
 def generate_random_code(code_length: int) -> str:
