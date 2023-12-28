@@ -1,12 +1,5 @@
-import json
-from decimal import Decimal
-from itertools import chain
 from django.conf import settings
-
-import requests
-from account.models import BankAccount
-from amyx_bank.ourutils import calc_commission, get_bank_info
-from card.models import Card
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -14,9 +7,19 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from payment.forms import PaymentForm, TransactionForm
 from django.template.loader import render_to_string
+
+from decimal import Decimal
+from itertools import chain
+
+import json
+import requests
 import weasyprint
+
+from account.models import BankAccount
+from amyx_bank.ourutils import calc_commission, get_bank_info
+from card.models import Card
+from payment.forms import PaymentForm, TransactionForm
 
 from .models import Payment, Transaction
 
