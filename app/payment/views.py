@@ -1,6 +1,7 @@
 import json
 from decimal import Decimal
 from itertools import chain
+from django.conf import settings
 
 import requests
 from account.models import BankAccount
@@ -14,8 +15,22 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from payment.forms import PaymentForm, TransactionForm
+from django.template.loader import render_to_string
+import weasyprint
 
 from .models import Payment, Transaction
+
+# PDF IN PROCESS
+# @staff_member_required
+# def admin_order_pdf(request, order_id):
+#     order = get_object_or_404(Order, id=order_id)
+#     html = render_to_string("orders/order/pdf.html", {"order": order})
+#     response = HttpResponse(content_type="application/pdf")
+#     response["Content-Disposition"] = f"filename=order_{order.id}.pdf"
+#     weasyprint.HTML(string=html).write_pdf(
+#         response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "css/pdf.css")]
+#     )
+#     return response
 
 
 @csrf_exempt
@@ -54,7 +69,9 @@ def payment(request):
                 )
                 return redirect(reverse("payment_detail", args=[new_payment.id]))
             else:
-                return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
+                return HttpResponseBadRequest(
+                    "Everything went ok, but you don't have enough money"
+                )
         else:
             return HttpResponseForbidden(f"The code pin {pin} doesn't match")
     else:
@@ -116,7 +133,9 @@ def outgoing_transactions(request):
                     amount=amount,
                     kind=Transaction.TransactionType.OUTGOING,
                 )
-                return redirect(reverse("transaction_detail", args=[new_transaction.id]))
+                return redirect(
+                    reverse("transaction_detail", args=[new_transaction.id])
+                )
             else:
                 return HttpResponseBadRequest(
                     f"The account {account} you tried to send money to does not exist"
@@ -168,8 +187,8 @@ def payroll(request):
     # La cantidad de dinero a instroducir
     # cuyos nombres seran cac y balance respectivamente
     cd = json.loads(request.body)
-    balance = Decimal(cd.get('balance'))
-    account = get_object_or_404(BankAccount, account_code=cd.get('cac').upper())
+    balance = Decimal(cd.get("balance"))
+    account = get_object_or_404(BankAccount, account_code=cd.get("cac").upper())
     account.balance += balance
     account.save()
     return HttpResponse("Payroll done")
@@ -186,7 +205,7 @@ def movements(request):
     )
     movements_per_page = 5
     paginator = Paginator(all_movements, movements_per_page)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         movements_page = paginator.page(page)
     except PageNotAnInteger:

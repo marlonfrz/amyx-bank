@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load bootstrap5 %}
 <!DOCTYPE html>
 <html>
@@ -11,21 +12,37 @@
 <link rel="icon" type="image/jpg" href="{% static 'img/logo1.jpg' %}"/>
 </head>
 <nav class="navigation navbar navbar-fixed-top">
-  <div class="header-container container-fluid">
+  <div class="container-fluid">
     <a class="header-a" href="{% url 'main' %}"><img src="{% static 'svg/logo1.svg' %}" height="70px" width="70px" alt="" class="img-fluid"></a>
-    <button id="navButton" class="btn btn-info">
+    <button id="navButton" class="btn login_button">
       {% if request.user.is_authenticated %}
-      <a href="{% url 'logout' %}">Log Out</a>
+      <a href="{% url 'logout' %}">{% trans Log Out %}</a>
       {% else %}
-      <a href="{% url 'login' %}">Log In</a>
+      <a href="{% url 'login' %}">{% trans Log In %}</a>
       {% endif %}
     </button>
-    <a class="header-a" href="{% url 'dashboard' %}"><p class="header-p">Profile</p></a>
-    <a class="header-a" href="{% url 'accounts' %}"><p class="header-p">Accounts</p></a>
-    <a class="header-a" href="{% url 'cards' %}"><p class="header-p">Cards</p></a>
-    <a class="header-a" href="{% url 'payment' %}"><p class="header-p">Payments</p></a>
-    <a class="header-a" href="{% url 'outgoing' %}"><p class="header-p">Transactions</p></a>
-    <a class="header-a" href="{% url 'movements' %}"><p class="header-p">Movements</p></a>
+    <a class="header-a" href="{% url 'dashboard' %}"><p class="header-p">{% trans Profile %}</p></a>
+    <a class="header-a" href="{% url 'accounts' %}"><p class="header-p">{% trans Accounts %}</p></a>
+    <a class="header-a" href="{% url 'cards' %}"><p class="header-p">{% trans Cards %}</p></a>
+    <a class="header-a" href="{% url 'payment' %}"><p class="header-p">{% trans Payments %}</p></a>
+    <a class="header-a" href="{% url 'outgoing' %}"><p class="header-p">{% trans Transactions %}</p></a>
+    <a class="header-a" href="{% url 'movements' %}"><p class="header-p">{% trans Movements %}</p></a>
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGES %}
+    {% get_language_info_list for LANGUAGES as languages %}
+    <div class="languages">
+      <p>{% trans "Language" %}:</p>
+      <ul class="languages">
+        {% for language in languages %}
+          <li>
+            <a href="/{{ language.code }}/"
+            {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+              {{ language.name_local }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </nav>
   <body>

@@ -1,0 +1,462 @@
+// Variables
+$primary-color: rgb(24, 139, 206);
+$secondary-color: rgb(33, 113, 160);
+$card-colors: #5385d8, #729bed, #92b2ff, #abc4ff;
+$useLightBackground: true;
+
+
+// Mixins
+@mixin hover-effect {
+  &:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+  }
+}
+
+// Base styles
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FFFFFF;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.logo {
+  display: block;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.risk1, .risk2 {
+  border: solid 1px grey;
+}
+
+.risk-n {
+  font-size: 4em;
+  padding: 1px;
+}
+
+// Nav
+nav {
+  background-color: #f5f5ff !important;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-evenly;
+  height: 50px;
+}
+
+.nav-brand {
+  width: 95px;
+}
+
+// Left menu
+.menu-nav {
+  transition: all 0.25ms ease;
+
+  a {
+    font-weight: bold;
+
+    @include hover-effect {
+      border-bottom: 2px solid black !important;
+      color: $primary-color !important;
+    }
+  }
+
+  flex: 1;
+}
+
+.menu-nav-right {
+  display: flex;
+  flex: -1;
+
+  > div {
+    font-weight: bold;
+  }
+}
+
+// Footer
+.footer_area {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 48px 8px rgba(47, 91, 234, 0.175);
+  padding: 60px;
+}
+
+.footer_area .row {
+  margin-left: -25px;
+  margin-right: -25px;
+}
+
+.single-footer-widget {
+  position: relative;
+  z-index: 0;
+
+  .copywrite-text a, .footer_menu li a {
+    color: #747794;
+    font-size: 1rem;
+
+    @include hover-effect {
+      color: #3f43fd;
+    }
+  }
+
+  .widget-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .footer_menu li:last-child a {
+    margin-bottom: 0;
+  }
+}
+
+.footer_social_area {
+  position: relative;
+  z-index: 0;
+
+  a {
+    border-radius: 50%;
+    height: 40px;
+    text-align: center;
+    width: 40px;
+    display: inline-block;
+    background-color: #f5f5ff;
+    line-height: 40px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-right: 10px;
+
+    i {
+      line-height: 36px;
+    }
+
+    @include hover-effect {
+      color: #ffffff;
+    }
+  }
+}
+
+
+// List styles
+ol li, ul li {
+  list-style: none;
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+// Miscellaneous styles
+#cuadro_img {
+  height: 200px;
+  width: 200px;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1rem;
+}
+
+.gutters-sm {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+
+.gutters-sm > .col, .gutters-sm > [class*=col-] {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.mb-3, .my-3 {
+  margin-bottom: 1rem !important;
+}
+
+.bg-gray-300 {
+  background-color: #e2e8f0;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.balance {
+  height: 5px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+  margin-bottom: 30px;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+}
+
+.btn.btn-outline-secondary {
+  border-color: $secondary-color;
+  color: $secondary-color;
+}
+
+.btn.btn-outline-secondary:hover {
+  background-color: $secondary-color;
+  color: white;
+}
+
+.btn.btn-primary {
+  background-color: $secondary-color;
+  border: none;
+}
+
+.btn.btn-primary:hover {
+  background-color: darken($secondary-color, 10%);
+}
+
+nav {
+  height: 100px;
+  margin: 0;
+  background-color: $secondary-color;
+
+  &:hover {
+    background-color: rgba($secondary-color, 0.8);
+  }
+}
+
+header {
+  height: 100px;
+  background-color: white;
+}
+
+.navbar .navbar-nav .nav-link {
+  height: 100px;
+  color: black !important;
+}
+
+// Reduce navigation bar height
+.navbar {
+  height: 70px;
+  margin: 0;
+}
+
+// Reduce text size in menu items
+.navbar-nav .nav-link {
+  font-size: 17px;
+
+  &:hover {
+    color: $primary-color !important;
+  }
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  &:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+
+    &:hover {
+      color: #FFFFFF;
+      background-color: $secondary-color;
+    }
+  }
+}
+
+.cards, .movimientos {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 12px;
+
+  a {
+    background: linear-gradient(to right, rgb(31, 31, 175), $secondary-color);
+    color: white;
+    text-decoration: none;
+    padding: 35px;
+    display: block;
+    border-radius: 20px;
+    width: 200px;
+    text-align: center;
+  }
+
+  .cards {
+    .submenu {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      z-index: 1;
+      width: 200px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover .submenu {
+      display: block;
+    }
+  }
+}
+
+// Card styles
+.card_1, .card_2, .card_3, .card_4 {
+  padding: 1rem;
+  color: white;
+
+  &:hover {
+    color: black;
+    z-index: 1;
+  }
+}
+
+.card_1 { background: #5385d8 !important; }
+.card_2 { background: #729bed !important; }
+.card_3 { background: #92b2ff !important; }
+.card_4 { background: #abc4ff !important; }
+
+// Form styles
+form p {
+  width: 100%;
+  overflow: auto;
+}
+
+label {
+  float: left;
+  clear: both;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+input, textarea {
+  clear: both;
+  float: left;
+  margin: 0 0 10px;
+  background-color: #efefef;
+  border: 0;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+input[type=submit], a.button {
+  font-weight: bold;
+  background: #12c064;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+// Button styles
+.btn-info {
+  background-color: $secondary-color;
+  color: white;
+  border: none;
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+  }
+
+  a {
+    background-color: transparent;
+  }
+}
+
+// Miscellaneous styles
+.total {
+  float: right;
+}
+
+.help {
+  clear: both;
+}
+
+.account, .iban {
+  display: inline;
+}
+
+.card_detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 0 solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  position: relative;
+  margin-bottom: 30px;
+  margin-left: 150px;
+  margin-right: 150px;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+// Bucle para estilos de tarjetas
+@for $i from 1 through length($card-colors) {
+    .card_#{$i} {
+      background: nth($card-colors, $i) !important;
+    }
+}
+
+// Bucle para estilos de enlaces en el submenu
+.cards {
+    .submenu {
+      @for $i from 1 through 4 {
+        a.card_#{$i} {
+          background: linear-gradient(to right, $primary-color, $secondary-color) !important;
+          color: white;
+          text-decoration: none;
+          padding: 10px;
+          display: block;
+          border-radius: 5px;
+          margin-bottom: 5px;
+          width: 100%;
+  
+          @include hover-effect {
+            background: darken($secondary-color, 10%);
+            color: white;
+          }
+        }
+      }
+    }  
+}
+
+nav {
+    height: 100px;
+    margin: 0;
+  
+    @if $useLightBackground {
+      background-color: #f0f0f0;
+    } @else {
+      background-color: $secondary-color;
+  
+      &:hover {
+        background-color: rgba($secondary-color, 0.8);
+      }
+    }
+}
