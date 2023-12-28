@@ -20,17 +20,6 @@ import weasyprint
 
 from .models import Payment, Transaction
 
-# PDF IN PROCESS
-# @staff_member_required
-# def admin_order_pdf(request, order_id):
-#     order = get_object_or_404(Order, id=order_id)
-#     html = render_to_string("orders/order/pdf.html", {"order": order})
-#     response = HttpResponse(content_type="application/pdf")
-#     response["Content-Disposition"] = f"filename=order_{order.id}.pdf"
-#     weasyprint.HTML(string=html).write_pdf(
-#         response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "css/pdf.css")]
-#     )
-#     return response
 
 
 @csrf_exempt
@@ -214,6 +203,28 @@ def movements(request):
         movements_page = paginator.page(paginator.num_pages)
     return render(request, "payment/movements.html", {"movements": movements_page})
 
+# PDF TO FIX
+@staff_member_required
+def transaction_pdf(request, transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+    html = render_to_string("templates/payment/transaction_pdf.html", {"transaction": transaction})
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f"filename=transaction_{transaction.id}.pdf"
+    weasyprint.HTML(string=html).write_pdf(
+        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "static/css/base.css")]
+    )
+    return response
+# PDF TO FIX ---- hacer comando python manage.py collectstatic, si no funciona sergio tiene otra solución en su codigo final ----
+@staff_member_required
+def payment_pdf(request, payment_id):
+    payment = get_object_or_404(Payment, id=payment_id)
+    html = render_to_string("templates/payment/payment_pdf.html", {"payment": payment})
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f"filename=payment_{payment.id}.pdf"
+    weasyprint.HTML(string=html).write_pdf(
+        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "static/css/base.css")]
+    )
+    return response
 
 @login_required
 def payment_detail(request, id):

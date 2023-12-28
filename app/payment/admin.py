@@ -1,8 +1,9 @@
 import csv
 import datetime
 from django.http import HttpResponse
-
+from django.urls import reverse
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 # Register your models here.
 from .models import Transaction, Payment
@@ -35,14 +36,24 @@ def export_to_csv(modeladmin, request, queryset):
 
 export_to_csv.short_description = "Export to CSV"
 
+def transaction_pdf(obj):
+    url = reverse('transaction:transaction_pdf', args=[obj.id])
+    return mark_safe(f'<a href="{url}">PDF</a>')
+transaction_pdf.short_description = 'Invoice'
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ["agent", "account", "concept", "amount", "kind", "timestamp"]
+    list_display = ["agent", "account", "concept", "amount", "kind", "timestamp",transaction_pdf] 
     actions = [export_to_csv]
 
+def payment_pdf(obj):
+    url = reverse('payment:payment_pdf', args=[obj.id])
+    return mark_safe(f'<a href="{url}">PDF</a>')
+payment_pdf.short_description = 'Invoice'
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ["business", "card", "amount", "kind", "timestamp"]
+    list_display = ["business", "card", "amount", "kind", "timestamp",payment_pdf]
     actions = [export_to_csv]
+
+

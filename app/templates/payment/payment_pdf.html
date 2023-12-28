@@ -1,0 +1,30 @@
+
+<html>
+    <body>
+        <center>
+            <h4 class="top-margin">Movement done at: {{payment.timestamp|date:"g:i A d F Y" }}</h4>
+            <table>
+                <tr>
+                    <th>Business</th>
+                    <td>{{ payment.business }}</td>
+                </tr>
+                <tr>
+                    <th>Card</th>
+                    <td>{{ payment.card }} ({{ payment.card.card_code }})</td>
+                </tr>
+                <tr>
+                    <th>Kind</th>
+                    <td>{{payment.kind }}</td>
+                </tr>
+                <tr>
+                    <th>Amount</th>
+                    <td>{{ payment.amount }} €</td>
+                </tr>
+                <tr>
+                    <th>Kind</th>
+                    <td>{{ payment.kind }} €</td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>
