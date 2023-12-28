@@ -24,9 +24,9 @@ def calc_commission(transferred_amount: Decimal, transference_type: str) -> Deci
     SMALL_UPPER_LIMIT = Decimal(50)
     MEDIUM_UPPER_LIMIT = Decimal(500)
     COMMISSION_TABLES = {
-        "OUTGOING": {"SMALL": "0.02", "MEDIUM": "0.04", "LARGE": "0.06"},  # FUNCIONA BIEN
-        "INCOMING": {"SMALL": "0.01", "MEDIUM": "0.02", "LARGE": "0.03"},  # FUNCIONA BIEN
-        "PAYMENTS": {"SMALL": "0.03", "MEDIUM": "0.05", "LARGE": "0.07"},  # FUNCIONA BIEN
+        "OUTGOING": {"SMALL": "0.02", "MEDIUM": "0.04", "LARGE": "0.06"},
+        "INCOMING": {"SMALL": "0.01", "MEDIUM": "0.02", "LARGE": "0.03"},
+        "PAYMENTS": {"SMALL": "0.03", "MEDIUM": "0.05", "LARGE": "0.07"},
     }
     if transferred_amount < SMALL_UPPER_LIMIT:
         transference_size = "SMALL"

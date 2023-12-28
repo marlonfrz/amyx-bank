@@ -30,7 +30,7 @@ class Transaction(models.Model):
 
 
 class Payment(models.Model):
-    card = models.ForeignKey(Card, on_delete=models.PROTECT)
+    card = models.ForeignKey(Card, on_delete=models.PROTECT, related_name="payments")
     business = models.CharField(max_length=60)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     timestamp = models.DateTimeField(auto_now_add=True)

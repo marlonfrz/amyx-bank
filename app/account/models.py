@@ -9,7 +9,7 @@ class BankAccount(models.Model):
         DISABLED = "DS", "Disable"
         CANCELLED = "CN", "Cancelled"
 
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, related_name="accounts")
     account_name = models.CharField(max_length=50, primary_key=False)
     balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     account_code = models.CharField(max_length=20, null=False, blank=True)
