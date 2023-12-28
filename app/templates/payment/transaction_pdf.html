@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <center>
+            <h4 class"top-margin" style="margin-top:20px; margin-bottom:20px">Movement done at: {{ transaction.timestamp|date:"g:i A d F Y" }}</h4>
+            <table>
+                <tr>
+                    <th>Agent</th>
+                    <td>{{ transaction.agent }}</td>
+                </tr>
+                <tr>
+                    <th>Account</th>
+                    <td>{{ transaction.account }}</td>
+                </tr>
+                <tr>
+                    <th>Concept</th>
+                    <td>{{ transaction.concept }}</td>
+                </tr>
+                <tr>
+                    <th>Amount</th>
+                    <td>{{ transaction.amount }} €</td>
+                </tr>
+                <tr>
+                    <th>Kind</th>
+                    <td><a href="{% url 'about_us' %}">{{ transaction.kind }}</a></td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>
