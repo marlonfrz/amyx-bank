@@ -15,22 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.utils.translation import gettext_lazy as _
 from payment import views
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path("__debug__/", include("debug_toolbar.urls")),
     path('', include('amyx_bank.urls')),
-    path('account/', include('account.urls')),
-    path('card/', include('card.urls')),
+    path(_('account/'), include('account.urls')),
+    path(_('card/'), include('card.urls')),
     path('admin/', admin.site.urls),
-    path('payments/', include('payment.urls')),
-    path('payment/', views.payment, name='payment'),
-    path('outgoing/', views.outgoing_transactions, name='outgoing'),
-    path('transfer/incoming/', views.incoming_transactions, name='incoming'),
-]
+    path(_('payments/'), include('payment.urls')),
+    path(_('payment/'), views.payment, name='payment'),
+    path(_('outgoing/'), views.outgoing_transactions, name='outgoing'),
+    path(_('transfer/incoming/'), views.incoming_transactions, name='incoming'),
+    path('rosetta/', include('rosetta.urls')),
+)
 
 
 if settings.DEBUG:

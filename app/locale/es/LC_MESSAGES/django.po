@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-29 11:52+0000\n"
+"PO-Revision-Date: 2023-12-29 11:55+0000\n"
+"Last-Translator:   <ramosyamila2003@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
+#: account/urls.py:8
+msgid "accounts/"
+msgstr "cuentas/"
+
+#: account/urls.py:9
+msgid "account_create_success/"
+msgstr "cuenta_creada/"
+
+#: account/urls.py:10
+msgid "edit/password/"
+msgstr "editar/contraseña/"
+
+#: account/urls.py:11
+msgid "account_detail/<int:id>/"
+msgstr "detalle_cuenta/<int:id>/"
+
+#: account/urls.py:12
+msgid "create_account/"
+msgstr "cuenta/"
+
+#: account/urls.py:13
+msgid "edit/account/<int:id>/"
+msgstr "editar/cuenta/"
+
+#: amyx_bank/urls.py:8
+msgid "about_us/"
+msgstr "nosotos/"
+
+#: amyx_bank/urls.py:9
+msgid "login/"
+msgstr "inicio_sesion/"
+
+#: amyx_bank/urls.py:10
+msgid "logout/"
+msgstr "cierre_sesion/"
+
+#: amyx_bank/urls.py:11
+msgid "register/"
+msgstr "registro/"
+
+#: amyx_bank/urls.py:12
+#, fuzzy
+#| msgid "Profile"
+msgid "edit/profile/"
+msgstr "Perfil"
+
+#: bank/urls.py:28
+msgid "account/"
+msgstr "cuenta/"
+
+#: bank/urls.py:29
+msgid "card/"
+msgstr "tarjeta/"
+
+#: bank/urls.py:31
+msgid "payments/"
+msgstr "pagos/"
+
+#: bank/urls.py:32
+msgid "payment/"
+msgstr "pago/"
+
+#: bank/urls.py:33
+msgid "outgoing/"
+msgstr ""
+
+#: bank/urls.py:34
+msgid "transfer/incoming/"
+msgstr ""
+
+#: templates/base.html:22
+msgid "Log Out"
+msgstr "Cerrar sesión"
+
+#: templates/base.html:24
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+#: templates/base.html:27
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/base.html:28
+msgid "Accounts"
+msgstr "Cuentas"
+
+#: templates/base.html:29
+msgid "Cards"
+msgstr "Tarjetas"
+
+#: templates/base.html:30
+msgid "Payments"
+msgstr "Pagos"
+
+#: templates/base.html:31
+msgid "Transactions"
+msgstr "Transferencias"
+
+#: templates/base.html:32
+msgid "Movements"
+msgstr "Movimientos"
+
+#: templates/base.html:37
+msgid "Language"
+msgstr "Idioma"

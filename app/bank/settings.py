@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "account",
     "card",
     "payment",
+    'rosetta',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -138,9 +139,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-#STATIC_ROOT = BASE_DIR / 'static' comprobar si funciona
+# STATIC_ROOT = BASE_DIR / 'static' comprobar si funciona
 STATIC_ROOT = 'static'
-#STATICFILES_DIRS = [BASE_DIR / "static"] comprobar que funciona
+# STATICFILES_DIRS = [BASE_DIR / "static"] comprobar que funciona
 STATICFILES_DIRS = ["staticfiles"]
 
 # Default primary key field type
@@ -154,12 +155,12 @@ LOGOUT_URL = "logout"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+""" EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=config.boolean)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('SMTP_LOGIN_PASSWORD', default='password')
+EMAIL_HOST_PASSWORD = config('SMTP_LOGIN_PASSWORD', default='password') """
 
 LANGUAGES = [
     ('en', 'English'),
