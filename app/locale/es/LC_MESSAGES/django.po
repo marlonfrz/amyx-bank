@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-29 11:52+0000\n"
-"PO-Revision-Date: 2023-12-29 11:55+0000\n"
+"POT-Creation-Date: 2023-12-30 13:11+0000\n"
+"PO-Revision-Date: 2023-12-30 13:08+0000\n"
 "Last-Translator:   <ramosyamila2003@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -37,7 +37,7 @@ msgstr "detalle_cuenta/<int:id>/"
 
 #: account/urls.py:12
 msgid "create_account/"
-msgstr "cuenta/"
+msgstr "crear_cuenta/"
 
 #: account/urls.py:13
 msgid "edit/account/<int:id>/"
@@ -63,7 +63,7 @@ msgstr "registro/"
 #, fuzzy
 #| msgid "Profile"
 msgid "edit/profile/"
-msgstr "Perfil"
+msgstr "editar/perfil"
 
 #: bank/urls.py:28
 msgid "account/"
@@ -88,6 +88,64 @@ msgstr ""
 #: bank/urls.py:34
 msgid "transfer/incoming/"
 msgstr ""
+
+#: card/urls.py:7
+msgid "cards"
+msgstr "tarjetas"
+
+#: card/urls.py:8
+#, fuzzy
+#| msgid "create_account/"
+msgid "create_card/"
+msgstr "crear_tarjeta/"
+
+#: card/urls.py:9
+#, fuzzy
+#| msgid "edit/account/<int:id>/"
+msgid "edit/card/<int:id>/"
+msgstr "editar/cuenta/<int:id>"
+
+#: card/urls.py:10
+#, fuzzy
+#| msgid "account_detail/<int:id>/"
+msgid "card_detail/<int:id>/"
+msgstr "detalle_cuenta/<int:id>/"
+
+#: payment/urls.py:8
+msgid "payment_success/"
+msgstr "pago_completo/"
+
+#: payment/urls.py:9
+msgid "payroll/"
+msgstr "nominas/"
+
+#: payment/urls.py:10
+#, fuzzy
+#| msgid "Movements"
+msgid "movements/"
+msgstr "movimientos/"
+
+#: payment/urls.py:11
+#, fuzzy
+#| msgid "account_detail/<int:id>/"
+msgid "payment_detail/<int:id>"
+msgstr "detalle_pago/<int:id>/"
+
+#: payment/urls.py:12
+#, fuzzy
+#| msgid "account_detail/<int:id>/"
+msgid "trasaction_detail/<int:id>"
+msgstr "detalle_transaccion/<int:id>/"
+
+#: payment/urls.py:13
+#, fuzzy
+#| msgid "account_detail/<int:id>/"
+msgid "trasaction_detail/<int:id>/pdf/"
+msgstr "detalle_transaccion/<int:id>/"
+
+#: payment/urls.py:14
+msgid "payment_detail/<int:id>/pdf/"
+msgstr "detalle_pago/<int:id>/pdf/"
 
 #: templates/base.html:22
 msgid "Log Out"
@@ -124,3 +182,51 @@ msgstr "Movimientos"
 #: templates/base.html:37
 msgid "Language"
 msgstr "Idioma"
+
+#: templates/registration/login.html:4 templates/registration/login.html:15
+msgid "Log-in"
+msgstr "Iniciar Sesión"
+
+#: templates/registration/login.html:21
+msgid "Your username and password didn't match."
+msgstr "Tu nombre de usuario y la contraseña no coinciden "
+
+#: templates/registration/login.html:22
+msgid "Please, try again."
+msgstr "Por favor, inténtelo de nuevo"
+
+#: templates/registration/login.html:31
+msgid "¿Don't have and account?"
+msgstr "¿No tienes cuenta todavía?"
+
+#: templates/registration/login.html:31
+msgid "Register"
+msgstr "Registrarse"
+
+#: templates/registration/logout.html:4 templates/registration/logout.html:7
+msgid "Logged out"
+msgstr ""
+
+#: templates/registration/logout.html:9
+msgid "You have been logged out."
+msgstr ""
+
+#: templates/registration/logout.html:10
+msgid "You can"
+msgstr ""
+
+#: templates/registration/register_done.html:3
+msgid "Welcome"
+msgstr ""
+
+#: templates/registration/register_done.html:5
+msgid "Welcome {{ new_user.first_name }}!"
+msgstr ""
+
+#: templates/registration/register_done.html:8
+msgid "Now you can"
+msgstr ""
+
+#: templates/registration/register_done.html:8
+msgid "log in"
+msgstr ""
