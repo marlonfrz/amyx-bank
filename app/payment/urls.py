@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from . import views
 
 urlpatterns = [
+    path("prueba/", views.prueba, name="prueba"),
     path('', views.payment, name='payments'),
     path(_('payment_success/'), views.payment_success, name='payment_success'),
     path(_('payroll/'), views.payroll, name='payroll'),

@@ -27,11 +27,11 @@ urlpatterns = i18n_patterns(
     path('', include('amyx_bank.urls')),
     path(_('account/'), include('account.urls')),
     path(_('card/'), include('card.urls')),
-    path('admin/', admin.site.urls),
     path(_('payments/'), include('payment.urls')),
     path(_('payment/'), views.payment, name='payment'),
     path(_('outgoing/'), views.outgoing_transactions, name='outgoing'),
     path(_('transfer/incoming/'), views.incoming_transactions, name='incoming'),
+    path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
 )
 

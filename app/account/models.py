@@ -39,6 +39,9 @@ class BankAccount(models.Model):
     def __str__(self) -> str:
         return self.account_name
 
+    def __repr__(self) -> str:
+        return self.account_name
+
     def get_absolute_url(self):
         return reverse('account_detail', args=[self.id])
 

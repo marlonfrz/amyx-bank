@@ -87,6 +87,8 @@ def edit_profile(request):
 def about_us(request):
     return render(request, "amyx_bank/about_us.html")
 
+
+
 # def inicio(request):
 #    return HttpResponse("Esta es la página de inicio. <a href='" + reverse('detalle', args=[1]) + "'>Ir a Detalle</a>")
 

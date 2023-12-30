@@ -38,8 +38,12 @@ class Card(models.Model):
     def get_absolute_url(self):
         return reverse('card_detail', args=[self.id])
     
+    def __repr__(self) -> str:
+        return self.card_name
+
     def __str__(self) -> str:
         return self.card_name
+
 
 
 """

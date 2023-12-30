@@ -16,7 +16,7 @@ import json
 import requests
 import weasyprint
 
-from account.models import BankAccount
+from account.models import BankAccount, Profile
 from amyx_bank.ourutils import calc_commission, get_bank_info
 from card.models import Card
 from payment.forms import PaymentForm, TransactionForm
@@ -244,3 +244,13 @@ def transaction_detail(request, id):
 @login_required
 def payment_success(request):
     return redirect("dashboard")
+
+def prueba(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    accounts = []
+    for account in profile.accounts.all():
+        accounts.append(account)
+    accounts2 = list(profile.accounts.all())
+    cards = list(accounts2[0].cards.all())
+    print(accounts2[0].cards.all())
+    return HttpResponse(f"Perfil: {profile}, Cuentas: {accounts2}, Tarjetas: {cards}, Pagos")

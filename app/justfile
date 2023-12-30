@@ -6,6 +6,9 @@ run:
 migrate:
     python manage.py makemigrations && python manage.py migrate
 
+shell:
+    python manage.py shell
+
 project_name := `basename $(dirname $(realpath $0))`
 
 dockup:
