@@ -188,23 +188,31 @@ def payroll(request):
 
 @login_required
 def movements(request):
-    transactions = Transaction.objects.all()
-    payments = Payment.objects.all()
-    all_movements = sorted(
-        chain(transactions, payments),
-        key=lambda instance: instance.timestamp,
-        reverse=True,
-    )
+    all_movements = {"payments": [], "incoming": [], "outgoing": []}
+    profile = get_object_or_404(Profile, user=request.user)
+    accounts = profile.accounts.all()
+    accounts2 = []
+    for account in accounts:
+        accounts2.append(account)
+        print(accounts2)
+        for card in account.cards.all():
+            payments = card.payments.all()
+            print(bool(payments))
+            if payments:
+                all_movements["payments"].extend(payments)
+    print(bool(all_movements["payments"]))
+
     movements_per_page = 5
     paginator = Paginator(all_movements, movements_per_page)
     page = request.GET.get("page")
-    try:
+    return render(request, "payment/movements.html", {"payments": all_movements})
+"""    try:
         movements_page = paginator.page(page)
     except PageNotAnInteger:
         movements_page = paginator.page(1)
     except EmptyPage:
         movements_page = paginator.page(paginator.num_pages)
-    return render(request, "payment/movements.html", {"movements": movements_page})
+"""
 
 # PDF TO FIX
 @staff_member_required
