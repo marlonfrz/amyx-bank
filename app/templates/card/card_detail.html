@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Cards detail{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Cards detail" %}{% endblock %}
 {% block content %}
 <div class="card_detail">
     <div class="card-statistic-3 p-4">
@@ -9,7 +10,7 @@
                 <div class='help'></div>
             </div>
             <div>
-                <h4 class="iban">CARD'S NUMBER:</h4>
+                <h4 class="iban">{% trans "CARD'S NUMBER:" %}</h4>
                 <h4 class="account">{{ card.card_code }}</h4>
             </div>
         </div>

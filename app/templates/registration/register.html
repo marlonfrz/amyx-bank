@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Register{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Register" %}{% endblock %}
 {% load static %}
 {% block content %}
 <div class="main">
@@ -12,7 +13,7 @@
                 <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
                     <!-- LOGO -->
                     <img src="{% static 'img/logo1.jpg' %}" height="350px" width="350px" alt="" class="img-fluid mb-3 d-none d-md-block">
-                    <h1>Register</h1>
+                    <h1>{% trans "Register" %}</h1>
                 </div>
 
                 <!-- Registration Form -->
@@ -23,7 +24,7 @@
                         <input type="hidden" name="next" value="{{ next }}" />
                         <p><input type="submit" value='Register' class="btn btn-primary btn-block py-2"></p>
                         <hr>
-                        <p class="text-muted font-weight-bold">Have an account? <a href="{% url 'login' %}" class="text-primary ml-2">Login</a></p>
+                        <p class="text-muted font-weight-bold">{% trans "Have an account? <a href="{% url 'login' %}" class="text-primary ml-2">Login" %}</a></p>
                     </form>
                 </div>
             </div>  

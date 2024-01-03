@@ -1,15 +1,16 @@
 {% extends "base.html" %}
-{% block title %}Edit your profile{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Edit your profile" %}{% endblock %}
 {% block content %}
 <div style="margin-left: 43%; margin-top:20px;">
-    <h1>Edit your profile</h1>
-    <p>You can edit your profile using the following form:</p>
+    <h1>{% trans "Edit your profile" %}</h1>
+    <p>{% trans "You can edit your profile using the following form:" %}</p>
     <form method="post" enctype="multipart/form-data">
         {{ user_edit_form.as_p }}
         {{ profile_edit_form.as_p }}
         {% csrf_token %}
     <p><input type="submit" class="btn btn-primary" value="Save changes"></p>
     </form>
-    <h5>You have changed your profile information,<br> you can also change your password <a href="{% url 'change_password' %}" style="color: blue">here</a></h5>
+    <h5>{% trans "You have changed your profile information" %},<br> {% trans "you can also change your password" %} <a href="{% url 'change_password' %}" style="color: blue">{% trans "here" %}</a></h5>
 </div>
 {% endblock %}

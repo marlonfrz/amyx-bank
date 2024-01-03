@@ -1,10 +1,11 @@
 {% extends "account/base.html" %}
-{% block title %}Payment success!{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Payment success!" %}{% endblock %}
 {% block content %}
 <center>
-    <h1>Hi {{ user.username }}!</h1>
+    <h1>{% trans "Hi {{ user.username }}!" %}</h1>
     <p>
-        Now you can see your payment at <a href="{% url "movements" %}">your movements</a>.
+        {% trans "Now you can see your payment at" %} <a href="{% url "movements" %}">{% trans "your movements" %}</a>.
     </p>
 </center>
 {% endblock %}

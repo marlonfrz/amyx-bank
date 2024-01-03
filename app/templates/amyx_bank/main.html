@@ -1,6 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Welcome{% endblock %}
 {% load static %}
+{% load i18n %}
+{% block title %}{% trans "Welcome" %}{% endblock %}
 {% load bootstrap5 %}
 {% block content %}
     <div class="container-fluid">
@@ -10,14 +11,12 @@
             <div class="row d-flex justify-content-center">
                 <div class="risk1 col-6 col-md-4">
                     <p class="inside-risk-container d-flex"><span class="risk-n">1/6</span><br>
-                        This number is indicative of the risk of the product,
-                      1/6 being indicative of lower risk and 6/6 indicating higher risk.
+                        {% trans "This number is indicative of the risk of the product, 1/6 being indicative of lower risk and 6/6 indicating higher risk." %} 
                     </p>
                 </div>
                 <div class="risk2 col-6 col-md-4 ">
                     <p class="inside-risk-container">
-                        A.M.Y.X Bank is attached to the Credit Institutions Deposit Guarantee Fund.
-                      For cash deposits, the maximum guaranteed amount is 100,000 euros per depositor in each credit institution.
+                        {% trans "A.M.Y.X Bank is attached to the Credit Institutions Deposit Guarantee Fund. For cash deposits, the maximum guaranteed amount is 100,000 euros per depositor in each credit institution." %}
                     </p>
                 </div>
             </div>

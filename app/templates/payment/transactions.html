@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Transaction{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Transaction" %}{% endblock %}
 {% block content %}
 <div style="margin-left: 43%; margin-top: 20px;">
-    <h1>Transaction</h1>
-    <p>Please fill up the following form</p>
+    <h1>{% trans "Transaction" %}</h1>
+    <p>{% trans "Please fill up the following form" %}</p>
     <form method="post">
         {{ transaction_form.as_p }}
         <p><input type="submit" class="btn btn-primary" value="Send money" onclick="dashboard"></p>

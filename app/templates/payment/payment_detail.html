@@ -1,28 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}Movement detail{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Movement detail" %}{% endblock %}
 {% block content %}
 <center>
-    <h4 class="top-margin">Movement done at: {{ movement.timestamp|date:"g:i A d F Y" }}</h4>
+    <h4 class="top-margin">{% trans "Movement done at" %}: {{ movement.timestamp|date:"g:i A d F Y" }}</h4>
     <table>
         <tr>
-            <th>Business</th>
+            <th>{% trans "Business" %}</th>
             <td>{{ movement.business }}</td>
         </tr>
         <tr>
-            <th>Card</th>
+            <th>{% trans "Card" %}</th>
             <td>{{ movement.card }} ({{ movement.card.card_code }})</td>
         </tr>
         <tr>
-            <th>Kind</th>
+            <th>{% trans "Kind" %}</th>
             <td>{{ movement.kind }}</td>
         </tr>
         <tr>
-            <th>Amount</th>
+            <th>{% trans "Amount" %}</th>
             <td>{{ movement.amount }} €</td>
-        </tr>
-        <tr>
-            <th>Kind</th>
-            <td>{{ movement.kind }} €</td>
         </tr>
     </table>
 </center>

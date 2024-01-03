@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}Movement detail{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Movement detail" %}{% endblock %}
 {% block content %}
 <center>
     <h4 class"top-margin" style="margin-top:20px; margin-bottom:20px">Movement done at: {{ movement.timestamp|date:"g:i A d F Y" }}</h4>
     <table>
         <tr>
-            <th>Agent</th>
+            <th>{% trans "Agent" %}</th>
             <td>{{ movement.agent }}</td>
         </tr>
         <tr>
-            <th>Account</th>
+            <th>{% trans "Account" %}</th>
             <td>{{ movement.account }}</td>
         </tr>
         <tr>
-            <th>Concept</th>
+            <th>{% trans "Concept" %}</th>
             <td>{{ movement.concept }}</td>
         </tr>
         <tr>
-            <th>Amount</th>
+            <th>{% trans "Amount" %}</th>
             <td>{{ movement.amount }} €</td>
         </tr>
         <tr>
-            <th>Kind</th>
+            <th>{% trans "Kind" %}</th>
             <td><a href="{% url 'about_us' %}">{{ movement.kind }}</a></td>
         </tr>
     </table>

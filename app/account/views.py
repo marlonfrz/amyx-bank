@@ -90,7 +90,8 @@ def edit_bank_account(request, id):  # el pk es primarykey
 def accounts(request):
     user = request.user
     profile = get_object_or_404(Profile, user=user)
-    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+    accounts = list(profile.accounts.all())
+#    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
     return render(request, "account/accounts.html", {"accounts": accounts})
 
 

@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Payments{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Payments" %}{% endblock %}
 {% block content %}
 <center>
     {% if payments %}
-        <h2 style="margin-top: 20px; margin-bottom: 20px">Your payments {{ user.username }}</h2>
+        <h2 style="margin-top: 20px; margin-bottom: 20px">{% trans "Your payments {{ user.username }}" %}</h2>
         {% for payment in payments %}
             <li class="card" style="width:35%">
                 <div class="card-statistic-3 p-4">
@@ -15,7 +16,7 @@
                                 <a href="{{ payment.get_absolute_url }}" style="color: blue">{{ payment.agent }}</a> 
                             {% endif %}
                         </h3>
-                        <h5>Amount: {{ payment.amount }}€</h5>
+                        <h5>{% trans "Amount" %}: {{ payment.amount }}€</h5>
                     </div>
                 </div>
             </li>
@@ -23,20 +24,20 @@
         <div class="">
             <span class="step-links">
                 {% if payments.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ payments.previous_page_number }}">previous</a>
+                    <a href="?page=1">&laquo; {% trans "first" %}</a>
+                    <a href="?page={{ payments.previous_page_number }}">{% trans "previous" %}</a>
                 {% endif %}
                 <span class="current">
-                    Página {{ payments.number }} de {{ payments.paginator.num_pages }}.
+                    {% trans "Page {{ payments.number }} of {{ payments.paginator.num_pages }}." %}
                 </span>
                 {% if payments.has_next %}
-                    <a href="?page={{ payments.next_page_number }}">next</a>
-                    <a href="?page={{ payments.paginator.num_pages }}">last &raquo;</a>
+                    <a href="?page={{ payments.next_page_number }}">{% trans "next" %}</a>
+                    <a href="?page={{ payments.paginator.num_pages }}">{% trans "last" %} &raquo;</a>
                 {% endif %}
             </span>
         </div>
     {% else %}
-    <h2 style="margin-top: 20px; margin-bottom: 20px">You have no payments yet</h2>
+    <h2 style="margin-top: 20px; margin-bottom: 20px">{% trans "You have no payments yet" %}</h2>
     {% endif %}
 </center>
 {% endblock %}

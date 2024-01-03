@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}About us{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "About us" %}{% endblock %}
 {% block content %}
 <br>
 <div style="margin-left: 25%; margin-right: 25%">
     <div class="card">
         <div class="card-statistic-3 p-4">
             <div>
-                <h3>About us</h3>
+                <h3>{% trans "About us"}</h3>
                 <h5 class="about_us">
-                    We, A.M.Y.X Bank, are a ficticial bank created for a proyect in the second year of DAW (Developer de Aplication Web)
+                    {% trans "We, A.M.Y.X Bank, are a ficticial bank created for a proyect in the second year of DAW (Developer de Aplication Web)" %}
                 </h5>
             </div>
         </div>
@@ -18,13 +18,13 @@
     <div class="card">
         <div class="card-statistic-3 p-4">
             <div>
-                <h3>Commissions</h3>
+                <h3>{% trans "Commissions" %}</h3>
                 <p class="about_us">
-                These are the commissions we apply to all transactions and payments
+                    {% trans "These are the commissions we apply to all transactions and payments" %}
                     <ul>
-                        <li class="about_us">Small commissions is for movements below 50€</li>
-                        <li class="about_us">Medium commissions is for movements above 50€ and below 500€</li> 
-                        <li class="about_us">Large commissions is for movements above 500€</li>
+                        <li class="about_us">{% trans "Small commissions is for movements below 50€" %}</li>
+                        <li class="about_us">{% trans "Medium commissions is for movements above 50€ and below 500€" %}</li> 
+                        <li class="about_us">{% trans "Large commissions is for movements above 500€" %}</li>
                     </ul>
                 </p>
             </div>
@@ -34,27 +34,27 @@
         <table style='border:1'>
             <tr>
                 <td></td>
-                <td>Small</td>
-                <td>Medium</td>
-                <td>Large</td>
+                <td>{% trans "Small" %}</td>
+                <td>{% trans "Medium" %}</td>
+                <td>{% trans "Large" %}</td>
             </tr>
             <tr>
-                <td>Payments</td>
-                <td class="about_us">3% of commissions</td>
-                <td class="about_us">5% of commissions</td>
-                <td class="about_us">7% of commissions</td>
+                <td>{% trans "Payments" %}</td>
+                <td class="about_us">{% trans "3% of commissions" %}</td>
+                <td class="about_us">{% trans "5% of commissions" %}</td>
+                <td class="about_us">{% trans "7% of commissions" %}</td>
             </tr>
             <tr>
-                <td>Incoming</td>
-                <td class="about_us">1% of commissions</td>
-                <td class="about_us">2% of commissions</td>
-                <td class="about_us">3% of commissions</td>
+                <td>{% trans "Incoming" %}</td>
+                <td class="about_us">{% trans "1% of commissions" %}</td>
+                <td class="about_us">{% trans "2% of commissions" %}</td>
+                <td class="about_us">{% trans "3% of commissions" %}</td>
             </tr>
             <tr>
-                <td>Outgoing</td>
-                <td class="about_us">2% of commissions</td>
-                <td class="about_us">4% of commissions</td>
-                <td class="about_us">6% of commissions</td>
+                <td>{% trans "Outgoing" %}</td>
+                <td class="about_us">{% trans "2% of commissions" %}</td>
+                <td class="about_us">{% trans "4% of commissions" %}</td>
+                <td class="about_us">{% trans "6% of commissions" %}</td>
             </tr>
         </table>
 

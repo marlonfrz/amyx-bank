@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Your account{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Your account" %}{% endblock %}
 {% block content %}
 <!-- nombre de la cuenta al lado la cantidad y debajo movimientos con scroll -->
 <div style="margin-left: 10%; margin-right:10%;">

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}The account has been created{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "The account has been created" %}{% endblock %}
 {% block content %}
 <div style="margin-left: 40%;">
-    <h1>The account has been created successfully!</h1>
-    <p>
-    Your account has been successfully created.
-    Now you can go to the <a href="{% url "dashboard" %}"></a>main page</a>.
+    <h1>{% trans "The account has been created successfully!" %}</h1>
+    <p>{% trans "Your account has been successfully created." %}
+    {% trans "Now you can go to the" %} <a href="{% url 'dashboard' %}"></a>main page</a>.
     </p>
 </div>
 {% endblock %}
