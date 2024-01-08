@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-01 18:33+0000\n"
+"POT-Creation-Date: 2024-01-07 12:35+0000\n"
 "PO-Revision-Date: 2024-01-03 18:05+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,6 @@ msgid "register/"
 msgstr "registro/"
 
 #: amyx_bank/urls.py:12
-#| msgid "Profile"
 msgid "edit/profile/"
 msgstr "editar/perfil"
 
@@ -93,17 +92,14 @@ msgid "cards"
 msgstr "tarjetas"
 
 #: card/urls.py:8
-#| msgid "create_account/"
 msgid "create_card/"
 msgstr "crear_tarjeta/"
 
 #: card/urls.py:9
-#| msgid "edit/account/<int:id>/"
 msgid "edit/card/<int:id>/"
 msgstr "editar/cuenta/<int:id>"
 
 #: card/urls.py:10
-#| msgid "account_detail/<int:id>/"
 msgid "card_detail/<int:id>/"
 msgstr "detalle_cuenta/<int:id>/"
 
@@ -116,22 +112,18 @@ msgid "payroll/"
 msgstr "nominas/"
 
 #: payment/urls.py:11
-#| msgid "Movements"
 msgid "movements/"
 msgstr "movimientos/"
 
 #: payment/urls.py:12
-#| msgid "account_detail/<int:id>/"
 msgid "payment_detail/<int:id>"
 msgstr "detalle_pago/<int:id>/"
 
 #: payment/urls.py:13
-#| msgid "account_detail/<int:id>/"
 msgid "trasaction_detail/<int:id>"
 msgstr "detalle_transaccion/<int:id>/"
 
 #: payment/urls.py:14
-#| msgid "account_detail/<int:id>/"
 msgid "trasaction_detail/<int:id>/pdf/"
 msgstr "detalle_transaccion/<int:id>/"
 
@@ -144,7 +136,6 @@ msgid "New Bank Account"
 msgstr "Nueva Cuenta Bancaria"
 
 #: templates/account/account_create.html:7
-#| msgid "create_account/"
 msgid "Create an account"
 msgstr "Crear una cuenta"
 
@@ -157,7 +148,6 @@ msgid "The account has been created"
 msgstr "La cuenta ha sido creada"
 
 #: templates/account/account_create_done.html:6
-#| msgid "account_create_success/"
 msgid "The account has been created successfully!"
 msgstr "Tu cuenta ha sido creada satisfactoriamente!"
 
@@ -166,7 +156,6 @@ msgid "Your account has been successfully created."
 msgstr "Tu cuenta ha sido creada satisfactoriamente."
 
 #: templates/account/account_create_done.html:8
-#| msgid "Now you can"
 msgid "Now you can go to the"
 msgstr "Ahora tú puedes ir a"
 
@@ -195,13 +184,11 @@ msgid "Edit your account"
 msgstr "Edita tu cuenta"
 
 #: templates/account/accounts.html:29
-#| msgid "¿Don't have and account?"
 msgid "You do not have accounts"
 msgstr "Todavía no tienes cuentas"
 
 #: templates/account/accounts.html:29 templates/card/card_create.html:16
 #: templates/card/cards.html:34
-#| msgid "Please use the following form"
 msgid "create some with the following"
 msgstr "crea algunas con el siguiente formulario"
 
@@ -268,7 +255,6 @@ msgid "You can edit your profile using the following form:"
 msgstr "Puedes editar tu perfil usando el siguiente formulario:"
 
 #: templates/account/edit_profile.html:14
-#| msgid "You can edit your profile using the following form:"
 msgid "You have changed your profile information"
 msgstr "Has cambiado la información de tu perfil"
 
@@ -308,8 +294,8 @@ msgstr "Las comisiones pequeñas son para movimientos inferiores a 50€."
 #: templates/amyx_bank/about_us.html:26
 msgid "Medium commissions is for movements above 50€ and below 500€"
 msgstr ""
-"Las comisiones medianas son para movimientos superiores a 50€ e inferiores a"
-" 500€."
+"Las comisiones medianas son para movimientos superiores a 50€ e inferiores a "
+"500€."
 
 #: templates/amyx_bank/about_us.html:27
 msgid "Large commissions is for movements above 500€"
@@ -375,7 +361,7 @@ msgstr "4% de comisiones"
 msgid "6%% of commissions"
 msgstr "6% de comisiones"
 
-#: templates/amyx_bank/main.html:2 templates/registration/register_done.html:3
+#: templates/amyx_bank/main.html:4 templates/registration/register_done.html:3
 msgid "Welcome"
 msgstr "Bienvenido"
 
@@ -522,7 +508,9 @@ msgid "Edit your card"
 msgstr "Edita tu tarjeta"
 
 #: templates/card/card_edit.html:6
-msgid "Edit your {{ card.card_name }} Card"
+#, fuzzy
+#| msgid "Edit your card"
+msgid "Edit your card: "
 msgstr "Edita tu tarjeta"
 
 #: templates/card/card_edit.html:7
@@ -569,8 +557,7 @@ msgstr "Siguiente"
 msgid "Your payments {{ user.username }}"
 msgstr "Tus pagos {{ user.username }}"
 
-#: templates/payment/movements.html:19
-#: templates/payment/payment_detail.html:21
+#: templates/payment/movements.html:19 templates/payment/payment_detail.html:21
 #: templates/payment/transaction_detail.html:21
 msgid "Amount"
 msgstr "Cantidad"
@@ -617,7 +604,6 @@ msgid "Movement detail"
 msgstr "Detalle del movimiento"
 
 #: templates/payment/payment_detail.html:6
-#| msgid "Movements"
 msgid "Movement done at"
 msgstr "Movimiento hecho a las"
 
@@ -643,12 +629,10 @@ msgid "Hi {{ user.username }}!"
 msgstr "Hola {{ user.username }}!"
 
 #: templates/payment/payment_success.html:8
-#| msgid "Now you can"
 msgid "Now you can see your payment at"
 msgstr "Ahora tú puedes ver tu pago en"
 
 #: templates/payment/payment_success.html:8
-#| msgid "Movements"
 msgid "your movements"
 msgstr "tus movimientos"
 
@@ -706,8 +690,10 @@ msgid "log-in again"
 msgstr "iniciar sesión de nuevo"
 
 #: templates/registration/register.html:27
-msgid "Have an account? <a href="
-msgstr "¿Tienes una cuenta?"
+#, fuzzy
+#| msgid "Create an account"
+msgid "Have an account?"
+msgstr "Crear una cuenta"
 
 #: templates/registration/register_done.html:5
 msgid "Welcome {{ new_user.first_name }}!"
@@ -720,3 +706,14 @@ msgstr "Ahora tú puedes"
 #: templates/registration/register_done.html:8
 msgid "log in"
 msgstr "iniciar sesión"
+
+#, fuzzy
+#~| msgid "Edit your card"
+#~ msgid "Edit your"
+#~ msgstr "Edita tu tarjeta"
+
+#~ msgid "Edit your {{ card.card_name }} Card"
+#~ msgstr "Edita tu tarjeta"
+
+#~ msgid "Have an account? <a href="
+#~ msgstr "¿Tienes una cuenta?"
