@@ -4,7 +4,7 @@
 {% block content %}
 <center>
     {% if payments %}
-        <h2 style="margin-top: 20px; margin-bottom: 20px">{% trans "Your payments {{ user.username }}" %}</h2>
+        <h2 style="margin-top: 20px; margin-bottom: 20px">{% trans "Your payments " %} {{ user.username }}</h2>
         {% for payment in payments %}
             <li class="card" style="width:35%">
                 <div class="card-statistic-3 p-4">
@@ -28,7 +28,7 @@
                     <a href="?page={{ payments.previous_page_number }}">{% trans "previous" %}</a>
                 {% endif %}
                 <span class="current">
-                    {% trans "Page {{ payments.number }} of {{ payments.paginator.num_pages }}." %}
+                    {% trans "Page " %} {{ payments.number }} {% trans "of " %} {{ payments.paginator.num_pages }}.
                 </span>
                 {% if payments.has_next %}
                     <a href="?page={{ payments.next_page_number }}">{% trans "next" %}</a>

@@ -1,3 +1,8 @@
+import json
+from decimal import Decimal
+
+import requests
+import weasyprint
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
@@ -5,16 +10,9 @@ from django.contrib.auth.hashers import check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.template.loader import render_to_string
-
-from decimal import Decimal
-from itertools import chain
-
-import json
-import requests
-import weasyprint
 
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import calc_commission, get_bank_info
@@ -23,6 +21,7 @@ from payment.forms import PaymentForm, TransactionForm
 
 from .models import Payment, Transaction
 
+# from itertools import chain
 
 
 @csrf_exempt
@@ -61,9 +60,7 @@ def payment(request):
                 )
                 return redirect(reverse("payment_detail", args=[new_payment.id]))
             else:
-                return HttpResponseBadRequest(
-                    "Everything went ok, but you don't have enough money"
-                )
+                return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
         else:
             return HttpResponseForbidden(f"The code pin {pin} doesn't match")
     else:
@@ -125,9 +122,7 @@ def outgoing_transactions(request):
                     amount=amount,
                     kind=Transaction.TransactionType.OUTGOING,
                 )
-                return redirect(
-                    reverse("transaction_detail", args=[new_transaction.id])
-                )
+                return redirect(reverse("transaction_detail", args=[new_transaction.id]))
             else:
                 return HttpResponseBadRequest(
                     f"The account {account} you tried to send money to does not exist"
@@ -206,6 +201,8 @@ def movements(request):
     paginator = Paginator(all_movements, movements_per_page)
     page = request.GET.get("page")
     return render(request, "payment/movements.html", {"payments": all_movements})
+
+
 """    try:
         movements_page = paginator.page(page)
     except PageNotAnInteger:
@@ -213,6 +210,7 @@ def movements(request):
     except EmptyPage:
         movements_page = paginator.page(paginator.num_pages)
 """
+
 
 # PDF TO FIX
 @staff_member_required
@@ -225,6 +223,8 @@ def transaction_pdf(request, transaction_id):
         response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "static/css/base.css")]
     )
     return response
+
+
 # PDF TO FIX ---- hacer comando python manage.py collectstatic, si no funciona sergio tiene otra solución en su codigo final ----
 @staff_member_required
 def payment_pdf(request, payment_id):
@@ -236,6 +236,7 @@ def payment_pdf(request, payment_id):
         response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "static/css/base.css")]
     )
     return response
+
 
 @login_required
 def payment_detail(request, id):
@@ -252,6 +253,7 @@ def transaction_detail(request, id):
 @login_required
 def payment_success(request):
     return redirect("dashboard")
+
 
 def prueba(request):
     profile = get_object_or_404(Profile, user=request.user)

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-07 12:35+0000\n"
-"PO-Revision-Date: 2024-01-03 18:05+0000\n"
-"Last-Translator:   <>\n"
+"POT-Creation-Date: 2024-01-10 20:16+0000\n"
+"PO-Revision-Date: 2024-01-10 20:11+0000\n"
+"Last-Translator:   <yamila@yamila.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -152,6 +152,7 @@ msgid "The account has been created successfully!"
 msgstr "Tu cuenta ha sido creada satisfactoriamente!"
 
 #: templates/account/account_create_done.html:7
+#: templates/registration/register_done.html:7
 msgid "Your account has been successfully created."
 msgstr "Tu cuenta ha sido creada satisfactoriamente."
 
@@ -319,17 +320,20 @@ msgid "Payments"
 msgstr "Pagos"
 
 #: templates/amyx_bank/about_us.html:43 templates/amyx_bank/about_us.html:51
-#, python-format
+#, fuzzy, python-format
+#| msgid "3% of commissions"
 msgid "3%% of commissions"
 msgstr "3% de comisiones"
 
 #: templates/amyx_bank/about_us.html:44
-#, python-format
+#, fuzzy, python-format
+#| msgid "5% of commissions"
 msgid "5%% of commissions"
 msgstr "5% de comisiones"
 
 #: templates/amyx_bank/about_us.html:45
-#, python-format
+#, fuzzy, python-format
+#| msgid "7% of commissions"
 msgid "7%% of commissions"
 msgstr "7% de comisiones"
 
@@ -338,12 +342,14 @@ msgid "Incoming"
 msgstr "Entrantes"
 
 #: templates/amyx_bank/about_us.html:49
-#, python-format
+#, fuzzy, python-format
+#| msgid "1% of commissions"
 msgid "1%% of commissions"
 msgstr "1% de comisiones"
 
 #: templates/amyx_bank/about_us.html:50 templates/amyx_bank/about_us.html:55
-#, python-format
+#, fuzzy, python-format
+#| msgid "2% of commissions"
 msgid "2%% of commissions"
 msgstr "2% de comisiones"
 
@@ -352,16 +358,19 @@ msgid "Outgoing"
 msgstr "Salientes"
 
 #: templates/amyx_bank/about_us.html:56
-#, python-format
+#, fuzzy, python-format
+#| msgid "4% of commissions"
 msgid "4%% of commissions"
 msgstr "4% de comisiones"
 
 #: templates/amyx_bank/about_us.html:57
-#, python-format
+#, fuzzy, python-format
+#| msgid "6% of commissions"
 msgid "6%% of commissions"
 msgstr "6% de comisiones"
 
 #: templates/amyx_bank/main.html:4 templates/registration/register_done.html:3
+#: templates/registration/register_done.html:5
 msgid "Welcome"
 msgstr "Bienvenido"
 
@@ -453,7 +462,7 @@ msgstr "Ayuda"
 
 #: templates/base.html:116
 msgid "Privacy Policy"
-msgstr "Políticas de privacidad"
+msgstr "Política de privacidad"
 
 #: templates/base.html:117 templates/base.html:133
 msgid "Term &amp; Conditions"
@@ -508,10 +517,8 @@ msgid "Edit your card"
 msgstr "Edita tu tarjeta"
 
 #: templates/card/card_edit.html:6
-#, fuzzy
-#| msgid "Edit your card"
 msgid "Edit your card: "
-msgstr "Edita tu tarjeta"
+msgstr "Edita tu tarjeta:"
 
 #: templates/card/card_edit.html:7
 msgid "Please use the following form"
@@ -554,8 +561,8 @@ msgid "Next"
 msgstr "Siguiente"
 
 #: templates/payment/movements.html:7
-msgid "Your payments {{ user.username }}"
-msgstr "Tus pagos {{ user.username }}"
+msgid "Your payments "
+msgstr "Tus pagos"
 
 #: templates/payment/movements.html:19 templates/payment/payment_detail.html:21
 #: templates/payment/transaction_detail.html:21
@@ -571,8 +578,12 @@ msgid "previous"
 msgstr "previa"
 
 #: templates/payment/movements.html:31
-msgid "Page {{ payments.number }} of {{ payments.paginator.num_pages }}."
-msgstr "Página {{ payments.number }} de {{ payments.paginator.num_pages }}."
+msgid "Page "
+msgstr "Página"
+
+#: templates/payment/movements.html:31
+msgid "of "
+msgstr "de"
 
 #: templates/payment/movements.html:34
 msgid "next"
@@ -690,14 +701,12 @@ msgid "log-in again"
 msgstr "iniciar sesión de nuevo"
 
 #: templates/registration/register.html:27
-#, fuzzy
-#| msgid "Create an account"
 msgid "Have an account?"
-msgstr "Crear una cuenta"
+msgstr "¿Tienes una cuenta?"
 
-#: templates/registration/register_done.html:5
-msgid "Welcome {{ new_user.first_name }}!"
-msgstr "Bienvenido "
+#: templates/registration/register.html:27
+msgid "Login"
+msgstr "Iniciar Sesión"
 
 #: templates/registration/register_done.html:8
 msgid "Now you can"
@@ -707,8 +716,16 @@ msgstr "Ahora tú puedes"
 msgid "log in"
 msgstr "iniciar sesión"
 
+#~ msgid "Welcome {{ new_user.first_name }}!"
+#~ msgstr "Bienvenido "
+
+#~ msgid "Your payments {{ user.username }}"
+#~ msgstr "Tus pagos {{ user.username }}"
+
+#~ msgid "Page {{ payments.number }} of {{ payments.paginator.num_pages }}."
+#~ msgstr "Página {{ payments.number }} de {{ payments.paginator.num_pages }}."
+
 #, fuzzy
-#~| msgid "Edit your card"
 #~ msgid "Edit your"
 #~ msgstr "Edita tu tarjeta"
 
