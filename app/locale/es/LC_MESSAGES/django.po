@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-10 20:16+0000\n"
-"PO-Revision-Date: 2024-01-10 20:11+0000\n"
+"POT-Creation-Date: 2024-01-11 19:01+0000\n"
+"PO-Revision-Date: 2024-01-11 19:02+0000\n"
 "Last-Translator:   <yamila@yamila.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,118 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
-
-#: account/urls.py:8
-msgid "accounts/"
-msgstr "cuentas/"
-
-#: account/urls.py:9
-msgid "account_create_success/"
-msgstr "cuenta_creada/"
-
-#: account/urls.py:10
-msgid "edit/password/"
-msgstr "editar/contraseña/"
-
-#: account/urls.py:11
-msgid "account_detail/<int:id>/"
-msgstr "detalle_cuenta/<int:id>/"
-
-#: account/urls.py:12
-msgid "create_account/"
-msgstr "crear_cuenta/"
-
-#: account/urls.py:13
-msgid "edit/account/<int:id>/"
-msgstr "editar/cuenta/<int:id>"
-
-#: amyx_bank/urls.py:8
-msgid "about_us/"
-msgstr "nosotos/"
-
-#: amyx_bank/urls.py:9
-msgid "login/"
-msgstr "inicio_sesion/"
-
-#: amyx_bank/urls.py:10
-msgid "logout/"
-msgstr "cierre_sesion/"
-
-#: amyx_bank/urls.py:11
-msgid "register/"
-msgstr "registro/"
-
-#: amyx_bank/urls.py:12
-msgid "edit/profile/"
-msgstr "editar/perfil"
-
-#: bank/urls.py:28
-msgid "account/"
-msgstr "cuenta/"
-
-#: bank/urls.py:29
-msgid "card/"
-msgstr "tarjeta/"
-
-#: bank/urls.py:30
-msgid "payments/"
-msgstr "pagos/"
-
-#: bank/urls.py:31
-msgid "payment/"
-msgstr "pago/"
-
-#: bank/urls.py:32
-msgid "outgoing/"
-msgstr "salientes/"
-
-#: bank/urls.py:33
-msgid "transfer/incoming/"
-msgstr "transferencias/entrantes/"
-
-#: card/urls.py:7
-msgid "cards"
-msgstr "tarjetas"
-
-#: card/urls.py:8
-msgid "create_card/"
-msgstr "crear_tarjeta/"
-
-#: card/urls.py:9
-msgid "edit/card/<int:id>/"
-msgstr "editar/cuenta/<int:id>"
-
-#: card/urls.py:10
-msgid "card_detail/<int:id>/"
-msgstr "detalle_cuenta/<int:id>/"
-
-#: payment/urls.py:9
-msgid "payment_success/"
-msgstr "pago_completo/"
-
-#: payment/urls.py:10
-msgid "payroll/"
-msgstr "nominas/"
-
-#: payment/urls.py:11
-msgid "movements/"
-msgstr "movimientos/"
-
-#: payment/urls.py:12
-msgid "payment_detail/<int:id>"
-msgstr "detalle_pago/<int:id>/"
-
-#: payment/urls.py:13
-msgid "trasaction_detail/<int:id>"
-msgstr "detalle_transaccion/<int:id>/"
-
-#: payment/urls.py:14
-msgid "trasaction_detail/<int:id>/pdf/"
-msgstr "detalle_transaccion/<int:id>/"
-
-#: payment/urls.py:15
-msgid "payment_detail/<int:id>/pdf/"
-msgstr "detalle_pago/<int:id>/pdf/"
 
 #: templates/account/account_create.html:4
 msgid "New Bank Account"
@@ -198,7 +86,7 @@ msgstr "crea algunas con el siguiente formulario"
 msgid "link"
 msgstr "enlace"
 
-#: templates/account/change_password.html:4
+#: templates/account/change_password.html:3
 #: templates/account/change_password.html:7
 msgid "Change password"
 msgstr "Cambiar contraseña"
@@ -295,8 +183,8 @@ msgstr "Las comisiones pequeñas son para movimientos inferiores a 50€."
 #: templates/amyx_bank/about_us.html:26
 msgid "Medium commissions is for movements above 50€ and below 500€"
 msgstr ""
-"Las comisiones medianas son para movimientos superiores a 50€ e inferiores a "
-"500€."
+"Las comisiones medianas son para movimientos superiores a 50€ e inferiores a"
+" 500€."
 
 #: templates/amyx_bank/about_us.html:27
 msgid "Large commissions is for movements above 500€"
@@ -319,55 +207,21 @@ msgstr "Grande"
 msgid "Payments"
 msgstr "Pagos"
 
-#: templates/amyx_bank/about_us.html:43 templates/amyx_bank/about_us.html:51
-#, fuzzy, python-format
-#| msgid "3% of commissions"
-msgid "3%% of commissions"
-msgstr "3% de comisiones"
-
-#: templates/amyx_bank/about_us.html:44
-#, fuzzy, python-format
-#| msgid "5% of commissions"
-msgid "5%% of commissions"
-msgstr "5% de comisiones"
-
-#: templates/amyx_bank/about_us.html:45
-#, fuzzy, python-format
-#| msgid "7% of commissions"
-msgid "7%% of commissions"
-msgstr "7% de comisiones"
+#: templates/amyx_bank/about_us.html:43 templates/amyx_bank/about_us.html:44
+#: templates/amyx_bank/about_us.html:45 templates/amyx_bank/about_us.html:49
+#: templates/amyx_bank/about_us.html:50 templates/amyx_bank/about_us.html:51
+#: templates/amyx_bank/about_us.html:55 templates/amyx_bank/about_us.html:56
+#: templates/amyx_bank/about_us.html:57
+msgid " of commissions"
+msgstr " de comisiones"
 
 #: templates/amyx_bank/about_us.html:48
 msgid "Incoming"
 msgstr "Entrantes"
 
-#: templates/amyx_bank/about_us.html:49
-#, fuzzy, python-format
-#| msgid "1% of commissions"
-msgid "1%% of commissions"
-msgstr "1% de comisiones"
-
-#: templates/amyx_bank/about_us.html:50 templates/amyx_bank/about_us.html:55
-#, fuzzy, python-format
-#| msgid "2% of commissions"
-msgid "2%% of commissions"
-msgstr "2% de comisiones"
-
 #: templates/amyx_bank/about_us.html:54
 msgid "Outgoing"
 msgstr "Salientes"
-
-#: templates/amyx_bank/about_us.html:56
-#, fuzzy, python-format
-#| msgid "4% of commissions"
-msgid "4%% of commissions"
-msgstr "4% de comisiones"
-
-#: templates/amyx_bank/about_us.html:57
-#, fuzzy, python-format
-#| msgid "6% of commissions"
-msgid "6%% of commissions"
-msgstr "6% de comisiones"
 
 #: templates/amyx_bank/main.html:4 templates/registration/register_done.html:3
 #: templates/registration/register_done.html:5
@@ -564,7 +418,8 @@ msgstr "Siguiente"
 msgid "Your payments "
 msgstr "Tus pagos"
 
-#: templates/payment/movements.html:19 templates/payment/payment_detail.html:21
+#: templates/payment/movements.html:19
+#: templates/payment/payment_detail.html:21
 #: templates/payment/transaction_detail.html:21
 msgid "Amount"
 msgstr "Cantidad"
@@ -715,6 +570,114 @@ msgstr "Ahora tú puedes"
 #: templates/registration/register_done.html:8
 msgid "log in"
 msgstr "iniciar sesión"
+
+#, python-format
+#~ msgid "5%% of commissions"
+#~ msgstr "5% de comisiones"
+
+#, python-format
+#~ msgid "7%% of commissions"
+#~ msgstr "7% de comisiones"
+
+#, python-format
+#~ msgid "1%% of commissions"
+#~ msgstr "1% de comisiones"
+
+#, python-format
+#~ msgid "2%% of commissions"
+#~ msgstr "2% de comisiones"
+
+#, python-format
+#~ msgid "4%% of commissions"
+#~ msgstr "4% de comisiones"
+
+#, python-format
+#~ msgid "6%% of commissions"
+#~ msgstr "6% de comisiones"
+
+#~ msgid "accounts/"
+#~ msgstr "cuentas/"
+
+#~ msgid "account_create_success/"
+#~ msgstr "cuenta_creada/"
+
+#~ msgid "edit/password/"
+#~ msgstr "editar/contraseña/"
+
+#~ msgid "account_detail/<int:id>/"
+#~ msgstr "detalle_cuenta/<int:id>/"
+
+#~ msgid "create_account/"
+#~ msgstr "crear_cuenta/"
+
+#~ msgid "edit/account/<int:id>/"
+#~ msgstr "editar/cuenta/<int:id>"
+
+#~ msgid "about_us/"
+#~ msgstr "nosotos/"
+
+#~ msgid "login/"
+#~ msgstr "inicio_sesion/"
+
+#~ msgid "logout/"
+#~ msgstr "cierre_sesion/"
+
+#~ msgid "register/"
+#~ msgstr "registro/"
+
+#~ msgid "edit/profile/"
+#~ msgstr "editar/perfil"
+
+#~ msgid "account/"
+#~ msgstr "cuenta/"
+
+#~ msgid "card/"
+#~ msgstr "tarjeta/"
+
+#~ msgid "payments/"
+#~ msgstr "pagos/"
+
+#~ msgid "payment/"
+#~ msgstr "pago/"
+
+#~ msgid "outgoing/"
+#~ msgstr "salientes/"
+
+#~ msgid "transfer/incoming/"
+#~ msgstr "transferencias/entrantes/"
+
+#~ msgid "cards"
+#~ msgstr "tarjetas"
+
+#~ msgid "create_card/"
+#~ msgstr "crear_tarjeta/"
+
+#~ msgid "edit/card/<int:id>/"
+#~ msgstr "editar/cuenta/<int:id>"
+
+#~ msgid "card_detail/<int:id>/"
+#~ msgstr "detalle_cuenta/<int:id>/"
+
+#~ msgid "payment_success/"
+#~ msgstr "pago_completo/"
+
+#~ msgid "payroll/"
+#~ msgstr "nominas/"
+
+#~ msgid "movements/"
+#~ msgstr "movimientos/"
+
+#~ msgid "payment_detail/<int:id>"
+#~ msgstr "detalle_pago/<int:id>/"
+
+#~ msgid "trasaction_detail/<int:id>"
+#~ msgstr "detalle_transaccion/<int:id>/"
+
+#~ msgid "trasaction_detail/<int:id>/pdf/"
+#~ msgstr "detalle_transaccion/<int:id>/"
+
+#~ msgid "payment_detail/<int:id>/pdf/"
+#~ msgstr "detalle_pago/<int:id>/pdf/"
 
 #~ msgid "Welcome {{ new_user.first_name }}!"
 #~ msgstr "Bienvenido "

@@ -19,21 +19,21 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from django.utils.translation import gettext_lazy as _
+
 from payment import views
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('', include('amyx_bank.urls')),
-    path(_('account/'), include('account.urls')),
-    path(_('card/'), include('card.urls')),
-    path(_('payments/'), include('payment.urls')),
-    path(_('payment/'), views.payment, name='payment'),
-    path(_('outgoing/'), views.outgoing_transactions, name='outgoing'),
-    path(_('transfer/incoming/'), views.incoming_transactions, name='incoming'),
+    path('account/', include('account.urls')),
+    path('card/', include('card.urls')),
+    path('payments/', include('payment.urls', namespace="payments")),
+    path('payment/', views.payment, name='payment'),
+    path('outgoing/', views.outgoing_transactions, name='outgoing'),
+    path('transfer/incoming/', views.incoming_transactions, name='incoming'),
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
-)
+]
 
 
 if settings.DEBUG:

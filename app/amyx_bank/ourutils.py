@@ -16,7 +16,7 @@ def generate_random_code(code_length: int) -> str:
 
 
 def get_bank_info(bank_account_or_card: str, related_info: str) -> str:
-    bank_id = int(bank_account_or_card[1]) - 1
+    bank_id = int(bank_account_or_card[1])
     return BANKS[bank_id].get(related_info)
 
 
@@ -30,8 +30,8 @@ def calc_commission(transferred_amount: Decimal, transference_type: str) -> Deci
     }
     if transferred_amount < SMALL_UPPER_LIMIT:
         transference_size = "SMALL"
-    elif MEDIUM_UPPER_LIMIT > transferred_amount > SMALL_UPPER_LIMIT:
+    elif MEDIUM_UPPER_LIMIT > transferred_amount >= SMALL_UPPER_LIMIT:
         transference_size = "MEDIUM"
-    elif transferred_amount > MEDIUM_UPPER_LIMIT:
+    elif transferred_amount >= MEDIUM_UPPER_LIMIT:
         transference_size = "LARGE"
     return transferred_amount * Decimal(COMMISSION_TABLES[transference_type][transference_size])

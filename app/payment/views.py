@@ -8,10 +8,12 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 
 from account.models import BankAccount, Profile
@@ -56,8 +58,9 @@ def payment(request):
                 new_payment = Payment.objects.create(
                     card=card,
                     business=business,
-                    amount=amount,
+                    amount=taxed_amount,
                 )
+                print(new_payment)
                 return redirect(reverse("payment_detail", args=[new_payment.id]))
             else:
                 return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
@@ -102,7 +105,7 @@ def outgoing_transactions(request):
             return HttpResponseForbidden(f"Account {sender} doesn't exists")
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
         if cac.balance > taxed_amount:
-            url = f"{destined_bank}:8000/transfer/incoming/"
+            url = f"{destined_bank}/transfer/incoming/"
             print(url)
             transaction = {
                 "sender": sender,
@@ -119,7 +122,7 @@ def outgoing_transactions(request):
                     agent=sender,
                     account=account,
                     concept=concept,
-                    amount=amount,
+                    amount=taxed_amount,
                     kind=Transaction.TransactionType.OUTGOING,
                 )
                 return redirect(reverse("transaction_detail", args=[new_transaction.id]))
@@ -140,7 +143,7 @@ def incoming_transactions(request):
     # llegar tanto por formulario como por curl
     # Puede llegar la solicitud mediante curl
     cd = json.loads(request.body)
-    # Obtención los datos del diccionario
+    # Obtención los datohttps://prod.liveshare.vsengsaas.visualstudio.com/join?77CB33C8F128794EF4A0E7FCAD629341D7F4s del diccionario
     sender = cd.get("sender").upper()
     cac = cd.get("cac").upper()
     concept = cd.get("concept")
@@ -161,7 +164,7 @@ def incoming_transactions(request):
         agent=sender,
         account=cac,
         concept=concept,
-        amount=amount,
+        amount=total_amount,
         kind=Transaction.TransactionType.INCOMING,
     )
     return redirect(reverse("transaction_detail", args=[new_transaction.id]))
@@ -183,33 +186,19 @@ def payroll(request):
 
 @login_required
 def movements(request):
-    all_movements = {"payments": [], "incoming": [], "outgoing": []}
+    all_movements = []
     profile = get_object_or_404(Profile, user=request.user)
     accounts = profile.accounts.all()
-    accounts2 = []
     for account in accounts:
-        accounts2.append(account)
-        print(accounts2)
+        account_movements = Transaction.objects.filter(
+            Q(agent__icontains=account.account_code) | Q(account__icontains=account.account_code)
+        )
+        all_movements.extend(account_movements)
         for card in account.cards.all():
-            payments = card.payments.all()
-            print(bool(payments))
-            if payments:
-                all_movements["payments"].extend(payments)
-    print(bool(all_movements["payments"]))
+            if payments := card.payments.all():
+                all_movements.extend(payments)
 
-    movements_per_page = 5
-    paginator = Paginator(all_movements, movements_per_page)
-    page = request.GET.get("page")
     return render(request, "payment/movements.html", {"payments": all_movements})
-
-
-"""    try:
-        movements_page = paginator.page(page)
-    except PageNotAnInteger:
-        movements_page = paginator.page(1)
-    except EmptyPage:
-        movements_page = paginator.page(paginator.num_pages)
-"""
 
 
 # PDF TO FIX
