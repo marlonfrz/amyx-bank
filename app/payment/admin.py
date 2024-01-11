@@ -43,22 +43,32 @@ def transaction_pdf(obj):
 
 transaction_pdf.short_description = 'Invoice'
 
-
+"""
 def payment_pdf(obj):
     url = reverse('payment:payment_pdf', args=[obj.id])
     return mark_safe(f'<a href="{url}">PDF</a>')
 
 
 payment_pdf.short_description = 'Invoice'
+"""
 
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ["agent", "account", "concept", "amount", "kind", "timestamp", transaction_pdf]
+    list_display = [
+        "agent",
+        "account",
+        "concept",
+        "amount",
+        "kind",
+        "timestamp",
+    ]  # , transaction_pdf]
+
     actions = [export_to_csv]
 
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ["business", "card", "amount", "kind", "timestamp", payment_pdf]
+    list_display = ["business", "card", "amount", "kind", "timestamp"]  # , payment_pdf]
+
     actions = [export_to_csv]
