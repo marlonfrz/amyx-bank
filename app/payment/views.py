@@ -1,3 +1,4 @@
+import csv
 import json
 from decimal import Decimal
 
@@ -51,21 +52,18 @@ def payment(request):
             return HttpResponseForbidden(f"Card {ccc} doesn't exists")
         correct_pin = check_password(pin, card.cvc)
         taxed_amount = amount + calc_commission(amount, "PAYMENTS")
-        if correct_pin:
-            if card.account.balance > taxed_amount:
-                card.account.balance -= taxed_amount
-                card.account.save()
-                new_payment = Payment.objects.create(
-                    card=card,
-                    business=business,
-                    amount=taxed_amount,
-                )
-                print(new_payment)
-                return redirect(reverse("payment_detail", args=[new_payment.id]))
-            else:
-                return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
-        else:
+        if not correct_pin:
+            return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
+        if card.account.balance < taxed_amount:
             return HttpResponseForbidden(f"The code pin {pin} doesn't match")
+        card.account.balance -= taxed_amount
+        card.account.save()
+        new_payment = Payment.objects.create(
+            card=card,
+            business=business,
+            amount=taxed_amount,
+        )
+        return redirect(reverse("payment_detail", args=[new_payment.id]))
     else:
         form = PaymentForm()
     return render(request, "payment/payment.html", {"payment_form": form})
@@ -104,34 +102,26 @@ def outgoing_transactions(request):
         except BankAccount.DoesNotExist:
             return HttpResponseForbidden(f"Account {sender} doesn't exists")
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
-        if cac.balance > taxed_amount:
-            url = f"{destined_bank}/transfer/incoming/"
-            print(url)
-            transaction = {
-                "sender": sender,
-                "cac": account,
-                "concept": concept,
-                "amount": str(amount),
-            }
-            status = requests.post(url, json=transaction)
-            print(status.status_code)
-            if status.status_code == 200:
-                cac.balance -= taxed_amount
-                cac.save()
-                new_transaction = Transaction.objects.create(
-                    agent=sender,
-                    account=account,
-                    concept=concept,
-                    amount=taxed_amount,
-                    kind=Transaction.TransactionType.OUTGOING,
-                )
-                return redirect(reverse("transaction_detail", args=[new_transaction.id]))
-            else:
-                return HttpResponseBadRequest(
-                    f"The account {account} you tried to send money to does not exist"
-                )
-        else:
+        if cac.balance < taxed_amount:
             return HttpResponseBadRequest("You do not have enough money!")
+        url = f"{destined_bank}/transfer/incoming/"
+        status = requests.post(
+            url, json={"sender": sender, "cac": account, "concept": concept, "amount": str(amount)}
+        )
+        if status.status_code != 200:
+            return HttpResponseBadRequest(
+                f"The account {account} you tried to send money to does not exist"
+            )
+        cac.balance -= taxed_amount
+        cac.save()
+        new_transaction = Transaction.objects.create(
+            agent=sender,
+            account=account,
+            concept=concept,
+            amount=taxed_amount,
+            kind=Transaction.TransactionType.OUTGOING,
+        )
+        return redirect(reverse("payments:transaction_detail", args=[new_transaction.id]))
     else:
         form = TransactionForm()
     return render(request, "payment/transactions.html", {"transaction_form": form})
@@ -139,11 +129,7 @@ def outgoing_transactions(request):
 
 @csrf_exempt
 def incoming_transactions(request):
-    # Este bloque controla que los datos pueden
-    # llegar tanto por formulario como por curl
-    # Puede llegar la solicitud mediante curl
     cd = json.loads(request.body)
-    # Obtención los datohttps://prod.liveshare.vsengsaas.visualstudio.com/join?77CB33C8F128794EF4A0E7FCAD629341D7F4s del diccionario
     sender = cd.get("sender").upper()
     cac = cd.get("cac").upper()
     concept = cd.get("concept")
@@ -167,7 +153,7 @@ def incoming_transactions(request):
         amount=total_amount,
         kind=Transaction.TransactionType.INCOMING,
     )
-    return redirect(reverse("transaction_detail", args=[new_transaction.id]))
+    return redirect(reverse("payments:transaction_detail", args=[new_transaction.id]))
 
 
 @csrf_exempt
@@ -190,14 +176,18 @@ def movements(request):
     profile = get_object_or_404(Profile, user=request.user)
     accounts = profile.accounts.all()
     for account in accounts:
-        account_movements = Transaction.objects.filter(
-            Q(agent__icontains=account.account_code) | Q(account__icontains=account.account_code)
+        outgoing_movements = Transaction.objects.filter(
+            agent__icontains=account.account_code, kind=Transaction.TransactionType.OUTGOING
         )
-        all_movements.extend(account_movements)
+        incoming_movements = Transaction.objects.filter(
+            account__icontains=account.account_code, kind=Transaction.TransactionType.INCOMING
+        )
+        all_movements.extend(outgoing_movements)
+        all_movements.extend(incoming_movements)
         for card in account.cards.all():
             if payments := card.payments.all():
                 all_movements.extend(payments)
-
+    all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
     return render(request, "payment/movements.html", {"payments": all_movements})
 
 

@@ -26,7 +26,7 @@ class Transaction(models.Model):
         ]
 
     def get_absolute_url(self):
-        return reverse('transaction_detail', args=[self.id])
+        return reverse('payments:transaction_detail', args=[self.id])
 
 
 class Payment(models.Model):
@@ -45,4 +45,4 @@ class Payment(models.Model):
         ]
 
     def get_absolute_url(self):
-        return reverse('payment_detail', args=[self.id])
+        return reverse('payments:payment_detail', args=[self.id])
