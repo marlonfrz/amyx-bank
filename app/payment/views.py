@@ -4,6 +4,9 @@ from decimal import Decimal
 
 import requests
 import weasyprint
+from account.models import BankAccount, Profile
+from amyx_bank.ourutils import calc_commission, get_bank_info
+from card.models import Card
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
@@ -16,10 +19,6 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-
-from account.models import BankAccount, Profile
-from amyx_bank.ourutils import calc_commission, get_bank_info
-from card.models import Card
 from payment.forms import PaymentForm, TransactionForm
 
 from .models import Payment, Transaction
@@ -188,7 +187,17 @@ def movements(request):
             if payments := card.payments.all():
                 all_movements.extend(payments)
     all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
-    return render(request, "payment/movements.html", {"payments": all_movements})
+    return render(request, "payment/movements.html", {"payment": all_movements})
+
+
+# CSV
+def export_csv(request, transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+    content_disposition = f'attachment; filename={transaction.verbose_name}.csv'
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = content_disposition
+    writer = csv.writer(response)
+    return render(request, 'payments/export_to_csv.html', {'writer': writer})
 
 
 # PDF TO FIX

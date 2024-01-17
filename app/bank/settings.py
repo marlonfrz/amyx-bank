@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import os
+""" import os """
 from pathlib import Path
 
 from prettyconf import config
@@ -155,7 +155,7 @@ LOGOUT_URL = "logout"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=config.boolean)

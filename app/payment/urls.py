@@ -13,4 +13,5 @@ urlpatterns = [
     path('trasaction_detail/<int:id>', views.transaction_detail, name='transaction_detail'),
     path('trasaction_detail/<int:id>/pdf/', views.transaction_pdf, name='transaction_pdf'),
     path('payment_detail/<int:id>/pdf/', views.payment_pdf, name='payment_pdf'),
+    path('export_movements<int:id>/csv', views.export_csv, name='export_movements'),
 ]
