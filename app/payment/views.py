@@ -6,12 +6,10 @@ import requests
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import calc_commission, get_bank_info
 from card.models import Card
-from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
@@ -20,6 +18,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from payment.forms import PaymentForm, TransactionForm
 from weasyprint import HTML
+from django.views.decorators.http import require_POST
 
 from .models import Payment, Transaction
 
@@ -187,24 +186,56 @@ def movements(request):
             if payments := card.payments.all():
                 all_movements.extend(payments)
     all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
-    return render(request, "payment/movements.html", {"payment": all_movements})
+    return render(request, "payment/movements.html", {"payments": all_movements})
 
 
 # CSV to admin
-def export_csv(request, transaction_id):
-    transaction = get_object_or_404(Transaction, id=transaction_id)
-    content_disposition = f'attachment; filename={transaction.verbose_name}.csv'
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = content_disposition
-    writer = csv.writer(response)
-    return render(request, 'payments/export_to_csv.html', {'writer': writer})
+
+"""
+from django.shortcuts import render, redirect
+from .models import YourElementModel
+
+def process_selected_elements(request):
+    if request.method == 'POST':
+        selected_elements = request.POST.getlist('selected_elements')
+        # Process the selected elements (e.g., update database records, perform some operations)
+        # ...
+
+        return redirect('success_page')  # Redirect to a success page after processing
+
+    return redirect('error_page')  # Redirect to an error page if the form was not submitted correctly
+"""
+
+@staff_member_required
+def export_csv(request):
+    print(request.body)
+    por_los_jajas = [int(chr(movement_id)) for movement_id in request.body]
+    print(por_los_jajas)
+#    selected_movements = request.GET.getlist('selected_elements')
+#    for movement_id in selected_movements:
+#        print(movement_id)
+#        try:
+#            transaction = get_object_or_404(Transaction, id=int(movement_id))
+#        except:
+#            payment = get_object_or_404(Payment, id=int(movement_id))
+    return HttpResponse("")
+
+# CSV to user
+#@login_required
+#def user_export_csv(request, transaction_id):
+#    transaction = get_object_or_404(Transaction, id=transaction_id)
+#    content_disposition = f'attachment; filename={transaction.verbose_name}.csv'
+#    response = HttpResponse(content_type='text/csv')
+#    response['Content-Disposition'] = content_disposition
+#    writer = csv.writer(response)
+#    return render(request, 'payments/export_to_csv.html', {'writer': writer})
 
 
 # PDF TO FIX
-@staff_member_required
+@login_required
 def transaction_pdf(request, transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
-    html = render_to_string("templates/payment/transaction_pdf.html", {"transaction": transaction})
+    html = render_to_string("payment/transaction_pdf.html", {"transaction": transaction})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f"attachment; filename='{transaction.id}.pdf'"
     HTML(string=html).write_pdf(response)
@@ -212,12 +243,13 @@ def transaction_pdf(request, transaction_id):
 
 
 # PDF TO FIX ---- hacer comando python manage.py collectstatic, si no funciona sergio tiene otra solución en su codigo final ----
-@staff_member_required
+@login_required
 def payment_pdf(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id)
-    html = render_to_string("templates/payment/payment_pdf.html", {"payment": payment})
+    html = render_to_string("payment/payment_pdf.html", {"payment": payment})
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = f"attachment; filename='{payment.id}.pdf'"
+    response["Content-Disposition"] = f'attachment; filename="{payment.id}.pdf"'
+    #f'attachment; filename="{document.title}.pdf"'
     HTML(string=html).write_pdf(response)
     return response
 

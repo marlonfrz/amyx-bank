@@ -25,6 +25,9 @@
             <th>{% trans "Kind" %}</th>
             <td><a href="{% url 'about_us' %}">{{ movement.kind }}</a></td>
         </tr>
+        <form action="{% url 'payments:transaction_pdf' movement.id %}" method="get" target="_blank">
+            <button class="bg-secondary btn btn-primary" type="submit">Export PDF</button>
+        </form>
     </table>
 </center>
 

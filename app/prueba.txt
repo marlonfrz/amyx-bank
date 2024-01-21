@@ -1,0 +1,51 @@
+------------------------------------------------------------------------------------
+
+# HTML
+
+<!-- your_template.html -->
+
+<form method="post" action="{% url 'process_selected_elements' %}">
+  {% csrf_token %}
+  {% for payment in payments %}
+    <div>
+      <input type="checkbox" name="selected_elements" value="{{ payment.id }}">
+      {{ payment.name }}
+    </div>
+  {% endfor %}
+  <button type="submit">Process Selected Elements</button>
+</form>
+
+------------------------------------------------------------------------------------
+
+# VISTAS EN DJANGO
+# views.py
+
+from django.shortcuts import render, redirect
+from .models import YourElementModel
+
+def your_view(request):
+    elements = YourElementModel.objects.all()  # Replace with your actual model and query
+    return render(request, 'your_template.html', {'elements': elements})
+
+def process_selected_elements(request):
+    if request.method == 'POST':
+        selected_elements = request.POST.getlist('selected_elements')
+        # Process the selected elements (e.g., update database records, perform some operations)
+        # ...
+
+        return redirect('success_page')  # Redirect to a success page after processing
+
+    return redirect('error_page')  # Redirect to an error page if the form was not submitted correctly
+
+------------------------------------------------------------------------------------
+
+# URLS DE LA APLICACION PAYMENTS
+# urls.py
+
+from django.urls import path
+from .views import your_view, process_selected_elements
+
+urlpatterns = [
+    path('your-view/', your_view, name='your_view'),
+    path('process-selected-elements/', process_selected_elements, name='process_selected_elements'),
+]

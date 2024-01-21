@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    A<input type="checkbox" name="checkbox_checker" value="1">
+    <br>A<input type="checkbox" name="checkbox_checker" value="2">
+    <br>A<input type="checkbox" name="checkbox_checker" value="3">
+    <br>A<input type="checkbox" name="checkbox_checker" value="4">
+    <br>A<input type="checkbox" name="checkbox_checker" value="5">
+    <br>A<input type="checkbox" name="checkbox_checker" value="6">
+    <br>A<input type="checkbox" name="checkbox_checker" value="7">
+    <br>A<input type="checkbox" name="checkbox_checker" value="8">
+    <br>A<input type="checkbox" name="checkbox_checker" value="9">
+    <br>A<input type="checkbox" name="checkbox_checker" value="10">
+    <br>A<input type="checkbox" name="checkbox_checker" value="11">
+    <br>A<input type="checkbox" name="checkbox_checker" value="12">
+    <br>A<input type="checkbox" name="checkbox_checker" value="13">
+    <br>A<input type="checkbox" name="checkbox_checker" value="14">
+    <br>A<input type="checkbox" name="checkbox_checker" value="15">
+    <br>A<input type="checkbox" name="checkbox_checker" value="16">
+    <br>A<input type="checkbox" name="checkbox_checker" value="17">
+
+    <button type="submit" id="send">Send</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("send").addEventListener("click", function() {
+                let checkboxes = document.getElementsByName("checkbox_checker")
+                let values = []
+                for (let checkbox of checkboxes) {
+                    if (checkbox.checked) {
+                        values.push(checkbox.value)
+                    }
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>
