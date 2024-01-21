@@ -22,5 +22,9 @@
             <td>{{ movement.amount }} €</td>
         </tr>
     </table>
+    <!--No se si funciona, comprobar-->
+    <form action="{% url 'payments:payment_pdf' movement.id %}" method="get" target="_blank">
+        <button class="bg-secondary btn btn-primary" type="submit">Export PDF</button>
+    </form>
 </center>
 {% endblock %}
