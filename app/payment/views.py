@@ -3,7 +3,6 @@ import json
 from decimal import Decimal
 
 import requests
-import weasyprint
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import calc_commission, get_bank_info
 from card.models import Card
@@ -20,6 +19,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from payment.forms import PaymentForm, TransactionForm
+from weasyprint import HTML
 
 from .models import Payment, Transaction
 
@@ -190,7 +190,7 @@ def movements(request):
     return render(request, "payment/movements.html", {"payment": all_movements})
 
 
-# CSV
+# CSV to admin
 def export_csv(request, transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
     content_disposition = f'attachment; filename={transaction.verbose_name}.csv'
@@ -206,10 +206,8 @@ def transaction_pdf(request, transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
     html = render_to_string("templates/payment/transaction_pdf.html", {"transaction": transaction})
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = f"filename=transaction_{transaction.id}.pdf"
-    weasyprint.HTML(string=html).write_pdf(
-        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "static/css/base.css")]
-    )
+    response["Content-Disposition"] = f"attachment; filename='{transaction.id}.pdf'"
+    HTML(string=html).write_pdf(response)
     return response
 
 
@@ -219,10 +217,8 @@ def payment_pdf(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id)
     html = render_to_string("templates/payment/payment_pdf.html", {"payment": payment})
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = f"filename=payment_{payment.id}.pdf"
-    weasyprint.HTML(string=html).write_pdf(
-        response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT / "static/css/base.css")]
-    )
+    response["Content-Disposition"] = f"attachment; filename='{payment.id}.pdf'"
+    HTML(string=html).write_pdf(response)
     return response
 
 
