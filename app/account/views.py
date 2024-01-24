@@ -1,11 +1,9 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponse, HttpResponseBadRequest
-from django.contrib.auth import authenticate
-
+from account.forms import AccountEditForm, AccountForm, ChangePasswordForm
 from account.models import BankAccount, Profile
-
-from account.forms import ChangePasswordForm, AccountEditForm, AccountForm
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.shortcuts import get_object_or_404, redirect, render
 
 
 # http://dsw.pc16.aula109:8000/account
@@ -46,29 +44,29 @@ def bank_account_create_view(request):
         bank_account_form = AccountForm(request.POST)
         if bank_account_form.is_valid():
             cd = bank_account_form.cleaned_data
-            user = authenticate(
-                request, username=request.user.username, password=cd["password"]
-            )
+            user = authenticate(request, username=request.user.username, password=cd["password"])
             profile = get_object_or_404(Profile, user=request.user)
-            accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+            accounts = BankAccount.objects.filter(profile=profile).exclude(
+                status=BankAccount.Status.CANCELLED
+            )
             if len(accounts) < MAX_ACCOUNT_AMOUNT:
                 if user is not None:
-                        new_bank_account = bank_account_form.save(commit=False)
-                        profile = get_object_or_404(Profile, user=user)
-                        new_bank_account.profile = profile
-                        new_bank_account.save()
-                        return redirect("dashboard")
+                    new_bank_account = bank_account_form.save(commit=False)
+                    profile = get_object_or_404(Profile, user=user)
+                    new_bank_account.profile = profile
+                    new_bank_account.save()
+                    return redirect("dashboard")
                 else:
                     return HttpResponse("Invalid credentials")
             else:
-                return HttpResponseBadRequest("You have reached the max amount of accounts you can create, which is 4") 
+                return HttpResponseBadRequest(
+                    "You have reached the max amount of accounts you can create, which is 4"
+                )
         else:
             return HttpResponseBadRequest("Invalid form data")
     else:
         form = AccountForm()
-    return render(
-        request, "account/account_create.html", {"bank_account_create_form": form}
-    )
+    return render(request, "account/account_create.html", {"bank_account_create_form": form})
 
 
 # http://dsw.pc16.aula109:8000/edit/account/<int:id>/
@@ -91,7 +89,7 @@ def accounts(request):
     user = request.user
     profile = get_object_or_404(Profile, user=user)
     accounts = list(profile.accounts.all())
-#    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+    #    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
     return render(request, "account/accounts.html", {"accounts": accounts})
 
 
