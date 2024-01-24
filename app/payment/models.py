@@ -28,6 +28,11 @@ class Transaction(models.Model):
     def get_absolute_url(self):
         return reverse('payments:transaction_detail', args=[self.id])
 
+    def __str__(self):
+        return f"{self.agent} -> {self.account}"
+
+    def __repr__(self):
+        return f"{self.agent} -> {self.account}"
 
 class Payment(models.Model):
     card = models.ForeignKey(Card, on_delete=models.PROTECT, related_name="payments")
@@ -46,3 +51,9 @@ class Payment(models.Model):
 
     def get_absolute_url(self):
         return reverse('payments:payment_detail', args=[self.id])
+
+    def __str__(self):
+        return f"{self.card} -> {self.business}"
+
+    def __repr__(self):
+        return f"{self.card} -> {self.business}"

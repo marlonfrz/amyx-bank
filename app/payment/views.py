@@ -18,9 +18,9 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from payment.forms import PaymentForm, TransactionForm
 from weasyprint import HTML
-from django.views.decorators.http import require_POST
-
+from django.conf import settings
 from .models import Payment, Transaction
+from django.utils import dateformat
 
 # from itertools import chain
 
@@ -134,7 +134,6 @@ def incoming_transactions(request):
     amount = Decimal(cd.get("amount"))
     # Comprueba que la cuenta existe
     try:
-        # account = get_object_or_404(BankAccount, account_code=cac)
         account = BankAccount.objects.get(account_code=cac)
     except BankAccount.DoesNotExist:
         return HttpResponseBadRequest(
@@ -165,7 +164,7 @@ def payroll(request):
     account = get_object_or_404(BankAccount, account_code=cd.get("cac").upper())
     account.balance += balance
     account.save()
-    return HttpResponse("Payroll done")
+    return HttpResponse("Payroll done!")
 
 
 @login_required
@@ -208,17 +207,29 @@ def process_selected_elements(request):
 
 @staff_member_required
 def export_csv(request):
-    print(request.body)
-    por_los_jajas = [int(chr(movement_id)) for movement_id in request.body]
-    print(por_los_jajas)
-#    selected_movements = request.GET.getlist('selected_elements')
-#    for movement_id in selected_movements:
-#        print(movement_id)
-#        try:
-#            transaction = get_object_or_404(Transaction, id=int(movement_id))
-#        except:
-#            payment = get_object_or_404(Payment, id=int(movement_id))
-    return HttpResponse("")
+    movements = json.loads(request.body)
+    payments = []
+    transactions = []
+    for movement in movements:
+        movement_id, movement_type = movement.split("-")
+        if eval(movement_type) == Transaction:
+            transactions.append(Transaction.objects.get(id=movement_id))
+        if eval(movement_type) == Payment:
+            payments.append(Payment.objects.get(id=movement_id))
+    if payments:
+        with open(settings.BASE_DIR / "csv_files" / "payments.csv", "w") as payments_csv_file:
+            file_writer = csv.writer(payments_csv_file)
+            file_writer.writerow(["id", "Card", "Business","Amount", "Kind", "Timestamp"])
+            for payment in payments:
+                file_writer.writerow([payment.id, payment.card, payment.business, payment.amount, payment.kind, payment.timestamp])
+    if transactions:
+        with open(settings.BASE_DIR / "csv_files" / "transactions.csv", "w") as transactions_csv_file:
+            file_writer = csv.writer(transactions_csv_file)
+            file_writer.writerow(["id", "Agent", "Account", "Amount", "Kind", "Timestamp"])
+            for transaction in transactions:
+                file_writer.writerow([transaction.id, transaction.agent, transaction.account, transaction.amount, transaction.kind, transaction.timestamp])
+
+    return HttpResponse()
 
 # CSV to user
 #@login_required

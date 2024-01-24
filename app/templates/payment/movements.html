@@ -67,7 +67,7 @@
                 values.push(checkbox.value)
             }
         }
-        options['body'] = values
+        options['body'] = JSON.stringify(values)
         alert(options['body'])
         fetch(url, options).then(response)
         }
