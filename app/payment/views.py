@@ -51,9 +51,9 @@ def payment(request):
         correct_pin = check_password(pin, card.cvc)
         taxed_amount = amount + calc_commission(amount, "PAYMENTS")
         if not correct_pin:
-            return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
-        if card.account.balance < taxed_amount:
             return HttpResponseForbidden(f"The code pin {pin} doesn't match")
+        if card.account.balance < taxed_amount:
+            return HttpResponseBadRequest("Everything went ok, but you don't have enough money")
         card.account.balance -= taxed_amount
         card.account.save()
         new_payment = Payment.objects.create(
@@ -61,7 +61,7 @@ def payment(request):
             business=business,
             amount=taxed_amount,
         )
-        return redirect(reverse("payment_detail", args=[new_payment.id]))
+        return redirect(reverse("payments:payment_detail", args=[new_payment.id]))
     else:
         form = PaymentForm()
     return render(request, "payment/payment.html", {"payment_form": form})

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load model_tags %}
 {% block title %}{% trans "Payments" %}{% endblock %}
 {% block content %}
 <center>
@@ -10,7 +11,7 @@
             {% for payment in payments %}
                 <li class="card" style="width:35%">
                     <div class="card-statistic-3 p-4">
-                        <input type="checkbox" name="selected_elements" value="{{ payment.id }}">
+                        <input type="checkbox" name="selected_elements" value="{{ payment.id }}-{{ payment|type }}">
                         <div class="mb-4 d-flex justify-content-between align-items-center">
                             <h3 class="card-title mb-0">
                                 {% if payment.business %}

@@ -43,9 +43,3 @@ class Card(models.Model):
 
     def __str__(self) -> str:
         return self.card_name
-
-
-
-"""
-<a href="{% url 'card_detail' card_account_code='card_account_code' %}"><p class="navbar-text navbar-right">Cards</p></a>
-"""
