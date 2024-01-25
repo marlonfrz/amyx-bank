@@ -228,7 +228,6 @@ def export_csv(request):
             file_writer.writerow(["id", "Agent", "Account", "Amount", "Kind", "Timestamp"])
             for transaction in transactions:
                 file_writer.writerow([transaction.id, transaction.agent, transaction.account, transaction.amount, transaction.kind, transaction.timestamp])
-
     return HttpResponse()
 
 # CSV to user
