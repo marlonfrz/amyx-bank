@@ -7,7 +7,7 @@
     {% if payments %}
         <h2 class="col-2 col-md-6" style="margin-top: 20px; margin-bottom: 20px">{% trans "Your payments " %} {{ user.username }}</h2>
         <form method="post" action="{% url 'payments:export_movements' %}">
-            {% csrf_token %}
+        {% csrf_token %}
             {% for payment in payments %}
                 <li class="card" style="width:35%">
                     <div class="card-statistic-3 p-4">
@@ -24,9 +24,9 @@
                         </div>
                     </div>
                 </li>
+                {% endfor %}
+                <button type="submit" id="send">Get your csv</button>
             </form>
-            {% endfor %}
-            <button type="submit" id="send">Get your csv</button>
         <div class="">
             <span class="step-links">
                 {% if payments.has_previous %}
@@ -47,78 +47,4 @@
     {% endif %}
 </center>
 {% endblock %}
-{% block domready %}
-    
-    let url = '{% url "payments:export_movements" %}'
-
-    let csrf_token = '{{ csrf_token }}'
-    let options = {
-        'method': 'POST',
-        'headers': {'X-CSRFToken': csrf_token},
-        'mode': 'same-origin'
-    }
-
-    
-    document.getElementById("send").addEventListener('click', function() {
-        let checkboxes = document.getElementsByName("selected_elements")
-        let values = []
-        for (let checkbox of checkboxes) {
-            if (checkbox.checked) {
-                values.push(checkbox.value)
-            }
-        }
-        options['body'] = JSON.stringify(values)
-        alert(options['body'])
-        fetch(url, options).then(response)
-        }
-    )
-    
-{% endblock %}
-{% comment %}
-<!-- options['body'] = JSON.stringify({ 'values': values }); // Enviar como JSON
-
-            alert(options['body']);
-
-            fetch(url, options)
-                .then(response => {
-                    if (response.ok) {
-                        // Redirigir a la URL deseada después de una respuesta exitosa
-                        window.location.href = '{% url "nombre_de_tu_url_de_redireccion" %}';
-                    } else {
-                        console.error('Error en la respuesta del servidor:', response.status);
-                        // Manejar otros casos de respuesta del servidor según sea necesario
-                    }
-                })
-                .catch(error => console.error('Error en la solicitud:', error));
-        });-->
-{% endcomment %}
-{% comment %}
-    <a class="btn btn-primary" href="{% url 'payments:export_movements' %}">{% trans "Export your movements" %}</a>
-{% endcomment %}
-
-{% comment %}
-let button = document.getElementById("send")
-let url = '{% url "payments:export_movements" %}'
-
-let options = {
-'method': 'POST',
-'headers': {'X-CSRFToken': csrftoken},
-'mode': 'same-origin'
-}
-
-button.addEventListener('click', (e) →> {
-    let originalValue = originalContent.value
-    let checkboxes = document.getElementsByName("selected_elements")
-    let values = []
-    for (let checkbox of checkboxes) {
-        if (checkbox.checked) {
-            values.push(checkbox.value)
-        }
-    }
-    let form = new FormData()
-    form.append('values', values)
-    options['body'] = form
-    fetch(url, options)
-})
-{% endcomment %}
 

@@ -21,7 +21,7 @@ from django.contrib import admin
 from django.urls import include, path
 from payment import views
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('', include('amyx_bank.urls')),
     path('account/', include('account.urls')),
@@ -32,7 +32,11 @@ urlpatterns = i18n_patterns(
     path('transfer/incoming/', views.incoming_transactions, name='incoming'),
     path('admin/', admin.site.urls),
     path('rosetta/', include('rosetta.urls')),
-)
+    path('api/', include('account.api.urls', namespace='api_account')),
+    path('api/', include('card.api.urls', namespace='api_card')),
+    path('api/', include('payment.api.urls', namespace='api_payment')),
+]
+
 
 
 if settings.DEBUG:

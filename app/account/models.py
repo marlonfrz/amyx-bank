@@ -15,7 +15,7 @@ class BankAccount(models.Model):
     account_code = models.CharField(max_length=20, null=False, blank=True)
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
     objects = models.Manager()
-    
+
 
     class Meta:
         ordering = ["-account_code"]
@@ -44,7 +44,4 @@ class BankAccount(models.Model):
 
     def get_absolute_url(self):
         return reverse('account_detail', args=[self.id])
-
-#href="{% url 'reverse' account_detail account.id %}"
-
 

@@ -18,11 +18,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from payment.forms import PaymentForm, TransactionForm
 from weasyprint import HTML
-from django.conf import settings
+from io import StringIO
 from .models import Payment, Transaction
-from django.utils import dateformat
-
-# from itertools import chain
 
 
 @csrf_exempt
@@ -168,7 +165,7 @@ def payroll(request):
 
 
 @login_required
-def movements(request):
+def transaction_list(request):
     all_movements = []
     profile = get_object_or_404(Profile, user=request.user)
     accounts = profile.accounts.all()
@@ -181,33 +178,25 @@ def movements(request):
         )
         all_movements.extend(outgoing_movements)
         all_movements.extend(incoming_movements)
+    all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
+    return render(request, "payment/movements.html", {"payments": all_movements})
+
+
+@login_required
+def payment_list(request):
+    all_movements = []
+    profile = get_object_or_404(Profile, user=request.user)
+    accounts = profile.accounts.all()
+    for account in accounts:
         for card in account.cards.all():
             if payments := card.payments.all():
                 all_movements.extend(payments)
     all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
     return render(request, "payment/movements.html", {"payments": all_movements})
 
-
-# CSV to admin
-
-"""
-from django.shortcuts import render, redirect
-from .models import YourElementModel
-
-def process_selected_elements(request):
-    if request.method == 'POST':
-        selected_elements = request.POST.getlist('selected_elements')
-        # Process the selected elements (e.g., update database records, perform some operations)
-        # ...
-
-        return redirect('success_page')  # Redirect to a success page after processing
-
-    return redirect('error_page')  # Redirect to an error page if the form was not submitted correctly
-"""
-
 @staff_member_required
 def export_csv(request):
-    movements = json.loads(request.body)
+    movements = request.POST.getlist("selected_elements")
     payments = []
     transactions = []
     for movement in movements:
@@ -216,19 +205,26 @@ def export_csv(request):
             transactions.append(Transaction.objects.get(id=movement_id))
         if eval(movement_type) == Payment:
             payments.append(Payment.objects.get(id=movement_id))
+    response = HttpResponse(content_type='text/csv')
     if payments:
-        with open(settings.BASE_DIR / "csv_files" / "payments.csv", "w") as payments_csv_file:
+        response['Content-Disposition'] = 'attachment; filename=payments.csv'
+        with StringIO() as payments_csv_file:
             file_writer = csv.writer(payments_csv_file)
-            file_writer.writerow(["id", "Card", "Business","Amount", "Kind", "Timestamp"])
+            file_writer.writerow(["id", "Card", "Business", "Amount", "Kind", "Timestamp"])
             for payment in payments:
                 file_writer.writerow([payment.id, payment.card, payment.business, payment.amount, payment.kind, payment.timestamp])
+            response.write(payments_csv_file.getvalue())
     if transactions:
-        with open(settings.BASE_DIR / "csv_files" / "transactions.csv", "w") as transactions_csv_file:
+        response['Content-Disposition'] = 'attachment; filename=transactions.csv'
+        with StringIO() as transactions_csv_file:
             file_writer = csv.writer(transactions_csv_file)
             file_writer.writerow(["id", "Agent", "Account", "Amount", "Kind", "Timestamp"])
             for transaction in transactions:
                 file_writer.writerow([transaction.id, transaction.agent, transaction.account, transaction.amount, transaction.kind, transaction.timestamp])
-    return HttpResponse()
+            response.write(transactions_csv_file.getvalue())
+    if not any([payments, transactions]):
+        return HttpResponse("You have not selected any transaction or payment!")
+    return response
 
 # CSV to user
 #@login_required

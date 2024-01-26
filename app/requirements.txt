@@ -6,3 +6,4 @@ django-debug-toolbar
 django-bootstrap-v5
 WeasyPrint
 django-rosetta
+djangorestframework

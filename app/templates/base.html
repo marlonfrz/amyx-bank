@@ -29,7 +29,8 @@
         <a class="header-a" href="{% url 'cards' %}"><p class="header-p">{% trans "Cards" %}</p></a>
         <a class="header-a" href="{% url 'payment' %}"><p class="header-p">{% trans "Payments" %}</p></a>
         <a class="header-a" href="{% url 'outgoing' %}"><p class="header-p">{% trans "Transactions" %}</p></a>
-        <a class="header-a" href="{% url 'payments:movements' %}"><p class="header-p">{% trans "Movements" %}</p></a>
+        <a class="header-a" href="{% url 'payments:transaction_list' %}"><p class="header-p">{% trans "Your Transactions" %}</p></a>
+        <a class="header-a" href="{% url 'payments:payment_list' %}"><p class="header-p">{% trans "Your Payments" %}</p></a>
         {% get_current_language as LANGUAGE_CODE %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
@@ -38,7 +39,7 @@
             <ul class="languages">
                 {% for language in languages %}
                     <li>
-                        <a href="/{{ language.code }}/"
+                        <a href=""
                             {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
                             {{ language.name_local }}
                         </a>
@@ -139,13 +140,7 @@
               </div>
             </div>
           </div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  {% block domready %}
-  
-  {% endblock %}
-})
-</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MRDxqP3sbCqnbM6Iz/UnBncmGOfj/fQ2RkLZ5ByfS04hMAI0mEZI1pepJwMzWay" crossorigin="anonymous"></script>
 </body>
