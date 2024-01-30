@@ -37,10 +37,10 @@ class BankAccount(models.Model):
         return super(__class__, self).save(*args, **kwargs)
     
     def __str__(self) -> str:
-        return self.account_name
+        return f"{self.account_name} ({self.account_code})"
 
     def __repr__(self) -> str:
-        return self.account_name
+        return self.account_code
 
     def get_absolute_url(self):
         return reverse('account_detail', args=[self.id])

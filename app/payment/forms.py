@@ -1,9 +1,10 @@
 from django import forms
-
+from account.models import BankAccount
 from payment.models import Payment, Transaction
 
 
 class TransactionForm(forms.ModelForm):
+    sender = forms.ModelChoiceField(queryset=BankAccount.objects.none())
     sender = forms.CharField(
         max_length=7,
         widget=forms.TextInput(

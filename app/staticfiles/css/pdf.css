@@ -1,0 +1,22 @@
+h4 {
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+table {
+    width: 80%;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

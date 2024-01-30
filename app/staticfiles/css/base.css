@@ -441,3 +441,14 @@ td {
 .about_us{
     font-size: 19px;
 }
+
+.input_controler {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    background: transparent;
+}

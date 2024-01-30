@@ -69,6 +69,7 @@ def payment(request):
 def outgoing_transactions(request):
     # Este bloque controla que los datos pueden
     # llegar tanto por formulario como por curl
+    profile = get_object_or_404(Profile, user=request.user)
     if request.method == "POST":
         try:
             cd = json.loads(request.body)
@@ -194,7 +195,7 @@ def payment_list(request):
     all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
     return render(request, "payment/movements.html", {"payments": all_movements})
 
-@staff_member_required
+@login_required
 def export_csv(request):
     movements = request.POST.getlist("selected_elements")
     payments = []
@@ -226,17 +227,6 @@ def export_csv(request):
         return HttpResponse("You have not selected any transaction or payment!")
     return response
 
-# CSV to user
-#@login_required
-#def user_export_csv(request, transaction_id):
-#    transaction = get_object_or_404(Transaction, id=transaction_id)
-#    content_disposition = f'attachment; filename={transaction.verbose_name}.csv'
-#    response = HttpResponse(content_type='text/csv')
-#    response['Content-Disposition'] = content_disposition
-#    writer = csv.writer(response)
-#    return render(request, 'payments/export_to_csv.html', {'writer': writer})
-
-
 # PDF TO FIX
 @login_required
 def transaction_pdf(request, transaction_id):
@@ -246,7 +236,6 @@ def transaction_pdf(request, transaction_id):
     response["Content-Disposition"] = f"attachment; filename='{transaction.id}.pdf'"
     HTML(string=html).write_pdf(response)
     return response
-
 
 # PDF TO FIX ---- hacer comando python manage.py collectstatic, si no funciona sergio tiene otra solución en su codigo final ----
 @login_required
@@ -259,30 +248,16 @@ def payment_pdf(request, payment_id):
     HTML(string=html).write_pdf(response)
     return response
 
-
 @login_required
 def payment_detail(request, id):
     movement = get_object_or_404(Payment, id=id)
     return render(request, "payment/payment_detail.html", {"movement": movement})
-
 
 @login_required
 def transaction_detail(request, id):
     movement = get_object_or_404(Transaction, id=id)
     return render(request, "payment/transaction_detail.html", {"movement": movement})
 
-
 @login_required
 def payment_success(request):
     return redirect("dashboard")
-
-
-def prueba(request):
-    profile = get_object_or_404(Profile, user=request.user)
-    accounts = []
-    for account in profile.accounts.all():
-        accounts.append(account)
-    accounts2 = list(profile.accounts.all())
-    cards = list(accounts2[0].cards.all())
-    print(accounts2[0].cards.all())
-    return HttpResponse(f"Perfil: {profile}, Cuentas: {accounts2}, Tarjetas: {cards}, Pagos")
