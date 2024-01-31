@@ -30,7 +30,10 @@
                 {% endfor %}
             </ul>
         </div>
-    {% else %}
+        <div>
+            <a class="operation" href="{% url 'create_card' %}">{% trans "Card creation" %}</a>
+        </div>
+        {% else %}
         <h1>{% trans "You do not have cards" %} <span style="color: orange">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: blue" href="{% url 'create_card' %}">{% trans "link" %}</a></h1>
     {% endif %}
 {% endblock %}

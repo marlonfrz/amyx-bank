@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-11 19:01+0000\n"
-"PO-Revision-Date: 2024-01-11 19:02+0000\n"
-"Last-Translator:   <yamila@yamila.com>\n"
+"POT-Creation-Date: 2024-01-30 16:45+0000\n"
+"PO-Revision-Date: 2024-01-30 16:45+0000\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -77,12 +77,12 @@ msgid "You do not have accounts"
 msgstr "Todavía no tienes cuentas"
 
 #: templates/account/accounts.html:29 templates/card/card_create.html:16
-#: templates/card/cards.html:34
+#: templates/card/cards.html:37
 msgid "create some with the following"
 msgstr "crea algunas con el siguiente formulario"
 
 #: templates/account/accounts.html:29 templates/card/card_create.html:16
-#: templates/card/cards.html:34
+#: templates/card/cards.html:37
 msgid "link"
 msgstr "enlace"
 
@@ -111,27 +111,27 @@ msgstr "Editar"
 msgid "Total balance"
 msgstr "Balance total"
 
-#: templates/account/dashboard.html:85
+#: templates/account/dashboard.html:75 templates/card/cards.html:34
 msgid "Card creation"
 msgstr "Creación de tarjeta"
 
-#: templates/account/dashboard.html:90
+#: templates/account/dashboard.html:80
 msgid "Account creation"
 msgstr "Creación de cuenta"
 
-#: templates/account/dashboard.html:95
+#: templates/account/dashboard.html:85
 msgid "Buy"
 msgstr "Comprar"
 
-#: templates/account/dashboard.html:100
+#: templates/account/dashboard.html:90
 msgid "Transfer"
 msgstr "Transferir"
 
-#: templates/account/dashboard.html:105
+#: templates/account/dashboard.html:95
 msgid "CARDS"
 msgstr "TARJETAS"
 
-#: templates/account/dashboard.html:111
+#: templates/account/dashboard.html:101
 msgid "ACCOUNTS"
 msgstr "CUENTAS"
 
@@ -155,7 +155,7 @@ msgstr "puedes también cambiar tu contraseña"
 msgid "here"
 msgstr "aquí"
 
-#: templates/amyx_bank/about_us.html:4
+#: templates/amyx_bank/about_us.html:4 templates/amyx_bank/about_us.html:11
 msgid "About us"
 msgstr "Sobre nosotros"
 
@@ -203,7 +203,7 @@ msgid "Large"
 msgstr "Grande"
 
 #: templates/amyx_bank/about_us.html:42 templates/base.html:30
-#: templates/payment/movements.html:3
+#: templates/payment/movements.html:5
 msgid "Payments"
 msgstr "Pagos"
 
@@ -271,74 +271,76 @@ msgid "Transactions"
 msgstr "Transferencias"
 
 #: templates/base.html:32
-msgid "Movements"
-msgstr "Movimientos"
+#| msgid "Transactions"
+msgid "Your Transactions"
+msgstr "Tus Transferencias"
 
-#: templates/base.html:37
-msgid "Language"
-msgstr "Idioma"
+#: templates/base.html:33
+#| msgid "Your payments "
+msgid "Your Payments"
+msgstr "Tus pagos"
 
-#: templates/base.html:67
+#: templates/base.html:60
 msgid "is your trusted bank"
 msgstr "es tu banco de confianza"
 
-#: templates/base.html:70
+#: templates/base.html:63
 msgid "Made by"
 msgstr "Hecho por"
 
-#: templates/base.html:94
+#: templates/base.html:87
 msgid "About"
 msgstr "Acerca de"
 
-#: templates/base.html:98
+#: templates/base.html:91
 msgid "About Us"
 msgstr "Sobre nosotros"
 
-#: templates/base.html:99
+#: templates/base.html:92
 msgid "Corporate Sale"
 msgstr "Venta corporativa"
 
-#: templates/base.html:100
+#: templates/base.html:93
 msgid "Terms &amp; Policy"
 msgstr "Términos &amp; Políticas"
 
-#: templates/base.html:101
+#: templates/base.html:94
 msgid "Community"
 msgstr "Comunidad"
 
-#: templates/base.html:110 templates/base.html:115
+#: templates/base.html:103 templates/base.html:108
 msgid "Support"
 msgstr "Apoyo"
 
-#: templates/base.html:114
+#: templates/base.html:107
 msgid "Help"
 msgstr "Ayuda"
 
-#: templates/base.html:116
+#: templates/base.html:109
 msgid "Privacy Policy"
 msgstr "Política de privacidad"
 
-#: templates/base.html:117 templates/base.html:133
+#: templates/base.html:110 templates/base.html:126
 msgid "Term &amp; Conditions"
 msgstr "Terminos y condiciones"
 
-#: templates/base.html:118
+#: templates/base.html:111
 msgid "Help &amp; Support"
 msgstr "Ayuda y apoyo"
 
-#: templates/base.html:127
+#: templates/base.html:120
 msgid "Contact"
 msgstr "Contacto"
 
-#: templates/base.html:131
+#: templates/base.html:124
 msgid "Call Centre"
 msgstr "Centro de atención al cliente"
 
-#: templates/base.html:132
+#: templates/base.html:125
 msgid "Email Us"
 msgstr "Escribenos"
 
-#: templates/base.html:134
+#: templates/base.html:127
 msgid "Help Center"
 msgstr "Centro de ayuda"
 
@@ -394,7 +396,7 @@ msgstr "Balance de la cuenta"
 msgid "Edit your Card"
 msgstr "Edita tu tarjeta"
 
-#: templates/card/cards.html:34
+#: templates/card/cards.html:37
 msgid "You do not have cards"
 msgstr "No tienes tarjetas"
 
@@ -414,41 +416,41 @@ msgstr "Página {{ page.number }} de {{ page.paginator.num_pages }}."
 msgid "Next"
 msgstr "Siguiente"
 
-#: templates/payment/movements.html:7
+#: templates/payment/movements.html:9
 msgid "Your payments "
 msgstr "Tus pagos"
 
-#: templates/payment/movements.html:19
+#: templates/payment/movements.html:24
 #: templates/payment/payment_detail.html:21
 #: templates/payment/transaction_detail.html:21
 msgid "Amount"
 msgstr "Cantidad"
 
-#: templates/payment/movements.html:27
+#: templates/payment/movements.html:34
 msgid "first"
 msgstr "primera"
 
-#: templates/payment/movements.html:28
+#: templates/payment/movements.html:35
 msgid "previous"
 msgstr "previa"
 
-#: templates/payment/movements.html:31
+#: templates/payment/movements.html:38
 msgid "Page "
 msgstr "Página"
 
-#: templates/payment/movements.html:31
+#: templates/payment/movements.html:38
 msgid "of "
 msgstr "de"
 
-#: templates/payment/movements.html:34
+#: templates/payment/movements.html:41
 msgid "next"
 msgstr "siguiente"
 
-#: templates/payment/movements.html:35
+#: templates/payment/movements.html:42
 msgid "last"
 msgstr "última"
 
-#: templates/payment/movements.html:40
+#: templates/payment/movements.html:47
 msgid "You have no payments yet"
 msgstr "Todavía no has realizado ningún pago"
 
@@ -539,19 +541,19 @@ msgstr "¿No tienes cuenta todavía?"
 msgid "Register"
 msgstr "Registrarse"
 
-#: templates/registration/logout.html:4 templates/registration/logout.html:7
+#: templates/registration/logout.html:4 templates/registration/logout.html:8
 msgid "Logged out"
 msgstr "Saliste de la sesión"
 
-#: templates/registration/logout.html:9
+#: templates/registration/logout.html:10
 msgid "You have been logged out."
 msgstr "Has cerrado cesión"
 
-#: templates/registration/logout.html:10
+#: templates/registration/logout.html:11
 msgid "You can"
 msgstr "Puedes"
 
-#: templates/registration/logout.html:10
+#: templates/registration/logout.html:11
 msgid "log-in again"
 msgstr "iniciar sesión de nuevo"
 
@@ -570,6 +572,12 @@ msgstr "Ahora tú puedes"
 #: templates/registration/register_done.html:8
 msgid "log in"
 msgstr "iniciar sesión"
+
+#~ msgid "Movements"
+#~ msgstr "Movimientos"
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
 
 #, python-format
 #~ msgid "5%% of commissions"

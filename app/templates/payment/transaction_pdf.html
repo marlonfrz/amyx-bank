@@ -10,13 +10,12 @@
     <body>
         <div class="container mt-5">
             <div class="text-center">
-                <h4 class="mt-3">Movement done at: {{ payment.timestamp|date:"g:i A d F Y" }}</h4>
+                <h4 class="mt-3">Movement done at: {{ transaction.timestamp|date:"g:i A d F Y" }}</h4>
             </div>
-            
             <table class="table mt-4">
                 <tr>
                     <th>Agent</th>
-                    <td>{{ transaction.agent }}</td>
+                    <td>{{ transaction.agent }}</td> 
                 </tr>
                 <tr>
                     <th>Account</th>

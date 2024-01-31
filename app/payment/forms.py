@@ -1,15 +1,12 @@
 from django import forms
+
 from account.models import BankAccount
-from payment.models import Payment, Transaction
+from payment.models import Card, Payment, Transaction
 
 
 class TransactionForm(forms.ModelForm):
-    sender = forms.ModelChoiceField(queryset=BankAccount.objects.none())
-    sender = forms.CharField(
-        max_length=7,
-        widget=forms.TextInput(
-            attrs={'id': 'sender', 'pattern': '[aA][0-9]-[0-9]{4}', 'placeholder': 'A5-0000'}
-        ),
+    sender = forms.ModelChoiceField(
+        queryset=BankAccount.objects.none(), to_field_name="account_code"
     )
     cac = forms.CharField(
         max_length=7,
@@ -26,15 +23,14 @@ class TransactionForm(forms.ModelForm):
             'amount': forms.TextInput(attrs={'id': 'amount'}),
         }
 
+    def __init__(self, profile=[], *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['sender'].queryset = BankAccount.objects.filter(profile=profile)
+
 
 class PaymentForm(forms.ModelForm):
     business = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id': 'business'}))
-    ccc = forms.CharField(
-        max_length=7,
-        widget=forms.TextInput(
-            attrs={'id': 'ccc', 'pattern': '[cC][0-9]-[0-9]{4}', 'placeholder': 'C9-0000'}
-        ),
-    )
+    ccc = forms.ModelChoiceField(Card.objects.none(), to_field_name="card_code")
     pin = forms.CharField(
         max_length=3,
         widget=forms.TextInput(
@@ -48,3 +44,14 @@ class PaymentForm(forms.ModelForm):
         widgets = {
             'amount': forms.TextInput(attrs={'id': 'amount'}),
         }
+
+    def __init__(self, accounts=[], *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if accounts:
+            self.fields['ccc'].queryset = Card.objects.filter(account=accounts[0])
+            cards = accounts[0].cards.all()
+            for account in accounts:
+                cards = cards | account.cards.all()
+            self.fields['ccc'].queryset = cards
+        else:
+            self.fields['ccc'].queryset = Card.objects.none()

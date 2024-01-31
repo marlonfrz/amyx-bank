@@ -3,19 +3,21 @@ from django.urls import reverse
 
 from amyx_bank.models import Profile
 
+
 class BankAccount(models.Model):
     class Status(models.TextChoices):
         ACTIVE = "AC", "Active"
         DISABLED = "DS", "Disable"
         CANCELLED = "CN", "Cancelled"
 
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, related_name="accounts")
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, null=True, related_name="accounts"
+    )
     account_name = models.CharField(max_length=50, primary_key=False)
     balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     account_code = models.CharField(max_length=20, null=False, blank=True)
     status = models.CharField(max_length=20, default=Status.ACTIVE, choices=Status.choices)
     objects = models.Manager()
-
 
     class Meta:
         ordering = ["-account_code"]
@@ -35,13 +37,12 @@ class BankAccount(models.Model):
                 new_bank_account_code = "A5-0001"
             self.account_code = new_bank_account_code
         return super(__class__, self).save(*args, **kwargs)
-    
+
     def __str__(self) -> str:
-        return f"{self.account_name} ({self.account_code})"
+        return f"{self.account_name} - {self.account_code}"
 
     def __repr__(self) -> str:
         return self.account_code
 
     def get_absolute_url(self):
         return reverse('account_detail', args=[self.id])
-

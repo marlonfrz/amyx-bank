@@ -27,9 +27,7 @@ class Card(models.Model):
         if not self.card_code:
             try:
                 last_used_card_code = Card.objects.latest("card_code").card_code
-                new_card_code = (
-                    f"{card_prefix}-{int(last_used_card_code[3:].lstrip('0')) + 1:04d}"
-                )
+                new_card_code = f"{card_prefix}-{int(last_used_card_code[3:].lstrip('0')) + 1:04d}"
             except Card.DoesNotExist:
                 new_card_code = "C5-0001"
             self.card_code = new_card_code
@@ -37,9 +35,9 @@ class Card(models.Model):
 
     def get_absolute_url(self):
         return reverse('card_detail', args=[self.id])
-    
+
     def __str__(self) -> str:
-        return f"{self.card_name} ({self.card_code})"
+        return f"{self.card_name} -- {self.card_code}"
 
     def __repr__(self) -> str:
         return self.card_name

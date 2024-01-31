@@ -1,12 +1,13 @@
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
+
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import generate_random_code
-from django.conf import settings
 from card.forms import CardCreateForm, CardEditForm
 from card.models import Card
 
@@ -22,16 +23,12 @@ def create_card(request):
             cd = card_form.cleaned_data
             user = authenticate(request, username=request.user.username, password=cd["password"])
             if user is not None:
-                destined_account = cd["accounts"]
-                account = BankAccount.objects.filter(profile=profile, status=BankAccount.Status.ACTIVE).get(
-                    account_name=destined_account
-                )
+                account = cd["accounts"]
                 cards = Card.objects.filter(account=account).exclude(status=Card.Status.CANCELLED)
                 if len(cards) < MAX_CARD_AMOUNT:
                     card = card_form.save(commit=False)
                     card.account = account
                     cvc = generate_random_code(3)
-                    #print("se ha generado tu tarjeta")
                     send_mail(
                         'You card\'s CVC',  # Email concept
                         f"""Your card {card} has been created succesfully.

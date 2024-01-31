@@ -1,11 +1,9 @@
 import csv
 import json
 from decimal import Decimal
+from io import StringIO
 
 import requests
-from account.models import BankAccount, Profile
-from amyx_bank.ourutils import calc_commission, get_bank_info
-from card.models import Card
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
@@ -16,19 +14,28 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-from payment.forms import PaymentForm, TransactionForm
 from weasyprint import HTML
-from io import StringIO
+
+from account.models import BankAccount, Profile
+from amyx_bank.ourutils import calc_commission, get_bank_info
+from card.models import Card
+from payment.forms import PaymentForm, TransactionForm
+
 from .models import Payment, Transaction
 
 
 @csrf_exempt
 def payment(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    accounts = profile.accounts.all()
+    print(accounts)
+    for i in accounts:
+        print(i)
     if request.method == "POST":
         try:
             cd = json.loads(request.body)
         except json.JSONDecodeError:
-            form = PaymentForm(request.POST)
+            form = PaymentForm(accounts, request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
         else:
@@ -36,7 +43,7 @@ def payment(request):
                 "Payment was cancelled due to invalid information passed in the POST request"
             )
         business = cd.get("business").upper()
-        ccc = cd.get("ccc").upper()
+        ccc = cd.get("ccc").card_code
         amount = Decimal(cd.get("amount"))
         if amount == 0:
             return HttpResponseBadRequest("You cannot send no money to anyone!")
@@ -60,7 +67,7 @@ def payment(request):
         )
         return redirect(reverse("payments:payment_detail", args=[new_payment.id]))
     else:
-        form = PaymentForm()
+        form = PaymentForm(accounts)
     return render(request, "payment/payment.html", {"payment_form": form})
 
 
@@ -74,7 +81,7 @@ def outgoing_transactions(request):
         try:
             cd = json.loads(request.body)
         except json.JSONDecodeError:
-            form = TransactionForm(request.POST)
+            form = TransactionForm(profile, request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
         else:
@@ -82,7 +89,7 @@ def outgoing_transactions(request):
                 "Transaction was cancelled due to invalid information passed in the POST request"
             )
         # Obtención los datos del diccionario
-        sender = cd.get("sender").upper()
+        sender = cd.get("sender").account_code
         account = cd.get("cac").upper()
         # Clausulas guarda para despachar los errores posibles
         if sender == account:
@@ -100,7 +107,7 @@ def outgoing_transactions(request):
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
         if cac.balance < taxed_amount:
             return HttpResponseBadRequest("You do not have enough money!")
-        url = f"{destined_bank}/transfer/incoming/"
+        url = f"{destined_bank}/{request.LANGUAGE_CODE}/transfer/incoming/"
         status = requests.post(
             url, json={"sender": sender, "cac": account, "concept": concept, "amount": str(amount)}
         )
@@ -119,7 +126,7 @@ def outgoing_transactions(request):
         )
         return redirect(reverse("payments:transaction_detail", args=[new_transaction.id]))
     else:
-        form = TransactionForm()
+        form = TransactionForm(profile=profile)
     return render(request, "payment/transactions.html", {"transaction_form": form})
 
 
@@ -195,6 +202,7 @@ def payment_list(request):
     all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
     return render(request, "payment/movements.html", {"payments": all_movements})
 
+
 @login_required
 def export_csv(request):
     movements = request.POST.getlist("selected_elements")
@@ -213,7 +221,16 @@ def export_csv(request):
             file_writer = csv.writer(payments_csv_file)
             file_writer.writerow(["id", "Card", "Business", "Amount", "Kind", "Timestamp"])
             for payment in payments:
-                file_writer.writerow([payment.id, payment.card, payment.business, payment.amount, payment.kind, payment.timestamp])
+                file_writer.writerow(
+                    [
+                        payment.id,
+                        payment.card,
+                        payment.business,
+                        payment.amount,
+                        payment.kind,
+                        payment.timestamp,
+                    ]
+                )
             response.write(payments_csv_file.getvalue())
     if transactions:
         response['Content-Disposition'] = 'attachment; filename=transactions.csv'
@@ -221,11 +238,21 @@ def export_csv(request):
             file_writer = csv.writer(transactions_csv_file)
             file_writer.writerow(["id", "Agent", "Account", "Amount", "Kind", "Timestamp"])
             for transaction in transactions:
-                file_writer.writerow([transaction.id, transaction.agent, transaction.account, transaction.amount, transaction.kind, transaction.timestamp])
+                file_writer.writerow(
+                    [
+                        transaction.id,
+                        transaction.agent,
+                        transaction.account,
+                        transaction.amount,
+                        transaction.kind,
+                        transaction.timestamp,
+                    ]
+                )
             response.write(transactions_csv_file.getvalue())
     if not any([payments, transactions]):
         return HttpResponse("You have not selected any transaction or payment!")
     return response
+
 
 # PDF TO FIX
 @login_required
@@ -237,6 +264,7 @@ def transaction_pdf(request, transaction_id):
     HTML(string=html).write_pdf(response)
     return response
 
+
 # PDF TO FIX ---- hacer comando python manage.py collectstatic, si no funciona sergio tiene otra solución en su codigo final ----
 @login_required
 def payment_pdf(request, payment_id):
@@ -244,19 +272,22 @@ def payment_pdf(request, payment_id):
     html = render_to_string("payment/payment_pdf.html", {"payment": payment})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f'attachment; filename="{payment.id}.pdf"'
-    #f'attachment; filename="{document.title}.pdf"'
+    # f'attachment; filename="{document.title}.pdf"'
     HTML(string=html).write_pdf(response)
     return response
+
 
 @login_required
 def payment_detail(request, id):
     movement = get_object_or_404(Payment, id=id)
     return render(request, "payment/payment_detail.html", {"movement": movement})
 
+
 @login_required
 def transaction_detail(request, id):
     movement = get_object_or_404(Transaction, id=id)
     return render(request, "payment/transaction_detail.html", {"movement": movement})
+
 
 @login_required
 def payment_success(request):
