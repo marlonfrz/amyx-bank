@@ -24,7 +24,7 @@ def create_card(request):
             user = authenticate(request, username=request.user.username, password=cd["password"])
             if user is not None:
                 account = cd["accounts"]
-                cards = Card.objects.filter(account=account).exclude(status=Card.Status.CANCELLED)
+                cards = account.cards.exclude(status=Card.Status.CANCELLED)
                 if len(cards) < MAX_CARD_AMOUNT:
                     card = card_form.save(commit=False)
                     card.account = account
@@ -54,7 +54,9 @@ We are sorry if you receive this by our testing and we appologise for it, you ar
     else:
         accounts = BankAccount.objects.filter(profile=profile)
         card_form = CardCreateForm(profile)
-    return render(request, "card/card_create.html", {"card_create_form": card_form, "accounts": accounts})
+    return render(
+        request, "card/card_create.html", {"card_create_form": card_form, "accounts": accounts}
+    )
 
 
 # http://dsw.pc16.aula109:8000/card/edit/card/<int:id>/
@@ -65,10 +67,15 @@ def card_edit(request, id):
         form = CardEditForm(request.POST, instance=card)
         if form.is_valid():
             form.save()
-            return redirect("card_detail", id=card.id)
+            cd = form.cleaned_data
+            card_status = cd["status"]
+            if card_status == Card.Status.CANCELLED:
+                return render(request, "card/cancellation.html", {"card_name": cd["card_name"]})
+            return redirect('card_detail', id=card.id)
     else:
         form = CardEditForm(instance=card)
     return render(request, "card/card_edit.html", {"card_edit_form": form, "card": card})
+
 
 # http://dsw.pc16.aula109:8000/card/cards/
 @login_required
@@ -79,7 +86,9 @@ def cards(request):
     all_cards = {}
     for account in accounts:
         try:
-            account_cards = Card.objects.filter(account=account).exclude(status=Card.Status.CANCELLED)
+            account_cards = Card.objects.filter(account=account).exclude(
+                status=Card.Status.CANCELLED
+            )
             for card in account_cards:
                 if all_cards.get(account):
                     all_cards[account].append(card)
@@ -88,6 +97,7 @@ def cards(request):
         except Card.DoesNotExist:
             continue
     return render(request, "card/cards.html", {"cards": all_cards})
+
 
 @login_required
 def card_detail(request, id):

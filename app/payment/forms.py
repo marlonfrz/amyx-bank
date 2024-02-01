@@ -25,7 +25,9 @@ class TransactionForm(forms.ModelForm):
 
     def __init__(self, profile=[], *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['sender'].queryset = BankAccount.objects.filter(profile=profile)
+        self.fields['sender'].queryset = BankAccount.objects.filter(profile=profile).exclude(
+            status=BankAccount.Status.CANCELLED
+        )
 
 
 class PaymentForm(forms.ModelForm):
@@ -49,9 +51,9 @@ class PaymentForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if accounts:
             self.fields['ccc'].queryset = Card.objects.filter(account=accounts[0])
-            cards = accounts[0].cards.all()
+            cards = accounts[0].cards.exclude(status=Card.Status.CANCELLED)
             for account in accounts:
-                cards = cards | account.cards.all()
+                cards = cards | account.cards.exclude(status=Card.Status.CANCELLED)
             self.fields['ccc'].queryset = cards
         else:
             self.fields['ccc'].queryset = Card.objects.none()

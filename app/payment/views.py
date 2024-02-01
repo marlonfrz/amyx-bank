@@ -4,7 +4,6 @@ from decimal import Decimal
 from io import StringIO
 
 import requests
-from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -12,7 +11,6 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from weasyprint import HTML
 
@@ -28,9 +26,6 @@ from .models import Payment, Transaction
 def payment(request):
     profile = get_object_or_404(Profile, user=request.user)
     accounts = profile.accounts.all()
-    print(accounts)
-    for i in accounts:
-        print(i)
     if request.method == "POST":
         try:
             cd = json.loads(request.body)
@@ -126,7 +121,7 @@ def outgoing_transactions(request):
         )
         return redirect(reverse("payments:transaction_detail", args=[new_transaction.id]))
     else:
-        form = TransactionForm(profile=profile)
+        form = TransactionForm(profile)
     return render(request, "payment/transactions.html", {"transaction_form": form})
 
 
@@ -265,7 +260,8 @@ def transaction_pdf(request, transaction_id):
     return response
 
 
-# PDF TO FIX ---- hacer comando python manage.py collectstatic, si no funciona sergio tiene otra solución en su codigo final ----
+# PDF TO FIX ---- hacer comando python manage.py collectstatic,
+# si no funciona sergio tiene otra solución en su codigo final ----
 @login_required
 def payment_pdf(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id)

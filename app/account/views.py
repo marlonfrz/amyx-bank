@@ -1,9 +1,10 @@
-from account.forms import AccountEditForm, AccountForm, ChangePasswordForm
-from account.models import BankAccount, Profile
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
+
+from account.forms import AccountEditForm, AccountForm, ChangePasswordForm
+from account.models import BankAccount, Profile
 
 
 # http://dsw.pc16.aula109:8000/account
@@ -77,6 +78,12 @@ def edit_bank_account(request, id):  # el pk es primarykey
         form = AccountEditForm(request.POST, instance=bank_account)
         if form.is_valid():
             form.save()
+            cd = form.cleaned_data
+            account_status = cd["status"]
+            if account_status == BankAccount.Status.CANCELLED:
+                return render(
+                    request, "account/cancellation.html", {"account_name": cd["account_name"]}
+                )
             return redirect("accounts")
     else:
         form = AccountEditForm(instance=bank_account)
@@ -88,8 +95,9 @@ def edit_bank_account(request, id):  # el pk es primarykey
 def accounts(request):
     user = request.user
     profile = get_object_or_404(Profile, user=user)
-    accounts = list(profile.accounts.all())
-    #    accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
+    accounts = profile.accounts.exclude(status=BankAccount.Status.CANCELLED)
+    #    accounts = BankAccount.objects.filter(profile=profile).
+    #    exclude(status=BankAccount.Status.CANCELLED)
     return render(request, "account/accounts.html", {"accounts": accounts})
 
 

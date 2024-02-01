@@ -22,4 +22,4 @@ class AccountForm(forms.ModelForm):
 class AccountEditForm(forms.ModelForm):
     class Meta:
         model = BankAccount
-        fields = ['account_name']
+        fields = ['account_name', 'status']

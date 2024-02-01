@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Card" %} {{ card_name }} {% trans "cancellated" %}{% endblock %}
+{% block content %}
+
+<center>
+<h2>Your Card {{ card_name }} has been cancellated succesfully! </h2>
+<p>Return to the home page with <a href="{%url 'dashboard' %}">this</a> link</p>
+</center>
+
+{% endblock %}

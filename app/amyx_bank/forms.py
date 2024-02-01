@@ -31,14 +31,17 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['avatar', 'date_of_birth']
 
+
 class HiddenPasswordInput(forms.widgets.PasswordInput):
     input_type = 'hidden'
+
 
 class UserEditForm(UserChangeForm):
     password = forms.CharField(
         widget=HiddenPasswordInput,
         required=False,
     )
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
@@ -55,4 +58,3 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["avatar", 'status']
-
