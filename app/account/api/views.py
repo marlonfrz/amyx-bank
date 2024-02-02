@@ -14,6 +14,10 @@ class BankAccountListView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     http_method_names = ['get']
 
+    #def get_queryset(self):
+    #   return BankAccount.objects.filter(user=self.request.user)
+    # se quitan la linea 11 y probar
+
 class BankAccountDetailView(generics.RetrieveAPIView):
     queryset = BankAccount.objects.all()
     serializer_class = BankAccountSerializer
