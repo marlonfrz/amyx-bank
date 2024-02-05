@@ -237,41 +237,6 @@ nav {
     box-shadow: 10px 0px 20px black;
 }
 
-
-/* Seccion de formularios */
-
-
-form p {
-    width: 100%;
-    overflow: auto;
-}
-
-label {
-    float: left;
-    clear: both;
-    color: #333;
-    margin-bottom: 4px;
-}
-
-input, textarea {
-    clear: both;
-    float: left;
-    margin: 0 0 10px;
-    background-color: #efefef;
-    border: 0;
-    padding: 6px 10px;
-    font-size: 14px;
-}
-
-input[type=submit], a.button {
-    font-weight: bold;
-    background: rgb(24, 139, 206);
-    color: white;
-    padding: 10px 20px;
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
 .product1 {
     display: flex;
     justify-content: center;

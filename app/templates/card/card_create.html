@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 {% block title %}{% trans "New Card" %}{% endblock %}
 {% block content %}
 {% if accounts %}
-    <div style="margin-left: 40%;">
+    <div style="margin-left: 40%; margin-right: 40%; margin-top: 2%">
         <h1>{% trans "Create a Card" %}</h1>
         <p>{% trans "You can create a card using the following form:" %}</p>
         <form method="post" enctype="multipart/form-data">
-            {{ card_create_form.as_p }}
+            {{ card_create_form|crispy }}
             {% csrf_token %}
             <p><input type="submit" class="btn btn-primary" value="Save changes"></p>
         </form>

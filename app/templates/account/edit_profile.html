@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 {% block title %}{% trans "Edit your profile" %}{% endblock %}
 {% block content %}
-<div style="margin-left: 43%; margin-top:20px;">
+<div style="margin-left: 40%; margin-right: 40%; margin-top: 2%">
     <h1>{% trans "Edit your profile" %}</h1>
     <p>{% trans "You can edit your profile using the following form:" %}</p>
     <form method="post" enctype="multipart/form-data">
-        {{ user_edit_form.as_p }}
-        {{ profile_edit_form.as_p }}
+        {{ user_edit_form|crispy }}
+        {{ profile_edit_form|crispy }}
         {% csrf_token %}
     <p><input type="submit" class="btn btn-primary" value="Save changes"></p>
     </form>

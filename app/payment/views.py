@@ -255,7 +255,7 @@ def transaction_pdf(request, transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
     html = render_to_string("payment/transaction_pdf.html", {"transaction": transaction})
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = f"attachment; filename='{transaction.id}.pdf'"
+    response["Content-Disposition"] = f"attachment; filename={transaction.id}.pdf"
     HTML(string=html).write_pdf(response)
     return response
 
@@ -267,7 +267,7 @@ def payment_pdf(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id)
     html = render_to_string("payment/payment_pdf.html", {"payment": payment})
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = f'attachment; filename="{payment.id}.pdf"'
+    response["Content-Disposition"] = f'attachment; filename={payment.id}.pdf'
     # f'attachment; filename="{document.title}.pdf"'
     HTML(string=html).write_pdf(response)
     return response

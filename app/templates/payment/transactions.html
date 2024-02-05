@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 {% block title %}{% trans "Transaction" %}{% endblock %}
 {% block content %}
-<div style="margin-left: 43%; margin-top: 20px;">
+<div style="margin-left: 40%; margin-right: 40%; margin-top: 2%">
     <h1>{% trans "Transaction" %}</h1>
     <p>{% trans "Please fill up the following form" %}</p>
     <form method="post">
-        {{ transaction_form.as_p }}
+        {{ transaction_form|crispy }}
         <p><input type="submit" class="btn btn-primary" value="Send money" onclick="dashboard"></p>
         {% csrf_token %}
     </form>
