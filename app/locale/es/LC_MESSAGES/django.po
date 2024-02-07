@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-07 01:56+0000\n"
-"PO-Revision-Date: 2024-02-07 01:56+0000\n"
+"POT-Creation-Date: 2024-02-07 02:15+0000\n"
+"PO-Revision-Date: 2024-02-07 02:16+0000\n"
 "Last-Translator: Ayoze Hernandez Diaz <elpayov2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -72,16 +72,21 @@ msgstr "Código de la cuenta"
 msgid "Edit your account"
 msgstr "Edita tu cuenta"
 
-#: templates/account/accounts.html:30
+#: templates/account/accounts.html:29
+#| msgid "Create an account"
+msgid "Create accounts"
+msgstr "Crear cuentas"
+
+#: templates/account/accounts.html:33
 msgid "You do not have accounts"
 msgstr "Todavía no tienes cuentas"
 
-#: templates/account/accounts.html:30 templates/card/card_create.html:18
+#: templates/account/accounts.html:33 templates/card/card_create.html:18
 #: templates/card/cards.html:38
 msgid "create some with the following"
 msgstr "crea algunas con el siguiente formulario"
 
-#: templates/account/accounts.html:30 templates/card/card_create.html:18
+#: templates/account/accounts.html:33 templates/card/card_create.html:18
 #: templates/card/cards.html:38
 msgid "link"
 msgstr "enlace"
@@ -396,7 +401,6 @@ msgid "Your cards"
 msgstr "Tus tarjetas"
 
 #: templates/card/cards.html:11
-#| msgid "Cards from"
 msgid "Cards from the account:"
 msgstr "Tarjetas de la cuenta:"
 
