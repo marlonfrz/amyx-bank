@@ -52,7 +52,7 @@ We are sorry if you receive this by our testing and we appologise for it, you ar
         else:
             return HttpResponse('Invalid form')
     else:
-        accounts = BankAccount.objects.filter(profile=profile)
+        accounts = BankAccount.objects.filter(profile=profile).exclude(status=BankAccount.Status.CANCELLED)
         card_form = CardCreateForm(profile)
     return render(
         request, "card/card_create.html", {"card_create_form": card_form, "accounts": accounts}

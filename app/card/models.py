@@ -10,7 +10,7 @@ class Card(models.Model):
         DISABLED = "DS", "Disable"
         CANCELLED = "CN", "Cancelled"
 
-    account = models.ForeignKey(BankAccount, on_delete=models.PROTECT, related_name="cards")
+    account = models.ForeignKey(BankAccount, on_delete=models.CASCADE, related_name="cards")
     card_name = models.CharField(max_length=50, primary_key=False, default='')
     cvc = models.CharField(max_length=3, default='CVC')
     card_code = models.CharField(max_length=20, null=False, blank=True)

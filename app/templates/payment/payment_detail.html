@@ -3,7 +3,9 @@
 {% block title %}{% trans "Movement detail" %}{% endblock %}
 {% block content %}
 <center>
-    <h4 class="top-margin">{% trans "Movement done at" %}: {{ movement.timestamp|date:"g:i A d F Y" }}</h4>
+<div>
+
+    <h4 style="margin-top:20px; margin-bottom:20px; margin-right:30%; margin-left:35%">{% trans "Movement done at" %}: {{ movement.timestamp|date:"g:i A d F Y" }}</h4>
     <table>
         <tr>
             <th>{% trans "Business" %}</th>
@@ -22,9 +24,13 @@
             <td>{{ movement.amount }} €</td>
         </tr>
     </table>
+</div>
     <!--No se si funciona, comprobar-->
+    <div style="margin-top:20px; margin-bottom:20px; margin-right:30%; margin-left:35%">
     <form action="{% url 'payments:payment_pdf' movement.id %}" method="get" target="_blank">
-        <button class="bg-secondary btn btn-primary" type="submit">Export PDF</button>
+        <button class="bg-primary btn btn-primary" type="submit">Export PDF</button>
     </form>
+</div>
+
 </center>
 {% endblock %}

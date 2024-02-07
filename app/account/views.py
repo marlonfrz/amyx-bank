@@ -72,10 +72,10 @@ def bank_account_create_view(request):
 
 # http://dsw.pc16.aula109:8000/edit/account/<int:id>/
 @login_required
-def edit_bank_account(request, id):  # el pk es primarykey
-    bank_account = BankAccount.objects.get(id=id)
+def edit_bank_account(request, id):
+    account = BankAccount.objects.get(id=id)
     if request.method == "POST":
-        form = AccountEditForm(request.POST, instance=bank_account)
+        form = AccountEditForm(request.POST, instance=account)
         if form.is_valid():
             form.save()
             cd = form.cleaned_data
@@ -86,7 +86,7 @@ def edit_bank_account(request, id):  # el pk es primarykey
                 )
             return redirect("accounts")
     else:
-        form = AccountEditForm(instance=bank_account)
+        form = AccountEditForm(instance=account)
     return render(request, "account/account_edit.html", {"account_edit_form": form})
 
 

@@ -22,6 +22,7 @@ from payment.forms import PaymentForm, TransactionForm
 from .models import Payment, Transaction
 
 
+@login_required
 @csrf_exempt
 def payment(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -38,15 +39,11 @@ def payment(request):
                 "Payment was cancelled due to invalid information passed in the POST request"
             )
         business = cd.get("business").upper()
-        ccc = cd.get("ccc").card_code
+        card = cd.get("ccc")
         amount = Decimal(cd.get("amount"))
         if amount == 0:
             return HttpResponseBadRequest("You cannot send no money to anyone!")
         pin = cd.get("pin")
-        try:
-            card = Card.objects.get(card_code=ccc)
-        except Card.DoesNotExist:
-            return HttpResponseForbidden(f"Card {ccc} doesn't exists")
         correct_pin = check_password(pin, card.cvc)
         taxed_amount = amount + calc_commission(amount, "PAYMENTS")
         if not correct_pin:
@@ -84,34 +81,29 @@ def outgoing_transactions(request):
                 "Transaction was cancelled due to invalid information passed in the POST request"
             )
         # Obtención los datos del diccionario
-        sender = cd.get("sender").account_code
+        sender = cd.get("sender")
         account = cd.get("cac").upper()
         # Clausulas guarda para despachar los errores posibles
-        if sender == account:
+        if sender.account_code == account:
             return HttpResponse("You can't send money to yourself")
         amount = Decimal(cd.get("amount"))
         if amount == 0:
             return HttpResponse("You can't send no money to anyone")
         concept = cd.get("concept")
         destined_bank = get_bank_info(account, "url")
-        # Obtiene la cuenta del sender
-        try:
-            cac = BankAccount.objects.get(account_code=sender)
-        except BankAccount.DoesNotExist:
-            return HttpResponseForbidden(f"Account {sender} doesn't exists")
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
-        if cac.balance < taxed_amount:
+        if sender.balance < taxed_amount:
             return HttpResponseBadRequest("You do not have enough money!")
         url = f"{destined_bank}/{request.LANGUAGE_CODE}/transfer/incoming/"
         status = requests.post(
-            url, json={"sender": sender, "cac": account, "concept": concept, "amount": str(amount)}
+            url, json={"sender": sender.account_code, "cac": account, "concept": concept, "amount": str(amount)}
         )
         if status.status_code != 200:
             return HttpResponseBadRequest(
                 f"The account {account} you tried to send money to does not exist"
             )
-        cac.balance -= taxed_amount
-        cac.save()
+        sender.balance -= taxed_amount
+        sender.save()
         new_transaction = Transaction.objects.create(
             agent=sender,
             account=account,
@@ -124,7 +116,7 @@ def outgoing_transactions(request):
         form = TransactionForm(profile)
     return render(request, "payment/transactions.html", {"transaction_form": form})
 
-
+@login_required
 @csrf_exempt
 def incoming_transactions(request):
     cd = json.loads(request.body)
@@ -167,6 +159,28 @@ def payroll(request):
     return HttpResponse("Payroll done!")
 
 
+"""
+def movements(request):
+    transactions = Transaction.objects.all()
+    payments = Payment.objects.all()
+    all_movements = sorted(
+        chain(transactions, payments),
+        key=lambda instance: instance.timestamp,
+        reverse=True,
+    )
+    movements_per_page = 5
+    paginator = Paginator(all_movements, movements_per_page)
+    page = request.GET.get('page')
+    try:
+        movements_page = paginator.page(page)
+    except PageNotAnInteger:
+        movements_page = paginator.page(1)
+    except EmptyPage:
+        movements_page = paginator.page(paginator.num_pages)
+    return render(request, "payment/movements.html", {"movements": movements_page})
+
+"""
+
 @login_required
 def transaction_list(request):
     all_movements = []
@@ -182,7 +196,16 @@ def transaction_list(request):
         all_movements.extend(outgoing_movements)
         all_movements.extend(incoming_movements)
     all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
-    return render(request, "payment/movements.html", {"payments": all_movements})
+    movements_per_page = 5
+    paginator = Paginator(all_movements, movements_per_page)
+    page = request.GET.get('page')
+    try:
+        movements_page = paginator.page(page)
+    except PageNotAnInteger:
+        movements_page = paginator.page(1)
+    except EmptyPage:
+        movements_page = paginator.page(paginator.num_pages)
+    return render(request, "payment/movements.html", {"payments": movements_page})
 
 
 @login_required
@@ -195,7 +218,16 @@ def payment_list(request):
             if payments := card.payments.all():
                 all_movements.extend(payments)
     all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
-    return render(request, "payment/movements.html", {"payments": all_movements})
+    movements_per_page = 5
+    paginator = Paginator(all_movements, movements_per_page)
+    page = request.GET.get('page')
+    try:
+        movements_page = paginator.page(page)
+    except PageNotAnInteger:
+        movements_page = paginator.page(1)
+    except EmptyPage:
+        movements_page = paginator.page(paginator.num_pages)
+    return render(request, "payment/movements.html", {"payments": movements_page})
 
 
 @login_required
@@ -249,7 +281,6 @@ def export_csv(request):
     return response
 
 
-# PDF TO FIX
 @login_required
 def transaction_pdf(request, transaction_id):
     transaction = get_object_or_404(Transaction, id=transaction_id)
@@ -260,8 +291,6 @@ def transaction_pdf(request, transaction_id):
     return response
 
 
-# PDF TO FIX ---- hacer comando python manage.py collectstatic,
-# si no funciona sergio tiene otra solución en su codigo final ----
 @login_required
 def payment_pdf(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id)

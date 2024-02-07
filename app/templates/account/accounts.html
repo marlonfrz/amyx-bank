@@ -26,7 +26,9 @@
             {% endfor %}
         </ul>
     {% else %}
+    <div style="margin-left: 10%; margin-right:10%; margin-top: 20px;">
         <h1>{% trans "You do not have accounts" %} <span style="color: orange">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: blue" href="{% url 'create_account' %}">{% trans "link" %}</a></h1>
+    </div>
     {% endif %}
 
 </div>

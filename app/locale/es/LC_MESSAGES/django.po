@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-30 16:45+0000\n"
-"PO-Revision-Date: 2024-01-30 16:45+0000\n"
-"Last-Translator:   <>\n"
+"POT-Creation-Date: 2024-02-07 01:56+0000\n"
+"PO-Revision-Date: 2024-02-07 01:56+0000\n"
+"Last-Translator: Ayoze Hernandez Diaz <elpayov2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: templates/account/account_create.html:4
+#: templates/account/account_create.html:5
 msgid "New Bank Account"
 msgstr "Nueva Cuenta Bancaria"
 
-#: templates/account/account_create.html:7
+#: templates/account/account_create.html:8
 msgid "Create an account"
 msgstr "Crear una cuenta"
 
-#: templates/account/account_create.html:8
+#: templates/account/account_create.html:9
 msgid "Please sign up using the following form"
 msgstr "Por favor regístrese usando el siguiente formulario"
 
@@ -52,11 +52,11 @@ msgstr "Ahora tú puedes ir a"
 msgid "Your account"
 msgstr "Tu cuenta"
 
-#: templates/account/account_edit.html:4
+#: templates/account/account_edit.html:5
 msgid "Edit your bank account"
 msgstr "Edita tu cuenta bancaria"
 
-#: templates/account/account_edit.html:7
+#: templates/account/account_edit.html:8
 msgid "Edit an account"
 msgstr "Editar una cuenta"
 
@@ -72,22 +72,31 @@ msgstr "Código de la cuenta"
 msgid "Edit your account"
 msgstr "Edita tu cuenta"
 
-#: templates/account/accounts.html:29
+#: templates/account/accounts.html:30
 msgid "You do not have accounts"
 msgstr "Todavía no tienes cuentas"
 
-#: templates/account/accounts.html:29 templates/card/card_create.html:16
-#: templates/card/cards.html:37
+#: templates/account/accounts.html:30 templates/card/card_create.html:18
+#: templates/card/cards.html:38
 msgid "create some with the following"
 msgstr "crea algunas con el siguiente formulario"
 
-#: templates/account/accounts.html:29 templates/card/card_create.html:16
-#: templates/card/cards.html:37
+#: templates/account/accounts.html:30 templates/card/card_create.html:18
+#: templates/card/cards.html:38
 msgid "link"
 msgstr "enlace"
 
-#: templates/account/change_password.html:3
-#: templates/account/change_password.html:7
+#: templates/account/cancellation.html:3
+#: templates/payment/transaction_detail.html:14
+msgid "Account"
+msgstr "Cuenta"
+
+#: templates/account/cancellation.html:3 templates/card/cancellation.html:3
+msgid "cancellated"
+msgstr ""
+
+#: templates/account/change_password.html:4
+#: templates/account/change_password.html:8
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -111,7 +120,7 @@ msgstr "Editar"
 msgid "Total balance"
 msgstr "Balance total"
 
-#: templates/account/dashboard.html:75 templates/card/cards.html:34
+#: templates/account/dashboard.html:75
 msgid "Card creation"
 msgstr "Creación de tarjeta"
 
@@ -135,23 +144,23 @@ msgstr "TARJETAS"
 msgid "ACCOUNTS"
 msgstr "CUENTAS"
 
-#: templates/account/edit_profile.html:3 templates/account/edit_profile.html:6
+#: templates/account/edit_profile.html:4 templates/account/edit_profile.html:7
 msgid "Edit your profile"
 msgstr "Editar tu perfil"
 
-#: templates/account/edit_profile.html:7
+#: templates/account/edit_profile.html:8
 msgid "You can edit your profile using the following form:"
 msgstr "Puedes editar tu perfil usando el siguiente formulario:"
 
-#: templates/account/edit_profile.html:14
+#: templates/account/edit_profile.html:15
 msgid "You have changed your profile information"
 msgstr "Has cambiado la información de tu perfil"
 
-#: templates/account/edit_profile.html:14
+#: templates/account/edit_profile.html:15
 msgid "you can also change your password"
 msgstr "puedes también cambiar tu contraseña"
 
-#: templates/account/edit_profile.html:14
+#: templates/account/edit_profile.html:15
 msgid "here"
 msgstr "aquí"
 
@@ -271,12 +280,10 @@ msgid "Transactions"
 msgstr "Transferencias"
 
 #: templates/base.html:32
-#| msgid "Transactions"
 msgid "Your Transactions"
 msgstr "Tus Transferencias"
 
 #: templates/base.html:33
-#| msgid "Your payments "
 msgid "Your Payments"
 msgstr "Tus pagos"
 
@@ -344,19 +351,23 @@ msgstr "Escribenos"
 msgid "Help Center"
 msgstr "Centro de ayuda"
 
-#: templates/card/card_create.html:3
+#: templates/card/cancellation.html:3 templates/payment/payment_detail.html:15
+msgid "Card"
+msgstr "Tarjeta"
+
+#: templates/card/card_create.html:4
 msgid "New Card"
 msgstr "Nueva tarjeta"
 
-#: templates/card/card_create.html:7
+#: templates/card/card_create.html:8
 msgid "Create a Card"
 msgstr "Crear una tarjeta"
 
-#: templates/card/card_create.html:8
+#: templates/card/card_create.html:9
 msgid "You can create a card using the following form:"
 msgstr "Puedes crear una tarjeta usando el siguiente formulario:"
 
-#: templates/card/card_create.html:16
+#: templates/card/card_create.html:18
 msgid "You do not have accounts to associate to a new card"
 msgstr "No tienes cuentas a las que asociar una nueva tarjeta"
 
@@ -368,15 +379,15 @@ msgstr "Detalle de la tarjeta"
 msgid "CARD'S NUMBER:"
 msgstr "NÚMERO DE LA TARJETA"
 
-#: templates/card/card_edit.html:3
+#: templates/card/card_edit.html:4
 msgid "Edit your card"
 msgstr "Edita tu tarjeta"
 
-#: templates/card/card_edit.html:6
+#: templates/card/card_edit.html:7
 msgid "Edit your card: "
 msgstr "Edita tu tarjeta:"
 
-#: templates/card/card_edit.html:7
+#: templates/card/card_edit.html:8
 msgid "Please use the following form"
 msgstr "Por favor usa el siguiente formulario"
 
@@ -385,8 +396,9 @@ msgid "Your cards"
 msgstr "Tus tarjetas"
 
 #: templates/card/cards.html:11
-msgid "account card's:"
-msgstr "Las tarjetas de tu cuenta:"
+#| msgid "Cards from"
+msgid "Cards from the account:"
+msgstr "Tarjetas de la cuenta:"
 
 #: templates/card/cards.html:12
 msgid "Account balance"
@@ -396,13 +408,13 @@ msgstr "Balance de la cuenta"
 msgid "Edit your Card"
 msgstr "Edita tu tarjeta"
 
-#: templates/card/cards.html:37
+#: templates/card/cards.html:34
+msgid "Create cards"
+msgstr "Crear tarjetas"
+
+#: templates/card/cards.html:38
 msgid "You do not have cards"
 msgstr "No tienes tarjetas"
-
-#: templates/details/account_detail.html:3
-msgid "Account detail"
-msgstr "Detalle de la cuenta"
 
 #: templates/paginator.html:5
 msgid "Previous"
@@ -421,8 +433,8 @@ msgid "Your payments "
 msgstr "Tus pagos"
 
 #: templates/payment/movements.html:24
-#: templates/payment/payment_detail.html:21
-#: templates/payment/transaction_detail.html:21
+#: templates/payment/payment_detail.html:23
+#: templates/payment/transaction_detail.html:22
 msgid "Amount"
 msgstr "Cantidad"
 
@@ -454,15 +466,15 @@ msgstr "última"
 msgid "You have no payments yet"
 msgstr "Todavía no has realizado ningún pago"
 
-#: templates/payment/payment.html:3
+#: templates/payment/payment.html:4
 msgid "Payment"
 msgstr "Pago"
 
-#: templates/payment/payment.html:6
+#: templates/payment/payment.html:7
 msgid "Payment Request"
 msgstr "Solicitud de pago"
 
-#: templates/payment/payment.html:7 templates/payment/transactions.html:7
+#: templates/payment/payment.html:8 templates/payment/transactions.html:8
 msgid "Please fill up the following form"
 msgstr "Por favor rellena el siguiente formulario"
 
@@ -471,20 +483,16 @@ msgstr "Por favor rellena el siguiente formulario"
 msgid "Movement detail"
 msgstr "Detalle del movimiento"
 
-#: templates/payment/payment_detail.html:6
+#: templates/payment/payment_detail.html:8
 msgid "Movement done at"
 msgstr "Movimiento hecho a las"
 
-#: templates/payment/payment_detail.html:9
+#: templates/payment/payment_detail.html:11
 msgid "Business"
 msgstr "Negocio"
 
-#: templates/payment/payment_detail.html:13
-msgid "Card"
-msgstr "Tarjeta"
-
-#: templates/payment/payment_detail.html:17
-#: templates/payment/transaction_detail.html:25
+#: templates/payment/payment_detail.html:19
+#: templates/payment/transaction_detail.html:26
 msgid "Kind"
 msgstr "Tipo"
 
@@ -504,40 +512,36 @@ msgstr "Ahora tú puedes ver tu pago en"
 msgid "your movements"
 msgstr "tus movimientos"
 
-#: templates/payment/transaction_detail.html:9
+#: templates/payment/transaction_detail.html:10
 msgid "Agent"
 msgstr "Agente"
 
-#: templates/payment/transaction_detail.html:13
-msgid "Account"
-msgstr "Cuenta"
-
-#: templates/payment/transaction_detail.html:17
+#: templates/payment/transaction_detail.html:18
 msgid "Concept"
 msgstr "Concepto"
 
-#: templates/payment/transactions.html:3 templates/payment/transactions.html:6
+#: templates/payment/transactions.html:4 templates/payment/transactions.html:7
 msgid "Transaction"
 msgstr "Transferencia"
 
-#: templates/registration/login.html:4 templates/registration/login.html:15
+#: templates/registration/login.html:5 templates/registration/login.html:16
 msgid "Log-in"
 msgstr "Iniciar Sesión"
 
-#: templates/registration/login.html:21
+#: templates/registration/login.html:22
 msgid "Your username and password didn't match."
 msgstr "Tu nombre de usuario y la contraseña no coinciden "
 
-#: templates/registration/login.html:22
+#: templates/registration/login.html:23
 msgid "Please, try again."
 msgstr "Por favor, inténtelo de nuevo"
 
-#: templates/registration/login.html:31
+#: templates/registration/login.html:32
 msgid "¿Don't have and account?"
 msgstr "¿No tienes cuenta todavía?"
 
-#: templates/registration/login.html:31 templates/registration/register.html:3
-#: templates/registration/register.html:16
+#: templates/registration/login.html:32 templates/registration/register.html:4
+#: templates/registration/register.html:17
 msgid "Register"
 msgstr "Registrarse"
 
@@ -557,11 +561,11 @@ msgstr "Puedes"
 msgid "log-in again"
 msgstr "iniciar sesión de nuevo"
 
-#: templates/registration/register.html:27
+#: templates/registration/register.html:28
 msgid "Have an account?"
 msgstr "¿Tienes una cuenta?"
 
-#: templates/registration/register.html:27
+#: templates/registration/register.html:28
 msgid "Login"
 msgstr "Iniciar Sesión"
 
@@ -572,6 +576,15 @@ msgstr "Ahora tú puedes"
 #: templates/registration/register_done.html:8
 msgid "log in"
 msgstr "iniciar sesión"
+
+#~ msgid "account:"
+#~ msgstr "cuenta"
+
+#~ msgid "account card's:"
+#~ msgstr "Las tarjetas de tu cuenta:"
+
+#~ msgid "Account detail"
+#~ msgstr "Detalle de la cuenta"
 
 #~ msgid "Movements"
 #~ msgstr "Movimientos"
@@ -635,9 +648,6 @@ msgstr "iniciar sesión"
 
 #~ msgid "edit/profile/"
 #~ msgstr "editar/perfil"
-
-#~ msgid "account/"
-#~ msgstr "cuenta/"
 
 #~ msgid "card/"
 #~ msgstr "tarjeta/"

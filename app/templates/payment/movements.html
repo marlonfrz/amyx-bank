@@ -4,13 +4,13 @@
 {% load model_tags %}
 {% block title %}{% trans "Payments" %}{% endblock %}
 {% block content %}
-<center>
+<div style="margin-left: 35%;">
     {% if payments %}
-        <h2 class="col-2 col-md-6" style="margin-top: 20px; margin-bottom: 20px">{% trans "Your payments " %} {{ user.username }}</h2>
+        <h2 class="col-5 col-md-8" style="margin-top: 20px; margin-bottom: 20px; margin-left: 15%;">{% trans "Your payments " %} {{ user.username }}</h2>
         <form method="post" action="{% url 'payments:export_movements' %}">
         {% csrf_token %}
             {% for payment in payments %}
-                <li class="card" style="width:35%">
+                <li class="card" style="width:50%">
                     <div class="card-statistic-3 p-4">
                         <input type="checkbox" class="input_controler" value="{{ payment.id }}-{{ payment|type }}">
                         <div class="mb-4 d-flex justify-content-between align-items-center">
@@ -26,26 +26,26 @@
                     </div>
                 </li>
                 {% endfor %}
-                <button type="submit" id="send" class="btn btn-primary ">Get your csv</button>
+                <button type="submit" style="margin-left: 20%;" id="send" class="btn btn-primary">Get your csv</button>
             </form>
-        <div class="">
+        <div style="margin-top: 2%; margin-left: 15%;">
             <span class="step-links">
                 {% if payments.has_previous %}
-                    <a href="?page=1">&laquo; {% trans "first" %}</a>
-                    <a href="?page={{ payments.previous_page_number }}">{% trans "previous" %}</a>
+                    <a style="color: blue" href="?page=1">&laquo; {% trans "first" %}</a>
+                    <a style="color: blue" href="?page={{ payments.previous_page_number }}">{% trans "previous" %}</a>
                 {% endif %}
                 <span class="current">
                     {% trans "Page " %} {{ payments.number }} {% trans "of " %} {{ payments.paginator.num_pages }}.
                 </span>
                 {% if payments.has_next %}
-                    <a href="?page={{ payments.next_page_number }}">{% trans "next" %}</a>
-                    <a href="?page={{ payments.paginator.num_pages }}">{% trans "last" %} &raquo;</a>
+                    <a style="color: blue" href="?page={{ payments.next_page_number }}">{% trans "next" %}</a>
+                    <a style="color: blue" href="?page={{ payments.paginator.num_pages }}">{% trans "last" %} &raquo;</a>
                 {% endif %}
             </span>
         </div>
     {% else %}
     <h2 style="margin-top: 20px; margin-bottom: 20px">{% trans "You have no payments yet" %}</h2>
     {% endif %}
-</center>
+</div>
 {% endblock %}
 
