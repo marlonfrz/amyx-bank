@@ -9,7 +9,6 @@ table {
 }
 
 th, td {
-    border: 1px solid black;
     padding: 8px;
     text-align: left;
 }
@@ -19,4 +18,12 @@ center {
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+tr > :nth-child(even) {
+    background-color: #F4FDFF;
+}
+
+tr :nth-child(odd) {
+    background-color: #1C448E;
 }

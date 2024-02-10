@@ -13,7 +13,6 @@ urlpatterns = [
     path('payment_detail/<int:id>', views.payment_detail, name='payment_detail'),
     path('trasaction_detail/<int:id>', views.transaction_detail, name='transaction_detail'),
     path('trasaction_detail/<int:transaction_id>/pdf/', views.transaction_pdf, name='transaction_pdf'),
-    path('payment_detail/<int:id>/pdf/', views.payment_pdf, name='payment_pdf'),
-    path('payment_detail/<int:id>/pdf/', views.payment_pdf, name='payment_pdf'),
+    path('payment_detail/<int:payment_id>/pdf/', views.payment_pdf, name='payment_pdf'),
     path('export_movements/csv', views.export_csv, name='export_movements'),
 ]

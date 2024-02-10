@@ -12,11 +12,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from weasyprint import HTML
+from weasyprint import HTML, CSS
+from django.contrib.staticfiles import finders
 
 from account.models import BankAccount, Profile
 from amyx_bank.ourutils import calc_commission, get_bank_info
-from card.models import Card
 from payment.forms import PaymentForm, TransactionForm
 
 from .models import Payment, Transaction
@@ -159,28 +159,6 @@ def payroll(request):
     return HttpResponse("Payroll done!")
 
 
-"""
-def movements(request):
-    transactions = Transaction.objects.all()
-    payments = Payment.objects.all()
-    all_movements = sorted(
-        chain(transactions, payments),
-        key=lambda instance: instance.timestamp,
-        reverse=True,
-    )
-    movements_per_page = 5
-    paginator = Paginator(all_movements, movements_per_page)
-    page = request.GET.get('page')
-    try:
-        movements_page = paginator.page(page)
-    except PageNotAnInteger:
-        movements_page = paginator.page(1)
-    except EmptyPage:
-        movements_page = paginator.page(paginator.num_pages)
-    return render(request, "payment/movements.html", {"movements": movements_page})
-
-"""
-
 @login_required
 def transaction_list(request):
     all_movements = []
@@ -287,7 +265,7 @@ def transaction_pdf(request, transaction_id):
     html = render_to_string("payment/transaction_pdf.html", {"transaction": transaction})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f"attachment; filename={transaction.id}.pdf"
-    HTML(string=html).write_pdf(response)
+    HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response, stylesheets=[CSS(finders.find('css/pdf.css'))])
     return response
 
 
@@ -297,8 +275,7 @@ def payment_pdf(request, payment_id):
     html = render_to_string("payment/payment_pdf.html", {"payment": payment})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f'attachment; filename={payment.id}.pdf'
-    # f'attachment; filename="{document.title}.pdf"'
-    HTML(string=html).write_pdf(response)
+    HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response, stylesheets=[CSS(finders.find('css/pdf.css'))])
     return response
 
 
