@@ -14,26 +14,24 @@
             </div>
             <table class="table mt-4">
                 <tr class="odd">
-                    <th>Business</th>
+                    <td class="odd">Business</td>
                     <td class="odd">{{ payment.business }}</td>
                 </tr>
                 <tr class="even">
-                    <th>Card</th>
+                    <td class="even">Card</td>
                     <td class="even">{{ payment.card }}</td>
                 </tr>
                 <tr class="odd">
-                    <th>Kind</th>
+                    <td class="odd">Kind</td>
                     <td class="odd">{{ payment.kind }}</td>
                 </tr>
                 <tr class="even">
-                    <th>Amount</th>
+                    <td class="even">Amount</td>
                     <td class="even">{{ payment.amount }} €</td>
                 </tr>
-                <tr class="odd">
-                    <th>Kind</th>
-                    <td class="odd">{{ payment.kind }} €</td>
-                </tr>
+                
             </table>
+            <img src="{% static 'svg/logo1_animated.svg' %}"  alt="" class="img">
         </div>
     </body>
     

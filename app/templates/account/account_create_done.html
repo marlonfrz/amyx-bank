@@ -2,10 +2,16 @@
 {% load i18n %}
 {% block title %}{% trans "The account has been created" %}{% endblock %}
 {% block content %}
+<br>
+<br>
+<br>
+<br>
+<center>
 <div style="margin-left: 40%;">
     <h1>{% trans "The account has been created successfully!" %}</h1>
     <p>{% trans "Your account has been successfully created." %}
     {% trans "Now you can go to the" %} <a href="{% url 'dashboard' %}"></a>main page</a>.
     </p>
 </div>
+</center>
 {% endblock %}

@@ -4,20 +4,19 @@ from decimal import Decimal
 from io import StringIO
 
 import requests
+from account.models import BankAccount, Profile
+from amyx_bank.ourutils import calc_commission, get_bank_info
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
+from django.contrib.staticfiles import finders
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from weasyprint import HTML, CSS
-from django.contrib.staticfiles import finders
-
-from account.models import BankAccount, Profile
-from amyx_bank.ourutils import calc_commission, get_bank_info
 from payment.forms import PaymentForm, TransactionForm
+from weasyprint import CSS, HTML
 
 from .models import Payment, Transaction
 
@@ -26,8 +25,12 @@ from .models import Payment, Transaction
 @csrf_exempt
 def payment(request):
     profile = get_object_or_404(Profile, user=request.user)
-    accounts = profile.accounts.all()
+    accounts = profile.accounts.exclude(status=BankAccount.Status.CANCELLED).exclude(
+        status=BankAccount.Status.DISABLED
+    )
     if request.method == "POST":
+        print(request.body)
+        print(request.POST)
         try:
             cd = json.loads(request.body)
         except json.JSONDecodeError:
@@ -38,9 +41,10 @@ def payment(request):
             return HttpResponseBadRequest(
                 "Payment was cancelled due to invalid information passed in the POST request"
             )
+        amount = Decimal(cd.get("amount"))
+        print(amount)
         business = cd.get("business").upper()
         card = cd.get("ccc")
-        amount = Decimal(cd.get("amount"))
         if amount == 0:
             return HttpResponseBadRequest("You cannot send no money to anyone!")
         pin = cd.get("pin")
@@ -94,9 +98,15 @@ def outgoing_transactions(request):
         taxed_amount = amount + calc_commission(amount, "OUTGOING")
         if sender.balance < taxed_amount:
             return HttpResponseBadRequest("You do not have enough money!")
-        url = f"{destined_bank}/{request.LANGUAGE_CODE}/transfer/incoming/"
+        url = f"{destined_bank}/transfer/incoming/"
         status = requests.post(
-            url, json={"sender": sender.account_code, "cac": account, "concept": concept, "amount": str(amount)}
+            url,
+            json={
+                "sender": sender.account_code,
+                "cac": account,
+                "concept": concept,
+                "amount": str(amount),
+            },
         )
         if status.status_code != 200:
             return HttpResponseBadRequest(
@@ -115,6 +125,7 @@ def outgoing_transactions(request):
     else:
         form = TransactionForm(profile)
     return render(request, "payment/transactions.html", {"transaction_form": form})
+
 
 @login_required
 @csrf_exempt
@@ -265,7 +276,9 @@ def transaction_pdf(request, transaction_id):
     html = render_to_string("payment/transaction_pdf.html", {"transaction": transaction})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f"attachment; filename={transaction.id}.pdf"
-    HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response, stylesheets=[CSS(finders.find('css/pdf.css'))])
+    HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+        response, stylesheets=[CSS(finders.find('css/pdf.css'))]
+    )
     return response
 
 
@@ -275,7 +288,9 @@ def payment_pdf(request, payment_id):
     html = render_to_string("payment/payment_pdf.html", {"payment": payment})
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f'attachment; filename={payment.id}.pdf'
-    HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response, stylesheets=[CSS(finders.find('css/pdf.css'))])
+    HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+        response, stylesheets=[CSS(finders.find('css/pdf.css'))]
+    )
     return response
 
 

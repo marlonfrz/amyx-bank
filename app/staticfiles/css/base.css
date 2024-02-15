@@ -417,3 +417,7 @@ td {
     border: 2px solid #ccc;
     background: transparent;
 }
+
+.numeric {
+    appearance: none;
+}

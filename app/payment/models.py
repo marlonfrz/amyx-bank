@@ -1,7 +1,6 @@
+from card.models import Card
 from django.db import models
 from django.urls import reverse
-
-from card.models import Card
 
 
 class Transaction(models.Model):
@@ -33,6 +32,7 @@ class Transaction(models.Model):
 
     def __repr__(self):
         return f"{self.agent} -> {self.account}"
+
 
 class Payment(models.Model):
     card = models.ForeignKey(Card, on_delete=models.PROTECT, related_name="payments")

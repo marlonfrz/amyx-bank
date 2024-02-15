@@ -1,6 +1,5 @@
-from django import forms
-
 from account.models import BankAccount
+from django import forms
 from payment.models import Card, Payment, Transaction
 
 
@@ -20,7 +19,7 @@ class TransactionForm(forms.ModelForm):
         fields = ['concept', 'amount']
         widgets = {
             'concept': forms.TextInput(attrs={'id': 'concept'}),
-            'amount': forms.TextInput(attrs={'id': 'amount'}),
+            'amount': forms.NumberInput(attrs={'id': 'amount', 'style': 'appereance: none'}),
         }
 
     def __init__(self, profile=[], *args, **kwargs):
@@ -28,7 +27,6 @@ class TransactionForm(forms.ModelForm):
         self.fields['sender'].queryset = BankAccount.objects.filter(profile=profile).exclude(
             status=BankAccount.Status.CANCELLED
         )
-
 
 class PaymentForm(forms.ModelForm):
     business = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'id': 'business'}))
@@ -44,7 +42,7 @@ class PaymentForm(forms.ModelForm):
         model = Payment
         fields = ['amount']
         widgets = {
-            'amount': forms.TextInput(attrs={'id': 'amount'}),
+            'amount': forms.NumberInput(attrs={'id': 'amount', 'style': 'appereance: none'}),
         }
 
     def __init__(self, accounts=[], *args, **kwargs):

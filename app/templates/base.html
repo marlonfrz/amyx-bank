@@ -27,8 +27,8 @@
         <a class="header-a" href="{% url 'dashboard' %}"><p class="header-p">{% trans "Profile" %}</p></a>
         <a class="header-a" href="{% url 'accounts' %}"><p class="header-p">{% trans "Accounts" %}</p></a>
         <a class="header-a" href="{% url 'cards' %}"><p class="header-p">{% trans "Cards" %}</p></a>
-        <a class="header-a" href="{% url 'payment' %}"><p class="header-p">{% trans "Payments" %}</p></a>
-        <a class="header-a" href="{% url 'outgoing' %}"><p class="header-p">{% trans "Transactions" %}</p></a>
+        <a class="header-a" href="{% url 'payment' %}"><p class="header-p">{% trans "Make payments" %}</p></a>
+        <a class="header-a" href="{% url 'outgoing' %}"><p class="header-p">{% trans "Make transactions" %}</p></a>
         <a class="header-a" href="{% url 'payments:transaction_list' %}"><p class="header-p">{% trans "Your Transactions" %}</p></a>
         <a class="header-a" href="{% url 'payments:payment_list' %}"><p class="header-p">{% trans "Your Payments" %}</p></a>
         {% get_current_language as LANGUAGE_CODE %}

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-07 02:15+0000\n"
-"PO-Revision-Date: 2024-02-07 02:16+0000\n"
-"Last-Translator: Ayoze Hernandez Diaz <elpayov2@gmail.com>\n"
+"POT-Creation-Date: 2024-02-15 19:22+0000\n"
+"PO-Revision-Date: 2024-02-15 19:33+0000\n"
+"Last-Translator: ayoze hdez diaz <elpayov2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,6 @@ msgid "Edit your account"
 msgstr "Edita tu cuenta"
 
 #: templates/account/accounts.html:29
-#| msgid "Create an account"
 msgid "Create accounts"
 msgstr "Crear cuentas"
 
@@ -84,7 +83,7 @@ msgstr "Todavía no tienes cuentas"
 #: templates/account/accounts.html:33 templates/card/card_create.html:18
 #: templates/card/cards.html:38
 msgid "create some with the following"
-msgstr "crea algunas con el siguiente formulario"
+msgstr "crea algunas con el siguiente"
 
 #: templates/account/accounts.html:33 templates/card/card_create.html:18
 #: templates/card/cards.html:38
@@ -98,7 +97,7 @@ msgstr "Cuenta"
 
 #: templates/account/cancellation.html:3 templates/card/cancellation.html:3
 msgid "cancellated"
-msgstr ""
+msgstr "cancelado"
 
 #: templates/account/change_password.html:4
 #: templates/account/change_password.html:8
@@ -216,8 +215,7 @@ msgstr "Mediano"
 msgid "Large"
 msgstr "Grande"
 
-#: templates/amyx_bank/about_us.html:42 templates/base.html:30
-#: templates/payment/movements.html:5
+#: templates/amyx_bank/about_us.html:42 templates/payment/movements.html:5
 msgid "Payments"
 msgstr "Pagos"
 
@@ -280,9 +278,15 @@ msgstr "Cuentas"
 msgid "Cards"
 msgstr "Tarjetas"
 
+#: templates/base.html:30
+#| msgid "payments/"
+msgid "Make payments"
+msgstr "Realizar pagos"
+
 #: templates/base.html:31
-msgid "Transactions"
-msgstr "Transferencias"
+#| msgid "Transactions"
+msgid "Make transactions"
+msgstr "Realizar transferencias"
 
 #: templates/base.html:32
 msgid "Your Transactions"
@@ -370,7 +374,7 @@ msgstr "Crear una tarjeta"
 
 #: templates/card/card_create.html:9
 msgid "You can create a card using the following form:"
-msgstr "Puedes crear una tarjeta usando el siguiente formulario:"
+msgstr "Puedes crear una tarjeta usando el siguiente "
 
 #: templates/card/card_create.html:18
 msgid "You do not have accounts to associate to a new card"
@@ -655,9 +659,6 @@ msgstr "iniciar sesión"
 
 #~ msgid "card/"
 #~ msgstr "tarjeta/"
-
-#~ msgid "payments/"
-#~ msgstr "pagos/"
 
 #~ msgid "payment/"
 #~ msgstr "pago/"

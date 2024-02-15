@@ -1,17 +1,20 @@
+from account.forms import AccountEditForm, AccountForm, ChangePasswordForm
+from account.models import BankAccount, Profile
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
-
-from account.forms import AccountEditForm, AccountForm, ChangePasswordForm
-from account.models import BankAccount, Profile
 
 
 # http://dsw.pc16.aula109:8000/account
 @login_required
 def dashboard(request):
     profile = get_object_or_404(Profile, user=request.user)
-    accounts = BankAccount.objects.filter(profile=profile)
+    accounts = (
+        BankAccount.objects.filter(profile=profile)
+        .exclude(status=BankAccount.Status.CANCELLED)
+        .exclude(status=BankAccount.Status.DISABLED)
+    )
     balance = sum(account.balance for account in accounts)
     return render(request, "account/dashboard.html", {"total_balance": balance})
 

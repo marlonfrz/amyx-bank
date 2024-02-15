@@ -1,29 +1,39 @@
-h4 {
-    margin-top: 20px;
-    margin-bottom:20px;
+/* Override the Bootstrap table appearance */
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-table {
-    width: 80%;
-    margin-top: 20px;
-}
+.table {
+    border-collapse: separate;
+    border-spacing: 0 2px ;
 
-th, td {
-    padding: 8px;
+  }
+  
+  .table tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  .table th,
+  .table td {
+    border: none;
     text-align: left;
+  }
+  
+  /* Odd rows background color */
+.table .odd {
+    color: aliceblue;
+    font-weight: 700;
+    background-color: #0077ff7e;
 }
 
-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-tr > :nth-child(even) {
-    background-color: #F4FDFF;
-}
-
-tr :nth-child(odd) {
-    background-color: #1C448E;
+/* Even rows background color */
+.table .even {
+    color: #000;
+    font-weight: 300;
+    background-color: #64abfc81;
+  }
+  
+.img {
+    height: 70px;
+    width: 70px;
 }
