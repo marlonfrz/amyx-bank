@@ -10,27 +10,30 @@
     <body>
         <div class="container mt-5">
             <div class="text-center">
-                <h4 class="mt-3">Movement done at: {{ transaction.timestamp|date:"g:i A d F Y" }}</h4>
+                <img src="{% static 'svg/logo1_animated.svg' %}"  alt="" class="img">
+
+                <h4 class="text">Movement done at: {{ transaction.timestamp|date:"g:i A d F Y" }}</h4>
             </div>
+
             <table class="table mt-4">
                 <tr class="odd">
-                    <th>Agent</th>
+                    <td class="odd">Agent</td>
                     <td class="odd">{{ transaction.agent }}</td> 
                 </tr>
                 <tr class="even">
-                    <th>Account</th>
+                    <td class="even">Account</td>
                     <td class="even">{{ transaction.account }}</td>
                 </tr>
                 <tr class="odd">
-                    <th>Concept</th>
+                    <td class="odd">Concept</td>
                     <td class="odd">{{ transaction.concept }}</td>
                 </tr>
                 <tr class="even">
-                    <th>Amount</th>
+                    <td class="even">Amount</td>
                     <td class="even">{{ transaction.amount }} €</td>
                 </tr>
                 <tr class="odd">
-                    <th>Kind</th>
+                    <td class="odd">Kind</td>
                     <td class="odd">{{ transaction.kind }}</td>
                 </tr>
             </table>
