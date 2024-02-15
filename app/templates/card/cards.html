@@ -34,8 +34,8 @@
             <a class="btn btn-primary" href="{% url 'create_card' %}">{% trans "Create cards" %}</a>
         </div>
         {% else %}
-        <div style="margin-left: 10%; margin-right:10%; margin-top: 20px;">
-            <h1>{% trans "You do not have cards" %} <span style="color: orange">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: blue" href="{% url 'create_card' %}">{% trans "link" %}</a></h1>
+        <div class="caja">
+            <h3>{% trans "You do not have cards" %} <span style="color: rgb(38, 0, 255)">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: rgba(28, 28, 247, 0.651)" href="{% url 'create_card' %}">{% trans "link" %}</a></h3>
         </div>
     {% endif %}
 {% endblock %}
