@@ -8,7 +8,7 @@
     <p> {% trans "Please fill up the following form" %}</p>
     <form method="post">
         {{ payment_form|crispy }}
-        <p><input type="submit" class="btn btn-primary" value="Request my Payment"></p>
+        <p><input type="submit" class="btn btn-primary" value="{% trans 'Request my Payment' %}"></p>
         {% csrf_token %}
     </form>
 </div>

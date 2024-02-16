@@ -1,7 +1,0 @@
-{% block cards %}
-    <ul class="submenu">
-        {% for card in cards %}
-            <li><a class="card_{{ forloop.counter }}" href="">{{ card.card_code }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}

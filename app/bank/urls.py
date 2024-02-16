@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
@@ -28,15 +29,16 @@ urlpatterns = i18n_patterns(
     path('account/', include('account.urls')),
     path('card/', include('card.urls')),
     path('payments/', include('payment.urls', namespace="payments")),
+    path('admin/', admin.site.urls),
+    path('rosetta/', include('rosetta.urls')),
+)
+
+urlpatterns += [
     path('payment/', views.payment, name='payment'),
     path('outgoing/', views.outgoing_transactions, name='outgoing'),
     path('transfer/incoming/', views.incoming_transactions, name='incoming'),
-    path('admin/', admin.site.urls),
-    path('rosetta/', include('rosetta.urls')),
-    path('api/', include('account.api.urls', namespace='api_account')),
-    path('api/', include('card.api.urls', namespace='api_card')),
-    path('api/', include('payment.api.urls', namespace='api_payment')),
-)
+    path('api/', include('bank.routers')),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

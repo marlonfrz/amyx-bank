@@ -4,8 +4,6 @@ from decimal import Decimal
 from io import StringIO
 
 import requests
-from account.models import BankAccount, Profile
-from amyx_bank.ourutils import calc_commission, get_bank_info
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.staticfiles import finders
@@ -15,8 +13,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from payment.forms import PaymentForm, TransactionForm
 from weasyprint import CSS, HTML
+
+from account.models import BankAccount, Profile
+from amyx_bank.ourutils import calc_commission, get_bank_info
+from payment.forms import PaymentForm, TransactionForm
 
 from .models import Payment, Transaction
 
@@ -29,8 +30,6 @@ def payment(request):
         status=BankAccount.Status.DISABLED
     )
     if request.method == "POST":
-        print(request.body)
-        print(request.POST)
         try:
             cd = json.loads(request.body)
         except json.JSONDecodeError:
@@ -42,7 +41,6 @@ def payment(request):
                 "Payment was cancelled due to invalid information passed in the POST request"
             )
         amount = Decimal(cd.get("amount"))
-        print(amount)
         business = cd.get("business").upper()
         card = cd.get("ccc")
         if amount == 0:
@@ -137,7 +135,7 @@ def incoming_transactions(request):
     amount = Decimal(cd.get("amount"))
     # Comprueba que la cuenta existe
     try:
-        account = BankAccount.objects.get(account_code=cac)
+        account = BankAccount.objects.filter(status=BankAccount.Status.ACTIVE).get(account_code=cac)
     except BankAccount.DoesNotExist:
         return HttpResponseBadRequest(
             f"The account {cac} you tried to send money to does not exist"
@@ -217,6 +215,36 @@ def payment_list(request):
     except EmptyPage:
         movements_page = paginator.page(paginator.num_pages)
     return render(request, "payment/movements.html", {"payments": movements_page})
+
+@login_required
+def complete_transaction_list(request):
+    all_movements = []
+    profile = get_object_or_404(Profile, user=request.user)
+    accounts = profile.accounts.all()
+    for account in accounts:
+        outgoing_movements = Transaction.objects.filter(
+            agent__icontains=account.account_code, kind=Transaction.TransactionType.OUTGOING
+        )
+        incoming_movements = Transaction.objects.filter(
+            account__icontains=account.account_code, kind=Transaction.TransactionType.INCOMING
+        )
+        all_movements.extend(outgoing_movements)
+        all_movements.extend(incoming_movements)
+    all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
+    return render(request, "payment/movements_list.html", {"payments": all_movements})
+
+
+@login_required
+def complete_payment_list(request):
+    all_movements = []
+    profile = get_object_or_404(Profile, user=request.user)
+    accounts = profile.accounts.all()
+    for account in accounts:
+        for card in account.cards.all():
+            if payments := card.payments.all():
+                all_movements.extend(payments)
+    all_movements = sorted(all_movements, key=lambda instance: instance.timestamp, reverse=True)
+    return render(request, "payment/movements_list.html", {"payments": all_movements})
 
 
 @login_required

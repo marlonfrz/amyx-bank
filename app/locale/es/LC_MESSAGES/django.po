@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-15 19:22+0000\n"
-"PO-Revision-Date: 2024-02-15 19:33+0000\n"
+"POT-Creation-Date: 2024-02-16 15:43+0000\n"
+"PO-Revision-Date: 2024-02-16 15:44+0000\n"
 "Last-Translator: ayoze hdez diaz <elpayov2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -31,20 +31,24 @@ msgstr "Crear una cuenta"
 msgid "Please sign up using the following form"
 msgstr "Por favor regístrese usando el siguiente formulario"
 
+#: templates/account/account_create.html:12
+msgid "Create my account"
+msgstr "Crear mi cuenta"
+
 #: templates/account/account_create_done.html:3
 msgid "The account has been created"
 msgstr "La cuenta ha sido creada"
 
-#: templates/account/account_create_done.html:6
+#: templates/account/account_create_done.html:11
 msgid "The account has been created successfully!"
 msgstr "Tu cuenta ha sido creada satisfactoriamente!"
 
-#: templates/account/account_create_done.html:7
-#: templates/registration/register_done.html:7
+#: templates/account/account_create_done.html:12
+#: templates/registration/register_done.html:12
 msgid "Your account has been successfully created."
 msgstr "Tu cuenta ha sido creada satisfactoriamente."
 
-#: templates/account/account_create_done.html:8
+#: templates/account/account_create_done.html:13
 msgid "Now you can go to the"
 msgstr "Ahora tú puedes ir a"
 
@@ -60,32 +64,36 @@ msgstr "Edita tu cuenta bancaria"
 msgid "Edit an account"
 msgstr "Editar una cuenta"
 
-#: templates/account/accounts.html:4 templates/account/accounts.html:8
+#: templates/account/account_edit.html:12 templates/card/card_edit.html:11
+msgid "Edit my account"
+msgstr "Editar mi cuenta"
+
+#: templates/account/accounts.html:4 templates/account/accounts.html:9
 msgid "Your accounts"
 msgstr "Tus cuentas"
 
-#: templates/account/accounts.html:20
+#: templates/account/accounts.html:21
 msgid "Account code:"
 msgstr "Código de la cuenta"
 
-#: templates/account/accounts.html:22
+#: templates/account/accounts.html:23
 msgid "Edit your account"
 msgstr "Edita tu cuenta"
 
-#: templates/account/accounts.html:29
+#: templates/account/accounts.html:31
 msgid "Create accounts"
 msgstr "Crear cuentas"
 
-#: templates/account/accounts.html:33
+#: templates/account/accounts.html:36
 msgid "You do not have accounts"
 msgstr "Todavía no tienes cuentas"
 
-#: templates/account/accounts.html:33 templates/card/card_create.html:18
+#: templates/account/accounts.html:36 templates/card/card_create.html:18
 #: templates/card/cards.html:38
 msgid "create some with the following"
 msgstr "crea algunas con el siguiente"
 
-#: templates/account/accounts.html:33 templates/card/card_create.html:18
+#: templates/account/accounts.html:36 templates/card/card_create.html:18
 #: templates/card/cards.html:38
 msgid "link"
 msgstr "enlace"
@@ -103,6 +111,10 @@ msgstr "cancelado"
 #: templates/account/change_password.html:8
 msgid "Change password"
 msgstr "Cambiar contraseña"
+
+#: templates/account/change_password.html:12
+msgid "Save"
+msgstr "Guardar"
 
 #: templates/account/dashboard.html:3
 msgid "Dashboard"
@@ -124,29 +136,37 @@ msgstr "Editar"
 msgid "Total balance"
 msgstr "Balance total"
 
-#: templates/account/dashboard.html:75
-msgid "Card creation"
-msgstr "Creación de tarjeta"
-
-#: templates/account/dashboard.html:80
-msgid "Account creation"
-msgstr "Creación de cuenta"
-
-#: templates/account/dashboard.html:85
-msgid "Buy"
-msgstr "Comprar"
-
-#: templates/account/dashboard.html:90
-msgid "Transfer"
-msgstr "Transferir"
-
-#: templates/account/dashboard.html:95
+#: templates/account/dashboard.html:69
 msgid "CARDS"
 msgstr "TARJETAS"
 
-#: templates/account/dashboard.html:101
+#: templates/account/dashboard.html:75
 msgid "ACCOUNTS"
 msgstr "CUENTAS"
+
+#: templates/account/dashboard.html:87
+msgid "Card creation"
+msgstr "Creación de tarjeta"
+
+#: templates/account/dashboard.html:92
+msgid "Account creation"
+msgstr "Creación de cuenta"
+
+#: templates/account/dashboard.html:97
+msgid "Make payment"
+msgstr "Realizar pagos"
+
+#: templates/account/dashboard.html:102
+msgid "Make transfer"
+msgstr "Realizar transferencias"
+
+#: templates/account/dashboard.html:106
+msgid "Export Payments"
+msgstr "Exportar pagos"
+
+#: templates/account/dashboard.html:110
+msgid "Export Transactions"
+msgstr "Exportar transferencias"
 
 #: templates/account/edit_profile.html:4 templates/account/edit_profile.html:7
 msgid "Edit your profile"
@@ -155,6 +175,10 @@ msgstr "Editar tu perfil"
 #: templates/account/edit_profile.html:8
 msgid "You can edit your profile using the following form:"
 msgstr "Puedes editar tu perfil usando el siguiente formulario:"
+
+#: templates/account/edit_profile.html:13 templates/card/card_create.html:13
+msgid "Save changes"
+msgstr "Guardar cambios"
 
 #: templates/account/edit_profile.html:15
 msgid "You have changed your profile information"
@@ -216,6 +240,7 @@ msgid "Large"
 msgstr "Grande"
 
 #: templates/amyx_bank/about_us.html:42 templates/payment/movements.html:5
+#: templates/payment/movements_list.html:5
 msgid "Payments"
 msgstr "Pagos"
 
@@ -236,7 +261,7 @@ msgid "Outgoing"
 msgstr "Salientes"
 
 #: templates/amyx_bank/main.html:4 templates/registration/register_done.html:3
-#: templates/registration/register_done.html:5
+#: templates/registration/register_done.html:10
 msgid "Welcome"
 msgstr "Bienvenido"
 
@@ -279,12 +304,10 @@ msgid "Cards"
 msgstr "Tarjetas"
 
 #: templates/base.html:30
-#| msgid "payments/"
 msgid "Make payments"
 msgstr "Realizar pagos"
 
 #: templates/base.html:31
-#| msgid "Transactions"
 msgid "Make transactions"
 msgstr "Realizar transferencias"
 
@@ -424,23 +447,12 @@ msgstr "Crear tarjetas"
 msgid "You do not have cards"
 msgstr "No tienes tarjetas"
 
-#: templates/paginator.html:5
-msgid "Previous"
-msgstr "Previo"
-
-#: templates/paginator.html:8
-msgid "Page {{ page.number }} of {{ page.paginator.num_pages }}."
-msgstr "Página {{ page.number }} de {{ page.paginator.num_pages }}."
-
-#: templates/paginator.html:11
-msgid "Next"
-msgstr "Siguiente"
-
-#: templates/payment/movements.html:9
+#: templates/payment/movements.html:9 templates/payment/movements_list.html:9
 msgid "Your payments "
 msgstr "Tus pagos"
 
 #: templates/payment/movements.html:24
+#: templates/payment/movements_list.html:24
 #: templates/payment/payment_detail.html:23
 #: templates/payment/transaction_detail.html:22
 msgid "Amount"
@@ -471,6 +483,7 @@ msgid "last"
 msgstr "última"
 
 #: templates/payment/movements.html:47
+#: templates/payment/movements_list.html:32
 msgid "You have no payments yet"
 msgstr "Todavía no has realizado ningún pago"
 
@@ -485,6 +498,10 @@ msgstr "Solicitud de pago"
 #: templates/payment/payment.html:8 templates/payment/transactions.html:8
 msgid "Please fill up the following form"
 msgstr "Por favor rellena el siguiente formulario"
+
+#: templates/payment/payment.html:11
+msgid "Request my Payment"
+msgstr "Solicitar mi pago"
 
 #: templates/payment/payment_detail.html:3
 #: templates/payment/transaction_detail.html:3
@@ -532,6 +549,10 @@ msgstr "Concepto"
 msgid "Transaction"
 msgstr "Transferencia"
 
+#: templates/payment/transactions.html:11
+msgid "Send money"
+msgstr "Enviar dinero"
+
 #: templates/registration/login.html:5 templates/registration/login.html:16
 msgid "Log-in"
 msgstr "Iniciar Sesión"
@@ -577,13 +598,28 @@ msgstr "¿Tienes una cuenta?"
 msgid "Login"
 msgstr "Iniciar Sesión"
 
-#: templates/registration/register_done.html:8
+#: templates/registration/register_done.html:13
 msgid "Now you can"
 msgstr "Ahora tú puedes"
 
-#: templates/registration/register_done.html:8
+#: templates/registration/register_done.html:13
 msgid "log in"
 msgstr "iniciar sesión"
+
+#~ msgid "Previous"
+#~ msgstr "Previo"
+
+#~ msgid "Page {{ page.number }} of {{ page.paginator.num_pages }}."
+#~ msgstr "Página {{ page.number }} de {{ page.paginator.num_pages }}."
+
+#~ msgid "Next"
+#~ msgstr "Siguiente"
+
+#~ msgid "Buy"
+#~ msgstr "Comprar"
+
+#~ msgid "Transfer"
+#~ msgstr "Transferir"
 
 #~ msgid "account:"
 #~ msgstr "cuenta"

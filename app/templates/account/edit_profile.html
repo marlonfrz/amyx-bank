@@ -10,7 +10,7 @@
         {{ user_edit_form|crispy }}
         {{ profile_edit_form|crispy }}
         {% csrf_token %}
-    <p><input type="submit" class="btn btn-primary" value="Save changes"></p>
+    <p><input type="submit" class="btn btn-primary" value="{% trans 'Save changes' %}"></p>
     </form>
     <h5>{% trans "You have changed your profile information" %},<br> {% trans "you can also change your password" %} <a href="{% url 'change_password' %}" style="color: blue">{% trans "here" %}</a></h5>
 </div>

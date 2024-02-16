@@ -1,7 +1,0 @@
-{% block accounts %}
-    <ul class="submenu">
-        {% for bank_account in bank_accounts %}
-            <li><a class="card_{{ forloop.counter }}" href="{{ bank_account.get_absolute_url }}">{{ bank_account.account_code }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}
