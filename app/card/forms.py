@@ -5,7 +5,7 @@ from card.models import Card
 
 
 class CardCreateForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput, help_text="Type your password to create a new card")
     accounts = forms.ModelChoiceField(
         queryset=BankAccount.objects.none(), to_field_name="account_code"
     )

@@ -14,8 +14,8 @@
         </form>
     </div> 
 {% else %}
-    <div style="margin-left: 10%; margin-right:10%; margin-top: 20px;">
-        <h1>{% trans "You do not have accounts to associate to a new card" %} <span style="color: orange">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: blue" href="{% url 'create_account' %}">{% trans "link" %}</a></h1>
+    <div class="caja" style="margin-left: 10%; margin-right:10%; margin-top: 20px;">
+        <h3>{% trans "You do not have accounts to associate to a new card" %} <span style="color: orange">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: blue" href="{% url 'create_account' %}">{% trans "link" %}</a></h3>
     </div>
 {% endif %}
 {% endblock %}

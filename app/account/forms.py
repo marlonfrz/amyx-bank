@@ -12,7 +12,7 @@ class ChangePasswordForm(PasswordChangeForm):
 
 
 class AccountForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput, help_text="Type your password to create a new account")
 
     class Meta:
         model = BankAccount
