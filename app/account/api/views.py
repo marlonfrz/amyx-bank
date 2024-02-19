@@ -16,5 +16,4 @@ class BankAccountViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get']
 
     def get_queryset(self):
-        profile = get_object_or_404(Profile, user=self.request.user)
-        return BankAccount.objects.filter(profile=profile)
+        return BankAccount.objects.filter(profile=get_object_or_404(Profile, user=self.request.user))

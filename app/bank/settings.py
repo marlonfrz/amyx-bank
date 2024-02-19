@@ -137,20 +137,17 @@ USE_I18N = True
 
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-# STATIC_ROOT = BASE_DIR / 'static' comprobar si funciona
 STATIC_ROOT = 'static'
-# STATICFILES_DIRS = [BASE_DIR / "static"] comprobar que funciona
 STATICFILES_DIRS = ["staticfiles"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "dashboard"
 LOGIN_URL = "login"

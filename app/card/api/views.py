@@ -18,9 +18,4 @@ class CardViewSet(viewsets.ReadOnlyModelViewSet):
     http_method_names = ['get']
 
     def get_queryset(self):
-        profile = get_object_or_404(Profile, user=self.request.user)
-        accounts = BankAccount.objects.filter(profile=profile)
-        cards = accounts[0].cards.all()
-        for account in accounts[1:]:
-            cards = cards | account.cards.all()
-        return cards
+        return Card.objects.filter(account_profile__user=self.request.user)
