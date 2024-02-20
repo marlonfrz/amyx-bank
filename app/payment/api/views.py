@@ -3,10 +3,15 @@ from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+import operator
+from django.db.models import Q
+from functools import reduce
+
 from account.models import BankAccount
 from amyx_bank.models import Profile
 from payment.api.serializers import TransactionSerializer
 from payment.models import Transaction
+from rest_framework.response import Response
 
 
 class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
@@ -14,18 +19,27 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TransactionSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
-    http_method_names = ['get']
+    http_method_names = ["get"]
 
-    def get_queryset(self):
-        accounts = BankAccount.objects.filter(profile=get_object_or_404(Profile, user=self.request.user))
-        transactions_accounts = None
-        transactions_agents = None
-        for account in accounts:
-            if transactions_accounts is None:
-                transactions_accounts = Transaction.objects.filter(account__icontains=account.account_code)
-                transactions_agents = Transaction.objects.filter(agent__icontains=account.account_code)
-            else:
-                transactions_accounts = transactions_accounts | Transaction.objects.filter(account__icontains=account.account_code)
-                transactions_agents = transactions_agents | Transaction.objects.filter(agent__icontains=account.account_code)
-        transactions = transactions_agents | transactions_accounts
-        return transactions
+    def list(self, request):
+        accounts = BankAccount.objects.filter(
+            profile=get_object_or_404(Profile, user=self.request.user)
+        )
+        queryset = Transaction.objects.filter(
+            reduce(
+                operator.and_,
+                (Q(account__icontains=acc.account_code) for acc in accounts),
+            )
+        ) | Transaction.objects.filter(
+            reduce(
+                operator.and_,
+                (Q(agent__icontains=acc.account_code) for acc in accounts),
+            )
+        )
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Transaction.objects.get(id=pk)
+        serializer = self.get_serializer(queryset)
+        return Response(serializer.data)
