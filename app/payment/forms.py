@@ -50,7 +50,7 @@ class PaymentForm(forms.ModelForm):
         if accounts:
             self.fields['ccc'].queryset = Card.objects.filter(account=accounts[0])
             cards = accounts[0].cards.exclude(status=Card.Status.CANCELLED)
-            for account in accounts:
+            for account in accounts[1:]:
                 cards = cards | account.cards.exclude(status=Card.Status.CANCELLED)
             self.fields['ccc'].queryset = cards
         else:

@@ -40,6 +40,6 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        queryset = Transaction.objects.get(id=pk)
+        queryset = get_object_or_404(Transaction, id=pk)
         serializer = self.get_serializer(queryset)
         return Response(serializer.data)
