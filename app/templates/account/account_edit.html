@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Edit your bank account" %}{% endblock %}
+{% block content %}
+<div style="margin-left: 40%; margin-right: 40%; margin-top: 2%">
+    <h1>{% trans "Edit an account" %}</h1>
+    <p>Please use the following form </p>
+    <form method="post">
+        {{ account_edit_form|crispy }}
+        <p><input type="submit" class="btn btn-primary" value="{% trans 'Edit my account' %}" onclick="account_create_success()"></p>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}

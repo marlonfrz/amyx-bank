@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block title %}{% trans "New Card" %}{% endblock %}
+{% block content %}
+{% if accounts %}
+    <div style="margin-left: 40%; margin-right: 40%; margin-top: 2%">
+        <h1>{% trans "Create a Card" %}</h1>
+        <p>{% trans "You can create a card using the following form:" %}</p>
+        <form method="post" enctype="multipart/form-data">
+            {{ card_create_form|crispy }}
+            {% csrf_token %}
+            <p><input type="submit" class="btn btn-primary" value="{% trans 'Save changes' %}"></p>
+        </form>
+    </div> 
+{% else %}
+    <div class="caja" style="margin-left: 10%; margin-right:10%; margin-top: 20px;">
+        <h3>{% trans "You do not have accounts to associate to a new card" %} <span style="color: orange">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: blue" href="{% url 'create_account' %}">{% trans "link" %}</a></h3>
+    </div>
+{% endif %}
+{% endblock %}

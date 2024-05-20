@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Your accounts" %}{% endblock %}
+{% block content %}
+{% if accounts %}
+    <div style="margin-left: 10%; margin-right:10%; margin-top: 20px;">
+    
+        <h1>{% trans "Your accounts" %} {{ user.username }}:</h1>
+        <ul>
+            {% for account in accounts %}
+                <li class="card">
+                    <div class="card-statistic-3 p-4">
+                        <div class="mb-4 d-flex justify-content-between align-items-center">
+                            <h3 class="card-title mb-0"><a href="{{ account.get_absolute_url }}"> {{ account.account_name }}</a></h3>
+                            <h5 class="total"> {{ account.balance }} €</h5>
+                        </div>
+                    </div>
+                    <div class="card-statistic-3 p-4">
+                        <div class="mb-4 d-flex justify-content-between align-items-center">
+                            <h3 class="card-title mb-0">{% trans "Account code:" %} </h3>
+                            <h5 class="total"> {{ account.account_code }} </h5>
+                            <p><a class="btn btn-primary" href="{% url 'edit_account' account.id %}">{% trans "Edit your account" %}</a></p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div style="margin-left: 83%; margin-top: 1%;">
+        <a class="btn btn-secondary" href="{% url 'create_account' %}">{% trans "Create accounts" %}</a>
+    </div>
+    
+    {% else %}
+    <div class="caja">
+        <h3>{% trans "You do not have accounts" %} <span style="color: rgb(38, 0, 255)">{{ user.username }}</span>, {% trans "create some with the following" %} <a style="color: rgba(28, 28, 247, 0.651)" href="{% url 'create_account' %}">{% trans "link" %}</a></h3>
+    </div>
+    {% endif %}
+
+
+
+{% endblock %}

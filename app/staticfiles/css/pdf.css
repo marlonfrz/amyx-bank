@@ -1,0 +1,51 @@
+/* Override the Bootstrap table appearance */
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 2px ;
+
+  }
+  
+  .table tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  .table th,
+  .table td {
+    border: none;
+    text-align: left;
+  }
+  
+  /* Odd rows background color */
+.table .odd {
+    color: aliceblue;
+    font-weight: 700;
+    background-color: #0077ff7e;
+}
+
+/* Even rows background color */
+.table .even {
+    color: #000;
+    font-weight: 300;
+    background-color: #64abfc81;
+  }
+  
+  .text-center {
+    display: flex;
+    align-items: center;
+    margin-left: 20%;
+  }
+  
+  .img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .text {
+    margin: 0;
+  }

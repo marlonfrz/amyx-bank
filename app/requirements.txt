@@ -1,0 +1,11 @@
+django
+prettyconf
+Pillow
+requests
+django-debug-toolbar
+django-bootstrap-v5
+WeasyPrint
+django-rosetta
+djangorestframework
+django-crispy-forms
+crispy-bootstrap5

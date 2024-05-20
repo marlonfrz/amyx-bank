@@ -1,0 +1,27 @@
+# Justfile
+
+run:
+    python manage.py runserver 0.0.0.0:8000
+
+migrate:
+    python manage.py makemigrations && python manage.py migrate
+
+shell:
+    python manage.py shell
+
+project_name := `basename $(dirname $(realpath $0))`
+
+dockup:
+    docker compose up
+
+clean:
+    #!/usr/bin/env bash
+    find . -name '__pycache__' -not -path "./.venv/*" -prune -exec rm -rf {} \;
+    find . -name '*.pyc' -not -path "./.venv/*" -exec rm {} \;
+    find . -name '.DS_Store' -not -path "./.venv/*" -exec rm {} \;
+    rm -rf .mypy_cache
+
+zip: clean
+    #!/usr/bin/env bash
+    rm -f {{ project_name }}.zip
+    zip -r {{ project_name }}.zip . -x .venv/**\*

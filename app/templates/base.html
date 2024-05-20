@@ -1,0 +1,139 @@
+{% load static %}
+{% load i18n %}
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="{% static 'css/base.css' %}" rel="stylesheet">
+<link rel="icon" type="image/jpg" href="{% static 'img/logo1.jpg' %}"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+
+  <nav class="navigation navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <a class="header-a" href="{% url 'main' %}">
+            <img src="{% static 'svg/logo1_animated.svg' %}" height="70px" width="70px" alt="" class="img-fluid logo">
+        </a>
+        <button id="navButton" class="btn login_button">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}">{% trans "Log Out" %}</a>
+            {% else %}
+                <a href="{% url 'login' %}">{% trans "Log In" %}</a>
+            {% endif %}
+        </button>
+        <a class="header-a" href="{% url 'dashboard' %}"><p class="header-p">{% trans "Profile" %}</p></a>
+        <a class="header-a" href="{% url 'accounts' %}"><p class="header-p">{% trans "Accounts" %}</p></a>
+        <a class="header-a" href="{% url 'cards' %}"><p class="header-p">{% trans "Cards" %}</p></a>
+        <a class="header-a" href="{% url 'payment' %}"><p class="header-p">{% trans "Make payments" %}</p></a>
+        <a class="header-a" href="{% url 'outgoing' %}"><p class="header-p">{% trans "Make transactions" %}</p></a>
+        <a class="header-a" href="{% url 'payments:transaction_list' %}"><p class="header-p">{% trans "Your Transactions" %}</p></a>
+        <a class="header-a" href="{% url 'payments:payment_list' %}"><p class="header-p">{% trans "Your Payments" %}</p></a>
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        
+        <div class="languages">
+            {% for language in languages %}
+              <a href="/{{ language.code }}/">{{ language.name_local }}</a>
+            {% endfor %}
+        </div>
+</nav>
+  <body>
+    {% block content %}
+    {% endblock %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="footer_area">
+      <div class="container_footer">
+          <div class="row footer_area">
+              <!-- Single Widget-->
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="single-footer-widget section_padding_0_130">
+                  <!-- Footer Logo-->
+                  <div class="footer-logo mb-3"></div>
+                  <p>A.M.Y.X Bank {% trans "is your trusted bank" %}</p>
+                  <!-- Copywrite Text-->
+                  <div class="copywrite-text mb-5">
+                    <p class="mb-0">{% trans "Made by" %} <a class="ml-1" href="{% url 'about_us' %}">A.M.Y.X Bank</a></p>
+                  </div>
+                  
+                  <!-- Footer Social Area-->
+                  <div class="footer_social_area">
+                    <a href="https://www.instagram.com/yaamiilaa_03/" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+                      <img src="{% static 'img/instagram.png' %}" height="70px" width="70px" alt="" class="img-fluid">
+                      <p style="font-size:12px">Yamila Ramos</p>
+                    </a>
+                    <a href="https://www.instagram.com/marlonfrz/" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+                      <img src="{% static 'img/instagram.png' %}" height="70px" width="70px" alt="" class="img-fluid">
+                      <p style="font-size: 12px">Marlon Farizo</p>
+                    </a>
+                    <a href="https://www.instagram.com/el__payo__/" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+                      <img src="{% static 'img/instagram.png' %}" height="70px" width="70px" alt="" class="img-fluid">
+                      <p style="font-size: 12px">Ayoze Hdez</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- Single Widget-->
+              <div class="col-12 col-sm-6 col-lg">
+                <div class="single-footer-widget section_padding_0_130">
+                  <!-- Widget Title-->
+                  <h5 class="widget-title">{% trans "About" %}</h5>
+                <!-- Footer Menu-->
+                  <div class="footer_menu">
+                      <ul>
+                      <li><a href="{% url 'about_us' %}">{% trans "About Us" %}</a></li>
+                      <li><a href="#">{% trans "Corporate Sale" %}</a></li>
+                      <li><a href="#">{% trans "Terms &amp; Policy" %}</a></li>
+                      <li><a href="#">{% trans "Community" %}</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Single Widget-->
+              <div class="col-12 col-sm-6 col-lg">
+                <div class="single-footer-widget section_padding_0_130">
+                  <!-- Widget Title-->
+                  <h5 class="widget-title">{% trans "Support" %}</h5>
+                  <!-- Footer Menu-->
+                  <div class="footer_menu">
+                      <ul>
+                        <li><a href="#">{% trans "Help" %}</a></li>
+                        <li><a href="#">{% trans "Support" %}</a></li>
+                        <li><a href="#">{% trans "Privacy Policy" %}</a></li>
+                        <li><a href="#">{% trans "Term &amp; Conditions" %}</a></li>
+                        <li><a href="#">{% trans "Help &amp; Support" %}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- Single Widget-->
+                <div class="col-12 col-sm-6 col-lg">
+                  <div class="single-footer-widget section_padding_0_130">
+                    <!-- Widget Title-->
+                    <h5 class="widget-title">{% trans "Contact" %}</h5>
+                    <!-- Footer Menu-->
+                    <div class="footer_menu">
+                      <ul>
+                        <li><a href="#">{% trans "Call Centre" %}</a></li>
+                        <li><a href="#">{% trans "Email Us" %}</a></li>
+                        <li><a href="#">{% trans "Term &amp; Conditions" %}</a></li>
+                        <li><a href="#">{% trans "Help Center" %}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MRDxqP3sbCqnbM6Iz/UnBncmGOfj/fQ2RkLZ5ByfS04hMAI0mEZI1pepJwMzWay" crossorigin="anonymous"></script>
+</body>
+</html>

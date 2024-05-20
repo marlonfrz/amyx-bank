@@ -1,0 +1,10 @@
+.env
+*.json
+*.pyc
+__pychache__
+db.*
+*.db
+.venv/
+mypy_cache/
+*prettyconf*
+prueba.*

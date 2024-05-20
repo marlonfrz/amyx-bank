@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load model_tags %}
+{% block title %}{% trans "Payments" %}{% endblock %}
+{% block content %}
+<div style="margin-left: 35%;">
+    {% if payments %}
+        <h2 class="col-5 col-md-8" style="margin-top: 20px; margin-bottom: 20px; margin-left: 15%;">{% trans "Your payments " %} {{ user.username }}</h2>
+        <form method="post" action="{% url 'payments:export_movements' %}">
+        {% csrf_token %}
+            {% for payment in payments %}
+                <li class="card" style="width:50%">
+                    <div class="card-statistic-3 p-4">
+                        <input type="checkbox" class="input_controler" value="{{ payment.id }}-{{ payment|type }}" name="selected_elements">
+                        <div class="mb-4 d-flex justify-content-between align-items-center">
+                            <h3 class="card-title mb-0">
+                                {% if payment.business %}
+                                    <a href="{{ payment.get_absolute_url }}" style="color: blue">{{ payment.business }}</a> 
+                                {% else %}
+                                    <a href="{{ payment.get_absolute_url }}" style="color: blue">{{ payment.agent }}</a> 
+                                {% endif %}
+                            </h3>
+                            <h5>{% trans "Amount" %}: {{ payment.amount }}€</h5>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+                <button type="submit" style="margin-left: 20%;" id="send" class="btn btn-primary">Get your csv</button>
+            </form>
+    {% else %}
+    <h2 style="margin-top: 20px; margin-bottom: 20px">{% trans "You have no payments yet" %}</h2>
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Your account" %}{% endblock %}
+{% block content %}
+<!-- nombre de la cuenta al lado la cantidad y debajo movimientos con scroll -->
+<div style="margin-left: 10%; margin-right:10%;">
+    <div class="card">
+        <div class="card-statistic-3 p-4">
+            <div class="mb-4 d-flex justify-content-between align-items-center">
+                <h1>{{ account.account_name }}</h1>
+                <h3> {{ account.account_balance }}</h3>
+            </div>
+            <!--Implementar movimientos -->
+        </div>
+    </div>
+</div>
+<!-- {% include "paginator.html" with page=posts %} -->
+{% endblock %}

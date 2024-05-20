@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Movement detail" %}{% endblock %}
+{% block content %}
+<center>
+    <div>
+        <h4 style="margin-top:20px; margin-bottom:20px; margin-right:30%; margin-left:30%">Movement done at: {{ movement.timestamp|date:"g:i A d F Y" }}</h4>
+        <table>
+        <tr>
+            <th>{% trans "Agent" %}</th>
+            <td>{{ movement.agent }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Account" %}</th>
+            <td>{{ movement.account }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Concept" %}</th>
+            <td>{{ movement.concept }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Amount" %}</th>
+            <td>{{ movement.amount }} €</td>
+        </tr>
+        <tr>
+            <th>{% trans "Kind" %}</th>
+            <td><a href="{% url 'about_us' %}">{{ movement.kind }}</a></td>
+        </tr>
+    </div>
+</table>
+<div style="margin-top:20px; margin-bottom:20px; margin-right:30%; margin-left:35%">
+    <form action="{% url 'payments:transaction_pdf' movement.id %}" method="get" target="_blank">
+        <button class="bg-primary btn btn-primary" type="submit">Export PDF</button>
+    </form>
+</div>
+</center>
+
+{% endblock %}

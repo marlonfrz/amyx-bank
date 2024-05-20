@@ -1,0 +1,758 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-16 15:43+0000\n"
+"PO-Revision-Date: 2024-02-16 15:44+0000\n"
+"Last-Translator: ayoze hdez diaz <elpayov2@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
+#: templates/account/account_create.html:5
+msgid "New Bank Account"
+msgstr "Nueva Cuenta Bancaria"
+
+#: templates/account/account_create.html:8
+msgid "Create an account"
+msgstr "Crear una cuenta"
+
+#: templates/account/account_create.html:9
+msgid "Please sign up using the following form"
+msgstr "Por favor regístrese usando el siguiente formulario"
+
+#: templates/account/account_create.html:12
+msgid "Create my account"
+msgstr "Crear mi cuenta"
+
+#: templates/account/account_create_done.html:3
+msgid "The account has been created"
+msgstr "La cuenta ha sido creada"
+
+#: templates/account/account_create_done.html:11
+msgid "The account has been created successfully!"
+msgstr "Tu cuenta ha sido creada satisfactoriamente!"
+
+#: templates/account/account_create_done.html:12
+#: templates/registration/register_done.html:12
+msgid "Your account has been successfully created."
+msgstr "Tu cuenta ha sido creada satisfactoriamente."
+
+#: templates/account/account_create_done.html:13
+msgid "Now you can go to the"
+msgstr "Ahora tú puedes ir a"
+
+#: templates/account/account_detail.html:4
+msgid "Your account"
+msgstr "Tu cuenta"
+
+#: templates/account/account_edit.html:5
+msgid "Edit your bank account"
+msgstr "Edita tu cuenta bancaria"
+
+#: templates/account/account_edit.html:8
+msgid "Edit an account"
+msgstr "Editar una cuenta"
+
+#: templates/account/account_edit.html:12 templates/card/card_edit.html:11
+msgid "Edit my account"
+msgstr "Editar mi cuenta"
+
+#: templates/account/accounts.html:4 templates/account/accounts.html:9
+msgid "Your accounts"
+msgstr "Tus cuentas"
+
+#: templates/account/accounts.html:21
+msgid "Account code:"
+msgstr "Código de la cuenta"
+
+#: templates/account/accounts.html:23
+msgid "Edit your account"
+msgstr "Edita tu cuenta"
+
+#: templates/account/accounts.html:31
+msgid "Create accounts"
+msgstr "Crear cuentas"
+
+#: templates/account/accounts.html:36
+msgid "You do not have accounts"
+msgstr "Todavía no tienes cuentas"
+
+#: templates/account/accounts.html:36 templates/card/card_create.html:18
+#: templates/card/cards.html:38
+msgid "create some with the following"
+msgstr "crea algunas con el siguiente"
+
+#: templates/account/accounts.html:36 templates/card/card_create.html:18
+#: templates/card/cards.html:38
+msgid "link"
+msgstr "enlace"
+
+#: templates/account/cancellation.html:3
+#: templates/payment/transaction_detail.html:14
+msgid "Account"
+msgstr "Cuenta"
+
+#: templates/account/cancellation.html:3 templates/card/cancellation.html:3
+msgid "cancellated"
+msgstr "cancelado"
+
+#: templates/account/change_password.html:4
+#: templates/account/change_password.html:8
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: templates/account/change_password.html:12
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/account/dashboard.html:3
+msgid "Dashboard"
+msgstr "Tu panel"
+
+#: templates/account/dashboard.html:30
+msgid "Name:"
+msgstr "Nombre:"
+
+#: templates/account/dashboard.html:39
+msgid "Email"
+msgstr "Correo"
+
+#: templates/account/dashboard.html:48
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/account/dashboard.html:63
+msgid "Total balance"
+msgstr "Balance total"
+
+#: templates/account/dashboard.html:69
+msgid "CARDS"
+msgstr "TARJETAS"
+
+#: templates/account/dashboard.html:75
+msgid "ACCOUNTS"
+msgstr "CUENTAS"
+
+#: templates/account/dashboard.html:87
+msgid "Card creation"
+msgstr "Creación de tarjeta"
+
+#: templates/account/dashboard.html:92
+msgid "Account creation"
+msgstr "Creación de cuenta"
+
+#: templates/account/dashboard.html:97
+msgid "Make payment"
+msgstr "Realizar pagos"
+
+#: templates/account/dashboard.html:102
+msgid "Make transfer"
+msgstr "Realizar transferencias"
+
+#: templates/account/dashboard.html:106
+msgid "Export Payments"
+msgstr "Exportar pagos"
+
+#: templates/account/dashboard.html:110
+msgid "Export Transactions"
+msgstr "Exportar transferencias"
+
+#: templates/account/edit_profile.html:4 templates/account/edit_profile.html:7
+msgid "Edit your profile"
+msgstr "Editar tu perfil"
+
+#: templates/account/edit_profile.html:8
+msgid "You can edit your profile using the following form:"
+msgstr "Puedes editar tu perfil usando el siguiente formulario:"
+
+#: templates/account/edit_profile.html:13 templates/card/card_create.html:13
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+#: templates/account/edit_profile.html:15
+msgid "You have changed your profile information"
+msgstr "Has cambiado la información de tu perfil"
+
+#: templates/account/edit_profile.html:15
+msgid "you can also change your password"
+msgstr "puedes también cambiar tu contraseña"
+
+#: templates/account/edit_profile.html:15
+msgid "here"
+msgstr "aquí"
+
+#: templates/amyx_bank/about_us.html:4 templates/amyx_bank/about_us.html:11
+msgid "About us"
+msgstr "Sobre nosotros"
+
+#: templates/amyx_bank/about_us.html:13
+msgid ""
+"We, A.M.Y.X Bank, are a ficticial bank created for a proyect in the second "
+"year of DAW (Developer de Aplication Web)"
+msgstr ""
+"Nosotros, A.M.Y.X Bank, somos un banco ficticio creado para un proyecto del "
+"segundo año de DAW (Desarrollo de Aplicaciones Web)"
+
+#: templates/amyx_bank/about_us.html:21
+msgid "Commissions"
+msgstr "Comisiones"
+
+#: templates/amyx_bank/about_us.html:23
+msgid "These are the commissions we apply to all transactions and payments"
+msgstr ""
+"Estas son las comisiones que aplicamos a todas las transacciones y pagos"
+
+#: templates/amyx_bank/about_us.html:25
+msgid "Small commissions is for movements below 50€"
+msgstr "Las comisiones pequeñas son para movimientos inferiores a 50€."
+
+#: templates/amyx_bank/about_us.html:26
+msgid "Medium commissions is for movements above 50€ and below 500€"
+msgstr ""
+"Las comisiones medianas son para movimientos superiores a 50€ e inferiores a"
+" 500€."
+
+#: templates/amyx_bank/about_us.html:27
+msgid "Large commissions is for movements above 500€"
+msgstr "Las grandes comisiones son para movimientos superiores a 500€."
+
+#: templates/amyx_bank/about_us.html:37
+msgid "Small"
+msgstr "Pequeño"
+
+#: templates/amyx_bank/about_us.html:38
+msgid "Medium"
+msgstr "Mediano"
+
+#: templates/amyx_bank/about_us.html:39
+msgid "Large"
+msgstr "Grande"
+
+#: templates/amyx_bank/about_us.html:42 templates/payment/movements.html:5
+#: templates/payment/movements_list.html:5
+msgid "Payments"
+msgstr "Pagos"
+
+#: templates/amyx_bank/about_us.html:43 templates/amyx_bank/about_us.html:44
+#: templates/amyx_bank/about_us.html:45 templates/amyx_bank/about_us.html:49
+#: templates/amyx_bank/about_us.html:50 templates/amyx_bank/about_us.html:51
+#: templates/amyx_bank/about_us.html:55 templates/amyx_bank/about_us.html:56
+#: templates/amyx_bank/about_us.html:57
+msgid " of commissions"
+msgstr " de comisiones"
+
+#: templates/amyx_bank/about_us.html:48
+msgid "Incoming"
+msgstr "Entrantes"
+
+#: templates/amyx_bank/about_us.html:54
+msgid "Outgoing"
+msgstr "Salientes"
+
+#: templates/amyx_bank/main.html:4 templates/registration/register_done.html:3
+#: templates/registration/register_done.html:10
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: templates/amyx_bank/main.html:14
+msgid ""
+"This number is indicative of the risk of the product, 1/6 being indicative "
+"of lower risk and 6/6 indicating higher risk."
+msgstr ""
+"Este número es indicativo del riesgo del producto, siendo 1/6 el riesgo más "
+"bajo y 6/6 el riesgo más alto"
+
+#: templates/amyx_bank/main.html:19
+msgid ""
+"A.M.Y.X Bank is attached to the Credit Institutions Deposit Guarantee Fund. "
+"For cash deposits, the maximum guaranteed amount is 100,000 euros per "
+"depositor in each credit institution."
+msgstr ""
+"A.M.Y.X Bank esta sujeto a las Entidades de Crédito y Fondos de Garantía de "
+"Depósitos. Para el ingreso de efectivo, la cantidad máxima asegurada por "
+"depositante en cada entidad de crédito es de 100.000 euros."
+
+#: templates/base.html:22
+msgid "Log Out"
+msgstr "Cerrar sesión"
+
+#: templates/base.html:24
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+#: templates/base.html:27
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/base.html:28
+msgid "Accounts"
+msgstr "Cuentas"
+
+#: templates/base.html:29
+msgid "Cards"
+msgstr "Tarjetas"
+
+#: templates/base.html:30
+msgid "Make payments"
+msgstr "Realizar pagos"
+
+#: templates/base.html:31
+msgid "Make transactions"
+msgstr "Realizar transferencias"
+
+#: templates/base.html:32
+msgid "Your Transactions"
+msgstr "Tus Transferencias"
+
+#: templates/base.html:33
+msgid "Your Payments"
+msgstr "Tus pagos"
+
+#: templates/base.html:60
+msgid "is your trusted bank"
+msgstr "es tu banco de confianza"
+
+#: templates/base.html:63
+msgid "Made by"
+msgstr "Hecho por"
+
+#: templates/base.html:87
+msgid "About"
+msgstr "Acerca de"
+
+#: templates/base.html:91
+msgid "About Us"
+msgstr "Sobre nosotros"
+
+#: templates/base.html:92
+msgid "Corporate Sale"
+msgstr "Venta corporativa"
+
+#: templates/base.html:93
+msgid "Terms &amp; Policy"
+msgstr "Términos &amp; Políticas"
+
+#: templates/base.html:94
+msgid "Community"
+msgstr "Comunidad"
+
+#: templates/base.html:103 templates/base.html:108
+msgid "Support"
+msgstr "Apoyo"
+
+#: templates/base.html:107
+msgid "Help"
+msgstr "Ayuda"
+
+#: templates/base.html:109
+msgid "Privacy Policy"
+msgstr "Política de privacidad"
+
+#: templates/base.html:110 templates/base.html:126
+msgid "Term &amp; Conditions"
+msgstr "Terminos y condiciones"
+
+#: templates/base.html:111
+msgid "Help &amp; Support"
+msgstr "Ayuda y apoyo"
+
+#: templates/base.html:120
+msgid "Contact"
+msgstr "Contacto"
+
+#: templates/base.html:124
+msgid "Call Centre"
+msgstr "Centro de atención al cliente"
+
+#: templates/base.html:125
+msgid "Email Us"
+msgstr "Escribenos"
+
+#: templates/base.html:127
+msgid "Help Center"
+msgstr "Centro de ayuda"
+
+#: templates/card/cancellation.html:3 templates/payment/payment_detail.html:15
+msgid "Card"
+msgstr "Tarjeta"
+
+#: templates/card/card_create.html:4
+msgid "New Card"
+msgstr "Nueva tarjeta"
+
+#: templates/card/card_create.html:8
+msgid "Create a Card"
+msgstr "Crear una tarjeta"
+
+#: templates/card/card_create.html:9
+msgid "You can create a card using the following form:"
+msgstr "Puedes crear una tarjeta usando el siguiente "
+
+#: templates/card/card_create.html:18
+msgid "You do not have accounts to associate to a new card"
+msgstr "No tienes cuentas a las que asociar una nueva tarjeta"
+
+#: templates/card/card_detail.html:3
+msgid "Cards detail"
+msgstr "Detalle de la tarjeta"
+
+#: templates/card/card_detail.html:13
+msgid "CARD'S NUMBER:"
+msgstr "NÚMERO DE LA TARJETA"
+
+#: templates/card/card_edit.html:4
+msgid "Edit your card"
+msgstr "Edita tu tarjeta"
+
+#: templates/card/card_edit.html:7
+msgid "Edit your card: "
+msgstr "Edita tu tarjeta:"
+
+#: templates/card/card_edit.html:8
+msgid "Please use the following form"
+msgstr "Por favor usa el siguiente formulario"
+
+#: templates/card/cards.html:3 templates/card/cards.html:7
+msgid "Your cards"
+msgstr "Tus tarjetas"
+
+#: templates/card/cards.html:11
+msgid "Cards from the account:"
+msgstr "Tarjetas de la cuenta:"
+
+#: templates/card/cards.html:12
+msgid "Account balance"
+msgstr "Balance de la cuenta"
+
+#: templates/card/cards.html:25
+msgid "Edit your Card"
+msgstr "Edita tu tarjeta"
+
+#: templates/card/cards.html:34
+msgid "Create cards"
+msgstr "Crear tarjetas"
+
+#: templates/card/cards.html:38
+msgid "You do not have cards"
+msgstr "No tienes tarjetas"
+
+#: templates/payment/movements.html:9 templates/payment/movements_list.html:9
+msgid "Your payments "
+msgstr "Tus pagos"
+
+#: templates/payment/movements.html:24
+#: templates/payment/movements_list.html:24
+#: templates/payment/payment_detail.html:23
+#: templates/payment/transaction_detail.html:22
+msgid "Amount"
+msgstr "Cantidad"
+
+#: templates/payment/movements.html:34
+msgid "first"
+msgstr "primera"
+
+#: templates/payment/movements.html:35
+msgid "previous"
+msgstr "previa"
+
+#: templates/payment/movements.html:38
+msgid "Page "
+msgstr "Página"
+
+#: templates/payment/movements.html:38
+msgid "of "
+msgstr "de"
+
+#: templates/payment/movements.html:41
+msgid "next"
+msgstr "siguiente"
+
+#: templates/payment/movements.html:42
+msgid "last"
+msgstr "última"
+
+#: templates/payment/movements.html:47
+#: templates/payment/movements_list.html:32
+msgid "You have no payments yet"
+msgstr "Todavía no has realizado ningún pago"
+
+#: templates/payment/payment.html:4
+msgid "Payment"
+msgstr "Pago"
+
+#: templates/payment/payment.html:7
+msgid "Payment Request"
+msgstr "Solicitud de pago"
+
+#: templates/payment/payment.html:8 templates/payment/transactions.html:8
+msgid "Please fill up the following form"
+msgstr "Por favor rellena el siguiente formulario"
+
+#: templates/payment/payment.html:11
+msgid "Request my Payment"
+msgstr "Solicitar mi pago"
+
+#: templates/payment/payment_detail.html:3
+#: templates/payment/transaction_detail.html:3
+msgid "Movement detail"
+msgstr "Detalle del movimiento"
+
+#: templates/payment/payment_detail.html:8
+msgid "Movement done at"
+msgstr "Movimiento hecho a las"
+
+#: templates/payment/payment_detail.html:11
+msgid "Business"
+msgstr "Negocio"
+
+#: templates/payment/payment_detail.html:19
+#: templates/payment/transaction_detail.html:26
+msgid "Kind"
+msgstr "Tipo"
+
+#: templates/payment/payment_success.html:3
+msgid "Payment success!"
+msgstr "Pago exitoso!"
+
+#: templates/payment/payment_success.html:6
+msgid "Hi {{ user.username }}!"
+msgstr "Hola {{ user.username }}!"
+
+#: templates/payment/payment_success.html:8
+msgid "Now you can see your payment at"
+msgstr "Ahora tú puedes ver tu pago en"
+
+#: templates/payment/payment_success.html:8
+msgid "your movements"
+msgstr "tus movimientos"
+
+#: templates/payment/transaction_detail.html:10
+msgid "Agent"
+msgstr "Agente"
+
+#: templates/payment/transaction_detail.html:18
+msgid "Concept"
+msgstr "Concepto"
+
+#: templates/payment/transactions.html:4 templates/payment/transactions.html:7
+msgid "Transaction"
+msgstr "Transferencia"
+
+#: templates/payment/transactions.html:11
+msgid "Send money"
+msgstr "Enviar dinero"
+
+#: templates/registration/login.html:5 templates/registration/login.html:16
+msgid "Log-in"
+msgstr "Iniciar Sesión"
+
+#: templates/registration/login.html:22
+msgid "Your username and password didn't match."
+msgstr "Tu nombre de usuario y la contraseña no coinciden "
+
+#: templates/registration/login.html:23
+msgid "Please, try again."
+msgstr "Por favor, inténtelo de nuevo"
+
+#: templates/registration/login.html:32
+msgid "¿Don't have and account?"
+msgstr "¿No tienes cuenta todavía?"
+
+#: templates/registration/login.html:32 templates/registration/register.html:4
+#: templates/registration/register.html:17
+msgid "Register"
+msgstr "Registrarse"
+
+#: templates/registration/logout.html:4 templates/registration/logout.html:8
+msgid "Logged out"
+msgstr "Saliste de la sesión"
+
+#: templates/registration/logout.html:10
+msgid "You have been logged out."
+msgstr "Has cerrado cesión"
+
+#: templates/registration/logout.html:11
+msgid "You can"
+msgstr "Puedes"
+
+#: templates/registration/logout.html:11
+msgid "log-in again"
+msgstr "iniciar sesión de nuevo"
+
+#: templates/registration/register.html:28
+msgid "Have an account?"
+msgstr "¿Tienes una cuenta?"
+
+#: templates/registration/register.html:28
+msgid "Login"
+msgstr "Iniciar Sesión"
+
+#: templates/registration/register_done.html:13
+msgid "Now you can"
+msgstr "Ahora tú puedes"
+
+#: templates/registration/register_done.html:13
+msgid "log in"
+msgstr "iniciar sesión"
+
+#~ msgid "Previous"
+#~ msgstr "Previo"
+
+#~ msgid "Page {{ page.number }} of {{ page.paginator.num_pages }}."
+#~ msgstr "Página {{ page.number }} de {{ page.paginator.num_pages }}."
+
+#~ msgid "Next"
+#~ msgstr "Siguiente"
+
+#~ msgid "Buy"
+#~ msgstr "Comprar"
+
+#~ msgid "Transfer"
+#~ msgstr "Transferir"
+
+#~ msgid "account:"
+#~ msgstr "cuenta"
+
+#~ msgid "account card's:"
+#~ msgstr "Las tarjetas de tu cuenta:"
+
+#~ msgid "Account detail"
+#~ msgstr "Detalle de la cuenta"
+
+#~ msgid "Movements"
+#~ msgstr "Movimientos"
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#, python-format
+#~ msgid "5%% of commissions"
+#~ msgstr "5% de comisiones"
+
+#, python-format
+#~ msgid "7%% of commissions"
+#~ msgstr "7% de comisiones"
+
+#, python-format
+#~ msgid "1%% of commissions"
+#~ msgstr "1% de comisiones"
+
+#, python-format
+#~ msgid "2%% of commissions"
+#~ msgstr "2% de comisiones"
+
+#, python-format
+#~ msgid "4%% of commissions"
+#~ msgstr "4% de comisiones"
+
+#, python-format
+#~ msgid "6%% of commissions"
+#~ msgstr "6% de comisiones"
+
+#~ msgid "accounts/"
+#~ msgstr "cuentas/"
+
+#~ msgid "account_create_success/"
+#~ msgstr "cuenta_creada/"
+
+#~ msgid "edit/password/"
+#~ msgstr "editar/contraseña/"
+
+#~ msgid "account_detail/<int:id>/"
+#~ msgstr "detalle_cuenta/<int:id>/"
+
+#~ msgid "create_account/"
+#~ msgstr "crear_cuenta/"
+
+#~ msgid "edit/account/<int:id>/"
+#~ msgstr "editar/cuenta/<int:id>"
+
+#~ msgid "about_us/"
+#~ msgstr "nosotos/"
+
+#~ msgid "login/"
+#~ msgstr "inicio_sesion/"
+
+#~ msgid "logout/"
+#~ msgstr "cierre_sesion/"
+
+#~ msgid "register/"
+#~ msgstr "registro/"
+
+#~ msgid "edit/profile/"
+#~ msgstr "editar/perfil"
+
+#~ msgid "card/"
+#~ msgstr "tarjeta/"
+
+#~ msgid "payment/"
+#~ msgstr "pago/"
+
+#~ msgid "outgoing/"
+#~ msgstr "salientes/"
+
+#~ msgid "transfer/incoming/"
+#~ msgstr "transferencias/entrantes/"
+
+#~ msgid "cards"
+#~ msgstr "tarjetas"
+
+#~ msgid "create_card/"
+#~ msgstr "crear_tarjeta/"
+
+#~ msgid "edit/card/<int:id>/"
+#~ msgstr "editar/cuenta/<int:id>"
+
+#~ msgid "card_detail/<int:id>/"
+#~ msgstr "detalle_cuenta/<int:id>/"
+
+#~ msgid "payment_success/"
+#~ msgstr "pago_completo/"
+
+#~ msgid "payroll/"
+#~ msgstr "nominas/"
+
+#~ msgid "movements/"
+#~ msgstr "movimientos/"
+
+#~ msgid "payment_detail/<int:id>"
+#~ msgstr "detalle_pago/<int:id>/"
+
+#~ msgid "trasaction_detail/<int:id>"
+#~ msgstr "detalle_transaccion/<int:id>/"
+
+#~ msgid "trasaction_detail/<int:id>/pdf/"
+#~ msgstr "detalle_transaccion/<int:id>/"
+
+#~ msgid "payment_detail/<int:id>/pdf/"
+#~ msgstr "detalle_pago/<int:id>/pdf/"
+
+#~ msgid "Welcome {{ new_user.first_name }}!"
+#~ msgstr "Bienvenido "
+
+#~ msgid "Your payments {{ user.username }}"
+#~ msgstr "Tus pagos {{ user.username }}"
+
+#~ msgid "Page {{ payments.number }} of {{ payments.paginator.num_pages }}."
+#~ msgstr "Página {{ payments.number }} de {{ payments.paginator.num_pages }}."
+
+#, fuzzy
+#~ msgid "Edit your"
+#~ msgstr "Edita tu tarjeta"
+
+#~ msgid "Edit your {{ card.card_name }} Card"
+#~ msgstr "Edita tu tarjeta"
+
+#~ msgid "Have an account? <a href="
+#~ msgstr "¿Tienes una cuenta?"

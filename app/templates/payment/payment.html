@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block title %}{% trans "Payment" %}{% endblock %}
+{% block content %}
+<div style="margin-left: 40%; margin-right: 40%; margin-top: 2%">
+    <h1>{% trans "Payment Request" %}</h1>
+    <p> {% trans "Please fill up the following form" %}</p>
+    <form method="post">
+        {{ payment_form|crispy }}
+        <p><input type="submit" class="btn btn-primary" value="{% trans 'Request my Payment' %}"></p>
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}
